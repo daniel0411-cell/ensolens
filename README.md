@@ -8,7 +8,7 @@ Read PROGRESS.md and AGENTS.md before continuing work. Git checkpoints preserve 
 
 - The official-data release was deployed on October 20, 2026 (Asia/Shanghai).
 - First verified official-data version: e3d2fbba-b818-4ef1-a9cb-9a772b6f4dd5.
-- Current production version: ceb51bdf-5f04-41fa-a1b0-a3a764becc6b; deployment f3242076-fbe3-4ad1-8c6d-d92be2268cce, activated October 20 at 10:51 Asia/Shanghai.
+- Current production version: 961bd7ff-da70-4a73-927b-11218dded27b; deployment 2d3067de-4d3f-4243-a08f-f6815562a821, activated October 20 at 17:38:15 Asia/Shanghai, serving 100% of traffic.
 - Production-only indexing is enabled and verified. This permits crawling; actual search-engine inclusion has not been confirmed.
 - contact@ensolens.com has a Cloudflare routing rule to an existing verified destination. Inbox receipt is unconfirmed; the public email link remains disabled.
 - The original demo release was 5757c27b-b2f4-4169-bda9-da8f28b76ab9.
@@ -63,6 +63,6 @@ Production checks cover seven pages, actual embedded chart data, the NOAA image,
 
 ## Validation completed
 
-The October 20 completion audit passed 33-file type checking with zero errors or warnings, all ten unit tests, build, a real preview Worker NOAA refresh/KV check, and desktop 1440px/mobile 390px browser checks against both preview and production. Viewport screenshots were visually inspected. Live HTTP verification passed with ENSOLENS_EXPECT_INDEXING=true, and all five live feeds had a successful scheduled refresh at 14:15:52 Asia/Shanghai.
+The October 20 completion audit passed 33-file type checking with zero errors or warnings, all ten unit tests, build, a real preview Worker NOAA refresh/KV check, and desktop 1440px/mobile 390px browser checks against both preview and production. Viewport screenshots were visually inspected. All five live feeds had a successful scheduled refresh at 14:15:52 Asia/Shanghai. The 17:38 release repeated the complete npm run deploy gate before upload, then passed live HTTP verification with ENSOLENS_EXPECT_INDEXING=true and fresh desktop/mobile production browser checks.
 
 Ten unit tests cover calendar rollover, source validation, negative fixed-width values, Watch versus Advisory semantics, failure retention, archival writes, redirects, and indexing. Browser checks cover chart pixels, source image decoding, CSV downloads, range switching, forecast comparison, map expansion and Escape, mobile navigation, overflow, and all pages including the custom 404. The remaining contact-address release depends on a confirmed test-message receipt; it is intentionally unpublished until that check passes.

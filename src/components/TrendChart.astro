@@ -1,0 +1,10 @@
+---
+import { Download, ArrowUpRight } from '@lucide/astro';
+---
+<section class="trend-section" aria-labelledby="trend-heading">
+  <div class="section-heading"><div><span class="eyebrow">OCEAN SIGNAL</span><h2 id="trend-heading">Tracking the temperature shift</h2></div><button class="icon-button download-data" title="Download illustrative trend data (CSV)" aria-label="Download illustrative trend data as CSV"><Download size={17} /></button></div>
+  <div class="chart-toolbar"><div class="chart-legend"><span><i class="legend-dot warm"></i>Weekly Niño 3.4</span><span><i class="legend-dash"></i>Seasonal RONI</span></div><div class="segmented" role="group" aria-label="Trend time range"><button data-range="6" aria-pressed="false">6M</button><button class="selected" data-range="12" aria-pressed="true">12M</button></div></div>
+  <div class="line-chart-wrap"><canvas id="trend-chart" role="img" aria-label="Illustrative weekly sea temperature anomaly and seasonal RONI trends, in degrees Celsius"></canvas></div>
+  <div class="chart-footer"><span>EXAMPLE SERIES · °C ANOMALY</span><a href="/methodology/#indices">Why do these lines differ? <ArrowUpRight size={13} /></a></div>
+  <p id="trend-live" class="sr-only" aria-live="polite">Showing 12 months of illustrative data.</p>
+</section>

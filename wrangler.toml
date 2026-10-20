@@ -1,0 +1,32 @@
+name = "ensolens"
+main = "src/worker.ts"
+account_id = "2e9212a9aeef7091fe79d82808aa5843"
+compatibility_date = "2026-10-20"
+compatibility_flags = ["nodejs_compat"]
+workers_dev = true
+preview_urls = false
+routes = [
+  { pattern = "ensolens.com", custom_domain = true },
+  { pattern = "www.ensolens.com", custom_domain = true }
+]
+
+[assets]
+directory = "./dist/client"
+binding = "ASSETS"
+html_handling = "auto-trailing-slash"
+not_found_handling = "404-page"
+run_worker_first = true
+
+[[kv_namespaces]]
+binding = "ENSO_CACHE"
+id = "aa9e067e35fd4fd3a61f01e330f245f2"
+
+[vars]
+INDEXING_ENABLED = "false"
+CONTACT_ENABLED = "false"
+
+[triggers]
+crons = ["15 */6 * * *"]
+
+[observability]
+enabled = true

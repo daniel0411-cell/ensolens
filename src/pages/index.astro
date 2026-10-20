@@ -1,0 +1,23 @@
+---
+import Layout from '../layouts/Layout.astro';
+import OceanMap from '../components/OceanMap.astro';
+import TrendChart from '../components/TrendChart.astro';
+import ForecastChart from '../components/ForecastChart.astro';
+import { ArrowUpRight, ArrowRight, Activity, WavesHorizontal as Waves, CalendarDays, Check } from '@lucide/astro';
+---
+<Layout title="ENSO Tracker & Seasonal Outlook" active="overview">
+  <div class="page-shell">
+    <div class="page-intro"><div><div class="eyebrow intro-eyebrow"><span class="live-dot"></span> THE ENSO OBSERVATORY</div><h1>A clearer view of <span>ENSO.</span></h1><p>The ocean signal. The seasonal outlook. The context that matters.</p></div><div class="snapshot-stamp"><CalendarDays size={15} /><div><strong>October 19, 2026</strong><span>Illustrative snapshot</span></div></div></div>
+    <section class="status-band" aria-label="Illustrative ENSO snapshot">
+      <div class="phase-stat"><div class="stat-label"><Activity size={14} /> EXAMPLE PHASE</div><div class="phase-value"><span class="phase-dot"></span>El Niño<span class="phase-badge">WARM PHASE</span></div><p>A coupled ocean–atmosphere pattern.</p></div>
+      <div class="numeric-stat"><div class="stat-label">WEEKLY NIÑO 3.4</div><div class="stat-value">+1.4<span>°C</span></div><p><span class="change-pill">↗ +0.1°C</span> vs. previous example week</p></div>
+      <div class="numeric-stat"><div class="stat-label">SEASONAL RONI</div><div class="stat-value">+0.9<span>°C</span></div><p>Three-month relative index <a href="/methodology/#indices" aria-label="Learn about the seasonal RONI index"><ArrowUpRight size={13} /></a></p></div>
+      <div class="outlook-stat"><div class="stat-label">DJF EL NIÑO PROBABILITY</div><div class="stat-value">78<span>%</span><span class="probability-mini"><i></i></span></div><p>Dec–Feb · illustrative probability</p></div>
+    </section>
+    <div class="overview-grid"><div class="main-column"><OceanMap /><TrendChart /></div><aside class="context-column"><section class="reading-section"><span class="eyebrow">THE SHORT READ</span><h2>The signal is only<br />part of the story.</h2><p>Warmer tropical Pacific waters can shift seasonal weather patterns. They do not determine the weather in your city.</p><div class="takeaway"><span class="number">01</span><div><h3>Start with the official status</h3><p>A weekly temperature reading alone does not establish an ENSO phase.</p></div></div><div class="takeaway"><span class="number">02</span><div><h3>Read probabilities, not promises</h3><p>Seasonal odds describe uncertainty, not a guaranteed outcome.</p></div></div><a class="text-link" href="/methodology/">Understand the indicators <ArrowRight size={15} /></a></section><section class="update-section"><div class="update-icon"><CalendarDays size={20} /></div><div><span class="eyebrow">OFFICIAL UPDATES</span><h3>Follow the next CPC release</h3><p>Check the official discussion for its next scheduled issue date.</p><a href="https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_advisory/ensodisc.shtml" target="_blank" rel="noreferrer">CPC release schedule <ArrowUpRight size={14} /></a></div></section></aside></div>
+    <ForecastChart />
+    <section class="impact-section"><div class="section-heading"><div><span class="eyebrow">FROM SIGNAL TO SEASON</span><h2>What could it mean closer to home?</h2></div><span class="muted small">Context, not a local forecast.</span></div><div class="impact-grid"><a class="impact-item" href="/winter-outlook/"><div class="impact-icon winter-icon"><Waves size={25} /></div><div><span class="eyebrow">NORTH AMERICA</span><h3>The U.S. winter outlook</h3><p>Separate the official outlook from historical ENSO tendencies.</p></div><ArrowUpRight size={19} /></a><a class="impact-item" href="/hurricane-connection/"><div class="impact-icon hurricane-icon"><Activity size={25} /></div><div><span class="eyebrow">ATLANTIC BASIN</span><h3>The hurricane connection</h3><p>How Pacific conditions can influence Atlantic wind shear.</p></div><ArrowUpRight size={19} /></a></div></section>
+    <div class="provenance-line"><span><Check size={14} /> Sources made visible</span><p>All dashboard values are illustrative. Read the original NOAA / CPC publications for current conditions.</p><a href="/methodology/">Data notes <ArrowUpRight size={13} /></a></div>
+  </div>
+  <script>import { initCharts } from '../scripts/charts'; initCharts();</script>
+</Layout>

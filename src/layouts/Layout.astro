@@ -1,9 +1,13 @@
 ---
-import { ArrowUpRight, ArrowRight, Menu, Earth as Globe2, FlaskConical } from '@lucide/astro';
+import { ArrowUpRight, ArrowRight, Menu, Earth as Globe2, Activity } from '@lucide/astro';
 import '../styles/global.css';
+import { env } from 'cloudflare:workers';
+import { indexingAllowed } from '../lib/http';
 interface Props { title: string; description?: string; active?: string }
 const { title, description = 'A clearer view of ENSO. Explore ocean conditions, seasonal probabilities, and the science behind El Niño and La Niña.', active = 'overview' } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
+const indexable = indexingAllowed(Astro.url.hostname, env.INDEXING_ENABLED) && (Astro.response.status ?? 200) < 400;
+const structured = JSON.stringify({ '@context': 'https://schema.org', '@type': 'WebSite', name: 'ENSOLens', url: 'https://ensolens.com/', inLanguage: 'en', description, publisher: { '@type': 'Organization', name: 'ENSOLens', url: 'https://ensolens.com/about/' } }).replace(/</g, '\\u003c');
 const links = [ ['overview', '/', 'Overview'], ['forecast', '/forecast/', 'Forecast'], ['winter', '/winter-outlook/', 'U.S. winter'], ['hurricanes', '/hurricane-connection/', 'Hurricanes'], ['methodology', '/methodology/', 'Sources & methods'] ];
 ---
 <!doctype html>
@@ -12,14 +16,21 @@ const links = [ ['overview', '/', 'Overview'], ['forecast', '/forecast/', 'Forec
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
-    <meta name="robots" content="noindex, nofollow" />
+    <meta name="robots" content={indexable ? "index, follow" : "noindex, follow"} />
+    <meta property="og:title" content={title + " · ENSOLens"} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="ENSOLens" />
+    <meta name="twitter:card" content="summary" />
+    <script type="application/ld+json" set:html={structured} />
     <meta name="theme-color" content="#f6f7f5" />
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <title>{title} · ENSOLens</title>
   </head>
   <body>
-    <div class="prototype-strip"><FlaskConical size={13} /><span>Preview edition</span><span class="strip-divider">/</span> Illustrative data. Not a current forecast.</div>
+    <div class="prototype-strip"><Activity size={13} /><span>NOAA / CPC sources</span><span class="strip-divider">/</span> Independent ENSO observations & context.</div>
     <header class="site-header">
       <div class="header-inner">
         <a class="brand" href="/" aria-label="ENSOLens home"><span class="brand-mark"><Globe2 size={25} stroke-width={1.6} /></span><span>ENSO<span class="brand-light">Lens</span><span class="brand-dot">.</span></span></a>
@@ -30,7 +41,7 @@ const links = [ ['overview', '/', 'Overview'], ['forecast', '/forecast/', 'Forec
       <nav id="mobile-navigation" class="mobile-navigation" aria-label="Mobile navigation" hidden>{links.map(([key, href, label]) => <a href={href} aria-current={active === key ? 'page' : undefined}>{label}<ArrowRight size={15} /></a>)}</nav>
     </header>
     <main><slot /></main>
-    <footer class="site-footer"><div class="footer-inner"><div><a class="brand footer-brand" href="/"><Globe2 size={20} /><span>ENSO<span class="brand-light">Lens</span><span class="brand-dot">.</span></span></a><p>Climate context. A little clearer.</p></div><div class="footer-note">Independent project. Not affiliated with NOAA.<br />Seasonal tendencies are not local weather forecasts.</div><div class="footer-links"><a href="/methodology/">Sources & methods <ArrowUpRight size={13} /></a><span>© 2026 ENSOLens</span></div></div></footer>
+    <footer class="site-footer"><div class="footer-inner"><div><a class="brand footer-brand" href="/"><Globe2 size={20} /><span>ENSO<span class="brand-light">Lens</span><span class="brand-dot">.</span></span></a><p>Climate context. A little clearer.</p></div><div class="footer-note">Independent project. Not affiliated with NOAA.<br />Seasonal tendencies are not local weather forecasts.</div><div class="footer-links"><a href="/methodology/">Sources & methods <ArrowUpRight size={13} /></a><a href="/about/">About & contact</a><a href="/privacy/">Privacy</a><span>© 2026 ENSOLens</span></div></div></footer>
     <script>
       const toggle = document.querySelector<HTMLButtonElement>('.mobile-menu');
       const menu = document.querySelector<HTMLElement>('#mobile-navigation');

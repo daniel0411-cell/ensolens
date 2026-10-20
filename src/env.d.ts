@@ -7,3 +7,12 @@ interface Env {
   INDEXING_ENABLED: string;
   CONTACT_ENABLED: string;
 }
+
+declare namespace Cloudflare {
+  interface Env {
+    ENSO_CACHE: KVNamespace;
+    ASSETS: Fetcher;
+    INDEXING_ENABLED: string;
+    CONTACT_ENABLED: string;
+  }
+}

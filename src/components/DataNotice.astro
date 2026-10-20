@@ -1,0 +1,6 @@
+---
+import { Info } from '@lucide/astro';
+interface Props { stale: string[] }
+const { stale } = Astro.props;
+---
+{stale.length > 0 && <div class="content-notice" role="status"><Info size={20} /><div><strong>Some source checks are delayed.</strong><p>Showing the last validated data, with original dates. Affected feeds: {stale.join(', ')}. <a href="/api/status">Data status</a></p></div></div>}

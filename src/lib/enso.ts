@@ -133,7 +133,11 @@ export function parseForecast(html: string, source = urls.forecast, now = new Da
     const season = clean($(tr).find('th abbr').clone().children().remove().end().text());
     const index = seasonNames.indexOf(season);
     requireValue(index >= 0 && cells.length === 3, 'Invalid forecast season');
-    const values = cells.map((_, td) => Number(clean($(td).text()))).get();
+    const values = cells.map((_, td) => {
+      const text = clean($(td).text());
+      requireValue(/^\d+(?:\.\d+)?$/.test(text), 'Missing or invalid probability');
+      return Number(text);
+    }).get();
     requireValue(values.every(n => Number.isFinite(n) && n >= 0 && n <= 100) && Math.abs(values.reduce((a, b) => a + b, 0) - 100) <= 1, 'Forecast probabilities must sum to 100');
     // The first target is centered in the issue month; year belongs to the center month.
     const target = new Date(Date.UTC(+m[2], month + rows.length, 1));
@@ -145,16 +149,20 @@ export function parseForecast(html: string, source = urls.forecast, now = new Da
   return { issue, source, rows };
 }
 
-export function previousForecastUrl(issue: string) {
+export function previousIssue(issue: string) {
   const date = new Date(`${issue}-01T00:00:00Z`);
   date.setUTCMonth(date.getUTCMonth() - 1);
-  return `https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/archives/?type=probabilities&month=${String(date.getUTCMonth() + 1).padStart(2, '0')}&year=${date.getUTCFullYear()}`;
+  return date.toISOString().slice(0, 7);
+}
+export function previousForecastUrl(issue: string) {
+  const prior = previousIssue(issue);
+  return `https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/archives/?type=probabilities&month=${prior.slice(5)}&year=${prior.slice(0, 4)}`;
 }
 
 export async function fetchOfficial(url: string, fetcher: typeof fetch = fetch) {
   const parsed = new URL(url);
   requireValue(parsed.protocol === 'https:' && parsed.hostname === 'www.cpc.ncep.noaa.gov', 'Unexpected upstream host');
-  const response = await fetcher(url, { headers: { 'User-Agent': 'ENSOLens/1.0 (https://ensolens.com/about/)' }, signal: AbortSignal.timeout(18000), redirect: 'error' });
+  const response = await fetcher(url, { headers: { 'User-Agent': 'ENSOLens/1.0 (https://ensolens.com/about/)' }, signal: AbortSignal.timeout(18000), redirect: 'manual' });
   requireValue(response.ok, `NOAA HTTP ${response.status}`);
   const body = await response.arrayBuffer();
   requireValue(body.byteLength > 0 && body.byteLength < 2_000_000, 'Unexpected upstream size');
@@ -174,18 +182,34 @@ export async function refreshSnapshot(prior: Snapshot | null, fetcher: typeof fe
     }
   }
   const [discussion, weekly, roni, forecast] = await Promise.all([
-    refresh(prior?.discussion, async () => parseDiscussion(decode(await fetchOfficial(urls.discussion, fetcher)), now)),
-    refresh(prior?.weekly, async () => parseWeekly(decode(await fetchOfficial(urls.weekly, fetcher)), now)),
-    refresh(prior?.roni, async () => parseRoni(decode(await fetchOfficial(urls.roni, fetcher)), now)),
-    refresh(prior?.forecast, async () => parseForecast(decode(await fetchOfficial(urls.forecast, fetcher)), urls.forecast, now)),
+    refresh(prior?.discussion, async () => {
+      const data = parseDiscussion(decode(await fetchOfficial(urls.discussion, fetcher)), now);
+      requireValue(!prior || data.issued >= prior.discussion.data.issued, 'Discussion moved backward');
+      return data;
+    }),
+    refresh(prior?.weekly, async () => {
+      const data = parseWeekly(decode(await fetchOfficial(urls.weekly, fetcher)), now);
+      requireValue(!prior || data.at(-1)!.date >= prior.weekly.data.at(-1)!.date, 'Weekly series moved backward');
+      return data;
+    }),
+    refresh(prior?.roni, async () => {
+      const data = parseRoni(decode(await fetchOfficial(urls.roni, fetcher)), now);
+      requireValue(!prior || data.at(-1)!.date >= prior.roni.data.at(-1)!.date, 'RONI moved backward');
+      return data;
+    }),
+    refresh(prior?.forecast, async () => {
+      const data = parseForecast(decode(await fetchOfficial(urls.forecast, fetcher)), urls.forecast, now);
+      requireValue(!prior || data.issue >= prior.forecast.data.issue, 'Forecast moved backward');
+      return data;
+    }),
   ]);
   let previous = prior?.previous ?? null;
   if (prior?.forecast.data.issue && prior.forecast.data.issue < forecast.data.issue) previous = prior.forecast.data;
-  if (!previous || previous.issue >= forecast.data.issue) {
+  if (!previous || previous.issue !== previousIssue(forecast.data.issue)) {
     try {
       const url = previousForecastUrl(forecast.data.issue);
       const archived = parseForecast(decode(await fetchOfficial(url, fetcher)), url, now);
-      requireValue(archived.issue < forecast.data.issue, 'Archive issue did not precede current issue');
+      requireValue(archived.issue === previousIssue(forecast.data.issue), 'Archive issue was not the preceding month');
       previous = archived;
     } catch { previous = null; }
   }

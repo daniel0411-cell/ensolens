@@ -1,0 +1,12 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { env } from 'cloudflare:workers';
+const contactEnabled = env.CONTACT_ENABLED === 'true';
+---
+<Layout title="About & Contact" active="none" description="Publisher information, editorial standards, and contact details for ENSOLens, an independent ENSO data and climate context project.">
+  <div class="page-shell subpage prose-page"><div class="page-intro"><div><span class="eyebrow">PUBLISHER</span><h1>About <span>ENSOLens.</span></h1><p>An independent climate data and context project.</p></div></div>
+  <section class="method-section"><h2>Who publishes this site</h2><p>ENSOLens is independently operated by the same publisher as Hurricane Tracker at hurricanetracker.cc. It is not affiliated with NOAA, CPC, or any government agency. ENSOLens is responsible for this site's presentation, source processing, and editorial context; NOAA and CPC remain the original sources of the official observations and forecasts.</p></section>
+  <section class="method-section"><h2>Editorial standards</h2><p>We distinguish observations, official outlooks, and historical context. Source dates remain visible, comparisons refer to the same target season, and unverified values are not substituted for official data. Failed source checks retain the last validated values with a visible notice. Material data corrections follow the revised source publication.</p><p>Read the <a href="/methodology/">sources and methodology</a> for index definitions and update handling. This site provides general climate information. Use official local forecasts and warnings for decisions about immediate weather hazards.</p></section>
+  <section class="method-section"><h2>Contact & corrections</h2>{contactEnabled ? <p>For data corrections, source questions, and publisher inquiries, email <a href="mailto:contact@ensolens.com">contact@ensolens.com</a>. Include the page URL, relevant observation or forecast date, and the original source where possible.</p> : <p>A dedicated contact mailbox is being set up. Contact details will be published here after delivery has been verified.</p>}</section>
+  <p class="figure-note">Publisher information updated October 20, 2026. <a href="/privacy/">Privacy policy</a></p></div>
+</Layout>

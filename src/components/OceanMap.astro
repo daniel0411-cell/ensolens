@@ -1,19 +1,14 @@
 ---
 import { Maximize2, X, Info } from '@lucide/astro';
+import { formatDate, urls, type Snapshot } from '../lib/enso';
+interface Props { snapshot: Snapshot }
+const { snapshot } = Astro.props;
+const image = snapshot.map.data;
 ---
 <section class="ocean-section" aria-labelledby="ocean-heading">
-  <div class="section-heading"><div><span class="eyebrow">THE BIG PICTURE</span><h2 id="ocean-heading">A warmer equatorial Pacific</h2></div><span class="data-tag">Illustrative field</span></div>
-  <div class="ocean-map" id="ocean-map">
-    <canvas id="pacific-canvas" role="img" aria-label="Illustrative sea surface temperature anomaly field in the tropical Pacific, with warmer water along the equator. This is synthetic data, not an observation."></canvas>
-    <div class="map-topline"><span><i></i> SEA SURFACE TEMPERATURE ANOMALY</span><button id="expand-map" class="map-expand icon-button" title="Expand ocean map" aria-label="Expand ocean map"><Maximize2 size={16} /></button></div>
-    <span class="map-place asia">WESTERN PACIFIC</span><span class="map-place america">EASTERN PACIFIC</span><span class="map-equator">0° EQUATOR</span>
-    <div class="nino-box" style="left:38.8889%"><span>NIÑO 3.4 REGION</span></div>
-    <div class="map-bottom"><span>EXAMPLE FIELD · NOT OBSERVED DATA</span><div class="map-scale"><div class="scale-gradient"></div><div><span>−3°C</span><span>0</span><span>+3°C</span></div></div></div>
-  </div>
-  <p class="figure-note"><Info size={13} /> The Niño 3.4 region is a key window into ENSO. Map colors here are illustrative.</p>
+  <div class="section-heading"><div><span class="eyebrow">THE BIG PICTURE</span><h2 id="ocean-heading">The observed Pacific</h2></div><span class="data-tag">NOAA / CPC</span></div>
+  <div class="official-map" id="ocean-map"><img id="ocean-image" src={'/api/ocean-map?version=' + image.version} alt={'NOAA sea surface temperature anomaly figure accompanying the CPC discussion issued ' + image.issued + '. Observation dates and color scale appear in the original figure.'} loading="eager" /><button id="expand-map" class="icon-button official-map-expand" title="Expand ocean map" aria-label="Expand ocean map"><Maximize2 size={18} /></button><p id="map-error" hidden>NOAA image unavailable. <a href={urls.map} target="_blank" rel="noreferrer">Open the original figure</a>.</p></div>
+  <p class="figure-note"><Info size={13} /> CPC discussion: {formatDate(image.issued)}. The original figure includes its observation period and scale. <a href={urls.map} target="_blank" rel="noreferrer">Source figure</a></p>
 </section>
-<dialog id="map-dialog" aria-labelledby="map-dialog-title"><div class="dialog-header"><div><span class="eyebrow">TROPICAL PACIFIC</span><h2 id="map-dialog-title">Sea surface temperature anomalies</h2></div><button id="close-map" class="icon-button" aria-label="Close expanded map"><X size={22} /></button></div><div id="expanded-map-container"></div><p class="figure-note">Synthetic example field. Land boundaries: Natural Earth, public domain.</p></dialog>
-<script>
-  import { initOceanMap } from '../scripts/ocean';
-  initOceanMap();
-</script>
+<dialog id="map-dialog" aria-labelledby="map-dialog-title"><div class="dialog-header"><div><span class="eyebrow">NOAA / CPC</span><h2 id="map-dialog-title">Sea surface temperature anomalies</h2></div><button id="close-map" class="icon-button" aria-label="Close expanded map"><X size={22} /></button></div><div id="expanded-map-container"></div></dialog>
+<script>import { initOceanMap } from '../scripts/ocean'; initOceanMap();</script>

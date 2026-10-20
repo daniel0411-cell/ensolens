@@ -7,7 +7,8 @@ export default {
   async fetch(request: Request, env: Env, context: ExecutionContext) {
     const redirect = canonicalRedirect(request);
     if (redirect) return secureResponse(redirect, false);
-    const indexable = indexingAllowed(new URL(request.url).hostname, env.INDEXING_ENABLED);
+    const url = new URL(request.url);
+    const indexable = indexingAllowed(url.hostname, env.INDEXING_ENABLED) && !url.pathname.startsWith('/api/');
     return secureResponse(await handle(request, env, context), indexable);
   },
   async scheduled(_event: ScheduledController, env: Env, context: ExecutionContext) {

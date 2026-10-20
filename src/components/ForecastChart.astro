@@ -1,14 +1,21 @@
 ---
 import { ArrowRight, Download, Info } from '@lucide/astro';
-import { seasons, probabilities } from '../data/demo';
-interface Props { expanded?: boolean }
-const { expanded = false } = Astro.props;
+import { seasonLabel, formatDate, type Snapshot } from '../lib/enso';
+interface Props { expanded?: boolean; snapshot: Snapshot }
+const { expanded = false, snapshot } = Astro.props;
+const current = snapshot.forecast.data;
+const previous = snapshot.previous;
+const target = current.rows.find(row => row.season === 'DJF') ?? current.rows[0];
+const prior = previous?.rows.find(row => row.key === target.key);
+const payload = JSON.stringify({ current, previous }).replace(/</g, '\\u003c');
 ---
 <section class="forecast-section" aria-labelledby="probability-heading">
-  <div class="section-heading"><div><span class="eyebrow">LOOKING AHEAD</span><h2 id="probability-heading">How the odds evolve</h2></div>{!expanded && <a class="subtle-link" href="/forecast/">Explore forecast <ArrowRight size={15} /></a>}{expanded && <button class="icon-button download-probabilities" title="Download illustrative forecast probabilities" aria-label="Download illustrative forecast probabilities"><Download size={18} /></button>}</div>
-  <div class="chart-toolbar"><div class="chart-legend"><span><i class="legend-dot cold"></i>La Niña</span><span><i class="legend-dot neutral"></i>Neutral</span><span><i class="legend-dot warm"></i>El Niño</span></div><label class="compare-toggle"><input id="compare-forecast" type="checkbox" /><span class="switch"></span><span>Previous issue</span></label></div>
-  <div class="probability-chart-wrap"><canvas id="probability-chart" role="img" aria-label="Illustrative seasonal probabilities for La Niña, neutral, and El Niño"></canvas></div>
-  <div class="chart-footer"><span>EXAMPLE ISSUES · OCT VS SEP 2026</span><span>THREE-MONTH SEASONS</span></div>
-  <div id="forecast-comparison" class="comparison-note" hidden><Info size={15} /><span>DJF El Niño probability: <strong>68% → 78%</strong> (+10 percentage points). Same target season, two example issue dates.</span></div>
-  {expanded && <div class="probability-table-wrap"><table class="data-table"><caption>Illustrative October issue · probabilities sum to 100% per season</caption><thead><tr><th scope="col">Season</th><th scope="col">La Niña</th><th scope="col">Neutral</th><th scope="col">El Niño</th></tr></thead><tbody>{seasons.map((season, i) => <tr><th scope="row">{season} {i === 0 ? '2026' : i < 3 ? '2026–27' : '2027'}</th><td>{probabilities.current.nina[i]}%</td><td>{probabilities.current.neutral[i]}%</td><td class="warm-text">{probabilities.current.nino[i]}%</td></tr>)}</tbody></table></div>}
+  <div class="section-heading"><div><span class="eyebrow">LOOKING AHEAD</span><h2 id="probability-heading">How the odds evolve</h2></div>{!expanded && <a class="subtle-link" href="/forecast/">Explore forecast <ArrowRight size={15} /></a>}{expanded && <button class="icon-button download-probabilities" title="Download official forecast probabilities (CSV)" aria-label="Download official forecast probabilities"><Download size={18} /></button>}</div>
+  <div class="chart-toolbar"><div class="chart-legend"><span><i class="legend-dot cold"></i>La Niña</span><span><i class="legend-dot neutral"></i>Neutral</span><span><i class="legend-dot warm"></i>El Niño</span></div><label class="compare-toggle"><input id="compare-forecast" type="checkbox" disabled={!previous} /><span class="switch"></span><span>Previous issue</span></label></div>
+  <div class="probability-chart-wrap"><canvas id="probability-chart" role="img" aria-label="Official CPC seasonal ENSO probabilities. Values are also available in the table below."></canvas></div>
+  <script id="forecast-data" type="application/json" set:html={payload} />
+  <div class="chart-footer"><a href={current.source} target="_blank" rel="noreferrer">CPC · {formatDate(current.issue, { day: undefined })}</a><span>THREE-MONTH SEASONS</span></div>
+  <div id="forecast-comparison" class="comparison-note" hidden><Info size={15} /><span>{prior ? <>{seasonLabel(target)} El Niño: <strong>{prior.nino}% → {target.nino}%</strong> ({target.nino - prior.nino > 0 ? '+' : ''}{target.nino - prior.nino} percentage points). Same season, {previous?.issue} and {current.issue} issues.</> : 'The previous issue has no estimate for this target season. Missing values are left blank.'}</span></div>
+  {!previous && <p class="figure-note">The previous official issue could not be verified. Comparison is unavailable.</p>}
+  <details class="probability-table-wrap" open={expanded}><summary>Seasonal probability table</summary><table class="data-table"><caption>CPC issue {current.issue} · RONI-based probabilities</caption><thead><tr><th scope="col">Season</th><th scope="col">La Niña</th><th scope="col">Neutral</th><th scope="col">El Niño</th></tr></thead><tbody>{current.rows.map(row => <tr><th scope="row">{seasonLabel(row)}</th><td>{row.nina}%</td><td>{row.neutral}%</td><td class="warm-text">{row.nino}%</td></tr>)}</tbody></table></details>
 </section>

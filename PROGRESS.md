@@ -11,11 +11,19 @@ Updated: 2026-10-20 (Asia/Shanghai)
 
 ## Active delivery
 
-1. Save the inherited implementation in Git; repair runtime typing and verification.
-2. Connect all dashboard views, downloads, and the ocean image to validated data.
-3. Complete publisher, privacy, sitemap, and indexing behavior.
-4. Verify failure handling, desktop/mobile interactions, and production responses.
-5. Deploy the verified build, record version and results, then enable indexing.
+1. DONE: inherited implementation saved in commit ea1ca0b; runtime typing repaired.
+2. DONE: dashboard, forecasts, CSV downloads and original NOAA image use official data.
+3. DONE: publisher, privacy, metadata, sitemap and hostname-aware indexing implemented.
+4. IN PROGRESS: 10 unit tests; desktop 1440px and mobile 390px interactions passed. Real Worker scheduled refresh exposed unsupported fetch redirect mode; fixed, awaiting rerun.
+5. PENDING: deploy verified build, production checks, indexing enablement and version record.
+
+## Runtime issues identified and addressed
+
+- Compatibility date exceeded local workerd support; pinned to 2026-10-19.
+- Legacy static HTML handling interfered with SSR/dev asset routes; Astro now owns page routing.
+- Wrangler previews inherited the production hostname; preview explicitly uses localhost.
+- Workers does not implement fetch redirect:error; manual mode now rejects non-2xx upstream responses.
+- Deployment now runs type checks, unit tests, build, and real Worker/browser verification before upload.
 
 ## Recovery rules
 
@@ -27,4 +35,4 @@ Updated: 2026-10-20 (Asia/Shanghai)
 
 ## Pending external detail
 
-- contact@ensolens.com is a proposed address, not a verified mailbox. Routing and receipt must be verified before publishing it.
+- contact@ensolens.com now has an active Cloudflare routing rule to an existing verified destination. Domain MX/SPF/DKIM records were provisioned. Inbox delivery has not been observed; do not claim end-to-end receipt verification.

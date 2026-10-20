@@ -1,7 +1,7 @@
 name = "ensolens"
 main = "src/worker.ts"
 account_id = "2e9212a9aeef7091fe79d82808aa5843"
-compatibility_date = "2026-10-20"
+compatibility_date = "2026-10-19"
 compatibility_flags = ["nodejs_compat"]
 workers_dev = true
 preview_urls = false
@@ -13,8 +13,7 @@ routes = [
 [assets]
 directory = "./dist/client"
 binding = "ASSETS"
-html_handling = "auto-trailing-slash"
-not_found_handling = "404-page"
+html_handling = "none"
 run_worker_first = true
 
 [[kv_namespaces]]

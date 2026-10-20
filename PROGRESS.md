@@ -14,8 +14,8 @@ Updated: 2026-10-20 (Asia/Shanghai)
 1. DONE: inherited implementation saved in commit ea1ca0b; runtime typing repaired.
 2. DONE: dashboard, forecasts, CSV downloads and original NOAA image use official data.
 3. DONE: publisher, privacy, metadata, sitemap and hostname-aware indexing implemented.
-4. IN PROGRESS: 10 unit tests; desktop 1440px and mobile 390px interactions passed. Real Worker scheduled refresh exposed unsupported fetch redirect mode; fixed, awaiting rerun.
-5. PENDING: deploy verified build, production checks, indexing enablement and version record.
+4. DONE: 10 unit tests; desktop 1440px and mobile 390px interactions passed. Real Worker scheduled refresh passes NOAA parsing, KV persistence, and healthy status checks. Code checkpoint: e8a84e2.
+5. IN PROGRESS: official-data build e3d2fbba-b818-4ef1-a9cb-9a772b6f4dd5 passed all production HTTP/data/SEO/redirect checks with indexing disabled. Enabling production-only indexing; final version and checks pending.
 
 ## Runtime issues identified and addressed
 

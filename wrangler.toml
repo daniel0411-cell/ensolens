@@ -21,7 +21,7 @@ binding = "ENSO_CACHE"
 id = "aa9e067e35fd4fd3a61f01e330f245f2"
 
 [vars]
-INDEXING_ENABLED = "false"
+INDEXING_ENABLED = "true"
 CONTACT_ENABLED = "false"
 
 [triggers]

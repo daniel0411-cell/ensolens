@@ -2,12 +2,14 @@
 
 Updated: 2026-10-20 (Asia/Shanghai)
 
-## Confirmed baseline
+## Confirmed production state
 
-- The demo was deployed to ensolens.com on October 20; version recorded in README.md.
-- Official NOAA ingestion, a dated seed, KV storage, and scheduled refresh were started but not deployed.
-- Pages still use demo values. Indexing and contact publishing are disabled.
-- Initial verification: six type errors; legacy Worker tests cannot load cloudflare: modules under Node.
+- The official NOAA-data release is live at https://ensolens.com/; pages no longer use demo values.
+- Current version: ceb51bdf-5f04-41fa-a1b0-a3a764becc6b, from actual Wrangler upload output and deployments list.
+- Deployment: f3242076-fbe3-4ad1-8c6d-d92be2268cce, activated October 20, 2026 at 10:51 Asia/Shanghai, serving 100% of traffic.
+- Production-only indexing is enabled. The October 20 recheck passed page robots headers/meta, canonical URLs, robots.txt and sitemap.xml. Search-engine crawling and inclusion are not confirmed by these checks.
+- NOAA scheduled refresh is operating: all five live feeds were checked and retrieved at 14:15:52 Asia/Shanghai on October 20 with status ok and no stale feeds.
+- Contact publishing remains disabled until actual inbox delivery is confirmed.
 
 ## Active delivery
 
@@ -15,7 +17,9 @@ Updated: 2026-10-20 (Asia/Shanghai)
 2. DONE: dashboard, forecasts, CSV downloads and original NOAA image use official data.
 3. DONE: publisher, privacy, metadata, sitemap and hostname-aware indexing implemented.
 4. DONE: 10 unit tests; desktop 1440px and mobile 390px interactions passed. Real Worker scheduled refresh passes NOAA parsing, KV persistence, and healthy status checks. Code checkpoint: e8a84e2.
-5. IN PROGRESS: official-data build e3d2fbba-b818-4ef1-a9cb-9a772b6f4dd5 passed all production HTTP/data/SEO/redirect checks with indexing disabled. Enabling production-only indexing; final version and checks pending.
+5. DONE: first official-data version e3d2fbba-b818-4ef1-a9cb-9a772b6f4dd5 passed production checks with indexing disabled. Version ceb51bdf-5f04-41fa-a1b0-a3a764becc6b enabled production-only indexing; live verification now passes with ENSOLENS_EXPECT_INDEXING=true.
+6. DONE: October 20 completion audit passed 33-file type checking (zero errors/warnings), all 10 unit tests, build, real local Worker NOAA refresh/KV checks, and 1440px/390px browser checks against both preview and production. Viewport screenshots were inspected. Recovery documentation is synchronized with the actual deployment.
+7. PENDING EXTERNAL VERIFICATION: contact@ensolens.com has an active routing rule, but the routing dashboard has no received-message activity. The user has been asked to send a test and confirm receipt before CONTACT_ENABLED can be enabled and released through npm run deploy.
 
 ## Runtime issues identified and addressed
 
@@ -35,4 +39,5 @@ Updated: 2026-10-20 (Asia/Shanghai)
 
 ## Pending external detail
 
-- contact@ensolens.com now has an active Cloudflare routing rule to an existing verified destination. Domain MX/SPF/DKIM records were provisioned. Inbox delivery has not been observed; do not claim end-to-end receipt verification.
+- contact@ensolens.com has an active Cloudflare routing rule to an existing verified destination; routing is enabled and its DNS records are locked. Domain MX/SPF/DKIM records were provisioned. Inbox delivery has not been observed; do not claim end-to-end receipt verification or publish the address yet.
+- No new runtime deployment was needed for the completion audit: the live indexing release already matches the verified implementation. Documentation and browser screenshot checks are local repository changes.

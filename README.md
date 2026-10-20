@@ -1,43 +1,68 @@
-# ENSOLens MVP
+# ENSOLens
 
-An English-language ENSO dashboard prototype built with Astro, Chart.js, and Lucide.
+An independent English-language ENSO dashboard built with Astro, Chart.js, and Cloudflare Workers. Production: https://ensolens.com/
 
-## Local development
+## Status and recovery
+
+Read PROGRESS.md and AGENTS.md before continuing work. Git checkpoints preserve the implementation separately from deployment state.
+
+- The official-data release was deployed on October 20, 2026 (Asia/Shanghai).
+- First verified official-data version: e3d2fbba-b818-4ef1-a9cb-9a772b6f4dd5.
+- Current production version: ceb51bdf-5f04-41fa-a1b0-a3a764becc6b; deployment f3242076-fbe3-4ad1-8c6d-d92be2268cce, activated October 20 at 10:51 Asia/Shanghai.
+- Production-only indexing is enabled and verified. This permits crawling; actual search-engine inclusion has not been confirmed.
+- contact@ensolens.com has a Cloudflare routing rule to an existing verified destination. Inbox receipt is unconfirmed; the public email link remains disabled.
+- The original demo release was 5757c27b-b2f4-4169-bda9-da8f28b76ab9.
+
+## Development and release
+
+Use the project's installed Node.js 24 runtime.
 
 ```sh
-npm install
-npm run dev
+npm ci
+npm run dev -- --port 4327
+npm run verify
+npm run preview
 ```
 
-```sh
-npm run check
-npm test
-npm run build
-```
-
-## Deployment
-
-The preview was deployed on October 20, 2026 (Asia/Shanghai):
-
-- Primary URL: https://ensolens.com/
-- www.ensolens.com redirects to the HTTPS primary host, preserving path and query.
-- Cloudflare Worker: `ensolens`
-- Fallback URL: https://ensolens.hurricanehub-canbao1.workers.dev/
-- Version: `5757c27b-b2f4-4169-bda9-da8f28b76ab9`
-- Registrar: Spaceship; authoritative DNS: Cloudflare.
-- Nameservers: `brenda.ns.cloudflare.com`, `gerardo.ns.cloudflare.com`.
-- Both hostnames are managed as Worker custom domains in `wrangler.toml`.
-
-With Wrangler authenticated to the existing Cloudflare account:
+The built Worker preview is available at http://127.0.0.1:4327/. It explicitly uses localhost as its upstream host, preventing production HTTPS redirects from affecting local tests.
 
 ```sh
+npm run data:refresh
+npm run test:browser
 npm run deploy
+ENSOLENS_EXPECT_INDEXING=true node scripts/verify-production.mjs
 ```
 
-Validation: Astro check reported no errors or warnings; all three Worker tests passed; the static build succeeded. Chrome verified HTTPS on the primary domain, all five content pages, www and HTTP redirects preserving path/query, the custom not-found page, and the noindex meta tag. Desktop and 390px mobile checks covered navigation, map expansion, rendered charts, and the forecast comparison toggle; no horizontal overflow was observed on the mobile dashboard. Cloudflare showed active edge certificates and an activated domain. The terminal DNS resolver still returned ENOTFOUND during rollout, so live HTTP status/header checks from that resolver remain unverified.
+Deploy runs type checks, unit tests, build, a real isolated Worker scheduled refresh against NOAA, KV persistence checks, and Chrome tests at 1440px and 390px before upload. Chrome must be installed. Browser tests start and stop their own preview; set ENSOLENS_TEST_URL to check an existing preview or production instead. Screenshots are saved under .playwright/.
 
-## Data status
+Production checks cover seven pages, actual embedded chart data, the NOAA image, source health, canonical URLs, metadata, indexing, sitemap, redirects, and the not-found page. A successful build alone is not a release verification.
 
-All dashboard values and map temperature colors are **illustrative**, not live observations or official forecasts. Example values are centralized in `src/data/demo.ts`. Map land outlines are Natural Earth public-domain data. No analytics or external font requests are included.
+## Data and failure behavior
 
-The deployed preview intentionally blocks indexing via robots.txt, a noindex meta tag, and an X-Robots-Tag response header. Before enabling indexing: connect and validate official sources, review regional copy, implement update monitoring and failure states, complete publisher/contact/privacy information, and review indexing controls and canonical URLs.
+- Official discussion: phase, alert, issue date, and next scheduled release.
+- Weekly Niño 3.4 anomalies: retain actual weekly dates.
+- Seasonal RONI: retain three-month season end dates; never repeat seasonal values as weekly observations.
+- Official probabilities: match previous and current issues by season and center year. Missing targets stay blank.
+- NOAA's original relative SST image: includes original observation period, reference baseline, and scale.
+- Sources are checked every six hours at 00:15, 06:15, 12:15, and 18:15 UTC (08:15, 14:15, 20:15, and 02:15 Asia/Shanghai).
+- Format, range, date, and probability validation failures retain the previous valid feed and mark it degraded.
+- /api/status/ reports source dates, check times, retrieval times, and degraded feeds. A degraded status returns HTTP 503.
+- The bundled dated snapshot serves as a fallback if KV is unavailable. Source errors and overdue data are shown on data pages.
+- Source formats and baseline changes fail validation rather than being silently accepted. Forecast and map revisions are retained in KV.
+
+## Hosting and indexing
+
+- Worker: ensolens; fallback: https://ensolens.hurricanehub-canbao1.workers.dev/.
+- Both ensolens.com and www.ensolens.com are Worker custom domains in wrangler.toml.
+- www and HTTP requests redirect to the HTTPS primary domain with path and query preserved.
+- Registrar: Spaceship. Authoritative DNS: Cloudflare (brenda.ns.cloudflare.com and gerardo.ns.cloudflare.com).
+- INDEXING_ENABLED permits indexing only on ensolens.com. Preview hosts and API responses stay noindex; error pages always stay noindex.
+- Publisher, methodology, privacy, robots.txt, sitemap.xml, canonical tags, Open Graph, and WebSite structured data are included.
+- CONTACT_ENABLED remains false until inbox delivery is verified.
+- No visitor analytics, advertising, accounts, external fonts, or tracking cookies are included.
+
+## Validation completed
+
+The October 20 completion audit passed 33-file type checking with zero errors or warnings, all ten unit tests, build, a real preview Worker NOAA refresh/KV check, and desktop 1440px/mobile 390px browser checks against both preview and production. Viewport screenshots were visually inspected. Live HTTP verification passed with ENSOLENS_EXPECT_INDEXING=true, and all five live feeds had a successful scheduled refresh at 14:15:52 Asia/Shanghai.
+
+Ten unit tests cover calendar rollover, source validation, negative fixed-width values, Watch versus Advisory semantics, failure retention, archival writes, redirects, and indexing. Browser checks cover chart pixels, source image decoding, CSV downloads, range switching, forecast comparison, map expansion and Escape, mobile navigation, overflow, and all pages including the custom 404. The remaining contact-address release depends on a confirmed test-message receipt; it is intentionally unpublished until that check passes.

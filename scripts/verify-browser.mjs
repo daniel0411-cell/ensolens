@@ -61,6 +61,8 @@ try {
       await page.getByRole('button', { name: 'Close navigation', exact: true }).click();
     }
     await page.screenshot({ path: fileURLToPath(new URL('dashboard-' + width + '.png', output)), fullPage: true });
+    await page.evaluate(() => window.scrollTo(0, 0));
+    await page.screenshot({ path: fileURLToPath(new URL('dashboard-' + width + '-viewport.png', output)), fullPage: false });
     await page.goto(base + '/forecast/', { waitUntil: 'networkidle' });
     await page.getByText('Previous issue', { exact: true }).click();
     assert.equal(await page.locator('#compare-forecast').isChecked(), true);

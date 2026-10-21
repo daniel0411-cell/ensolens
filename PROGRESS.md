@@ -2,6 +2,12 @@
 
 Updated: 2026-10-21 (Asia/Shanghai)
 
+## GitHub backup checkpoint (October 21)
+
+- Associated origin with https://github.com/daniel0411-cell/ensolens.git after confirming the remote had no refs. Existing local history through 5fbf539 was successfully pushed to master, which now tracks origin/master.
+- Reviewed tracked files and historical filenames and scanned current content and historical diffs for common credential patterns; no matching credentials were found. Environment files, local Wrangler state, dependencies, builds, and browser screenshots are ignored. Repository visibility has not been checked.
+- GitHub synchronization is separate from the Cloudflare deployment and GSC verification state; this upload did not deploy the site or submit a sitemap.
+
 ## GSC verification checkpoint (October 21)
 
 - Previous chat stopped with `stream disconnected before completion: response protection is unavailable`. Its last GSC screenshot showed the Cloudflare automatic DNS verification prompt before starting; it did not show a Google verification failure. The cause of the chat transport error is unconfirmed; the evidence does not establish a Chrome component fault.

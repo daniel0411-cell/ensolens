@@ -1,6 +1,15 @@
 # ENSOLens Delivery Status
 
-Updated: 2026-10-20 (Asia/Shanghai)
+Updated: 2026-10-21 (Asia/Shanghai)
+
+## GSC verification checkpoint (October 21)
+
+- Previous chat stopped with `stream disconnected before completion: response protection is unavailable`. Its last GSC screenshot showed the Cloudflare automatic DNS verification prompt before starting; it did not show a Google verification failure. The cause of the chat transport error is unconfirmed; the evidence does not establish a Chrome component fault.
+- Public NS lookup confirms brenda.ns.cloudflare.com and gerardo.ns.cloudflare.com. Both authoritative servers and Google Public DNS (8.8.8.8) return only the root TXT `v=spf1 include:_spf.mx.cloudflare.net ~all`; no root `google-site-verification=` TXT is published at observation time. This establishes the missing TXT prerequisite, not the status of every possible CNAME verification method or the signed-in GSC account.
+- Live `ENSOLENS_EXPECT_INDEXING=true node scripts/verify-production.mjs` passed all seven pages, source health, robots, sitemap, 404 and canonical redirects. No deployment was needed or performed. GSC ownership, sitemap submission, and actual indexing remain unconfirmed.
+- Recommended next action: in the ensolens.com Domain property verification dialog, switch the provider dropdown from Cloudflare.com to Any DNS provider to obtain the exact TXT value. In Cloudflare > ensolens.com > DNS > Records, add a separate TXT record at @ with that entire value and TTL Auto. Preserve existing mail and application records; do not add it at Spaceship because Cloudflare is authoritative. Confirm it is publicly served, then click Verify in GSC. Retain the TXT after success; submit https://ensolens.com/sitemap.xml afterward.
+- User's earlier preference was to operate Chrome themselves. No Chrome tab was opened or manipulated during this audit; the account-specific TXT token has not been obtained. Public documentation was read in a background in-app browser.
+- Official reference: https://support.google.com/webmasters/answer/9008080?hl=zh-Hans (observed October 21, 2026; no publication date shown). Google documents automatic provider verification and manual TXT verification, exact-token matching, record retention, and possible propagation delays of up to 2-3 days. Waiting alone will not create an absent record.
 
 ## Confirmed production state
 

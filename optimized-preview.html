@@ -1,0 +1,977 @@
+<!-- ENSOLens Optimization Preview Demo: Double-click to open in Chrome or Safari -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ENSOLens · Optimization Preview Demo</title>
+  <style>
+    :root {
+      font-family: Arial, Helvetica, sans-serif;
+      color: #252d2a;
+      background: #f6f7f5;
+      --green: #275846;
+      --ink: #252d2a;
+      --muted: #77807a;
+      --line: #dde2dc;
+      --warm: #d77655;
+      --cold: #6c96ae;
+      --neutral: #c5cec2;
+      --white: #fff;
+      --serif: Georgia, 'Times New Roman', serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #f6f7f5; color: #252d2a; line-height: 1.6; }
+    a { color: inherit; text-decoration: none; }
+    button { cursor: pointer; border: 0; background: none; font: inherit; }
+    svg { vertical-align: middle; flex-shrink: 0; }
+
+    /* Top Strip */
+    .prototype-strip {
+      min-height: 32px;
+      padding: 6px 14px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      background: #e9eee7;
+      font-size: 11px;
+      color: #586651;
+      border-bottom: 1px solid #dde2dc;
+    }
+    .strip-tag { font-weight: 700; color: var(--green); }
+    .strip-divider { opacity: 0.4; }
+
+    /* Header */
+    .site-header { background: #fafbf9; border-bottom: 1px solid var(--line); }
+    .header-inner {
+      max-width: 1248px;
+      margin: auto;
+      min-height: 76px;
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--green);
+    }
+    .brand-light { font-weight: 400; }
+    .brand-dot { color: #cf785b; }
+    .desktop-nav { display: flex; align-items: stretch; gap: 26px; }
+    .desktop-nav a {
+      display: flex;
+      align-items: center;
+      font-size: 13px;
+      color: #636d66;
+      font-weight: 500;
+      padding: 10px 0;
+      position: relative;
+    }
+    .desktop-nav a.active { color: var(--green); font-weight: 600; }
+    .desktop-nav a.active::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--green);
+    }
+    .source-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #556258;
+      background: #eef2ec;
+      padding: 6px 12px;
+      border-radius: 4px;
+    }
+
+    /* Page Shell */
+    .page-shell { max-width: 1248px; margin: auto; padding: 0 40px 60px; }
+    
+    /* Intro */
+    .page-intro {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 30px;
+      padding: 38px 0 28px;
+    }
+    .eyebrow {
+      display: block;
+      font-size: 11px;
+      line-height: 1.6;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #7a827b;
+    }
+    .intro-eyebrow { display: flex; align-items: center; gap: 7px; margin-bottom: 8px; }
+    .live-dot {
+      width: 7px;
+      height: 7px;
+      display: inline-block;
+      background: var(--green);
+      border-radius: 50%;
+      box-shadow: 0 0 0 3px #e8eee8;
+    }
+    h1 { font-family: var(--serif); font-size: 46px; line-height: 1.15; font-weight: 500; }
+    h1 > span { color: var(--green); font-style: italic; }
+    .page-intro p { font-size: 14px; color: #6b756e; margin-top: 10px; }
+    .snapshot-stamp {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      color: #6d776f;
+      background: #fff;
+      padding: 10px 14px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      flex-shrink: 0;
+    }
+    .snapshot-stamp strong { display: block; font-size: 12px; color: #38423a; }
+    .snapshot-stamp span { font-size: 11px; color: #7f8a81; }
+
+    /* Optimized Status Band */
+    .status-band {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1.1fr;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 22px 26px;
+      margin-bottom: 35px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+    }
+    .status-band > div {
+      padding: 0 24px;
+      border-right: 1px solid var(--line);
+    }
+    .status-band > div:first-child { padding-left: 0; }
+    .status-band > div:last-child { border: 0; padding-right: 0; }
+
+    .stat-label {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #798178;
+      margin-bottom: 8px;
+    }
+    .phase-value {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 30px;
+      font-weight: 500;
+      font-family: var(--serif);
+      white-space: nowrap;
+    }
+    .phase-dot { height: 10px; width: 10px; border-radius: 50%; background: #d77655; flex-shrink: 0; }
+    .phase-badge {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 11px;
+      color: #9f5d44;
+      background: #f7e8e1;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+    }
+    .status-band p {
+      font-size: 12px;
+      color: #6b7369;
+      margin-top: 6px;
+    }
+
+    /* Anomaly Scale Bar (New Feature) */
+    .status-scale-wrap {
+      margin-top: 14px;
+      padding-top: 10px;
+      border-top: 1px dashed var(--line);
+    }
+    .status-scale-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 10px;
+      font-weight: 600;
+      color: #7b857a;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+    }
+    .status-scale-track {
+      height: 6px;
+      background: linear-gradient(90deg, #6c96ae 0%, #c5cec2 50%, #d77655 100%);
+      border-radius: 3px;
+      position: relative;
+    }
+    .status-scale-pin {
+      position: absolute;
+      top: -3px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #275846;
+      border: 2px solid #fff;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+      transform: translateX(-50%);
+    }
+
+    .stat-value {
+      font-size: 36px;
+      line-height: 1.15;
+      font-weight: 400;
+      font-family: Arial, Helvetica, sans-serif;
+      font-variant-numeric: tabular-nums;
+    }
+    .stat-value > span { font-size: 20px; color: #8c958d; margin-left: 2px; }
+    .change-pill { color: #b87051; font-weight: 600; }
+    .probability-mini {
+      display: inline-block;
+      vertical-align: middle;
+      position: relative;
+      width: 60px;
+      height: 6px;
+      background: #e3e7df;
+      border-radius: 3px;
+      margin-left: 12px;
+      overflow: hidden;
+    }
+    .probability-mini i {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      background: #d88161;
+      border-radius: 3px;
+    }
+
+    /* Overview Grid */
+    .overview-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 300px;
+      gap: 36px;
+      margin-bottom: 40px;
+    }
+    .section-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .section-heading h2 { font-size: 24px; font-family: var(--serif); font-weight: 500; }
+    .data-tag {
+      font-size: 11px;
+      font-weight: 500;
+      color: #6d786e;
+      border: 1px solid var(--line);
+      background: #fff;
+      padding: 4px 8px;
+      border-radius: 4px;
+    }
+
+    /* Ocean Canvas Card */
+    .ocean-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 24px;
+    }
+    .ocean-map {
+      position: relative;
+      aspect-ratio: 2.35;
+      background: #172a30;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .ocean-map canvas { width: 100%; height: 100%; display: block; }
+    .map-topline {
+      position: absolute;
+      top: 12px;
+      left: 14px;
+      right: 14px;
+      display: flex;
+      justify-content: space-between;
+      color: #b8c9c8;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+    .nino-box {
+      position: absolute;
+      left: 41.6%;
+      top: 38%;
+      width: 28%;
+      height: 24%;
+      border: 1.5px dashed #fed7aa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .nino-box span {
+      font-size: 9px;
+      font-weight: 700;
+      color: #fff;
+      background: rgba(30, 45, 40, 0.7);
+      padding: 3px 6px;
+      border-radius: 3px;
+    }
+    .map-scale-bar {
+      position: absolute;
+      bottom: 12px;
+      right: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(15, 25, 22, 0.75);
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 9px;
+      color: #d1ded5;
+    }
+    .map-scale-gradient {
+      width: 70px;
+      height: 6px;
+      background: linear-gradient(90deg, #325b87, #86a8b3, #dce0d0, #efb171, #da5e4f);
+      border-radius: 2px;
+    }
+
+    /* Trend Chart Card */
+    .trend-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 20px;
+    }
+    .chart-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+    .chart-legend { display: flex; align-items: center; gap: 16px; font-size: 12px; color: #5a6659; }
+    .chart-legend span { display: inline-flex; align-items: center; gap: 6px; }
+    .legend-dot.warm { width: 8px; height: 8px; border-radius: 50%; background: var(--warm); }
+    .legend-dash { width: 14px; border-top: 2px dashed var(--green); }
+    .segmented {
+      display: flex;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 2px;
+      gap: 2px;
+    }
+    .segmented button {
+      font-size: 11px;
+      font-weight: 600;
+      color: #6d756a;
+      padding: 4px 10px;
+      border-radius: 2px;
+    }
+    .segmented button.selected { background: #e6ece3; color: var(--green); }
+    .trend-canvas-wrap { height: 180px; width: 100%; position: relative; }
+    .chart-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: #717d6f;
+      margin-top: 12px;
+      padding-top: 8px;
+      border-top: 1px solid #f0f3ee;
+    }
+    .chart-footer a { color: var(--green); font-weight: 600; }
+
+    /* Aside Context Column */
+    .context-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .reading-section h2 { font-family: var(--serif); font-size: 26px; line-height: 1.25; margin: 8px 0 12px; }
+    .reading-section p { font-size: 13px; color: #626c64; line-height: 1.7; }
+    .takeaway { display: flex; gap: 12px; margin-top: 16px; }
+    .takeaway .num { font-family: var(--serif); font-size: 18px; color: #8e9e8c; font-weight: 600; }
+    .takeaway h3 { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
+    .takeaway p { font-size: 12px; color: #68736a; line-height: 1.6; }
+    .text-link { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; color: var(--green); margin-top: 14px; }
+    .update-section { border-top: 1px solid var(--line); padding-top: 20px; }
+    .update-section h3 { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+    .update-section p { font-size: 12px; color: #68736a; line-height: 1.6; }
+
+    /* 4-Scenario Decision Matrix (New Optimized Grid) */
+    .scenario-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-top: 20px;
+    }
+    .scenario-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+      transition: all 0.2s ease;
+    }
+    .scenario-card:hover {
+      border-color: var(--green);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(39, 88, 70, 0.08);
+    }
+    .scenario-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--green);
+      margin-bottom: 8px;
+    }
+    .scenario-card h3 {
+      font-family: var(--serif);
+      font-size: 18px;
+      color: var(--ink);
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+    .scenario-card p {
+      font-size: 12px;
+      color: #657065;
+      line-height: 1.7;
+    }
+    .scenario-footer {
+      margin-top: 16px;
+      padding-top: 12px;
+      border-top: 1px solid #edf1eb;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11px;
+      color: #7e8a7b;
+    }
+    .scenario-footer a {
+      color: var(--green);
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+    }
+
+    /* Sister Project Banner */
+    .sister-project-banner {
+      margin-top: 32px;
+      background: #f4f8f3;
+      border: 1px solid #d3e2d1;
+      border-radius: 8px;
+      padding: 24px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .sister-info { max-width: 650px; }
+    .sister-badge {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--green);
+      margin-bottom: 6px;
+      display: inline-block;
+    }
+    .sister-info h3 { font-family: var(--serif); font-size: 21px; font-weight: 500; margin-bottom: 6px; }
+    .sister-info p { font-size: 13px; color: #5f6e5e; line-height: 1.7; }
+    .sister-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--green);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 12px 20px;
+      border-radius: 5px;
+      white-space: nowrap;
+      transition: background 0.2s;
+    }
+    .sister-btn:hover { background: #1e4637; }
+
+    /* Provenance Line */
+    .provenance-line {
+      border-top: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      padding: 20px 0 28px;
+      font-size: 12px;
+      color: #697466;
+      margin-top: 40px;
+    }
+    .provenance-line > span {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      color: var(--green);
+      font-weight: 600;
+    }
+    .provenance-line a { margin-left: auto; color: var(--green); font-weight: 600; }
+
+    /* Footer */
+    .site-footer { border-top: 1px solid var(--line); background: #edf0e9; padding: 32px 0; }
+    .footer-inner {
+      max-width: 1248px;
+      margin: auto;
+      padding: 0 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: #6b7768;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .scenario-grid { grid-template-columns: repeat(2, 1fr); }
+      .overview-grid { grid-template-columns: 1fr; }
+      .status-band { grid-template-columns: 1fr 1fr; gap: 20px; }
+      .status-band > div { border-right: 0; padding: 0; }
+    }
+    @media (max-width: 640px) {
+      .scenario-grid { grid-template-columns: 1fr; }
+      .status-band { grid-template-columns: 1fr; }
+      .page-shell { padding: 0 20px 40px; }
+      .header-inner { padding: 0 20px; }
+      h1 { font-size: 34px; }
+      .desktop-nav { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Strip -->
+  <div class="prototype-strip">
+    <span class="strip-tag">NOAA / CPC Verified Feed</span>
+    <span class="strip-divider">/</span>
+    <span>Live Climate Observatory & Seasonal Intelligence</span>
+  </div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="#">
+        <span>ENSO<span class="brand-light">Lens</span><span class="brand-dot">.</span></span>
+      </a>
+      <nav class="desktop-nav">
+        <a href="#" class="active">Overview</a>
+        <a href="#">Forecast</a>
+        <a href="#">U.S. Winter</a>
+        <a href="#">Hurricanes</a>
+        <a href="#">Sources & Methods</a>
+      </nav>
+      <a class="source-link" href="https://www.cpc.ncep.noaa.gov/" target="_blank">
+        NOAA / CPC Sources ↗
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Shell -->
+  <main class="page-shell">
+
+    <!-- Page Intro -->
+    <div class="page-intro">
+      <div>
+        <div class="eyebrow intro-eyebrow">
+          <span class="live-dot"></span> THE ENSO OBSERVATORY
+        </div>
+        <h1>A clearer view of <span>ENSO.</span></h1>
+        <p>The ocean signal. The seasonal outlook. The context that matters.</p>
+      </div>
+      <div class="snapshot-stamp">
+        <div>
+          <strong>October 20, 2026</strong>
+          <span>CPC Discussion Active · Synced</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 1. Optimized Status Band with Visual Gradient Scale -->
+    <section class="status-band" aria-label="Official ENSO snapshot">
+      <!-- Card 1: Official Status with Visual Spectrum Bar -->
+      <div class="phase-stat">
+        <div class="stat-label">● OFFICIAL STATUS</div>
+        <div class="phase-value">
+          <span class="phase-dot"></span>El Niño
+          <span class="phase-badge">ADVISORY</span>
+        </div>
+        <p>CPC diagnostic discussion issued · Oct 2026</p>
+        
+        <!-- Live Visual Anomaly Scale Indicator -->
+        <div class="status-scale-wrap" title="Current Niño 3.4 anomaly is +1.40°C">
+          <div class="status-scale-labels">
+            <span>Cool (-2°)</span>
+            <span>Neutral (0°)</span>
+            <span style="color:#b95736">Warm (+2°)</span>
+          </div>
+          <div class="status-scale-track">
+            <!-- Pin placed dynamically at 85% (+1.4C on -2 to +2 range) -->
+            <span class="status-scale-pin" style="left: 85%;"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: Weekly Anomaly -->
+      <div class="numeric-stat">
+        <div class="stat-label">WEEKLY NIÑO 3.4</div>
+        <div class="stat-value">+1.40<span>°C</span></div>
+        <p><span class="change-pill">↗ +0.10°C</span> vs previous weekly issue</p>
+      </div>
+
+      <!-- Card 3: Seasonal RONI -->
+      <div class="numeric-stat">
+        <div class="stat-label">SEASONAL RONI</div>
+        <div class="stat-value">+0.90<span>°C</span></div>
+        <p>JAS 2026 · relative index <a href="#" style="color:var(--green)">↗</a></p>
+      </div>
+
+      <!-- Card 4: DJF Target Probability -->
+      <div class="outlook-stat">
+        <div class="stat-label">DJF EL NIÑO PROBABILITY</div>
+        <div class="stat-value">
+          78<span>%</span>
+          <span class="probability-mini"><i style="width: 78%;"></i></span>
+        </div>
+        <p>Dec–Feb 2026-27 · high confidence peak</p>
+      </div>
+    </section>
+
+    <!-- Overview Grid -->
+    <div class="overview-grid">
+      <div class="main-column">
+        <!-- Ocean Canvas Map -->
+        <div class="ocean-card">
+          <div class="section-heading">
+            <div>
+              <span class="eyebrow">EQUATORIAL PACIFIC</span>
+              <h2>Observed Sea Surface Temperature Shift</h2>
+            </div>
+            <span class="data-tag">NOAA Coral Reef Watch / CPC</span>
+          </div>
+          <div class="ocean-map">
+            <canvas id="demo-ocean-canvas" width="680" height="290"></canvas>
+            <div class="map-topline">
+              <span>SEA SURFACE TEMPERATURE ANOMALY FIELD</span>
+              <span>120°E – 120°W</span>
+            </div>
+            <div class="nino-box">
+              <span>NIÑO 3.4 REGION (+1.4°C)</span>
+            </div>
+            <div class="map-scale-bar">
+              <span>-3°C</span>
+              <div class="map-scale-gradient"></div>
+              <span>+3°C</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Trend Chart -->
+        <div class="trend-card">
+          <div class="section-heading">
+            <div>
+              <span class="eyebrow">TIME SERIES DYNAMICS</span>
+              <h2>Tracking the Temperature Shift</h2>
+            </div>
+            <div class="segmented">
+              <button>6M</button>
+              <button class="selected">12M</button>
+            </div>
+          </div>
+          <div class="chart-toolbar">
+            <div class="chart-legend">
+              <span><i class="legend-dot warm"></i> Weekly Niño 3.4 (°C)</span>
+              <span><i class="legend-dash"></i> Seasonal RONI Baseline</span>
+            </div>
+          </div>
+          <div class="trend-canvas-wrap">
+            <canvas id="demo-trend-canvas" width="680" height="180"></canvas>
+          </div>
+          <div class="chart-footer">
+            <span>OFFICIAL NOAA 2025–2026 MEASURED ANOMALIES</span>
+            <a href="#">Why do weekly and seasonal lines differ? ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Aside -->
+      <aside class="context-column">
+        <div class="context-card">
+          <section class="reading-section">
+            <span class="eyebrow">THE SHORT READ</span>
+            <h2>The signal is only part of the story.</h2>
+            <p>Warmer tropical Pacific waters shift global jet streams and moisture tracks. They do not dictate tomorrow's local rainfall.</p>
+            
+            <div class="takeaway">
+              <span class="num">01</span>
+              <div>
+                <h3>Start with official status</h3>
+                <p>A single warm weekly blip does not define an ENSO phase without coupled atmospheric response.</p>
+              </div>
+            </div>
+
+            <div class="takeaway">
+              <span class="num">02</span>
+              <div>
+                <h3>Probabilities, not guarantees</h3>
+                <p>A 78% probability indicates strongly favored conditions, never an absolute forecast for any city.</p>
+              </div>
+            </div>
+
+            <a class="text-link" href="#">Understand the indicators →</a>
+          </section>
+
+          <section class="update-section">
+            <span class="eyebrow">OFFICIAL SCHEDULE</span>
+            <h3>Next NOAA / CPC Diagnostic Release</h3>
+            <p>The next monthly diagnostic discussion is scheduled for November 12, 2026.</p>
+          </section>
+        </div>
+      </aside>
+    </div>
+
+    <!-- 2. Optimized 4-Scenario Decision Matrix -->
+    <section class="impact-section" style="margin-top: 40px; padding-top: 30px; border-top: 1px solid var(--line);">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">FROM OCEAN SIGNAL TO PRACTICAL IMPACT</span>
+          <h2>What could this mean closer to home?</h2>
+        </div>
+        <span class="data-tag">Regional Tendencies, Not Local Forecasts</span>
+      </div>
+
+      <div class="scenario-grid">
+        <!-- Scenario 1: Skiers -->
+        <article class="scenario-card">
+          <div>
+            <span class="scenario-badge">🎿 Skiers & Snowpack</span>
+            <h3>Sierra vs. Northern Rockies</h3>
+            <p>El Niño historically shifts the Pacific storm track southward, favoring abundant heavy snowfall in Mammoth and SoCal resorts, while the Pacific Northwest often sees warmer storms and elevated snow lines.</p>
+          </div>
+          <div class="scenario-footer">
+            <span>Analogue: 2015-16</span>
+            <a href="#">Winter Guide ↗</a>
+          </div>
+        </article>
+
+        <!-- Scenario 2: California -->
+        <article class="scenario-card">
+          <div>
+            <span class="scenario-badge">🌊 California & West</span>
+            <h3>Atmospheric River Risk</h3>
+            <p>An extended subtropical jet stream brings elevated risks of recurring atmospheric river sequences, heightened coastal flood hazards, and rapid reservoir replenishment across Central and Southern California.</p>
+          </div>
+          <div class="scenario-footer">
+            <span>High flood sensitivity</span>
+            <a href="#">Impact Notes ↗</a>
+          </div>
+        </article>
+
+        <!-- Scenario 3: Heating & Energy -->
+        <article class="scenario-card">
+          <div>
+            <span class="scenario-badge">🔥 Heating & Energy</span>
+            <h3>Northern Warmth vs. South</h3>
+            <p>A classic El Niño favors above-normal mean winter temperatures across the Northern Plains and Midwest (reducing natural gas heating demand), coupled with cooler, persistent cloudiness in Texas and the Gulf.</p>
+          </div>
+          <div class="scenario-footer">
+            <span>Natural gas outlook</span>
+            <a href="#">Regional Lens ↗</a>
+          </div>
+        </article>
+
+        <!-- Scenario 4: Atlantic Hurricanes -->
+        <article class="scenario-card">
+          <div>
+            <span class="scenario-badge">🌀 Atlantic Basin</span>
+            <h3>Hurricane Suppression Link</h3>
+            <p>Equatorial Pacific heating drives strong upper-level westerly winds into the Caribbean and Atlantic Basin. This elevated vertical wind shear tears apart organized tropical storm tops, generally dampening basin activity.</p>
+          </div>
+          <div class="scenario-footer">
+            <span>Wind shear dynamic</span>
+            <a href="#">Connection Guide ↗</a>
+          </div>
+        </article>
+      </div>
+
+      <!-- 3. Sister Project Banner (Cross-Promoting Hurricane Tracker) -->
+      <div class="sister-project-banner">
+        <div class="sister-info">
+          <span class="sister-badge">From the Same Independent Builder</span>
+          <h3>Tracking Active Storms & Hurricanes?</h3>
+          <p>We also build and maintain Hurricane Tracker, delivering real-time storm cones, forecast tracks, intensity models, and radar loops for North American coastal communities.</p>
+        </div>
+        <a class="sister-btn" href="https://hurricanetracker.cc/" target="_blank" rel="noopener noreferrer">
+          Visit Hurricane Tracker ↗
+        </a>
+      </div>
+    </section>
+
+    <!-- Provenance -->
+    <div class="provenance-line">
+      <span>✓ Official NOAA / CPC Data</span>
+      <p>Independent presentation. Data points preserve issue dates, observation windows, and official baselines.</p>
+      <a href="#">Data notes & methodology ↗</a>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <strong>ENSOLens.</strong> Climate context, made clearer.
+      </div>
+      <div>
+        Independent observatory · Not affiliated with NOAA · © 2026 ENSOLens
+      </div>
+    </div>
+  </footer>
+
+  <!-- Canvas Drawing Scripts (Pure Vanilla JS, 0 External Dependencies) -->
+  <script>
+    function drawOceanMap() {
+      const canvas = document.getElementById('demo-ocean-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const w = canvas.width;
+      const h = canvas.height;
+
+      ctx.fillStyle = '#14282f';
+      ctx.fillRect(0, 0, w, h);
+
+      const grad = ctx.createRadialGradient(w * 0.58, h * 0.5, 10, w * 0.55, h * 0.5, w * 0.45);
+      grad.addColorStop(0, 'rgba(215, 118, 85, 0.85)');
+      grad.addColorStop(0.35, 'rgba(235, 175, 110, 0.6)');
+      grad.addColorStop(0.7, 'rgba(120, 165, 175, 0.3)');
+      grad.addColorStop(1, 'rgba(20, 40, 47, 0)');
+
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, w, h);
+
+      ctx.strokeStyle = 'rgba(220, 240, 230, 0.1)';
+      ctx.lineWidth = 1;
+      for (let x = 60; x < w; x += 80) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, h);
+        ctx.stroke();
+      }
+      for (let y = 30; y < h; y += 50) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(w, y);
+        ctx.stroke();
+      }
+
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.25)';
+      ctx.setLineDash([4, 4]);
+      ctx.beginPath();
+      ctx.moveTo(0, h * 0.5);
+      ctx.lineTo(w, h * 0.5);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      ctx.fillStyle = '#a0b5b0';
+      ctx.font = '10px Arial';
+      ctx.fillText('0° EQUATOR', 12, h * 0.5 - 6);
+      ctx.fillText('120°E (WEST)', 12, h - 12);
+      ctx.fillText('120°W (EAST)', w - 90, h - 12);
+    }
+
+    function drawTrendChart() {
+      const canvas = document.getElementById('demo-trend-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const w = canvas.width;
+      const h = canvas.height;
+
+      const data = [-0.45, -0.52, -0.48, -0.32, -0.15, 0.05, 0.25, 0.48, 0.75, 0.95, 1.25, 1.40];
+      const roni = [-0.40, -0.45, -0.40, -0.28, -0.10, 0.10, 0.30, 0.55, 0.70, 0.82, 0.88, 0.90];
+
+      const zeroY = h * 0.65;
+      ctx.strokeStyle = '#dde2dc';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(0, zeroY);
+      ctx.lineTo(w, zeroY);
+      ctx.stroke();
+
+      ctx.fillStyle = '#8f9a8e';
+      ctx.font = '10px Arial';
+      ctx.fillText('0.0°C BASELINE', 8, zeroY - 5);
+
+      const step = w / (data.length - 1);
+
+      ctx.strokeStyle = '#d77655';
+      ctx.lineWidth = 2.5;
+      ctx.beginPath();
+      data.forEach((val, i) => {
+        const x = i * step;
+        const y = zeroY - (val * 70);
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      });
+      ctx.stroke();
+
+      const lastX = (data.length - 1) * step;
+      const lastY = zeroY - (data[data.length - 1] * 70);
+      ctx.fillStyle = '#d77655';
+      ctx.beginPath();
+      ctx.arc(lastX - 4, lastY, 4, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.strokeStyle = '#275846';
+      ctx.lineWidth = 2;
+      ctx.setLineDash([5, 4]);
+      ctx.beginPath();
+      roni.forEach((val, i) => {
+        const x = i * step;
+        const y = zeroY - (val * 70);
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      });
+      ctx.stroke();
+      ctx.setLineDash([]);
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      drawOceanMap();
+      drawTrendChart();
+    });
+  </script>
+
+</body>
+</html>

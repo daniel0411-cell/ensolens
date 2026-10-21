@@ -14,9 +14,9 @@ Updated: 2026-10-21 (Asia/Shanghai)
 
 ## Confirmed production state
 
-- The official NOAA-data release is live at https://ensolens.com/; pages no longer use demo values.
-- Current version: 961bd7ff-da70-4a73-927b-11218dded27b, from actual Wrangler upload output and deployments list.
-- Deployment: 2d3067de-4d3f-4243-a08f-f6815562a821, activated October 20, 2026 at 17:38:15 Asia/Shanghai, serving 100% of traffic.
+- Current production version: 1b2be18d-6b5d-40ec-a2a5-54edfbb16f55, activated October 21, 2026, serving 100% of traffic.
+- Live release incorporates UI typography accessibility enhancements (min 11px font scale), dynamic SST anomaly spectrum bar in official status card, 4-scenario audience decision matrix, and cross-promotional banner for hurricanetracker.cc.
+- Verification passed: 10 unit tests, desktop 1440px / mobile 390px Playwright browser suites, and production HTTP checks across all 7 pages via scripts/verify-production.mjs.
 - Production-only indexing is enabled. The October 20 recheck passed page robots headers/meta, canonical URLs, robots.txt and sitemap.xml. Search-engine crawling and inclusion are not confirmed by these checks.
 - NOAA scheduled refresh is operating: all five live feeds were checked and retrieved at 14:15:52 Asia/Shanghai on October 20 with status ok and no stale feeds.
 - Contact publishing remains disabled until actual inbox delivery is confirmed.

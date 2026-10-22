@@ -162,7 +162,7 @@ export function previousForecastUrl(issue: string) {
 export async function fetchOfficial(url: string, fetcher: typeof fetch = fetch) {
   const parsed = new URL(url);
   requireValue(parsed.protocol === 'https:' && parsed.hostname === 'www.cpc.ncep.noaa.gov', 'Unexpected upstream host');
-  const response = await fetcher(url, { headers: { 'User-Agent': 'ENSOLens/1.0 (https://ensolens.com/about/)' }, signal: AbortSignal.timeout(18000), redirect: 'manual' });
+  const response = await fetcher(url, { headers: { 'User-Agent': 'ENSOLens/1.0 (https://ensolens.com/about/)' }, signal: AbortSignal.timeout(28000), redirect: 'manual' });
   requireValue(response.ok, `NOAA HTTP ${response.status}`);
   const body = await response.arrayBuffer();
   requireValue(body.byteLength > 0 && body.byteLength < 2_000_000, 'Unexpected upstream size');

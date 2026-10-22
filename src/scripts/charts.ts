@@ -2,9 +2,9 @@ import { Chart, registerables } from 'chart.js';
 import type { Forecast, WeeklyPoint, SeasonalPoint } from '../lib/enso';
 
 Chart.register(...registerables);
-Chart.defaults.font.family = 'Arial, Helvetica, sans-serif';
-Chart.defaults.font.size = 10;
-Chart.defaults.color = '#66736c';
+Chart.defaults.font.family = '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif';
+Chart.defaults.font.size = 11;
+Chart.defaults.color = '#94a3b8';
 Chart.defaults.animation = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? false : { duration: 300 };
 const stamp = (date: string) => Date.parse(date + 'T00:00:00Z');
 const seasonLabel = (row: { season: string; year: number }) => row.season === 'DJF' ? row.season + ' ' + (row.year - 1) + '-' + String(row.year).slice(-2) : row.season === 'NDJ' ? row.season + ' ' + row.year + '-' + String(row.year + 1).slice(-2) : row.season + ' ' + row.year;
@@ -33,8 +33,8 @@ export function initCharts() {
       const cutoff = new Date(latest);
       cutoff.setUTCMonth(cutoff.getUTCMonth() - months);
       return { datasets: [
-        { label: 'Weekly Niño 3.4', data: payload.weekly.filter(p => stamp(p.date) >= +cutoff).map(p => ({ x: stamp(p.date), y: p.anomaly })), borderColor: '#d18160', borderWidth: 2, pointRadius: 0, pointHoverRadius: 4, tension: 0.15 },
-        { label: 'Seasonal RONI', data: payload.roni.filter(p => stamp(p.date) >= +cutoff).map(p => ({ x: stamp(p.date), y: p.value })), borderColor: '#48775e', borderDash: [4, 4], borderWidth: 1.5, pointRadius: 2, tension: 0 },
+        { label: 'Weekly Niño 3.4', data: payload.weekly.filter(p => stamp(p.date) >= +cutoff).map(p => ({ x: stamp(p.date), y: p.anomaly })), borderColor: '#f97316', backgroundColor: 'rgba(249, 115, 22, 0.08)', fill: true, borderWidth: 2.2, pointRadius: 0, pointHoverRadius: 4, tension: 0.15 },
+        { label: 'Seasonal RONI', data: payload.roni.filter(p => stamp(p.date) >= +cutoff).map(p => ({ x: stamp(p.date), y: p.value })), borderColor: '#10b981', borderDash: [4, 4], borderWidth: 1.8, pointRadius: 2, tension: 0 },
       ] };
     };
     const line = new Chart(lineCanvas, {
@@ -42,13 +42,23 @@ export function initCharts() {
       options: {
         responsive: true, maintainAspectRatio: false,
         interaction: { intersect: false, mode: 'nearest', axis: 'xy' },
-        plugins: { legend: { display: false }, tooltip: { callbacks: {
-          title: items => new Date(items[0].parsed.x ?? 0).toLocaleDateString('en-US', { timeZone: 'UTC', year: 'numeric', month: 'short', day: 'numeric' }),
-          label: ctx => ctx.dataset.label + ': ' + ctx.parsed.y?.toFixed(1) + '°C',
-        } } },
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            backgroundColor: 'rgba(11, 19, 16, 0.95)',
+            titleColor: '#fff',
+            bodyColor: '#cbd5e1',
+            borderColor: 'rgba(255, 255, 255, 0.15)',
+            borderWidth: 1,
+            callbacks: {
+              title: items => new Date(items[0].parsed.x ?? 0).toLocaleDateString('en-US', { timeZone: 'UTC', year: 'numeric', month: 'short', day: 'numeric' }),
+              label: ctx => ctx.dataset.label + ': ' + ctx.parsed.y?.toFixed(1) + '°C',
+            }
+          }
+        },
         scales: {
-          x: { type: 'linear', grid: { display: false }, ticks: { maxTicksLimit: 6, maxRotation: 0, callback: value => new Date(Number(value)).toLocaleDateString('en-US', { month: 'short', timeZone: 'UTC' }) } },
-          y: { grid: { color: '#e4e8df' }, ticks: { callback: value => Number(value).toFixed(1) + '°' } },
+          x: { type: 'linear', grid: { display: false }, ticks: { maxTicksLimit: 6, maxRotation: 0, color: '#94a3b8', callback: value => new Date(Number(value)).toLocaleDateString('en-US', { month: 'short', timeZone: 'UTC' }) } },
+          y: { grid: { color: 'rgba(255, 255, 255, 0.08)' }, ticks: { color: '#94a3b8', callback: value => Number(value).toFixed(1) + '°' } },
         },
       },
     });
@@ -68,14 +78,14 @@ export function initCharts() {
   const canvas = document.querySelector<HTMLCanvasElement>('#probability-chart');
   if (!canvas || Chart.getChart(canvas)) return;
   const { current, previous }: { current: Forecast; previous: Forecast | null } = JSON.parse(document.querySelector('#forecast-data')!.textContent!);
-  const colors = ['#759bb1', '#c6cec0', '#d78b6b'];
+  const colors = ['#06b6d4', '#64748b', '#f97316'];
   const names = ['La Niña', 'Neutral', 'El Niño'];
   const keys = ['nina', 'neutral', 'nino'] as const;
   const datasets = (compare: boolean) => {
     const make = (forecast: Forecast, prior: boolean) => keys.map((key, i) => ({
       label: names[i] + ' · ' + forecast.issue,
       data: current.rows.map(row => forecast.rows.find(p => p.key === row.key)?.[key] ?? null),
-      backgroundColor: prior ? colors[i] + '70' : colors[i],
+      backgroundColor: prior ? colors[i] + '60' : colors[i],
       stack: prior ? 'previous' : 'current', borderWidth: 0, barPercentage: 0.7, categoryPercentage: 0.8,
     }));
     return [...make(current, false), ...(compare && previous ? make(previous, true) : [])];
@@ -84,8 +94,21 @@ export function initCharts() {
     type: 'bar', data: { labels: current.rows.map(seasonLabel), datasets: datasets(false) },
     options: {
       responsive: true, maintainAspectRatio: false, interaction: { intersect: false, mode: 'index' },
-      plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': ' + ctx.parsed.y + '%' } } },
-      scales: { x: { stacked: true, grid: { display: false }, ticks: { maxRotation: 45, font: { size: 9 } } }, y: { stacked: true, min: 0, max: 100, ticks: { stepSize: 25, callback: value => value + '%' } } },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: 'rgba(11, 19, 16, 0.95)',
+          titleColor: '#fff',
+          bodyColor: '#cbd5e1',
+          borderColor: 'rgba(255, 255, 255, 0.15)',
+          borderWidth: 1,
+          callbacks: { label: ctx => ctx.dataset.label + ': ' + ctx.parsed.y + '%' }
+        }
+      },
+      scales: {
+        x: { stacked: true, grid: { display: false }, ticks: { maxRotation: 45, font: { size: 10 }, color: '#94a3b8' } },
+        y: { stacked: true, min: 0, max: 100, grid: { color: 'rgba(255, 255, 255, 0.08)' }, ticks: { stepSize: 25, color: '#94a3b8', callback: value => value + '%' } }
+      },
     },
   });
   document.querySelector<HTMLInputElement>('#compare-forecast')?.addEventListener('change', event => {

@@ -22,7 +22,7 @@ const target = snapshot.forecast.data.rows.find(row => row.season === 'DJF') ?? 
     <section class="status-band" aria-label="Official ENSO snapshot">
       <div class="phase-stat">
         <div class="stat-label"><Activity size={14} /> OFFICIAL STATUS</div>
-        <div class="phase-value"><span class="phase-dot" style={{ background: discussion.phase === 'El Niño' ? '#d77655' : discussion.phase === 'La Niña' ? '#6c96ae' : '#77807a' }}></span>{discussion.phase}<span class="phase-badge">{discussion.alert}</span></div>
+        <div class="phase-value"><span class="phase-dot" style={{ background: discussion.phase === 'El Niño' ? '#f97316' : discussion.phase === 'La Niña' ? '#06b6d4' : '#64748b' }}></span>{discussion.phase}<span class="phase-badge">{discussion.alert}</span></div>
         <p>CPC discussion · {formatDate(discussion.issued)}</p>
         <div class="status-scale-wrap" aria-hidden="true" title={`Current Niño 3.4 anomaly is ${signed(weekly.anomaly)}°C on a -2°C to +2°C scale`}>
           <div class="status-scale-labels"><span>Cool (-2°)</span><span>Neutral (0°)</span><span>Warm (+2°)</span></div>

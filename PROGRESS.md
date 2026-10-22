@@ -2,6 +2,13 @@
 
 Updated: 2026-10-22 (Asia/Shanghai)
 
+## Independent redesign audit (October 22)
+
+- Completed read-only production and code audit; findings and reproduction details are in AUDIT-2026-10-22.md. Application code and production were not changed.
+- Actual Wrangler output confirms version `ef995825-4bba-42d5-863e-d525f1326066` at 100% traffic; deployment `a39209a1-516f-44a4-8d2e-1a1f86eaa62f`, activated October 22 at 13:58:37 Asia/Shanghai. Older "current production" statements below and in README are historical and superseded by this observation.
+- Both remote branches pointed to f97040c at audit time. Production HTTP/indexing-permission checks, local type checks, all 10 unit tests and build passed. Browser inspection covered the live redesign, mobile navigation, trend range, forecast comparison, map dialog and a downloaded forecast CSV. Actual search indexing remains unverified.
+- Open findings: insufficient small-text contrast, mobile map shrinking on expansion, homepage horizontal overflow at 320px, tablet phase-badge intrusion, sticky-header anchor occlusion and conflicting recovery documentation. No immediate rollback-level fault was identified within this audit's scope. The full local Worker refresh/browser release gate was not rerun and no release was attempted.
+
 ## Dark Modern Climate Observatory release (October 22)
 
 - Transformed the full website visual & layout design to Concept 1: "Dark Modern Climate Observatory" (深邃气象仪器风). Deep midnight canvas (`#090e0c`), frosted glass panels (`rgba(18, 26, 23, 0.75)`), glowing emerald accents (`#10b981`), thermal orange anomalies (`#f97316`), and luminous dark Chart.js data visualizations.

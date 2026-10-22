@@ -75,7 +75,7 @@ try {
     assert.doesNotMatch(csv, /ILLUSTRATIVE/);
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), true, 'Forecast overflow at ' + width);
     await page.screenshot({ path: fileURLToPath(new URL('forecast-' + width + '.png', output)), fullPage: true });
-    for (const path of ['/winter-outlook/', '/hurricane-connection/', '/methodology/', '/about/', '/privacy/']) {
+    for (const path of ['/historical/', '/faq/', '/winter-outlook/', '/hurricane-connection/', '/methodology/', '/about/', '/privacy/']) {
       const response = await page.goto(base + path, { waitUntil: 'networkidle' });
       assert.equal(response.status(), 200, path);
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), true, path + ' overflow at ' + width);

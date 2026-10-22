@@ -121,4 +121,112 @@ export function initCharts() {
     ['issue', 'season', 'target_key', 'la_nina_percent', 'neutral_percent', 'el_nino_percent', 'source'],
     ...[current, ...(previous ? [previous] : [])].flatMap(issue => issue.rows.map(row => [issue.issue, seasonLabel(row), row.key, row.nina, row.neutral, row.nino, issue.source])),
   ]));
+
+  const analogCanvas = document.querySelector<HTMLCanvasElement>('#analog-chart');
+  if (analogCanvas && !Chart.getChart(analogCanvas)) {
+    interface AnalogWeek { week: number; anomaly: number; date?: string; sst?: number }
+    interface AnalogBenchmark { id: string; name: string; color: string; weeks: AnalogWeek[] }
+    interface AnalogPayload { current: AnalogWeek[]; benchmarks: AnalogBenchmark[] }
+
+    const raw = document.querySelector('#analog-data')?.textContent;
+    if (!raw) return;
+    const payload: AnalogPayload = JSON.parse(raw);
+
+    const monthByWeek = (week: number) => {
+      const map: Record<number, string> = { 1: 'Jan', 5: 'Feb', 9: 'Mar', 14: 'Apr', 18: 'May', 22: 'Jun', 27: 'Jul', 31: 'Aug', 36: 'Sep', 40: 'Oct', 44: 'Nov', 49: 'Dec' };
+      return map[week] ?? '';
+    };
+
+    const currentDataset = {
+      label: '2026 (Current)',
+      data: payload.current.map(w => ({ x: w.week, y: w.anomaly })),
+      borderColor: '#10b981',
+      backgroundColor: 'rgba(16, 185, 129, 0.15)',
+      borderWidth: 3,
+      pointRadius: 2.5,
+      pointHoverRadius: 5,
+      tension: 0.2,
+      order: 0,
+    };
+
+    const benchmarkDatasets = payload.benchmarks.map((b, i) => ({
+      label: b.name,
+      data: b.weeks.map(w => ({ x: w.week, y: w.anomaly })),
+      borderColor: b.color,
+      backgroundColor: 'transparent',
+      borderWidth: 2,
+      borderDash: b.id === '2020' ? [4, 4] : [],
+      pointRadius: 0,
+      pointHoverRadius: 4,
+      tension: 0.2,
+      order: i + 1,
+    }));
+
+    const analogChart = new Chart(analogCanvas, {
+      type: 'line',
+      data: { datasets: [currentDataset, ...benchmarkDatasets] },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: { intersect: false, mode: 'index' },
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            backgroundColor: 'rgba(11, 19, 16, 0.95)',
+            titleColor: '#fff',
+            bodyColor: '#cbd5e1',
+            borderColor: 'rgba(255, 255, 255, 0.15)',
+            borderWidth: 1,
+            callbacks: {
+              title: items => 'Week ' + items[0].parsed.x + ' (Annual Progression)',
+              label: ctx => ctx.dataset.label + ': ' + ((ctx.parsed.y ?? 0) > 0 ? '+' : '') + ctx.parsed.y?.toFixed(1) + '°C'
+            }
+          }
+        },
+        scales: {
+          x: {
+            type: 'linear',
+            min: 1,
+            max: 52,
+            grid: { color: 'rgba(255, 255, 255, 0.05)' },
+            ticks: {
+              stepSize: 1,
+              color: '#94a3b8',
+              callback: value => monthByWeek(Number(value))
+            }
+          },
+          y: {
+            grid: { color: 'rgba(255, 255, 255, 0.08)' },
+            ticks: {
+              color: '#94a3b8',
+              callback: value => (Number(value) > 0 ? '+' : '') + Number(value).toFixed(1) + '°C'
+            }
+          }
+        }
+      }
+    });
+
+    document.querySelectorAll<HTMLButtonElement>('[data-analog-toggle]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.dataset.analogToggle;
+        const index = payload.benchmarks.findIndex(b => b.id === id);
+        if (index === -1) return;
+        const datasetIndex = index + 1;
+        const visible = analogChart.isDatasetVisible(datasetIndex);
+        analogChart.setDatasetVisibility(datasetIndex, !visible);
+        analogChart.update();
+        btn.classList.toggle('active', !visible);
+        btn.setAttribute('aria-pressed', String(!visible));
+      });
+    });
+
+    document.querySelector('.download-analog-data')?.addEventListener('click', () => {
+      const rows: (string | number)[][] = [
+        ['series', 'week_number', 'observation_date', 'sst_anomaly_c'],
+        ...payload.current.map(w => ['2026 (Current)', w.week, w.date || '', w.anomaly]),
+        ...payload.benchmarks.flatMap(b => b.weeks.map(w => [b.name, w.week, w.date || '', w.anomaly]))
+      ];
+      downloadCsv('ensolens-historical-analogs.csv', rows);
+    });
+  }
 }

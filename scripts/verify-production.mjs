@@ -3,7 +3,7 @@ import { load } from 'cheerio/slim';
 
 const indexable = process.env.ENSOLENS_EXPECT_INDEXING === 'true';
 const host = 'https://ensolens.com';
-const paths = ['/', '/forecast/', '/winter-outlook/', '/hurricane-connection/', '/methodology/', '/about/', '/privacy/'];
+const paths = ['/', '/forecast/', '/historical/', '/faq/', '/winter-outlook/', '/hurricane-connection/', '/methodology/', '/about/', '/privacy/'];
 async function request(path, options = {}) {
   return fetch(path.startsWith('http') ? path : host + path, { signal: AbortSignal.timeout(30000), ...options });
 }

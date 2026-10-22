@@ -3,12 +3,20 @@ import { ArrowUpRight, ArrowRight, Menu, Earth as Globe2, Activity } from '@luci
 import '../styles/global.css';
 import { env } from 'cloudflare:workers';
 import { indexingAllowed } from '../lib/http';
-interface Props { title: string; description?: string; active?: string }
-const { title, description = 'A clearer view of ENSO. Explore ocean conditions, seasonal probabilities, and the science behind El Niño and La Niña.', active = 'overview' } = Astro.props;
+interface Props { title: string; description?: string; active?: string; extraSchema?: Record<string, unknown> }
+const { title, description = 'A clearer view of ENSO. Explore ocean conditions, seasonal probabilities, and the science behind El Niño and La Niña.', active = 'overview', extraSchema = {} } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const indexable = indexingAllowed(Astro.url.hostname, env.INDEXING_ENABLED) && (Astro.response.status ?? 200) < 400;
-const structured = JSON.stringify({ '@context': 'https://schema.org', '@type': 'WebSite', name: 'ENSOLens', url: 'https://ensolens.com/', inLanguage: 'en', description, publisher: { '@type': 'Organization', name: 'ENSOLens', url: 'https://ensolens.com/about/' } }).replace(/</g, '\\u003c');
-const links = [ ['overview', '/', 'Overview'], ['forecast', '/forecast/', 'Forecast'], ['winter', '/winter-outlook/', 'U.S. winter'], ['hurricanes', '/hurricane-connection/', 'Hurricanes'], ['methodology', '/methodology/', 'Sources & methods'] ];
+const structured = JSON.stringify({ '@context': 'https://schema.org', '@type': 'WebSite', name: 'ENSOLens', url: 'https://ensolens.com/', inLanguage: 'en', description, publisher: { '@type': 'Organization', name: 'ENSOLens', url: 'https://ensolens.com/about/' }, ...extraSchema }).replace(/</g, '\\u003c');
+const links = [
+  ['overview', '/', 'Overview'],
+  ['forecast', '/forecast/', 'Forecast'],
+  ['historical', '/historical/', 'Historical'],
+  ['faq', '/faq/', 'FAQ'],
+  ['winter', '/winter-outlook/', 'U.S. winter'],
+  ['hurricanes', '/hurricane-connection/', 'Hurricanes'],
+  ['methodology', '/methodology/', 'Sources & methods']
+];
 ---
 <!doctype html>
 <html lang="en">
@@ -41,7 +49,7 @@ const links = [ ['overview', '/', 'Overview'], ['forecast', '/forecast/', 'Forec
       <nav id="mobile-navigation" class="mobile-navigation" aria-label="Mobile navigation" hidden>{links.map(([key, href, label]) => <a href={href} aria-current={active === key ? 'page' : undefined}>{label}<ArrowRight size={15} /></a>)}</nav>
     </header>
     <main><slot /></main>
-    <footer class="site-footer"><div class="footer-inner"><div><a class="brand footer-brand" href="/"><Globe2 size={20} /><span>ENSO<span class="brand-light">Lens</span><span class="brand-dot">.</span></span></a><p>Climate context. A little clearer.</p></div><div class="footer-note">Independent project. Not affiliated with NOAA.<br />Seasonal tendencies are not local weather forecasts.</div><div class="footer-links"><a href="/methodology/">Sources & methods <ArrowUpRight size={13} /></a><a href="/about/">About & contact</a><a href="/privacy/">Privacy</a><span>© 2026 ENSOLens</span></div></div></footer>
+    <footer class="site-footer"><div class="footer-inner"><div><a class="brand footer-brand" href="/"><Globe2 size={20} /><span>ENSO<span class="brand-light">Lens</span><span class="brand-dot">.</span></span></a><p>Climate context. A little clearer.</p></div><div class="footer-note">Independent project. Not affiliated with NOAA.<br />Seasonal tendencies are not local weather forecasts.</div><div class="footer-links"><a href="/historical/">Historical analogs</a><a href="/faq/">FAQ</a><a href="/methodology/">Sources & methods <ArrowUpRight size={13} /></a><a href="/about/">About & contact</a><a href="/privacy/">Privacy</a><span>© 2026 ENSOLens</span></div></div></footer>
     <script>
       const toggle = document.querySelector<HTMLButtonElement>('.mobile-menu');
       const menu = document.querySelector<HTMLElement>('#mobile-navigation');

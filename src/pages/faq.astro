@@ -1,0 +1,214 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { CircleHelp, ChevronRight, Search, BookOpen, ArrowUpRight } from '@lucide/astro';
+
+const faqs = [
+  {
+    id: 'enso-basics',
+    category: 'fundamentals',
+    categoryLabel: 'Fundamentals',
+    question: 'What is ENSO and how does it drive global weather patterns?',
+    answer: 'The El Niño-Southern Oscillation (ENSO) is a coupled ocean-atmosphere climate cycle centered over the equatorial Pacific Ocean. In neutral conditions, easterly trade winds push sun-warmed surface water toward Indonesia, while cold, nutrient-rich water upwells along the coasts of Peru and Ecuador. During El Niño, these trade winds weaken or reverse, allowing deep pools of warm water to surge eastward across the Pacific basin. During La Niña, easterly trade winds strengthen even further, driving colder-than-normal water westward. This massive redistribution of ocean heat forces convection into the upper troposphere, steering the polar and subtropical jet streams across thousands of miles and shifting seasonal storm tracks worldwide.'
+  },
+  {
+    id: 'el-nino-vs-la-nina',
+    category: 'fundamentals',
+    categoryLabel: 'Fundamentals',
+    question: 'What is the fundamental difference between El Niño and La Niña?',
+    answer: 'El Niño represents the warm phase of ENSO, characterized by warmer-than-average sea surface temperatures (+0.5°C or greater departure) across the central and eastern equatorial Pacific, accompanied by reduced trade winds, lowered thermocline depth in the west, and suppressed eastern upwelling. La Niña represents the cold phase, characterized by cooler-than-average ocean temperatures (-0.5°C or lower departure), intensified easterly trade winds, a shallower thermocline in the east, and enhanced upwelling. Meteorologically, El Niño typically favors an extended Pacific jet stream and active southern storm tracks in North America, while La Niña drives a more variable, wavy jet stream with colder northern intrusions and enhanced Atlantic hurricane activity.'
+  },
+  {
+    id: 'alerts-explained',
+    category: 'alerts',
+    categoryLabel: 'NOAA Alerts & Forecasts',
+    question: 'What is the difference between an ENSO Watch, Advisory, and Not Active status?',
+    answer: 'The NOAA Climate Prediction Center (CPC) classifies ENSO diagnostic alerts using strict, operational criteria: \n• Not Active: The tropical Pacific is in an ENSO-neutral state, with ocean temperatures within ±0.5°C of climatological averages and normal Walker circulation.\n• ENSO Watch: Oceanic and atmospheric conditions are favorable for the development of El Niño or La Niña within the next six months, typically supported by model consensus around a 50% or higher probability.\n• ENSO Advisory: Official El Niño or La Niña conditions are actively observed, with tropical Pacific temperature anomalies meeting threshold criteria, atmospheric coupling established, and forecasts indicating the phase will persist for at least five consecutive overlapping three-month seasons.'
+  },
+  {
+    id: 'nino-34-threshold',
+    category: 'data',
+    categoryLabel: 'Indices & Methods',
+    question: 'What is the Niño 3.4 region, and why is ±0.5°C the critical threshold?',
+    answer: 'The Niño 3.4 region is a standardized ocean monitoring box bounded by 5°N to 5°S latitude and 170°W to 120°W longitude in the east-central equatorial Pacific. Decades of atmospheric research have proven that sea surface temperature anomalies in this specific corridor have the strongest statistical teleconnection to global jet streams and atmospheric circulation. A temperature anomaly of ±0.5°C represents the physical tipping point where equatorial ocean warmth is substantial enough to significantly alter atmospheric deep convection. Anomalies between +0.5°C and +0.9°C denote a weak event, +1.0°C to +1.4°C a moderate event, and +1.5°C or higher denotes a strong El Niño.'
+  },
+  {
+    id: 'oni-vs-roni',
+    category: 'data',
+    categoryLabel: 'Indices & Methods',
+    question: 'What is the difference between ONI (Oceanic Niño Index) and RONI (Relative ONI)?',
+    answer: 'The Oceanic Niño Index (ONI) measures the 3-month running mean of Niño 3.4 sea surface temperature anomalies compared against 30-year base periods updated every five years. However, because global oceans are warming comprehensively under climate change, a +0.5°C anomaly today does not create the same atmospheric gradient as it did decades ago. To account for this background warming, NOAA CPC introduced the Relative Oceanic Niño Index (RONI). RONI subtracts the global tropical mean ocean temperature anomaly from the regional Niño 3.4 anomaly, isolating internal equatorial ocean dynamics from secular background warming.'
+  },
+  {
+    id: 'event-duration',
+    category: 'fundamentals',
+    categoryLabel: 'Fundamentals',
+    question: 'How long do El Niño and La Niña episodes typically persist?',
+    answer: 'El Niño episodes typically develop during boreal spring or summer (April to July), reach peak intensity during late autumn or winter (November to January), and decay by the following spring, lasting on average between 9 and 12 months. In contrast, La Niña episodes frequently exhibit longer persistence, often spanning two or even three consecutive winters. These multi-year events (termed "double-dip" or "triple-dip" La Niñas, such as 1998–2001 and 2020–2023) can prolong regional drought cycles in the American Southwest and East Africa.'
+  },
+  {
+    id: 'local-weather-guarantee',
+    category: 'weather',
+    categoryLabel: 'Weather & Hurricanes',
+    question: 'Does a strong El Niño or La Niña guarantee extreme weather in my specific city?',
+    answer: 'No. ENSO shifts regional atmospheric probabilities; it does not dictate day-to-day weather outcomes. Think of ENSO as loading the climate dice: a strong El Niño increases the statistical likelihood of an active southern storm track across California and the southern United States, and favors milder conditions in the northern tier. However, short-term atmospheric patterns—such as the Arctic Oscillation (AO), North Atlantic Oscillation (NAO), and Madden-Julian Oscillation (MJO)—can temporarily disrupt or override seasonal ENSO tendencies in any given month.'
+  },
+  {
+    id: 'hurricane-impact',
+    category: 'weather',
+    categoryLabel: 'Weather & Hurricanes',
+    question: 'How does ENSO influence Atlantic and Pacific hurricane seasons?',
+    answer: 'ENSO has an opposing, seesaw effect on tropical cyclone activity across the Pacific and Atlantic basins. During El Niño, vigorous deep convection in the central Pacific generates strong upper-level westerly winds that tear across the Caribbean and tropical Atlantic, creating high vertical wind shear that suppresses Atlantic hurricane formation and intensification. Simultaneously, El Niño lowers wind shear in the eastern and central Pacific, fueling more numerous and intense Pacific cyclones. Conversely, La Niña reduces Atlantic vertical wind shear and fosters a more unstable tropical atmosphere, historically creating hyperactive Atlantic hurricane seasons.'
+  },
+  {
+    id: 'data-refresh-cadence',
+    category: 'data',
+    categoryLabel: 'Indices & Methods',
+    question: 'Where does ENSOLens source its observations and how often are they refreshed?',
+    answer: 'ENSOLens ingests official datasets directly from the NOAA National Weather Service Climate Prediction Center (CPC). Our automated backend system checks and validates official sources on a 6-hour cycle: \n• Weekly Niño 3.4 SST anomaly: updated weekly from NOAA satellite and in-situ buoy blends.\n• Monthly Seasonal RONI series: updated monthly following NOAA ERSSTv6 processing.\n• Official ENSO Diagnostics Discussion & Probabilities: updated on the second Thursday of each month.\nEvery ingested record is validated before updating our live Cloudflare KV data store.'
+  }
+];
+
+const faqSchema = {
+  mainEntity: {
+    '@type': 'FAQPage',
+    mainEntity: faqs.map(item => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer.replace(/\n/g, '<br />')
+      }
+    }))
+  }
+};
+---
+
+<Layout
+  title="ENSO FAQ: El Niño, La Niña & Climate Index Questions"
+  description="Authoritative, scientifically grounded answers to the most common questions about El Niño, La Niña, Niño 3.4 anomalies, NOAA alerts, and seasonal climate impacts."
+  active="faq"
+  extraSchema={faqSchema}
+>
+  <div class="page-shell subpage">
+    <div class="page-intro">
+      <div>
+        <span class="eyebrow">FREQUENTLY ASKED QUESTIONS · CLIMATE CONTEXT</span>
+        <h1>Understanding ENSO.<br /><span>Clear answers to complex science.</span></h1>
+        <p>Authoritative guidance on oceanic indices, NOAA diagnostic alert criteria, and seasonal climate teleconnections.</p>
+      </div>
+    </div>
+
+    <div class="faq-controls">
+      <div class="faq-search-box">
+        <Search size={18} />
+        <input
+          id="faq-search"
+          type="search"
+          placeholder="Search questions (e.g. RONI, Advisory, Hurricane, Duration)..."
+          aria-label="Search frequently asked questions"
+        />
+      </div>
+      <div class="faq-filter-bar" role="group" aria-label="Filter questions by category">
+        <button class="faq-filter-btn active" data-category="all" aria-pressed="true">All Questions</button>
+        <button class="faq-filter-btn" data-category="fundamentals" aria-pressed="false">Fundamentals</button>
+        <button class="faq-filter-btn" data-category="alerts" aria-pressed="false">Alerts & Forecasts</button>
+        <button class="faq-filter-btn" data-category="weather" aria-pressed="false">Weather & Hurricanes</button>
+        <button class="faq-filter-btn" data-category="data" aria-pressed="false">Indices & Methods</button>
+      </div>
+    </div>
+
+    <section class="faq-section" aria-label="Questions list">
+      <div id="faq-list" class="faq-list">
+        {faqs.map((faq, index) => (
+          <details class="faq-item" id={faq.id} data-category={faq.category}>
+            <summary class="faq-question">
+              <span class="faq-question-text">
+                <span class="faq-num">0{index + 1}</span>
+                <span class="faq-category-tag">{faq.categoryLabel}</span>
+                <span class="faq-title">{faq.question}</span>
+              </span>
+              <ChevronRight size={18} class="faq-chevron" />
+            </summary>
+            <div class="faq-answer">
+              <p>{faq.answer}</p>
+              <div class="faq-footer">
+                <a class="faq-anchor-link" href={`#${faq.id}`} title="Direct link to this question">Direct link #</a>
+              </div>
+            </div>
+          </details>
+        ))}
+      </div>
+      <div id="faq-empty" class="faq-empty" hidden>
+        <CircleHelp size={32} />
+        <p>No questions matched your search query. Try searching for "RONI", "Threshold", or "Watch".</p>
+      </div>
+    </section>
+
+    <div class="source-callout">
+      <BookOpen size={20} />
+      <div>
+        <strong>Looking for technical definitions or raw equations?</strong>
+        <p>Review the full mathematical baselines, reference climatologies, and ERSSTv6 methodologies in our sources guide.</p>
+      </div>
+      <a href="/methodology/">Sources & methods <ArrowUpRight size={15} /></a>
+    </div>
+  </div>
+
+  <script>
+    const searchInput = document.querySelector<HTMLInputElement>('#faq-search');
+    const filterButtons = document.querySelectorAll<HTMLButtonElement>('.faq-filter-btn');
+    const faqItems = document.querySelectorAll<HTMLDetailsElement>('.faq-item');
+    const emptyState = document.querySelector<HTMLElement>('#faq-empty');
+
+    let currentCategory = 'all';
+    let searchQuery = '';
+
+    function updateFaqVisibility() {
+      let visibleCount = 0;
+      faqItems.forEach(item => {
+        const itemCategory = item.dataset.category || '';
+        const textContent = (item.textContent || '').toLowerCase();
+        const matchesCategory = currentCategory === 'all' || itemCategory === currentCategory;
+        const matchesSearch = !searchQuery || textContent.includes(searchQuery);
+
+        if (matchesCategory && matchesSearch) {
+          item.hidden = false;
+          visibleCount++;
+        } else {
+          item.hidden = true;
+        }
+      });
+
+      if (emptyState) {
+        emptyState.hidden = visibleCount > 0;
+      }
+    }
+
+    searchInput?.addEventListener('input', () => {
+      searchQuery = searchInput.value.trim().toLowerCase();
+      updateFaqVisibility();
+    });
+
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        filterButtons.forEach(b => {
+          b.classList.remove('active');
+          b.setAttribute('aria-pressed', 'false');
+        });
+        button.classList.add('active');
+        button.setAttribute('aria-pressed', 'true');
+        currentCategory = button.dataset.category || 'all';
+        updateFaqVisibility();
+      });
+    });
+
+    // Auto-expand question if targeted by URL hash
+    if (window.location.hash) {
+      const target = document.querySelector<HTMLDetailsElement>(window.location.hash);
+      if (target) {
+        target.open = true;
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  </script>
+</Layout>

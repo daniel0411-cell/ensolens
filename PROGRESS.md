@@ -2,6 +2,13 @@
 
 Updated: 2026-10-22 (Asia/Shanghai)
 
+## Historical Analog Tool & FAQ Knowledge Hub release (October 22)
+
+- Released version `83ff102e-2cb5-4eca-9023-980c13697a2e` serving 100% of production traffic across `ensolens.com` and `www.ensolens.com`.
+- **Historical Analog Tool (`/historical/`)**: Interactive multi-line comparison tool mapping current 2026 Niño 3.4 weekly trajectory against 4 defining climate benchmarks: 1997–98 Monster El Niño (+2.3°C), 2015–16 Super El Niño (+3.0°C), 2020–23 Triple-Dip La Niña (-1.4°C), and 2023–24 Strong El Niño (+2.1°C). Supports dataset toggles, event profile cards, and CSV download.
+- **FAQ Knowledge Hub (`/faq/`)**: 8 authoritative questions covering Walker circulation, Niño 3.4 ±0.5°C threshold, ONI vs RONI baselines, NOAA diagnostic alerts (Watch vs Advisory), and hurricane teleconnections. Equipped with instant client-side search, category filter pills, smooth accordion interactions, and Schema.org `FAQPage` JSON-LD markup for Google Rich Snippets.
+- **Verification Gates**: 35 Astro files type-checked (0 errors), 10 unit tests, 1440px desktop & 390px mobile Playwright suites (including canvas pixel tests, no overflow across all 9 pages), and production live verification (`verify-production.mjs`) passed across all 9 pages.
+
 ## Independent redesign audit (October 22)
 
 - Completed read-only production and code audit; findings and reproduction details are in AUDIT-2026-10-22.md. Application code and production were not changed.

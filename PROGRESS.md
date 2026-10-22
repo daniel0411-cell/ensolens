@@ -1,6 +1,13 @@
 # ENSOLens Delivery Status
 
-Updated: 2026-10-21 (Asia/Shanghai)
+Updated: 2026-10-22 (Asia/Shanghai)
+
+## Dark Modern Climate Observatory release (October 22)
+
+- Transformed the full website visual & layout design to Concept 1: "Dark Modern Climate Observatory" (深邃气象仪器风). Deep midnight canvas (`#090e0c`), frosted glass panels (`rgba(18, 26, 23, 0.75)`), glowing emerald accents (`#10b981`), thermal orange anomalies (`#f97316`), and luminous dark Chart.js data visualizations.
+- Pinned `<meta name="theme-color" content="#090e0c" />` and synced all component color tokens across the dashboard, forecasts, winter outlook, hurricane connection, methodology, about, and privacy pages.
+- Released version `ef995825-4bba-42d5-863e-d525f1326066` on Cloudflare Workers serving 100% of production traffic across `ensolens.com` and `www.ensolens.com`.
+- Git commit `82d9ca6` pushed to both `origin/main` and `origin/master`.
 
 ## GitHub backup checkpoint (October 21)
 

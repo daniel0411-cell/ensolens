@@ -36,7 +36,7 @@ try {
   }
   browser = await chromium.launch({ channel: 'chrome', headless: true });
   for (const width of [1440, 390]) {
-    const context = await browser.newContext({ viewport: { width, height: 1000 }, deviceScaleFactor: 1, acceptDownloads: true });
+    const context = await browser.newContext({ viewport: { width, height: 1000 }, deviceScaleFactor: 1, acceptDownloads: true, reducedMotion: 'reduce' });
     const page = await context.newPage();
     const errors = [];
     page.on('pageerror', error => errors.push(error.message));
@@ -75,7 +75,51 @@ try {
     assert.doesNotMatch(csv, /ILLUSTRATIVE/);
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), true, 'Forecast overflow at ' + width);
     await page.screenshot({ path: fileURLToPath(new URL('forecast-' + width + '.png', output)), fullPage: true });
-    for (const path of ['/historical/', '/faq/', '/winter-outlook/', '/hurricane-connection/', '/methodology/', '/about/', '/privacy/']) {
+    await page.goto(base + '/historical/', { waitUntil: 'networkidle' });
+    const analog = page.locator('#analog-chart');
+    await page.waitForFunction(() => {
+      const canvas = document.querySelector('#analog-chart');
+      return canvas.width > 0 && canvas.getContext('2d').getImageData(0, 0, canvas.width, canvas.height).data.some((value, index) => index % 4 === 3 && value > 0);
+    });
+    const beforeToggle = await analog.evaluate(canvas => canvas.toDataURL());
+    const toggle = page.locator('[data-analog-toggle="2015"]');
+    await toggle.click();
+    assert.equal(await toggle.getAttribute('aria-pressed'), 'false');
+    assert.notEqual(await analog.evaluate(canvas => canvas.toDataURL()), beforeToggle, 'Historical toggle must change plotted pixels');
+    await toggle.click();
+    assert.equal(await toggle.getAttribute('aria-pressed'), 'true');
+    const analogDownload = page.waitForEvent('download');
+    await page.getByRole('button', { name: 'Download official historical analog data as CSV', exact: true }).click();
+    const analogCsv = await readFile(await (await analogDownload).path(), 'utf8');
+    assert.match(analogCsv, /observation_date/);
+    assert.match(analogCsv, /"2020-10-28","-1.7"/);
+    assert.match(analogCsv, /"53","1997-12-31"/);
+    assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), true, 'Historical overflow at ' + width);
+    await page.screenshot({ path: fileURLToPath(new URL('historical-' + width + '.png', output)), fullPage: true });
+
+    await page.goto(base + '/faq/', { waitUntil: 'networkidle' });
+    assert.equal(await page.locator('.faq-item:visible').count(), 9);
+    assert.equal(await page.locator('#faq-empty').isVisible(), false);
+    await page.locator('[data-category="alerts"].faq-filter-btn').click();
+    assert.equal(await page.locator('.faq-item:visible').count(), 1);
+    await page.locator('#faq-search').fill('unmatched-query-xyz');
+    assert.equal(await page.locator('.faq-item:visible').count(), 0);
+    assert.equal(await page.locator('#faq-empty').isVisible(), true);
+    await page.locator('#faq-search').fill('');
+    assert.equal(await page.locator('#faq-empty').isVisible(), false);
+    await page.locator('[data-category="all"].faq-filter-btn').click();
+    await page.locator('#faq-search').fill('RONI');
+    assert.ok(await page.locator('.faq-item:visible').count() > 0);
+    assert.ok(await page.locator('.faq-item:visible').count() < 9);
+    await page.goto(base + '/faq/#alerts-explained', { waitUntil: 'networkidle' });
+    assert.equal(await page.locator('#alerts-explained').evaluate(item => item.open), true);
+    await page.goto(base + '/faq/#oni-vs-roni');
+    await page.waitForFunction(() => document.getElementById('oni-vs-roni').open);
+    assert.equal(await page.locator('#faq-empty').isVisible(), false);
+    assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), true, 'FAQ overflow at ' + width);
+    await page.evaluate(() => window.scrollTo(0, 0));
+    await page.screenshot({ path: fileURLToPath(new URL('faq-' + width + '.png', output)), fullPage: true });
+    for (const path of ['/winter-outlook/', '/hurricane-connection/', '/methodology/', '/about/', '/privacy/']) {
       const response = await page.goto(base + path, { waitUntil: 'networkidle' });
       assert.equal(response.status(), 200, path);
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), true, path + ' overflow at ' + width);
@@ -84,7 +128,7 @@ try {
     assert.equal(missing.status(), 404);
     assert.match(await page.locator('meta[name=robots]').getAttribute('content'), /noindex/);
     assert.deepEqual(errors, [], 'Browser JavaScript errors');
-    console.log('PASS ' + width + 'px: pages, chart pixels, source image, range, comparison, CSV, map, navigation, overflow, 404');
+    console.log('PASS ' + width + 'px: pages, chart pixels, historical toggle/CSV, FAQ search/filter/anchors, source image, range, comparison, CSV, map, navigation, overflow, 404');
     await context.close();
   }
 } finally {

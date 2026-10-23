@@ -2,6 +2,13 @@
 
 Updated: 2026-10-23 (Asia/Shanghai)
 
+## Historical / FAQ repair checkpoint (October 23)
+
+- Restored independent historical chart initialization, benchmark toggles and CSV downloads. Added calendar-year rollover from the latest observation, calendar-week gap preservation and week 53 support.
+- Historical cards and matrix now derive weekly extremes and first tied dates from the same bundled series. Corrected inconsistent 1997, 2023 and 2020 peak metadata without changing NOAA observations. Explicitly label the calendar-year scope and show the latest observation date and weekly-feed degradation notices.
+- Fixed FAQ hidden empty-state styling and mobile question layout; robust hash links reveal the matching question and clear conflicting filters. FAQPage schema now represents the actual FAQ URL with nine questions. Removed overly precise alert and threshold claims and clarified ONI/RONI differences; no rich-result or indexing guarantee is made.
+- Added two historical regression tests and desktop/mobile assertions for historical canvas pixels, dataset toggle pixel changes, CSV including week 53, FAQ search/category/empty-state and anchors. Initial local Worker refresh and 1440px/390px browser tests passed; screenshots inspected. Final release gate and production verification pending at this checkpoint.
+
 ## Independent Historical / FAQ audit (October 23)
 
 - Audited feature commit `30142d5` and live production; details and verification limits are in AUDIT-2026-10-23.md. Application code and production were not changed.

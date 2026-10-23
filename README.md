@@ -8,7 +8,7 @@ Read PROGRESS.md and AGENTS.md before continuing work. Git checkpoints preserve 
 
 - The official-data release was deployed on October 20, 2026 (Asia/Shanghai).
 - First verified official-data version: e3d2fbba-b818-4ef1-a9cb-9a772b6f4dd5.
-- Current production version: 961bd7ff-da70-4a73-927b-11218dded27b; deployment 2d3067de-4d3f-4243-a08f-f6815562a821, activated October 20 at 17:38:15 Asia/Shanghai, serving 100% of traffic.
+- Read the newest release checkpoint in PROGRESS.md for the independently verified production version and deployment ID. Earlier release records are historical.
 - Production-only indexing is enabled and verified. This permits crawling; actual search-engine inclusion has not been confirmed.
 - contact@ensolens.com has a Cloudflare routing rule to an existing verified destination. Inbox receipt is unconfirmed; the public email link remains disabled.
 - The original demo release was 5757c27b-b2f4-4169-bda9-da8f28b76ab9.
@@ -35,7 +35,7 @@ ENSOLENS_EXPECT_INDEXING=true node scripts/verify-production.mjs
 
 Deploy runs type checks, unit tests, build, a real isolated Worker scheduled refresh against NOAA, KV persistence checks, and Chrome tests at 1440px and 390px before upload. Chrome must be installed. Browser tests start and stop their own preview; set ENSOLENS_TEST_URL to check an existing preview or production instead. Screenshots are saved under .playwright/.
 
-Production checks cover seven pages, actual embedded chart data, the NOAA image, source health, canonical URLs, metadata, indexing, sitemap, redirects, and the not-found page. A successful build alone is not a release verification.
+Production checks cover nine pages, FAQ schema, actual embedded chart data, the NOAA image, source health, canonical URLs, metadata, indexing configuration, sitemap, redirects, and the not-found page. Browser checks also exercise historical chart rendering, toggles and CSV, plus FAQ search, filters, empty states and anchors at desktop and mobile sizes. A successful build alone is not a release verification.
 
 ## Data and failure behavior
 

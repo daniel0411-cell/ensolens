@@ -4,21 +4,18 @@ import { Download, ArrowUpRight, Clock, Flame, Snowflake } from '@lucide/astro';
 import { env } from 'cloudflare:workers';
 import { getData } from '../lib/data';
 import historicalData from '../data/historical-analogs.json';
+import DataNotice from '../components/DataNotice.astro';
+import { latestAnnualSeries, weeklyPeak } from '../lib/historical';
+import { formatDate, signed } from '../lib/enso';
 
-const { snapshot } = await getData(env);
+const { snapshot, stale } = await getData(env);
 
-// Filter current 2026 weeks and map to week index
-const weeks2026 = snapshot.weekly.data
-  .filter(p => p.date.startsWith('2026'))
-  .map((p, index) => ({
-    week: index + 1,
-    date: p.date,
-    anomaly: p.anomaly,
-    sst: p.sst
-  }));
+const { year, current } = latestAnnualSeries(snapshot.weekly.data);
+const peaks = Object.fromEntries(historicalData.benchmarks.map(b => [b.id, weeklyPeak(b.weeks, b.category === 'la-nina')]));
 
 const payload = JSON.stringify({
-  current: weeks2026,
+  year,
+  current,
   benchmarks: historicalData.benchmarks
 }).replace(/</g, '\\u003c');
 ---
@@ -31,11 +28,13 @@ const payload = JSON.stringify({
   <div class="page-shell subpage">
     <div class="page-intro">
       <div>
-        <span class="eyebrow">HISTORICAL BENCHMARKS · 1982–2026</span>
-        <h1>Analog Event Comparison.<br /><span>How 2026 measures up to history.</span></h1>
+        <span class="eyebrow">HISTORICAL BENCHMARKS · 1997–{year}</span>
+        <h1>Analog Event Comparison.<br /><span>How {year} measures up to history.</span></h1>
         <p>Compare observed weekly Niño 3.4 departures against the landmark El Niño and La Niña events of modern satellite climate observation.</p>
       </div>
     </div>
+    <DataNotice stale={stale.filter(feed => feed.startsWith('weekly'))} />
+    <p class="figure-note">Latest available observation: {formatDate(current.at(-1)!.date)}. Each line covers one calendar year, not the full multi-year event.</p>
 
     <!-- Analog Interactive Chart Section -->
     <section class="trend-section analog-chart-section" aria-labelledby="analog-heading">
@@ -52,7 +51,7 @@ const payload = JSON.stringify({
       <div class="chart-toolbar analog-toolbar">
         <div class="analog-legend-pills">
           <span class="analog-current-pill">
-            <i class="legend-dot current-glow"></i>2026 (Current)
+            <i class="legend-dot current-glow"></i>{year} (Latest available)
           </span>
           {historicalData.benchmarks.map(b => (
             <button
@@ -69,7 +68,7 @@ const payload = JSON.stringify({
       </div>
 
       <div class="line-chart-wrap analog-canvas-wrap">
-        <canvas id="analog-chart" role="img" aria-label="Interactive multi-line chart comparing 2026 weekly Niño 3.4 anomalies against benchmark years 1997, 2015, 2020, and 2023"></canvas>
+        <canvas id="analog-chart" role="img" aria-label={`Weekly Niño 3.4 anomalies for ${year}, 1997, 2015, 2020, and 2023`}></canvas>
       </div>
       <script id="analog-data" type="application/json" set:html={payload} />
 
@@ -77,7 +76,8 @@ const payload = JSON.stringify({
         <span>OFFICIAL NOAA CPC WEEKLY DATA · 1991–2020 BASELINE</span>
         <a href="/methodology/#indices">Understand Niño 3.4 calculation <ArrowUpRight size={13} /></a>
       </div>
-      <p class="figure-note">X-axis represents weeks 1 through 52 of each annual progression. Click benchmark buttons above to isolate specific historical trajectories.</p>
+      <p class="figure-note historical-note">Weekly observations, January through December, on a 1991–2020 baseline. Historical summaries describe only the calendar year shown; dates identify the first occurrence of a tied extreme. <a href="https://www.cpc.ncep.noaa.gov/data/indices/wksst9120.for" target="_blank" rel="noreferrer">NOAA weekly source</a></p>
+      <p id="analog-live" class="sr-only" role="status" aria-live="polite"></p>
     </section>
 
     <!-- Benchmark Deep-Dive Profiles -->
@@ -99,16 +99,16 @@ const payload = JSON.stringify({
           </div>
           <div class="analog-metric-row">
             <div>
-              <span class="analog-metric-label">PEAK ANOMALY</span>
-              <span class="analog-metric-val">+3.0°C</span>
+              <span class="analog-metric-label">2015 WEEKLY PEAK</span>
+              <span class="analog-metric-val">{signed(peaks['2015'].anomaly)}°C</span>
             </div>
             <div>
               <span class="analog-metric-label">PEAK TIMING</span>
-              <span class="analog-metric-sub">Mid-November 2015</span>
+              <span class="analog-metric-sub">{formatDate(peaks['2015'].date)}</span>
             </div>
           </div>
           <p class="analog-card-text">
-            The highest recorded weekly Niño 3.4 anomaly (+3.0°C) of the modern satellite era. Produced unprecedented central Pacific tropical cyclone activity (including Category 5 Hurricane Patricia) and catalyzed the longest global coral bleaching event on record.
+            A major warm-phase benchmark. The 2015 calendar-year series shows a pronounced late-year warming peak; it is a weekly SST comparison, not a seasonal ONI or RONI classification.
           </p>
           <div class="analog-card-footer">
             <span class="analog-badge">Historic Global Ocean Heat</span>
@@ -125,12 +125,12 @@ const payload = JSON.stringify({
           </div>
           <div class="analog-metric-row">
             <div>
-              <span class="analog-metric-label">PEAK ANOMALY</span>
-              <span class="analog-metric-val">+2.3°C</span>
+              <span class="analog-metric-label">1997 WEEKLY PEAK</span>
+              <span class="analog-metric-val">{signed(peaks['1997'].anomaly)}°C</span>
             </div>
             <div>
               <span class="analog-metric-label">PEAK TIMING</span>
-              <span class="analog-metric-sub">Late November 1997</span>
+              <span class="analog-metric-sub">{formatDate(peaks['1997'].date)}</span>
             </div>
           </div>
           <p class="analog-card-text">
@@ -151,12 +151,12 @@ const payload = JSON.stringify({
           </div>
           <div class="analog-metric-row">
             <div>
-              <span class="analog-metric-label">PEAK ANOMALY</span>
-              <span class="analog-metric-val">+2.1°C</span>
+              <span class="analog-metric-label">2023 WEEKLY PEAK</span>
+              <span class="analog-metric-val">{signed(peaks['2023'].anomaly)}°C</span>
             </div>
             <div>
               <span class="analog-metric-label">PEAK TIMING</span>
-              <span class="analog-metric-sub">Mid-December 2023</span>
+              <span class="analog-metric-sub">{formatDate(peaks['2023'].date)}</span>
             </div>
           </div>
           <p class="analog-card-text">
@@ -177,12 +177,12 @@ const payload = JSON.stringify({
           </div>
           <div class="analog-metric-row">
             <div>
-              <span class="analog-metric-label">PEAK ANOMALY</span>
-              <span class="analog-metric-val">-1.4°C</span>
+              <span class="analog-metric-label">2020 WEEKLY MINIMUM</span>
+              <span class="analog-metric-val">{signed(peaks['2020'].anomaly)}°C</span>
             </div>
             <div>
               <span class="analog-metric-label">PEAK TIMING</span>
-              <span class="analog-metric-sub">November 2020</span>
+              <span class="analog-metric-sub">{formatDate(peaks['2020'].date)}</span>
             </div>
           </div>
           <p class="analog-card-text">
@@ -209,8 +209,8 @@ const payload = JSON.stringify({
             <tr>
               <th scope="col">Event</th>
               <th scope="col">Classification</th>
-              <th scope="col">Peak Niño 3.4</th>
-              <th scope="col">Peak Season</th>
+              <th scope="col">Calendar-Year Weekly Extreme</th>
+              <th scope="col">Observation Date</th>
               <th scope="col">Atlantic Activity</th>
               <th scope="col">Key Global Teleconnections</th>
             </tr>
@@ -219,32 +219,32 @@ const payload = JSON.stringify({
             <tr>
               <td><strong>2015–2016</strong></td>
               <td><span class="table-badge warm">Super El Niño</span></td>
-              <td><strong>+3.0°C</strong></td>
-              <td>OND 2015</td>
+              <td><strong>{signed(peaks['2015'].anomaly)}°C</strong></td>
+              <td>{formatDate(peaks['2015'].date)}</td>
               <td>Suppressed (ACE 63)</td>
               <td>Record Central Pacific hurricanes; historic global coral bleaching; severe Ethiopian drought.</td>
             </tr>
             <tr>
               <td><strong>1997–1998</strong></td>
               <td><span class="table-badge warm">Super El Niño</span></td>
-              <td><strong>+2.3°C</strong></td>
-              <td>NDJ 1997–98</td>
+              <td><strong>{signed(peaks['1997'].anomaly)}°C</strong></td>
+              <td>{formatDate(peaks['1997'].date)}</td>
               <td>Suppressed (ACE 41)</td>
               <td>Torrential California storms & atmospheric rivers; Peru flooding; severe SE Asia forest fires.</td>
             </tr>
             <tr>
               <td><strong>2023–2024</strong></td>
               <td><span class="table-badge warm">Strong El Niño</span></td>
-              <td><strong>+2.1°C</strong></td>
-              <td>DJF 2023–24</td>
+              <td><strong>{signed(peaks['2023'].anomaly)}°C</strong></td>
+              <td>{formatDate(peaks['2023'].date)}</td>
               <td>Counterbalanced by extreme Atlantic SST</td>
               <td>Severe Amazon River low water records; Southern Africa mid-summer drought; warm boreal winter.</td>
             </tr>
             <tr>
               <td><strong>2020–2023</strong></td>
               <td><span class="table-badge cold">Triple-Dip La Niña</span></td>
-              <td><strong>-1.4°C</strong></td>
-              <td>OND 2020</td>
+              <td><strong>{signed(peaks['2020'].anomaly)}°C</strong></td>
+              <td>{formatDate(peaks['2020'].date)}</td>
               <td>Hyperactive (Record 30 storms in 2020)</td>
               <td>Persistent Southwest US megadrought; historic multi-year Australian flooding; Horn of Africa drought.</td>
             </tr>

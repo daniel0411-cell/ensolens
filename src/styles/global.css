@@ -1033,6 +1033,7 @@ dialog::backdrop { background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(4px); 
   gap: 12px;
 }
 .faq-item {
+  scroll-margin-top: 110px;
   background: var(--card);
   border: 1px solid var(--line);
   border-radius: var(--radius-sm);
@@ -1135,6 +1136,8 @@ dialog::backdrop { background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(4px); 
   border: 1px dashed var(--line);
   border-radius: var(--radius-sm);
 }
+.faq-empty[hidden] { display: none; }
+.historical-note { display: block; }
 
 /* Historical Analog Styles */
 .analog-chart-section {
@@ -1367,6 +1370,13 @@ dialog::backdrop { background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(4px); 
   .faq-title {
     font-size: 14px;
   }
+}
+
+@media (max-width: 600px) {
+  .faq-question-text { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 6px 10px; min-width: 0; }
+  .faq-num { grid-row: 1 / 3; }
+  .faq-category-tag { justify-self: start; letter-spacing: 0; }
+  .faq-title { grid-column: 2; }
 }
 
 @media (prefers-reduced-motion: reduce) {

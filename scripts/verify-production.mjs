@@ -15,7 +15,13 @@ for (const path of paths) {
   assert.equal($('link[rel=canonical]').attr('href'), host + path);
   assert.match($('meta[name=robots]').attr('content'), indexable ? /^index, follow$/ : /noindex/);
   assert.ok($('meta[name=description]').attr('content')?.length > 20);
-  assert.equal(JSON.parse($('script[type="application/ld+json"]').text())['@type'], 'WebSite');
+  const schema = JSON.parse($('script[type="application/ld+json"]').text());
+  assert.equal(schema['@type'], path === '/faq/' ? 'FAQPage' : 'WebSite');
+  if (path === '/faq/') {
+    assert.equal(schema.url, host + path);
+    assert.equal(schema.mainEntity.length, $('.faq-item').length);
+    assert.ok(schema.mainEntity.every(question => question['@type'] === 'Question' && question.acceptedAnswer['@type'] === 'Answer'));
+  }
   assert.doesNotMatch($('main').text(), /illustrative|synthetic|example phase/i);
   if (path === '/') {
     const forecast = JSON.parse($('#forecast-data').text());

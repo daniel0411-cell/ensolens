@@ -1,6 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { CircleHelp, ChevronRight, Search, BookOpen, ArrowUpRight } from '@lucide/astro';
+import { ChevronRight, Search, BookOpen, ArrowUpRight } from '@lucide/astro';
 
 const faqs = [
   {
@@ -22,21 +22,21 @@ const faqs = [
     category: 'alerts',
     categoryLabel: 'NOAA Alerts & Forecasts',
     question: 'What is the difference between an ENSO Watch, Advisory, and Not Active status?',
-    answer: 'The NOAA Climate Prediction Center (CPC) classifies ENSO diagnostic alerts using strict, operational criteria: \n• Not Active: The tropical Pacific is in an ENSO-neutral state, with ocean temperatures within ±0.5°C of climatological averages and normal Walker circulation.\n• ENSO Watch: Oceanic and atmospheric conditions are favorable for the development of El Niño or La Niña within the next six months, typically supported by model consensus around a 50% or higher probability.\n• ENSO Advisory: Official El Niño or La Niña conditions are actively observed, with tropical Pacific temperature anomalies meeting threshold criteria, atmospheric coupling established, and forecasts indicating the phase will persist for at least five consecutive overlapping three-month seasons.'
+    answer: 'CPC uses a Watch when conditions favor the development of El Niño or La Niña in the coming months. An Advisory indicates that El Niño or La Niña conditions are observed and expected to continue. Not Active means that neither a Watch nor an Advisory is in effect. The alert is an assessment of the coupled ocean-atmosphere system, not a label inferred from one weekly temperature reading. The five overlapping three-month seasons used in historical ONI episode classification should not be treated as a waiting period for issuing an operational Advisory. Consult the current CPC discussion for the official alert and its reasoning.'
   },
   {
     id: 'nino-34-threshold',
     category: 'data',
     categoryLabel: 'Indices & Methods',
     question: 'What is the Niño 3.4 region, and why is ±0.5°C the critical threshold?',
-    answer: 'The Niño 3.4 region is a standardized ocean monitoring box bounded by 5°N to 5°S latitude and 170°W to 120°W longitude in the east-central equatorial Pacific. Decades of atmospheric research have proven that sea surface temperature anomalies in this specific corridor have the strongest statistical teleconnection to global jet streams and atmospheric circulation. A temperature anomaly of ±0.5°C represents the physical tipping point where equatorial ocean warmth is substantial enough to significantly alter atmospheric deep convection. Anomalies between +0.5°C and +0.9°C denote a weak event, +1.0°C to +1.4°C a moderate event, and +1.5°C or higher denotes a strong El Niño.'
+    answer: 'Niño 3.4 spans 5°N to 5°S and 170°W to 120°W in the central equatorial Pacific. The ±0.5°C thresholds are conventions used with seasonal ENSO indices; they are not universal physical tipping points. Duration, the index and reference baseline, and atmospheric coupling all matter. A weekly SST anomaly above or below a threshold does not by itself establish an ENSO episode or its strength. ENSOLens distinguishes weekly SST observations from seasonal RONI and CPC operational assessments.'
   },
   {
     id: 'oni-vs-roni',
     category: 'data',
     categoryLabel: 'Indices & Methods',
     question: 'What is the difference between ONI (Oceanic Niño Index) and RONI (Relative ONI)?',
-    answer: 'The Oceanic Niño Index (ONI) measures the 3-month running mean of Niño 3.4 sea surface temperature anomalies compared against 30-year base periods updated every five years. However, because global oceans are warming comprehensively under climate change, a +0.5°C anomaly today does not create the same atmospheric gradient as it did decades ago. To account for this background warming, NOAA CPC introduced the Relative Oceanic Niño Index (RONI). RONI subtracts the global tropical mean ocean temperature anomaly from the regional Niño 3.4 anomaly, isolating internal equatorial ocean dynamics from secular background warming.'
+    answer: 'ONI is a three-month running mean of Niño 3.4 sea surface temperature anomalies. RONI adjusts the regional anomaly relative to the tropical ocean background and includes variance scaling. The indices therefore use different methods and their values are not interchangeable. ENSOLens displays CPC seasonal RONI separately from the weekly Niño 3.4 SST series. See Sources & methods for the datasets and reference periods used here.'
   },
   {
     id: 'event-duration',
@@ -69,8 +69,8 @@ const faqs = [
 ];
 
 const faqSchema = {
-  mainEntity: {
     '@type': 'FAQPage',
+    url: 'https://ensolens.com/faq/',
     mainEntity: faqs.map(item => ({
       '@type': 'Question',
       name: item.question,
@@ -79,13 +79,12 @@ const faqSchema = {
         text: item.answer.replace(/\n/g, '<br />')
       }
     }))
-  }
 };
 ---
 
 <Layout
   title="ENSO FAQ: El Niño, La Niña & Climate Index Questions"
-  description="Authoritative, scientifically grounded answers to the most common questions about El Niño, La Niña, Niño 3.4 anomalies, NOAA alerts, and seasonal climate impacts."
+  description="Answers to common questions about El Niño, La Niña, Niño 3.4 observations, NOAA alerts, and seasonal climate impacts."
   active="faq"
   extraSchema={faqSchema}
 >
@@ -94,7 +93,7 @@ const faqSchema = {
       <div>
         <span class="eyebrow">FREQUENTLY ASKED QUESTIONS · CLIMATE CONTEXT</span>
         <h1>Understanding ENSO.<br /><span>Clear answers to complex science.</span></h1>
-        <p>Authoritative guidance on oceanic indices, NOAA diagnostic alert criteria, and seasonal climate teleconnections.</p>
+        <p>Oceanic indices, NOAA diagnostic alerts, and seasonal climate context.</p>
       </div>
     </div>
 
@@ -139,7 +138,7 @@ const faqSchema = {
         ))}
       </div>
       <div id="faq-empty" class="faq-empty" hidden>
-        <CircleHelp size={32} />
+        <Search size={32} />
         <p>No questions matched your search query. Try searching for "RONI", "Threshold", or "Watch".</p>
       </div>
     </section>
@@ -202,13 +201,24 @@ const faqSchema = {
       });
     });
 
-    // Auto-expand question if targeted by URL hash
-    if (window.location.hash) {
-      const target = document.querySelector<HTMLDetailsElement>(window.location.hash);
-      if (target) {
-        target.open = true;
-        target.scrollIntoView({ behavior: 'smooth' });
-      }
+    function openLinkedQuestion() {
+      let id: string;
+      try { id = decodeURIComponent(window.location.hash.slice(1)); } catch { return; }
+      const target = document.getElementById(id);
+      if (!(target instanceof HTMLDetailsElement) || !target.classList.contains('faq-item')) return;
+      currentCategory = 'all';
+      searchQuery = '';
+      if (searchInput) searchInput.value = '';
+      filterButtons.forEach(button => {
+        const selected = button.dataset.category === 'all';
+        button.classList.toggle('active', selected);
+        button.setAttribute('aria-pressed', String(selected));
+      });
+      updateFaqVisibility();
+      target.open = true;
+      target.scrollIntoView({ behavior: 'instant', block: 'start' });
     }
+    window.addEventListener('hashchange', openLinkedQuestion);
+    openLinkedQuestion();
   </script>
 </Layout>

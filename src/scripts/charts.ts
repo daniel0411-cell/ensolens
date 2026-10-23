@@ -76,7 +76,7 @@ export function initCharts() {
     ]));
   }
   const canvas = document.querySelector<HTMLCanvasElement>('#probability-chart');
-  if (!canvas || Chart.getChart(canvas)) return;
+  if (canvas && !Chart.getChart(canvas)) {
   const { current, previous }: { current: Forecast; previous: Forecast | null } = JSON.parse(document.querySelector('#forecast-data')!.textContent!);
   const colors = ['#06b6d4', '#64748b', '#f97316'];
   const names = ['La Niña', 'Neutral', 'El Niño'];
@@ -121,12 +121,13 @@ export function initCharts() {
     ['issue', 'season', 'target_key', 'la_nina_percent', 'neutral_percent', 'el_nino_percent', 'source'],
     ...[current, ...(previous ? [previous] : [])].flatMap(issue => issue.rows.map(row => [issue.issue, seasonLabel(row), row.key, row.nina, row.neutral, row.nino, issue.source])),
   ]));
+  }
 
   const analogCanvas = document.querySelector<HTMLCanvasElement>('#analog-chart');
   if (analogCanvas && !Chart.getChart(analogCanvas)) {
     interface AnalogWeek { week: number; anomaly: number; date?: string; sst?: number }
     interface AnalogBenchmark { id: string; name: string; color: string; weeks: AnalogWeek[] }
-    interface AnalogPayload { current: AnalogWeek[]; benchmarks: AnalogBenchmark[] }
+    interface AnalogPayload { year: number; current: AnalogWeek[]; benchmarks: AnalogBenchmark[] }
 
     const raw = document.querySelector('#analog-data')?.textContent;
     if (!raw) return;
@@ -138,7 +139,7 @@ export function initCharts() {
     };
 
     const currentDataset = {
-      label: '2026 (Current)',
+      label: payload.year + ' (Latest available)',
       data: payload.current.map(w => ({ x: w.week, y: w.anomaly })),
       borderColor: '#10b981',
       backgroundColor: 'rgba(16, 185, 129, 0.15)',
@@ -187,7 +188,7 @@ export function initCharts() {
           x: {
             type: 'linear',
             min: 1,
-            max: 52,
+            max: 53,
             grid: { color: 'rgba(255, 255, 255, 0.05)' },
             ticks: {
               stepSize: 1,
@@ -217,13 +218,14 @@ export function initCharts() {
         analogChart.update();
         btn.classList.toggle('active', !visible);
         btn.setAttribute('aria-pressed', String(!visible));
+        document.querySelector('#analog-live')!.textContent = payload.benchmarks[index].name + (visible ? ' hidden.' : ' shown.');
       });
     });
 
     document.querySelector('.download-analog-data')?.addEventListener('click', () => {
       const rows: (string | number)[][] = [
         ['series', 'week_number', 'observation_date', 'sst_anomaly_c'],
-        ...payload.current.map(w => ['2026 (Current)', w.week, w.date || '', w.anomaly]),
+        ...payload.current.map(w => [payload.year + ' (Latest available)', w.week, w.date || '', w.anomaly]),
         ...payload.benchmarks.flatMap(b => b.weeks.map(w => [b.name, w.week, w.date || '', w.anomaly]))
       ];
       downloadCsv('ensolens-historical-analogs.csv', rows);

@@ -1,6 +1,15 @@
 # ENSOLens Delivery Status
 
-Updated: 2026-10-22 (Asia/Shanghai)
+Updated: 2026-10-23 (Asia/Shanghai)
+
+## Independent Historical / FAQ audit (October 23)
+
+- Audited feature commit `30142d5` and live production; details and verification limits are in AUDIT-2026-10-23.md. Application code and production were not changed.
+- Actual Wrangler output confirms version `83ff102e-2cb5-4eca-9023-980c13697a2e` at 100%; deployment `02733dac-6856-4d36-bfa4-be56fc1bfb41`, created October 22 at 23:36:38 Asia/Shanghai.
+- Confirmed P1: historical chart initialization is blocked by the probability-chart early return; chart is blank and benchmark toggles are unresponsive. The same return blocks CSV listener setup.
+- Confirmed P2: 2020 peak metadata/profile contradict bundled weekly data; FAQ empty-state flex styling overrides hidden; historical page omits degraded-data warnings.
+- Type checking, 10 unit tests, build, and all nine production HTTP/indexing-configuration checks passed. Existing browser tests only add the new pages to status/overflow checks and do not verify their new features. Prior release claims below therefore do not establish historical chart/toggle/CSV or FAQ behavior.
+- Browser timeouts limited mobile, category/deep-link, and primary-source verification. Scientific FAQ assertions, rich-result eligibility, and actual search indexing remain unverified. Follow-up details are in the report. Documentation checkpoint only; no fix, push, or deployment.
 
 ## Historical Analog Tool & FAQ Knowledge Hub release (October 22)
 

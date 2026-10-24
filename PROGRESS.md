@@ -6,7 +6,9 @@ Updated: 2026-10-24 (Asia/Shanghai)
 
 - Removed the hurricane topic page, desktop/mobile navigation entry, homepage scenario and cross-promotion, shared-publisher disclosure, and related FAQ, historical and privacy text. Historical NOAA observation values are unchanged.
 - Removed the retired URL from the sitemap. Verification now covers eight public pages, eight FAQ entries, absence of removed topic/association text in public HTML, and a noindex 404 for the retired URL.
-- Local verification passed: 36-file type check with zero diagnostics, all 12 unit tests, build, real Worker NOAA refresh/KV checks and 1440px/390px browser checks including retired-route 404. Desktop/mobile homepage screenshots inspected; three remaining scenarios reflow correctly. Missing local runtime binaries were restored with npm ci without changing the lockfile. Deployment and live verification pending.
+- Local verification passed: 36-file type check with zero diagnostics, all 12 unit tests, build, real Worker NOAA refresh/KV checks and 1440px/390px browser checks including retired-route 404. Desktop/mobile homepage screenshots inspected; three remaining scenarios reflow correctly. Missing local runtime binaries were restored with npm ci without changing the lockfile.
+- Released implementation `bb847b6` through the complete `npm run deploy` gate. Actual Wrangler version: `2afc0f02-cafd-41ef-96a2-e84330d117b3`; deployment: `bc615fb7-9826-4e42-abaa-e860909dff4b`, created October 24 at 09:38:20 Asia/Shanghai, serving 100% traffic. Both custom domains and the six-hour schedule remain active; `INDEXING_ENABLED=true`, `CONTACT_ENABLED=false`.
+- Post-deployment production verification passed all eight pages, absence of removed topic/association text in HTML (including structured data and embedded historical descriptions), sitemap, health, metadata, indexing configuration, redirects and retired-route noindex 404. Production 1440px/390px browser checks passed charts, downloads, FAQ interactions, navigation and overflow. Historical search snippets/caches and other websites were not changed or verified.
 
 ## Historical / FAQ repair checkpoint (October 23)
 

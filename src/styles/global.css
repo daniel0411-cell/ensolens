@@ -645,47 +645,6 @@ main { min-height: 65vh; }
   gap: 4px;
 }
 
-/* Sister Project Banner */
-.sister-project-banner {
-  margin-top: 36px;
-  background: linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(15, 23, 20, 0.85) 100%);
-  border: 1px solid rgba(16, 185, 129, 0.3);
-  border-radius: 12px;
-  padding: 24px 28px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 22px;
-  flex-wrap: wrap;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
-}
-.sister-info { max-width: 650px; }
-.sister-badge {
-  font-size: 11px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--green);
-  margin-bottom: 6px;
-  display: inline-block;
-}
-.sister-info h3 { font-family: var(--serif); font-size: 21px; color: #fff; margin-bottom: 6px; }
-.sister-info p { font-size: 13px; color: #cbd5e1; line-height: 1.7; }
-.sister-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: var(--green);
-  color: #022c22;
-  font-size: 13px;
-  font-weight: 700;
-  padding: 11px 20px;
-  border-radius: 6px;
-  white-space: nowrap;
-  box-shadow: 0 0 16px rgba(16, 185, 129, 0.35);
-  transition: all 0.2s;
-}
-.sister-btn:hover { background: #34d399; transform: translateY(-1px); box-shadow: 0 0 22px rgba(16, 185, 129, 0.5); }
 
 /* Provenance Line & Footer */
 .provenance-line {

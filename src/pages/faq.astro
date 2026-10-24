@@ -15,7 +15,7 @@ const faqs = [
     category: 'fundamentals',
     categoryLabel: 'Fundamentals',
     question: 'What is the fundamental difference between El Niño and La Niña?',
-    answer: 'El Niño represents the warm phase of ENSO, characterized by warmer-than-average sea surface temperatures (+0.5°C or greater departure) across the central and eastern equatorial Pacific, accompanied by reduced trade winds, lowered thermocline depth in the west, and suppressed eastern upwelling. La Niña represents the cold phase, characterized by cooler-than-average ocean temperatures (-0.5°C or lower departure), intensified easterly trade winds, a shallower thermocline in the east, and enhanced upwelling. Meteorologically, El Niño typically favors an extended Pacific jet stream and active southern storm tracks in North America, while La Niña drives a more variable, wavy jet stream with colder northern intrusions and enhanced Atlantic hurricane activity.'
+    answer: 'El Niño represents the warm phase of ENSO, characterized by warmer-than-average sea surface temperatures (+0.5°C or greater departure) across the central and eastern equatorial Pacific, accompanied by reduced trade winds, lowered thermocline depth in the west, and suppressed eastern upwelling. La Niña represents the cold phase, characterized by cooler-than-average ocean temperatures (-0.5°C or lower departure), intensified easterly trade winds, a shallower thermocline in the east, and enhanced upwelling. Meteorologically, El Niño typically favors an extended Pacific jet stream and active southern storm tracks in North America, while La Niña drives a more variable, wavy jet stream with colder northern intrusions.'
   },
   {
     id: 'alerts-explained',
@@ -48,16 +48,9 @@ const faqs = [
   {
     id: 'local-weather-guarantee',
     category: 'weather',
-    categoryLabel: 'Weather & Hurricanes',
+    categoryLabel: 'Weather & Impacts',
     question: 'Does a strong El Niño or La Niña guarantee extreme weather in my specific city?',
     answer: 'No. ENSO shifts regional atmospheric probabilities; it does not dictate day-to-day weather outcomes. Think of ENSO as loading the climate dice: a strong El Niño increases the statistical likelihood of an active southern storm track across California and the southern United States, and favors milder conditions in the northern tier. However, short-term atmospheric patterns—such as the Arctic Oscillation (AO), North Atlantic Oscillation (NAO), and Madden-Julian Oscillation (MJO)—can temporarily disrupt or override seasonal ENSO tendencies in any given month.'
-  },
-  {
-    id: 'hurricane-impact',
-    category: 'weather',
-    categoryLabel: 'Weather & Hurricanes',
-    question: 'How does ENSO influence Atlantic and Pacific hurricane seasons?',
-    answer: 'ENSO has an opposing, seesaw effect on tropical cyclone activity across the Pacific and Atlantic basins. During El Niño, vigorous deep convection in the central Pacific generates strong upper-level westerly winds that tear across the Caribbean and tropical Atlantic, creating high vertical wind shear that suppresses Atlantic hurricane formation and intensification. Simultaneously, El Niño lowers wind shear in the eastern and central Pacific, fueling more numerous and intense Pacific cyclones. Conversely, La Niña reduces Atlantic vertical wind shear and fosters a more unstable tropical atmosphere, historically creating hyperactive Atlantic hurricane seasons.'
   },
   {
     id: 'data-refresh-cadence',
@@ -103,7 +96,7 @@ const faqSchema = {
         <input
           id="faq-search"
           type="search"
-          placeholder="Search questions (e.g. RONI, Advisory, Hurricane, Duration)..."
+          placeholder="Search questions (e.g. RONI, Advisory, ENSO, Duration)..."
           aria-label="Search frequently asked questions"
         />
       </div>
@@ -111,7 +104,7 @@ const faqSchema = {
         <button class="faq-filter-btn active" data-category="all" aria-pressed="true">All Questions</button>
         <button class="faq-filter-btn" data-category="fundamentals" aria-pressed="false">Fundamentals</button>
         <button class="faq-filter-btn" data-category="alerts" aria-pressed="false">Alerts & Forecasts</button>
-        <button class="faq-filter-btn" data-category="weather" aria-pressed="false">Weather & Hurricanes</button>
+        <button class="faq-filter-btn" data-category="weather" aria-pressed="false">Weather & Impacts</button>
         <button class="faq-filter-btn" data-category="data" aria-pressed="false">Indices & Methods</button>
       </div>
     </div>

@@ -35,7 +35,7 @@ ENSOLENS_EXPECT_INDEXING=true node scripts/verify-production.mjs
 
 Deploy runs type checks, unit tests, build, a real isolated Worker scheduled refresh against NOAA, KV persistence checks, and Chrome tests at 1440px and 390px before upload. Chrome must be installed. Browser tests start and stop their own preview; set ENSOLENS_TEST_URL to check an existing preview or production instead. Screenshots are saved under .playwright/.
 
-Production checks cover nine pages, FAQ schema, actual embedded chart data, the NOAA image, source health, canonical URLs, metadata, indexing configuration, sitemap, redirects, and the not-found page. Browser checks also exercise historical chart rendering, toggles and CSV, plus FAQ search, filters, empty states and anchors at desktop and mobile sizes. A successful build alone is not a release verification.
+Production checks cover eight pages, FAQ schema, actual embedded chart data, the NOAA image, source health, canonical URLs, metadata, indexing configuration, sitemap, redirects, and the not-found page. Browser checks also exercise historical chart rendering, toggles and CSV, plus FAQ search, filters, empty states and anchors at desktop and mobile sizes. A successful build alone is not a release verification.
 
 ## Data and failure behavior
 

@@ -7,7 +7,7 @@ import DataNotice from '../components/DataNotice.astro';
 import { env } from 'cloudflare:workers';
 import { getData } from '../lib/data';
 import { formatDate, seasonLabel, signed } from '../lib/enso';
-import { ArrowUpRight, ArrowRight, Activity, CalendarDays, Check, Snowflake, Thermometer, Wind, CloudRain } from '@lucide/astro';
+import { ArrowUpRight, ArrowRight, Activity, CalendarDays, Check, Snowflake, Thermometer, CloudRain } from '@lucide/astro';
 const { snapshot, stale } = await getData(env);
 const weekly = snapshot.weekly.data.at(-1)!;
 const priorWeek = snapshot.weekly.data.at(-2)!;
@@ -83,29 +83,8 @@ const target = snapshot.forecast.data.rows.find(row => row.season === 'DJF') ?? 
           </div>
         </article>
 
-        <article class="scenario-card">
-          <div>
-            <span class="scenario-badge"><Wind size={14} /> Atlantic Basin</span>
-            <h3>Hurricane Suppression Link</h3>
-            <p>Warmer Pacific waters shift tropical convection eastward, generating stronger vertical wind shear over the Caribbean and tropical Atlantic, tending to disrupt storm formation.</p>
-          </div>
-          <div class="scenario-footer">
-            <span>Basin-wide environment</span>
-            <a href="/hurricane-connection/">Connection Guide <ArrowUpRight size={13} /></a>
-          </div>
-        </article>
       </div>
 
-      <div class="sister-project-banner">
-        <div class="sister-info">
-          <span class="sister-badge">From the Same Independent Builder</span>
-          <h3>Looking for Active Tropical Storms?</h3>
-          <p>We also build and maintain Hurricane Tracker, delivering real-time storm cones, forecast tracks, intensity models, and radar loops for North American coastal communities.</p>
-        </div>
-        <a class="sister-btn" href="https://hurricanetracker.cc/" target="_blank" rel="noopener noreferrer">
-          Visit Hurricane Tracker <ArrowUpRight size={15} />
-        </a>
-      </div>
     </section>
     <div class="provenance-line"><span><Check size={14} /> Sources made visible</span><p>Official NOAA / CPC data. Each series retains its own observation period and source issue.</p><a href="/methodology/">Data notes <ArrowUpRight size={13} /></a></div>
   </div>

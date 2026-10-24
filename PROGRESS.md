@@ -1,6 +1,12 @@
 # ENSOLens Delivery Status
 
-Updated: 2026-10-23 (Asia/Shanghai)
+Updated: 2026-10-24 (Asia/Shanghai)
+
+## Topic and cross-promotion removal (October 24)
+
+- Removed the hurricane topic page, desktop/mobile navigation entry, homepage scenario and cross-promotion, shared-publisher disclosure, and related FAQ, historical and privacy text. Historical NOAA observation values are unchanged.
+- Removed the retired URL from the sitemap. Verification now covers eight public pages, eight FAQ entries, absence of removed topic/association text in public HTML, and a noindex 404 for the retired URL.
+- Local verification passed: 36-file type check with zero diagnostics, all 12 unit tests, build, real Worker NOAA refresh/KV checks and 1440px/390px browser checks including retired-route 404. Desktop/mobile homepage screenshots inspected; three remaining scenarios reflow correctly. Missing local runtime binaries were restored with npm ci without changing the lockfile. Deployment and live verification pending.
 
 ## Historical / FAQ repair checkpoint (October 23)
 

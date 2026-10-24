@@ -3,7 +3,7 @@ import { load } from 'cheerio/slim';
 
 const indexable = process.env.ENSOLENS_EXPECT_INDEXING === 'true';
 const host = 'https://ensolens.com';
-const paths = ['/', '/forecast/', '/historical/', '/faq/', '/winter-outlook/', '/hurricane-connection/', '/methodology/', '/about/', '/privacy/'];
+const paths = ['/', '/forecast/', '/historical/', '/faq/', '/winter-outlook/', '/methodology/', '/about/', '/privacy/'];
 async function request(path, options = {}) {
   return fetch(path.startsWith('http') ? path : host + path, { signal: AbortSignal.timeout(30000), ...options });
 }
@@ -11,7 +11,9 @@ for (const path of paths) {
   const response = await request(path);
   assert.equal(response.status, 200, path);
   assert.match(response.headers.get('x-robots-tag'), indexable ? /^index, follow$/ : /noindex/);
-  const $ = load(await response.text());
+  const html = await response.text();
+  assert.doesNotMatch(html, /hurricane|cyclone|sister-project|same independent builder/i, path);
+  const $ = load(html);
   assert.equal($('link[rel=canonical]').attr('href'), host + path);
   assert.match($('meta[name=robots]').attr('content'), indexable ? /^index, follow$/ : /noindex/);
   assert.ok($('meta[name=description]').attr('content')?.length > 20);
@@ -44,8 +46,12 @@ const robots = await (await request('/robots.txt')).text();
 assert.match(robots, indexable ? /Allow: \/\n/ : /Disallow: \/\n/);
 if (indexable) assert.match(robots, /Sitemap: https:\/\/ensolens.com\/sitemap.xml/);
 const sitemap = await (await request('/sitemap.xml')).text();
+assert.doesNotMatch(sitemap, /hurricane/i);
 for (const path of paths) assert.ok(sitemap.includes('<loc>' + host + path + '</loc>'));
 const missing = await request('/missing-page-check/');
+const retired = await request('/hurricane-connection/');
+assert.equal(retired.status, 404);
+assert.match(retired.headers.get('x-robots-tag'), /noindex/);
 assert.equal(missing.status, 404);
 assert.match(missing.headers.get('x-robots-tag'), /noindex/);
 const missingHtml = load(await missing.text());

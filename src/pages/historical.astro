@@ -186,10 +186,10 @@ const payload = JSON.stringify({
             </div>
           </div>
           <p class="analog-card-text">
-            A rare three-year multi-winter La Niña sequence. Intensified the 2020 record Atlantic hurricane season (30 named storms), prolonged severe drought across the American Southwest, and generated historic multi-year flooding across eastern Australia.
+            A rare three-year multi-winter La Niña sequence associated with prolonged severe drought across the American Southwest and historic multi-year flooding across eastern Australia.
           </p>
           <div class="analog-card-footer">
-            <span class="analog-badge">Record 30-Storm Atlantic Season</span>
+            <span class="analog-badge">Multi-Year Cold Phase</span>
           </div>
         </article>
       </div>
@@ -211,7 +211,6 @@ const payload = JSON.stringify({
               <th scope="col">Classification</th>
               <th scope="col">Calendar-Year Weekly Extreme</th>
               <th scope="col">Observation Date</th>
-              <th scope="col">Atlantic Activity</th>
               <th scope="col">Key Global Teleconnections</th>
             </tr>
           </thead>
@@ -221,15 +220,13 @@ const payload = JSON.stringify({
               <td><span class="table-badge warm">Super El Niño</span></td>
               <td><strong>{signed(peaks['2015'].anomaly)}°C</strong></td>
               <td>{formatDate(peaks['2015'].date)}</td>
-              <td>Suppressed (ACE 63)</td>
-              <td>Record Central Pacific hurricanes; historic global coral bleaching; severe Ethiopian drought.</td>
+              <td>Historic global coral bleaching; severe Ethiopian drought.</td>
             </tr>
             <tr>
               <td><strong>1997–1998</strong></td>
               <td><span class="table-badge warm">Super El Niño</span></td>
               <td><strong>{signed(peaks['1997'].anomaly)}°C</strong></td>
               <td>{formatDate(peaks['1997'].date)}</td>
-              <td>Suppressed (ACE 41)</td>
               <td>Torrential California storms & atmospheric rivers; Peru flooding; severe SE Asia forest fires.</td>
             </tr>
             <tr>
@@ -237,7 +234,6 @@ const payload = JSON.stringify({
               <td><span class="table-badge warm">Strong El Niño</span></td>
               <td><strong>{signed(peaks['2023'].anomaly)}°C</strong></td>
               <td>{formatDate(peaks['2023'].date)}</td>
-              <td>Counterbalanced by extreme Atlantic SST</td>
               <td>Severe Amazon River low water records; Southern Africa mid-summer drought; warm boreal winter.</td>
             </tr>
             <tr>
@@ -245,7 +241,6 @@ const payload = JSON.stringify({
               <td><span class="table-badge cold">Triple-Dip La Niña</span></td>
               <td><strong>{signed(peaks['2020'].anomaly)}°C</strong></td>
               <td>{formatDate(peaks['2020'].date)}</td>
-              <td>Hyperactive (Record 30 storms in 2020)</td>
               <td>Persistent Southwest US megadrought; historic multi-year Australian flooding; Horn of Africa drought.</td>
             </tr>
           </tbody>

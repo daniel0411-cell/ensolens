@@ -98,7 +98,7 @@ try {
     await page.screenshot({ path: fileURLToPath(new URL('historical-' + width + '.png', output)), fullPage: true });
 
     await page.goto(base + '/faq/', { waitUntil: 'networkidle' });
-    assert.equal(await page.locator('.faq-item:visible').count(), 9);
+    assert.equal(await page.locator('.faq-item:visible').count(), 8);
     assert.equal(await page.locator('#faq-empty').isVisible(), false);
     await page.locator('[data-category="alerts"].faq-filter-btn').click();
     assert.equal(await page.locator('.faq-item:visible').count(), 1);
@@ -110,7 +110,7 @@ try {
     await page.locator('[data-category="all"].faq-filter-btn').click();
     await page.locator('#faq-search').fill('RONI');
     assert.ok(await page.locator('.faq-item:visible').count() > 0);
-    assert.ok(await page.locator('.faq-item:visible').count() < 9);
+    assert.ok(await page.locator('.faq-item:visible').count() < 8);
     await page.goto(base + '/faq/#alerts-explained', { waitUntil: 'networkidle' });
     assert.equal(await page.locator('#alerts-explained').evaluate(item => item.open), true);
     await page.goto(base + '/faq/#oni-vs-roni');
@@ -119,13 +119,16 @@ try {
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), true, 'FAQ overflow at ' + width);
     await page.evaluate(() => window.scrollTo(0, 0));
     await page.screenshot({ path: fileURLToPath(new URL('faq-' + width + '.png', output)), fullPage: true });
-    for (const path of ['/winter-outlook/', '/hurricane-connection/', '/methodology/', '/about/', '/privacy/']) {
+    for (const path of ['/winter-outlook/', '/methodology/', '/about/', '/privacy/']) {
       const response = await page.goto(base + path, { waitUntil: 'networkidle' });
       assert.equal(response.status(), 200, path);
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), true, path + ' overflow at ' + width);
     }
     const missing = await page.goto(base + '/missing-page-check/', { waitUntil: 'networkidle' });
     assert.equal(missing.status(), 404);
+    assert.match(await page.locator('meta[name=robots]').getAttribute('content'), /noindex/);
+    const retired = await page.goto(base + '/hurricane-connection/', { waitUntil: 'networkidle' });
+    assert.equal(retired.status(), 404);
     assert.match(await page.locator('meta[name=robots]').getAttribute('content'), /noindex/);
     assert.deepEqual(errors, [], 'Browser JavaScript errors');
     console.log('PASS ' + width + 'px: pages, chart pixels, historical toggle/CSV, FAQ search/filter/anchors, source image, range, comparison, CSV, map, navigation, overflow, 404');

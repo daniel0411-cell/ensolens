@@ -4,6 +4,8 @@ An independent English-language ENSO dashboard built with Astro, Chart.js, and C
 
 ## Status and recovery
 
+Latest verified release (October 30, 2026): code `f45a1ea` on `origin/master`, Cloudflare version `e7fe983d-ba7c-40f9-b96b-d559705aaf84`, activated at 17:02:22 Asia/Shanghai with 100% traffic. The complete deploy gate, 11-page production HTTP/FAQ/indexing checks and desktop/mobile production browser suites passed. Older version statements below are historical checkpoints superseded by this release. Actual search inclusion remains unverified. See PROGRESS.md for the release record.
+
 Read PROGRESS.md and AGENTS.md before continuing work. Git checkpoints preserve the implementation separately from deployment state.
 
 - The official-data release was deployed on October 20, 2026 (Asia/Shanghai).

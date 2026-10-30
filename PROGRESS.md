@@ -9,7 +9,9 @@ Updated: 2026-10-30 (Asia/Shanghai)
 - Added `/impacts/california-snow-vs-rain/` with snow-level/SWE explanations and local official sources. No unsupported seasonal snowfall probabilities or historical attribution claims were imported.
 - Reused the existing same-season forecast comparison and automatic source-refresh pipeline. Added forecast-page links, sitemap entries, Twitter title/description, editorial maintenance instructions, and coverage in preview/production verification scripts.
 - Refreshed the build fallback through the existing official pipeline on October 30: weekly center October 21, Niño 3.4 +3.4°C; CPC discussion October 8; forecast issue October; RONI JAS 2026 +1.7 in the production table's published precision. No conversion from prototype values.
-- Local type check (37 files, no errors), ten unit tests, build, real isolated Worker scheduled NOAA refresh/KV persistence, and 1440px/390px browser suites passed. New-page screenshots were visually inspected. Production release and verification pending; no deployment claim yet.
+- Code commit `f45a1ea` pushed to `origin/master` and remote SHA verified before deployment. `npm run deploy` passed type check (37 files, no errors), ten unit tests, build, real isolated Worker scheduled NOAA refresh/KV persistence, and 1440px/390px browser suites. New-page screenshots were visually inspected.
+- Released version `e7fe983d-ba7c-40f9-b96b-d559705aaf84` on October 30 at 17:02:22 Asia/Shanghai, serving 100% according to `wrangler deployments list`. Both custom domains and the existing six-hour schedule were confirmed in actual deploy output.
+- Post-deploy `ENSOLENS_EXPECT_INDEXING=true node scripts/verify-production.mjs` passed all 11 pages, visible FAQ/schema matching, healthy feeds, robots, sitemap, 404 and canonical redirects. Production 1440px/390px browser suites also passed. The default workers.dev hostname returned the new lifecycle page successfully. Search-engine inclusion remains unverified; no indexing submission performed.
 
 Older release statements below are historical checkpoints, not the current version record.
 

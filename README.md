@@ -15,6 +15,8 @@ Read PROGRESS.md and AGENTS.md before continuing work. Git checkpoints preserve 
 
 ## Development and release
 
+Production source is this Astro/Worker repository. The Python generator in the parent research directory is a separate prototype. Read EDITORIAL.md for the low-maintenance workflow. Lifecycle explanation: `/forecast/when-will-it-end/`; California snow/rain: `/impacts/california-snow-vs-rain/`. These pages use the existing validated CPC feed or evergreen explanations, not unverified prototype values.
+
 Use the project's installed Node.js 24 runtime.
 
 ```sh

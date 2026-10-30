@@ -1,0 +1,42 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import DataNotice from '../../components/DataNotice.astro';
+import { env } from 'cloudflare:workers';
+import { getData } from '../../lib/data';
+import { seasonLabel, formatDate, urls } from '../../lib/enso';
+const { snapshot, stale } = await getData(env);
+const forecast = snapshot.forecast.data;
+const weekly = snapshot.weekly.data.at(-1)!;
+const questions = [
+  { question: 'Does one cooler week confirm that El Niño has peaked?', answer: 'No. Weekly variability and later revisions can change the picture. Compare subsequent observations in the same dataset, and distinguish the warmest individual week from the peak three-month seasonal index.' },
+  { question: 'Does a neutral probability predict the exact day El Niño ends?', answer: 'No. A seasonal probability describes an overlapping three-month period. It is not a transition date, and the other possible states retain their published probabilities.' },
+  { question: 'Will La Niña follow next winter?', answer: 'Use an outlook that explicitly covers that winter. A forecast for an earlier season cannot establish the next winter’s state, and the end of El Niño does not guarantee an immediate transition to La Niña.' },
+];
+---
+<Layout title="When will El Niño peak and end?" active="forecast" description="Separate the ocean-temperature peak, the official return to neutral and regional impacts. Read current NOAA probabilities with their dates and spring forecast uncertainty.">
+  <div class="page-shell subpage lifecycle-page">
+    <div class="page-intro"><div><span class="eyebrow">ENSO LIFECYCLE · EDITORIAL REVIEW OCTOBER 30, 2026</span><h1>When will El Niño<br /><span>peak and end?</span></h1><p>Three different clocks. No single guaranteed end date.</p></div></div>
+    <DataNotice stale={stale} />
+    <section class="lifecycle-section">
+      <h2>Start with the official assessment.</h2>
+      <p class="body-copy">CPC’s discussion issued {formatDate(snapshot.discussion.data.issued)} states: <strong>{snapshot.discussion.data.synopsis}</strong></p>
+      <p class="body-copy">The latest validated weekly Niño 3.4 anomaly is {weekly.anomaly > 0 ? '+' : ''}{weekly.anomaly.toFixed(1)}°C for the week centered {formatDate(weekly.date)}. This is an observation, not a final peak or an official seasonal strength classification.</p>
+      <p class="figure-note">Weekly source checked {snapshot.weekly.checkedAt}; last successful retrieval {snapshot.weekly.retrievedAt}. Forecast issue: {forecast.issue}. These dates describe different products.</p>
+    </section>
+    <section class="regional-section"><h2>Three different clocks</h2><div class="regional-grid">
+      <article><h3>The ocean peak</h3><p>A sustained decline in the same index can establish a peak retrospectively. One flat or cooler week is insufficient; weekly and three-month peaks need not coincide.</p></article>
+      <article><h3>The official phase</h3><p>CPC evaluates the ocean and atmosphere together. A weekly crossing of a seasonal threshold does not by itself confirm that an event has ended.</p></article>
+      <article><h3>Regional impacts</h3><p>Local precipitation, temperature and water-supply effects have their own timing. The Pacific index does not set a universal end date for these impacts.</p></article>
+    </div></section>
+    <section class="lifecycle-section"><h2>What does the current outlook cover?</h2>
+      <p class="body-copy">CPC issue {forecast.issue}, RONI-based state probabilities. Each row is a three-month season. A probability for El Niño is not a probability of a strong event or of local severe weather.</p>
+      <div class="probability-table-wrap"><table class="data-table"><caption>NOAA CPC · issue {forecast.issue}</caption><thead><tr><th scope="col">Target season</th><th scope="col">El Niño</th><th scope="col">Neutral</th><th scope="col">La Niña</th></tr></thead><tbody>{forecast.rows.map(row => <tr><th scope="row">{seasonLabel(row)}</th><td>{row.nino}%</td><td>{row.neutral}%</td><td>{row.nina}%</td></tr>)}</tbody></table></div>
+      <p class="body-copy">A reported 100% does not remove real-world uncertainty. A change from 99% to 100% is one percentage point, not evidence of a significant forecast change. <a href="/forecast/">Compare the same season across official issues.</a></p>
+    </section>
+    <section class="explanation-grid"><div><h2>Why a winter peak is common</h2><p>ENSO events often reach their greatest amplitude around the end of the calendar year because of the seasonal cycle of ocean-atmosphere coupling. November–January is a monitoring window, not a guaranteed peak for every event.</p></div><div><h2>How an event can weaken</h2><p>Changes in winds, currents, upwelling and thermocline depth redistribute ocean heat. Oceanic waves transmit these adjustments. Surface warming alone cannot prove that a subsurface cooling wave has arrived or set a countdown to decay.</p></div></section>
+    <section class="lifecycle-section"><h2>The spring predictability barrier</h2><p class="body-copy">Forecasts that cross northern spring often have reduced skill. This varies by event, model and lead time; March–May is not a complete blind spot. Revisit a summer forecast as new monthly issues arrive, and do not extend probabilities beyond their stated horizon.</p></section>
+    <section class="lifecycle-section" aria-labelledby="lifecycle-faq"><h2 id="lifecycle-faq">Questions readers ask</h2>{questions.map(item => <div class="lifecycle-answer"><h3>{item.question}</h3><p class="body-copy">{item.answer}</p></div>)}</section>
+    <section class="lifecycle-section"><h2>Sources and update policy</h2><p class="body-copy"><a href={urls.discussion}>NOAA CPC diagnostic discussion</a> · <a href={forecast.source}>CPC probability source</a> · <a href={urls.weekly}>Weekly SST anomalies</a> · <a href="https://www.climate.gov/enso">NOAA ENSO background</a></p><p class="body-copy">The table uses the same validated feed as the dashboard. Failed checks retain dated values and show a notice above. This page uses CPC probabilities; it does not merge them with an IRI model outlook. Review the explanation monthly; a new weekly observation does not change a monthly forecast’s issue date.</p></section>
+  </div>
+  <script type="application/ld+json" set:html={JSON.stringify({ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: questions.map(item => ({ '@type': 'Question', name: item.question, acceptedAnswer: { '@type': 'Answer', text: item.answer } })) }).replace(/</g, '\\u003c')} />
+</Layout>

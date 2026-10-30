@@ -3,7 +3,7 @@ import { load } from 'cheerio/slim';
 
 const indexable = process.env.ENSOLENS_EXPECT_INDEXING === 'true';
 const host = 'https://ensolens.com';
-const paths = ['/', '/forecast/', '/historical/', '/faq/', '/winter-outlook/', '/hurricane-connection/', '/methodology/', '/about/', '/privacy/'];
+const paths = ['/', '/forecast/', '/forecast/when-will-it-end/', '/impacts/california-snow-vs-rain/', '/historical/', '/faq/', '/winter-outlook/', '/hurricane-connection/', '/methodology/', '/about/', '/privacy/'];
 async function request(path, options = {}) {
   return fetch(path.startsWith('http') ? path : host + path, { signal: AbortSignal.timeout(30000), ...options });
 }
@@ -15,7 +15,16 @@ for (const path of paths) {
   assert.equal($('link[rel=canonical]').attr('href'), host + path);
   assert.match($('meta[name=robots]').attr('content'), indexable ? /^index, follow$/ : /noindex/);
   assert.ok($('meta[name=description]').attr('content')?.length > 20);
-  assert.equal(JSON.parse($('script[type="application/ld+json"]').text())['@type'], 'WebSite');
+  assert.equal(JSON.parse($('script[type="application/ld+json"]').first().text())['@type'], 'WebSite');
+  if (path === '/forecast/when-will-it-end/' || path === '/impacts/california-snow-vs-rain/') {
+    const faq = JSON.parse($('script[type="application/ld+json"]').last().text());
+    assert.equal(faq['@type'], 'FAQPage');
+    assert.equal(faq.mainEntity.length, 3);
+    for (const item of faq.mainEntity) {
+      assert.ok($('main').text().includes(item.name));
+      assert.ok($('main').text().includes(item.acceptedAnswer.text));
+    }
+  }
   assert.doesNotMatch($('main').text(), /illustrative|synthetic|example phase/i);
   if (path === '/') {
     const forecast = JSON.parse($('#forecast-data').text());

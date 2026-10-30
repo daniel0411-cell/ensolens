@@ -1,6 +1,17 @@
 # ENSOLens Delivery Status
 
-Updated: 2026-10-22 (Asia/Shanghai)
+Updated: 2026-10-30 (Asia/Shanghai)
+
+## Lifecycle and California explanation release (October 30)
+
+- Production source confirmed as this Astro/Cloudflare Worker repository, `daniel0411-cell/ensolens`, branch `master`. The parent research directory's Python generator is a separate prototype, not a production checkout.
+- Added `/forecast/when-will-it-end/` with live validated CPC probabilities, dated weekly observations, a peak/phase/impact distinction, spring forecast uncertainty, citations and visible-answer-matched FAQ JSON-LD.
+- Added `/impacts/california-snow-vs-rain/` with snow-level/SWE explanations and local official sources. No unsupported seasonal snowfall probabilities or historical attribution claims were imported.
+- Reused the existing same-season forecast comparison and automatic source-refresh pipeline. Added forecast-page links, sitemap entries, Twitter title/description, editorial maintenance instructions, and coverage in preview/production verification scripts.
+- Refreshed the build fallback through the existing official pipeline on October 30: weekly center October 21, Niño 3.4 +3.4°C; CPC discussion October 8; forecast issue October; RONI JAS 2026 +1.7 in the production table's published precision. No conversion from prototype values.
+- Local type check (37 files, no errors), ten unit tests, build, real isolated Worker scheduled NOAA refresh/KV persistence, and 1440px/390px browser suites passed. New-page screenshots were visually inspected. Production release and verification pending; no deployment claim yet.
+
+Older release statements below are historical checkpoints, not the current version record.
 
 ## Historical Analog Tool & FAQ Knowledge Hub release (October 22)
 

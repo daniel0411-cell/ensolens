@@ -1,0 +1,23 @@
+---
+import Layout from '../../layouts/Layout.astro';
+const questions = [
+  { question: 'Does a strong El Niño guarantee lots of snow in California?', answer: 'No. Even when a seasonal outlook favors more precipitation, storm temperatures, snow levels and elevation determine how much falls as snow. Subsequent melting also affects the snowpack.' },
+  { question: 'Can Tahoe receive rain while higher slopes receive snow?', answer: 'Yes. A sufficiently warm storm can bring rain below the snow level and snow higher up. Check the local forecast: there is no fixed snow line for an entire El Niño winter.' },
+  { question: 'Is snow depth the same as snow water equivalent?', answer: 'No. Depth measures snow thickness. Snow water equivalent measures the water stored in the snow. Density varies, so equal snow depths can hold different amounts of water.' },
+];
+---
+<Layout title="California: Does El Niño mean snow or rain?" active="winter" description="Why a wetter California winter need not mean a deeper Sierra snowpack. Understand snow levels, snow water equivalent and the forecasts Tahoe and Mammoth visitors need.">
+  <div class="page-shell subpage lifecycle-page">
+    <div class="page-intro"><div><span class="eyebrow">CALIFORNIA · REVIEWED OCTOBER 30, 2026</span><h1>More rain.<br /><span>Not always more snow.</span></h1><p>What an ENSO outlook can tell Tahoe and Mammoth visitors—and what a local forecast must answer.</p></div></div>
+    <section class="lifecycle-section"><h2>Precipitation is only half the story.</h2><p class="body-copy">ENSO can shift California’s winter precipitation odds, particularly in the south. It does not determine the temperature or track of each storm. Sierra snow accumulation depends on precipitation, elevation, storm temperature and later melting.</p><p class="body-copy">A warm, moisture-rich storm may bring rain to lower slopes and snow higher up. A colder storm with less total moisture may deliver more low-elevation snow. An El Niño label cannot settle that distinction.</p></section>
+    <section class="regional-section"><h2>Choose the measurement for the decision.</h2><div class="regional-grid">
+      <article><h3>A ski trip</h3><p>Use local snow-level, wind and precipitation forecasts and resort operations reports. Conditions can differ between the base and summit and change within one storm.</p><a href="https://www.weather.gov/rev/">NWS Reno: Tahoe and Mammoth area</a></article>
+      <article><h3>Water supply</h3><p>Track snow water equivalent (SWE), precipitation and storage. Snow depth alone does not measure how much water is stored in the mountain snowpack.</p><a href="https://cdec.water.ca.gov/snow/">California DWR snow observations</a></article>
+      <article><h3>Flood preparedness</h3><p>Read current warnings, local runoff outlooks and reservoir guidance. Soil wetness and individual storms matter more than a seasonal ENSO label.</p><a href="https://www.weather.gov/">National Weather Service</a></article>
+    </div></section>
+    <section class="explanation-grid"><div><h2>Atmospheric rivers vary.</h2><p>Atmospheric rivers occur in different ENSO phases. Their landfall, duration and freezing levels vary. Rain on existing snow can add runoff, but the outcome depends on the snowpack and storm. Not every atmospheric river is warm or produces flooding.</p></div><div><h2>California is not one climate.</h2><p>Historical ENSO relationships depend on location, season, event sample and index. A Southern California precipitation tendency is not a snowfall forecast for the northern Sierra. No numerical regional odds are assigned here without a dated regional source.</p></div></section>
+    <section class="lifecycle-section"><h2>Questions readers ask</h2>{questions.map(item => <div class="lifecycle-answer"><h3>{item.question}</h3><p class="body-copy">{item.answer}</p></div>)}</section>
+    <section class="lifecycle-section"><h2>Seasonal context and sources</h2><p class="body-copy">See the <a href="https://www.cpc.ncep.noaa.gov/products/predictions/long_range/">current CPC regional seasonal outlook</a>, <a href="https://www.climate.gov/enso">NOAA ENSO resources</a> and our <a href="/winter-outlook/">U.S. winter explanation</a>. This is evergreen context, not a current storm forecast or a numerical snowfall prediction for winter 2026–27.</p></section>
+  </div>
+  <script type="application/ld+json" set:html={JSON.stringify({ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: questions.map(item => ({ '@type': 'Question', name: item.question, acceptedAnswer: { '@type': 'Answer', text: item.answer } })) }).replace(/</g, '\\u003c')} />
+</Layout>

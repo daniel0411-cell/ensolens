@@ -75,10 +75,16 @@ try {
     assert.doesNotMatch(csv, /ILLUSTRATIVE/);
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), true, 'Forecast overflow at ' + width);
     await page.screenshot({ path: fileURLToPath(new URL('forecast-' + width + '.png', output)), fullPage: true });
-    for (const path of ['/historical/', '/faq/', '/winter-outlook/', '/hurricane-connection/', '/methodology/', '/about/', '/privacy/']) {
+    for (const path of ['/forecast/when-will-it-end/', '/impacts/california-snow-vs-rain/', '/historical/', '/faq/', '/winter-outlook/', '/hurricane-connection/', '/methodology/', '/about/', '/privacy/']) {
       const response = await page.goto(base + path, { waitUntil: 'networkidle' });
       assert.equal(response.status(), 200, path);
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), true, path + ' overflow at ' + width);
+      if (path === '/forecast/when-will-it-end/' || path === '/impacts/california-snow-vs-rain/') {
+        assert.equal(await page.locator('h1').count(), 1);
+        const faq = await page.locator('script[type="application/ld+json"]').last().textContent();
+        assert.equal(JSON.parse(faq)['@type'], 'FAQPage');
+        await page.screenshot({ path: fileURLToPath(new URL(path.includes('when-will') ? 'lifecycle-' + width + '.png' : 'california-' + width + '.png', output)), fullPage: true });
+      }
     }
     const missing = await page.goto(base + '/missing-page-check/', { waitUntil: 'networkidle' });
     assert.equal(missing.status(), 404);

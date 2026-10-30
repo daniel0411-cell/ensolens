@@ -1372,3 +1372,11 @@ dialog::backdrop { background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(4px); 
 @media (prefers-reduced-motion: reduce) {
   *, *:before, *:after { scroll-behavior: auto !important; transition: none !important; animation: none !important; }
 }
+ .lifecycle-section { margin-block: 2.5rem; }
+ .lifecycle-section h2 { margin-bottom: 1rem; }
+ .lifecycle-answer { padding-block: 1rem; border-bottom: 1px solid var(--border, #35463e); }
+ .lifecycle-answer h3 { margin-bottom: .75rem; font-size: 1.1rem; line-height: 1.5; }
+ .lifecycle-page { overflow-wrap: anywhere; }
+ .lifecycle-page h1, .lifecycle-page h2, .lifecycle-page h3 { letter-spacing: 0; }
+ .lifecycle-page .figure-note { overflow-wrap: anywhere; }
+ .lifecycle-page [id] { scroll-margin-top: 100px; }

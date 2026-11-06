@@ -48,7 +48,7 @@ try {
   await rssPage.close();
   console.log('PASS RSS: real XML parsing, response headers and item count');
   for (const width of [1440, 390]) {
-    const context = await browser.newContext({ viewport: { width, height: 1000 }, deviceScaleFactor: 1, acceptDownloads: true });
+    const context = await browser.newContext({ viewport: { width, height: 1000 }, deviceScaleFactor: 1, acceptDownloads: true, reducedMotion: 'reduce' });
     const page = await context.newPage();
     const errors = [];
     page.on('pageerror', error => errors.push(error.message));
@@ -112,6 +112,34 @@ try {
       assert.equal(response.status(), 200, path);
       assert.doesNotMatch(await page.content(), /hurricanetracker\.cc|hurricanehub|Hurricane Tracker|same independent builder|same publisher as/i, path);
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), true, path + ' overflow at ' + width);
+      if (path === '/historical/') {
+        const canvas = page.locator('#analog-chart');
+        await page.waitForFunction(() => {
+          const canvas = document.querySelector('#analog-chart');
+          if (!canvas || !canvas.width || !canvas.height) return false;
+          const pixels = canvas.getContext('2d').getImageData(0, 0, canvas.width, canvas.height).data;
+          return pixels.some((value, index) => index % 4 === 3 && value > 0);
+        });
+        await page.waitForFunction(() => document.querySelectorAll('[data-analog-toggle]').length === 4);
+        for (const toggle of await page.locator('[data-analog-toggle]').all()) {
+          const beforeToggle = await canvas.evaluate(canvas => canvas.toDataURL());
+          await toggle.click();
+          assert.equal(await toggle.getAttribute('aria-pressed'), 'false');
+          await page.waitForFunction(previous => document.querySelector('#analog-chart').toDataURL() !== previous, beforeToggle);
+          await toggle.click();
+          assert.equal(await toggle.getAttribute('aria-pressed'), 'true');
+        }
+        const analogDownload = page.waitForEvent('download');
+        await page.getByRole('button', { name: 'Download official historical analog data as CSV', exact: true }).click();
+        const analogCsv = await readFile(await (await analogDownload).path(), 'utf8');
+        const analogData = JSON.parse(await page.locator('#analog-data').textContent());
+        const expectedRows = 1 + analogData.current.length + analogData.benchmarks.reduce((count, item) => count + item.weeks.length, 0);
+        assert.equal(analogCsv.split('\r\n').length, expectedRows);
+        assert.match(analogCsv, /observation_date/);
+        assert.ok(analogCsv.includes(analogData.current.at(-1).date));
+        await canvas.screenshot({ path: fileURLToPath(new URL('historical-chart-' + width + '.png', output)) });
+        await page.screenshot({ path: fileURLToPath(new URL('historical-' + width + '.png', output)), fullPage: true });
+      }
       if (path === '/forecast/when-will-it-end/' || path === '/impacts/california-snow-vs-rain/') {
         assert.equal(await page.locator('h1').count(), 1);
         const faq = await page.locator('script[type="application/ld+json"]').last().textContent();

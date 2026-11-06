@@ -2,6 +2,13 @@
 
 Updated: 2026-11-06 (Asia/Shanghai)
 
+## Historical chart initialization fix (November 6)
+
+- Reproduced the live blank historical chart: valid embedded data with 43 current observations, an unpainted 300x150 canvas, inert benchmark toggles and no JavaScript exception. The shared initializer returned when the page lacked a forecast chart, before reaching the historical initializer.
+- Scoped forecast initialization to its own conditional block so historical chart setup and controls run independently, retaining existing chart-instance guards.
+- Added desktop/mobile browser coverage for historical canvas pixels, actual visual changes on benchmark toggles and CSV row counts. Browser screenshots use reduced motion to avoid capturing chart animations partway through drawing.
+- Verification and deployment pending; the RSS release below remains the last verified production version.
+
 ## RSS subscription update (November 6)
 
 - Added the RSS endpoint, global autodiscovery/footer subscription link and dated next-discussion reminder from the reviewed pending changes.

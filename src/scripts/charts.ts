@@ -76,51 +76,52 @@ export function initCharts() {
     ]));
   }
   const canvas = document.querySelector<HTMLCanvasElement>('#probability-chart');
-  if (!canvas || Chart.getChart(canvas)) return;
-  const { current, previous }: { current: Forecast; previous: Forecast | null } = JSON.parse(document.querySelector('#forecast-data')!.textContent!);
-  const colors = ['#06b6d4', '#64748b', '#f97316'];
-  const names = ['La Niña', 'Neutral', 'El Niño'];
-  const keys = ['nina', 'neutral', 'nino'] as const;
-  const datasets = (compare: boolean) => {
-    const make = (forecast: Forecast, prior: boolean) => keys.map((key, i) => ({
-      label: names[i] + ' · ' + forecast.issue,
-      data: current.rows.map(row => forecast.rows.find(p => p.key === row.key)?.[key] ?? null),
-      backgroundColor: prior ? colors[i] + '60' : colors[i],
-      stack: prior ? 'previous' : 'current', borderWidth: 0, barPercentage: 0.7, categoryPercentage: 0.8,
-    }));
-    return [...make(current, false), ...(compare && previous ? make(previous, true) : [])];
-  };
-  const chart = new Chart(canvas, {
-    type: 'bar', data: { labels: current.rows.map(seasonLabel), datasets: datasets(false) },
-    options: {
-      responsive: true, maintainAspectRatio: false, interaction: { intersect: false, mode: 'index' },
-      plugins: {
-        legend: { display: false },
-        tooltip: {
-          backgroundColor: 'rgba(11, 19, 16, 0.95)',
-          titleColor: '#fff',
-          bodyColor: '#cbd5e1',
-          borderColor: 'rgba(255, 255, 255, 0.15)',
-          borderWidth: 1,
-          callbacks: { label: ctx => ctx.dataset.label + ': ' + ctx.parsed.y + '%' }
-        }
+  if (canvas && !Chart.getChart(canvas)) {
+    const { current, previous }: { current: Forecast; previous: Forecast | null } = JSON.parse(document.querySelector('#forecast-data')!.textContent!);
+    const colors = ['#06b6d4', '#64748b', '#f97316'];
+    const names = ['La Niña', 'Neutral', 'El Niño'];
+    const keys = ['nina', 'neutral', 'nino'] as const;
+    const datasets = (compare: boolean) => {
+      const make = (forecast: Forecast, prior: boolean) => keys.map((key, i) => ({
+        label: names[i] + ' · ' + forecast.issue,
+        data: current.rows.map(row => forecast.rows.find(p => p.key === row.key)?.[key] ?? null),
+        backgroundColor: prior ? colors[i] + '60' : colors[i],
+        stack: prior ? 'previous' : 'current', borderWidth: 0, barPercentage: 0.7, categoryPercentage: 0.8,
+      }));
+      return [...make(current, false), ...(compare && previous ? make(previous, true) : [])];
+    };
+    const chart = new Chart(canvas, {
+      type: 'bar', data: { labels: current.rows.map(seasonLabel), datasets: datasets(false) },
+      options: {
+        responsive: true, maintainAspectRatio: false, interaction: { intersect: false, mode: 'index' },
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            backgroundColor: 'rgba(11, 19, 16, 0.95)',
+            titleColor: '#fff',
+            bodyColor: '#cbd5e1',
+            borderColor: 'rgba(255, 255, 255, 0.15)',
+            borderWidth: 1,
+            callbacks: { label: ctx => ctx.dataset.label + ': ' + ctx.parsed.y + '%' }
+          }
+        },
+        scales: {
+          x: { stacked: true, grid: { display: false }, ticks: { maxRotation: 45, font: { size: 10 }, color: '#94a3b8' } },
+          y: { stacked: true, min: 0, max: 100, grid: { color: 'rgba(255, 255, 255, 0.08)' }, ticks: { stepSize: 25, color: '#94a3b8', callback: value => value + '%' } }
+        },
       },
-      scales: {
-        x: { stacked: true, grid: { display: false }, ticks: { maxRotation: 45, font: { size: 10 }, color: '#94a3b8' } },
-        y: { stacked: true, min: 0, max: 100, grid: { color: 'rgba(255, 255, 255, 0.08)' }, ticks: { stepSize: 25, color: '#94a3b8', callback: value => value + '%' } }
-      },
-    },
-  });
-  document.querySelector<HTMLInputElement>('#compare-forecast')?.addEventListener('change', event => {
-    const checked = (event.target as HTMLInputElement).checked;
-    chart.data.datasets = datasets(checked);
-    chart.update();
-    document.querySelector<HTMLElement>('#forecast-comparison')!.hidden = !checked;
-  });
-  document.querySelector('.download-probabilities')?.addEventListener('click', () => downloadCsv('ensolens-official-probabilities.csv', [
-    ['issue', 'season', 'target_key', 'la_nina_percent', 'neutral_percent', 'el_nino_percent', 'source'],
-    ...[current, ...(previous ? [previous] : [])].flatMap(issue => issue.rows.map(row => [issue.issue, seasonLabel(row), row.key, row.nina, row.neutral, row.nino, issue.source])),
-  ]));
+    });
+    document.querySelector<HTMLInputElement>('#compare-forecast')?.addEventListener('change', event => {
+      const checked = (event.target as HTMLInputElement).checked;
+      chart.data.datasets = datasets(checked);
+      chart.update();
+      document.querySelector<HTMLElement>('#forecast-comparison')!.hidden = !checked;
+    });
+    document.querySelector('.download-probabilities')?.addEventListener('click', () => downloadCsv('ensolens-official-probabilities.csv', [
+      ['issue', 'season', 'target_key', 'la_nina_percent', 'neutral_percent', 'el_nino_percent', 'source'],
+      ...[current, ...(previous ? [previous] : [])].flatMap(issue => issue.rows.map(row => [issue.issue, seasonLabel(row), row.key, row.nina, row.neutral, row.nino, issue.source])),
+    ]));
+  }
 
   const analogCanvas = document.querySelector<HTMLCanvasElement>('#analog-chart');
   if (analogCanvas && !Chart.getChart(analogCanvas)) {

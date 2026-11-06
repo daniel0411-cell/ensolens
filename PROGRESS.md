@@ -7,7 +7,9 @@ Updated: 2026-11-06 (Asia/Shanghai)
 - Integrated the pending fixed-target comparison table, interpretation boundaries and decision-routing cards, preserving the existing chart selectors and download controls.
 - Missing prior issues or target estimates now read "Comparison unavailable" instead of implying a new forecast target. CPC probabilities are distinguished from model agreement, and calendar three-month periods and same-target comparisons are described without assuming a universal peak/decay timeline.
 - Added browser assertions comparing each table row with the embedded official current/prior forecasts, including missing targets and percentage-point changes. The separate parent Python prototype received the matching uncertainty wording and corrected methodology link; it is not deployed.
-- Release validation and deployment are pending; the independent-branding release below remains the last verified production version.
+- Code commit `f3cd78b` pushed to `origin/master`; the remote SHA matched before deployment. The complete `npm run deploy` gate passed: type checks, ten unit tests, build, real Worker NOAA refresh/KV verification and 1440px/390px browser suites with table assertions.
+- Released version `53d1068e-e6d6-4aa9-a921-288e79beaeff`, deployment `82ab440d-aaa9-47a9-958d-26fcae5f9677`, activated November 6 at 16:17:17 Asia/Shanghai with 100% traffic, confirmed by Wrangler. Both custom domains and the six-hour refresh schedule remain configured.
+- Post-deploy production verification passed all 11 pages, healthy source feeds, indexing configuration, sitemap, canonical redirects and 404 behavior. Fresh production browser suites passed at 1440px and 390px; forecast screenshots were inspected. Actual search inclusion remains unverified; no indexing submission was performed.
 
 ## Independent branding release (November 6)
 

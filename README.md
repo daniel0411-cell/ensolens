@@ -4,7 +4,7 @@ An independent English-language ENSO dashboard built with Astro, Chart.js, and C
 
 ## Status and recovery
 
-Latest verified release (November 6, 2026): code `ccb3f31` on `origin/master`, Cloudflare version `7b644ff2-0e86-4858-b7b7-3745d92602e5`, deployment `d39b9fbf-19d4-4b1f-be09-6f7ec9e2ac2b`, activated at 15:56:25 Asia/Shanghai with 100% traffic. Removed cross-site branding and promotion and disabled this Worker's default entry; custom domains remain active. The complete deploy gate, 11-page production checks and desktop/mobile browser suites passed. Older version statements below are historical checkpoints superseded by this release. Actual search inclusion remains unverified. See PROGRESS.md for the release record.
+Latest verified release (November 6, 2026): code `f3cd78b` on `origin/master`, Cloudflare version `53d1068e-e6d6-4aa9-a921-288e79beaeff`, deployment `82ab440d-aaa9-47a9-958d-26fcae5f9677`, activated at 16:17:17 Asia/Shanghai with 100% traffic. Added fixed-target forecast comparisons, clarified missing-data and probability explanations, and added decision-routing cards. Independent branding and the disabled default Worker entry are preserved. The complete deploy gate, 11-page production checks and desktop/mobile browser suites passed. Older version statements below are historical checkpoints superseded by this release. Actual search inclusion remains unverified. See PROGRESS.md for the release record.
 
 Read PROGRESS.md and AGENTS.md before continuing work. Git checkpoints preserve the implementation separately from deployment state.
 

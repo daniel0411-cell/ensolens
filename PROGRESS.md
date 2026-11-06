@@ -8,7 +8,10 @@ Updated: 2026-11-06 (Asia/Shanghai)
 - Homepage routing now features California rain/snow and ENSO lifecycle guides. Added browser and production checks for cross-site branding and homepage/navigation regressions.
 - Set this Worker's `workers_dev = false` while preserving both custom domains, preview-url settings and the shared account subdomain. No other site's configuration or repository visibility is changed.
 - Existing uncommitted forecast-page and CSS changes belong to other ongoing work and are excluded from this release. Deploy from an isolated committed checkout so these changes remain untouched and unpublished.
-- Verification and deployment pending. Public Git history and third-party archives can retain prior statements; this release does not claim historical anonymity.
+- Code commit `ccb3f31` pushed to `origin/master`; remote SHA matched the isolated release checkout before deployment. The complete `npm run deploy` gate passed: 37-file type check with no errors, ten unit tests, build, real Worker NOAA refresh/KV checks, and 1440px/390px browser suites. Homepage screenshots were inspected.
+- Released version `7b644ff2-0e86-4858-b7b7-3745d92602e5`, deployment `d39b9fbf-19d4-4b1f-be09-6f7ec9e2ac2b`, activated November 6 at 15:56:25 Asia/Shanghai with 100% traffic, confirmed by Wrangler deployment output.
+- All 11 production pages passed metadata, brand-boundary, source-health, FAQ, sitemap, redirect and 404 verification. Production desktop/mobile browser suites passed. The old default workers.dev endpoint returned HTTP 404; both custom domains and the existing schedule remain configured.
+- The other site's live homepage and local source scan had no direct ENSOLens reference; this is not an exhaustive historical audit. The GitHub repository is public. Public Git history and third-party archives can retain prior statements; this release does not claim historical anonymity, change repository permissions, or rewrite history.
 
 ## Lifecycle and California explanation release (October 30)
 

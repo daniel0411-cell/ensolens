@@ -4,7 +4,7 @@ import ForecastChart from '../components/ForecastChart.astro';
 import DataNotice from '../components/DataNotice.astro';
 import { env } from 'cloudflare:workers';
 import { getData } from '../lib/data';
-import { seasonLabel } from '../lib/enso';
+import { seasonLabel, formatDate } from '../lib/enso';
 import {
   ArrowUpRight,
   ArrowRight,
@@ -48,6 +48,14 @@ const comparisonRows = forecast.rows.map(row => {
     </div>
 
     <DataNotice stale={stale} />
+
+    <div class="content-notice">
+      <CalendarDays size={18} />
+      <div>
+        <strong>Next scheduled consensus release: {formatDate(snapshot.discussion.data.next, { month: 'long' })}.</strong>
+        <p>CPC issues full diagnostic discussions and updated seasonal ENSO category probabilities on the second Thursday of each month. Current figures reflect issue {forecast.issue}.</p>
+      </div>
+    </div>
 
     <!-- Active Winter Highlight -->
     <div class="forecast-summary">

@@ -35,6 +35,18 @@ try {
     console.log('PASS real Worker scheduled refresh: NOAA validation, KV persistence and healthy status');
   }
   browser = await chromium.launch({ channel: 'chrome', headless: true });
+  const rssResponse = await fetch(base + '/rss.xml');
+  assert.equal(rssResponse.status, 200);
+  assert.equal(rssResponse.headers.get('content-type'), 'application/xml; charset=utf-8');
+  assert.equal(rssResponse.headers.get('cache-control'), 'public, max-age=3600');
+  const rssPage = await browser.newPage();
+  const rssCheck = await rssPage.evaluate(xml => {
+    const doc = new DOMParser().parseFromString(xml, 'application/xml');
+    return { errors: doc.querySelectorAll('parsererror').length, items: doc.querySelectorAll('item').length, buildDates: doc.querySelectorAll('lastBuildDate').length };
+  }, await rssResponse.text());
+  assert.deepEqual(rssCheck, { errors: 0, items: 5, buildDates: 0 });
+  await rssPage.close();
+  console.log('PASS RSS: real XML parsing, response headers and item count');
   for (const width of [1440, 390]) {
     const context = await browser.newContext({ viewport: { width, height: 1000 }, deviceScaleFactor: 1, acceptDownloads: true });
     const page = await context.newPage();
@@ -68,6 +80,12 @@ try {
     await page.evaluate(() => window.scrollTo(0, 0));
     await page.screenshot({ path: fileURLToPath(new URL('dashboard-' + width + '-viewport.png', output)), fullPage: false });
     await page.goto(base + '/forecast/', { waitUntil: 'networkidle' });
+    assert.equal(await page.locator('head link[rel="alternate"][type="application/rss+xml"]').getAttribute('href'), '/rss.xml');
+    assert.equal(await page.locator('footer a[href="/rss.xml"]').count(), 1);
+    const nextRelease = page.locator('.content-notice').filter({ hasText: 'Next scheduled consensus release:' });
+    assert.equal(await nextRelease.count(), 1);
+    const noticeBounds = await nextRelease.boundingBox();
+    assert.ok(noticeBounds && noticeBounds.x >= 0 && noticeBounds.x + noticeBounds.width <= width + 1);
     const forecastData = JSON.parse(await page.locator('#forecast-data').textContent());
     const comparisonRows = page.locator('section[aria-labelledby="comparison-heading"] table tbody tr');
     assert.equal(await comparisonRows.count(), forecastData.current.rows.length);

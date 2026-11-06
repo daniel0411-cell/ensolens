@@ -2,6 +2,14 @@
 
 Updated: 2026-11-06 (Asia/Shanghai)
 
+## RSS subscription update (November 6)
+
+- Added the RSS endpoint, global autodiscovery/footer subscription link and dated next-discussion reminder from the reviewed pending changes.
+- RSS omits optional publication/build timestamps when the source provides only an issue month, observation center week or retrieval time. Verified discussion and guide publication dates remain. Unchanged successful source checks do not alter the feed content.
+- Retained valid data during source failures and added channel-level degradation plus affected-item notices with last retrieval/check timestamps. A pure XML renderer enables regression checks without mocking the Worker runtime.
+- Added RSS tests for date stability, failure/expiry handling and XML escaping, and extended local browser and production checks for the new endpoint. Release validation and deployment are pending; the forecast release below remains the last verified production version.
+- Independent review identified a category-versus-strength wording error in the new release notice; corrected it to seasonal ENSO category probabilities. Pre-release type checks, 13 tests, build, NOAA refresh/KV and desktop/mobile browser checks passed; the formal deploy gate will recheck the final wording.
+
 ## Collaboration rules update (November 6)
 
 - Expanded AGENTS.md with shared AI roles, owner decision authority, evidence and hypothesis distinctions, scientific boundaries, maintenance-budget tradeoffs, independent-review reporting and production/prototype separation.

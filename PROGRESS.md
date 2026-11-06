@@ -1,6 +1,14 @@
 # ENSOLens Delivery Status
 
-Updated: 2026-10-30 (Asia/Shanghai)
+Updated: 2026-11-06 (Asia/Shanghai)
+
+## Independent branding release (November 6)
+
+- Removed cross-project promotion and shared-publisher statements from the homepage, About, privacy and hurricane explanation. Removed the hurricane primary navigation item; the existing science page and official NHC citations remain available at their original route.
+- Homepage routing now features California rain/snow and ENSO lifecycle guides. Added browser and production checks for cross-site branding and homepage/navigation regressions.
+- Set this Worker's `workers_dev = false` while preserving both custom domains, preview-url settings and the shared account subdomain. No other site's configuration or repository visibility is changed.
+- Existing uncommitted forecast-page and CSS changes belong to other ongoing work and are excluded from this release. Deploy from an isolated committed checkout so these changes remain untouched and unpublished.
+- Verification and deployment pending. Public Git history and third-party archives can retain prior statements; this release does not claim historical anonymity.
 
 ## Lifecycle and California explanation release (October 30)
 

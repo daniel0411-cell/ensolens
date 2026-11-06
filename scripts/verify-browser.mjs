@@ -41,6 +41,10 @@ try {
     const errors = [];
     page.on('pageerror', error => errors.push(error.message));
     await page.goto(base + '/', { waitUntil: 'networkidle' });
+    assert.doesNotMatch(await page.content(), /hurricanetracker\.cc|hurricanehub|Hurricane Tracker|same independent builder|same publisher as/i);
+    assert.equal(await page.locator('.sister-project-banner').count(), 0);
+    assert.equal(await page.locator('nav a[href="/hurricane-connection/"]').count(), 0);
+    assert.equal(await page.locator('.scenario-card a[href="/impacts/california-snow-vs-rain/"]').count(), 1);
     await page.waitForFunction(() => [...document.querySelectorAll('canvas')].every(canvas => canvas.width > 0 && canvas.getContext('2d').getImageData(0, 0, canvas.width, canvas.height).data.some((value, index) => index % 4 === 3 && value > 0)));
     assert.equal(await page.locator('#ocean-image').evaluate(image => image.complete && image.naturalWidth > 100), true);
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), true, 'Homepage overflow at ' + width);
@@ -78,6 +82,7 @@ try {
     for (const path of ['/forecast/when-will-it-end/', '/impacts/california-snow-vs-rain/', '/historical/', '/faq/', '/winter-outlook/', '/hurricane-connection/', '/methodology/', '/about/', '/privacy/']) {
       const response = await page.goto(base + path, { waitUntil: 'networkidle' });
       assert.equal(response.status(), 200, path);
+      assert.doesNotMatch(await page.content(), /hurricanetracker\.cc|hurricanehub|Hurricane Tracker|same independent builder|same publisher as/i, path);
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), true, path + ' overflow at ' + width);
       if (path === '/forecast/when-will-it-end/' || path === '/impacts/california-snow-vs-rain/') {
         assert.equal(await page.locator('h1').count(), 1);

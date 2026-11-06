@@ -2,6 +2,10 @@
 
 ENSOLens answers recurring ENSO questions using dated official observations and probabilities. Monthly maintenance budget: 6–10 hours. Focus on the dashboard, lifecycle explanation and one regional use case before adding more pages.
 
+## Brand boundary
+
+Present ENSOLens as its own independent project. Do not add cross-site promotion, shared-operator statements or links to other operator-owned sites. Scientific hurricane context may remain with official NOAA/NHC citations; it is not a primary navigation item. Use the existing California and lifecycle guides for homepage routing. Keep this Worker's default workers.dev entry and preview URLs disabled without renaming the account-wide subdomain or affecting other Workers. Public repository history and third-party archives are not erased by a website release.
+
 ## Weekly review (target: 20 minutes)
 
 1. Check `/api/status/` and the official weekly file. Distinguish the center week, source release and retrieval dates. An upstream failure is not unchanged conditions.

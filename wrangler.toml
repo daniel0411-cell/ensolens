@@ -3,7 +3,7 @@ main = "src/worker.ts"
 account_id = "2e9212a9aeef7091fe79d82808aa5843"
 compatibility_date = "2026-10-19"
 compatibility_flags = ["nodejs_compat"]
-workers_dev = true
+workers_dev = false
 preview_urls = false
 routes = [
   { pattern = "ensolens.com", custom_domain = true },

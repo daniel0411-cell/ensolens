@@ -11,7 +11,15 @@ for (const path of paths) {
   const response = await request(path);
   assert.equal(response.status, 200, path);
   assert.match(response.headers.get('x-robots-tag'), indexable ? /^index, follow$/ : /noindex/);
-  const $ = load(await response.text());
+  const html = await response.text();
+  assert.doesNotMatch(html, /hurricanetracker\.cc|hurricanehub|Hurricane Tracker|same independent builder|same publisher as/i, path + ' must not expose cross-site branding');
+  const $ = load(html);
+  assert.equal($('nav a[href="/hurricane-connection/"]').length, 0, 'Hurricane topic is not a primary navigation item');
+  if (path === '/') {
+    assert.equal($('.sister-project-banner').length, 0);
+    assert.equal($('.scenario-card a[href="/impacts/california-snow-vs-rain/"]').length, 1);
+    assert.equal($('.scenario-card a[href="/hurricane-connection/"]').length, 0);
+  }
   assert.equal($('link[rel=canonical]').attr('href'), host + path);
   assert.match($('meta[name=robots]').attr('content'), indexable ? /^index, follow$/ : /noindex/);
   assert.ok($('meta[name=description]').attr('content')?.length > 20);

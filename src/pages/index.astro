@@ -7,7 +7,7 @@ import DataNotice from '../components/DataNotice.astro';
 import { env } from 'cloudflare:workers';
 import { getData } from '../lib/data';
 import { formatDate, seasonLabel, signed } from '../lib/enso';
-import { ArrowUpRight, ArrowRight, Activity, CalendarDays, Check, Snowflake, Thermometer, Wind, CloudRain } from '@lucide/astro';
+import { ArrowUpRight, ArrowRight, Activity, CalendarDays, Check, Snowflake, Thermometer, CloudRain } from '@lucide/astro';
 const { snapshot, stale } = await getData(env);
 const weekly = snapshot.weekly.data.at(-1)!;
 const priorWeek = snapshot.weekly.data.at(-2)!;
@@ -51,10 +51,10 @@ const target = snapshot.forecast.data.rows.find(row => row.season === 'DJF') ?? 
           <div>
             <span class="scenario-badge"><Snowflake size={14} /> Skiers & Snowpack</span>
             <h3>Sierra vs. Northern Rockies</h3>
-            <p>El Niño tends to drive storms across the southern tier, favoring abundant snowfall in Mammoth and SoCal mountains, while the Pacific Northwest often faces warmer storms and higher freezing levels.</p>
+            <p>A seasonal precipitation tendency is not a resort snowfall forecast. Storm temperature, elevation and later melting determine how much snow accumulates.</p>
           </div>
           <div class="scenario-footer">
-            <span>Historical analogue: 2015-16</span>
+            <span>Temperature and elevation matter</span>
             <a href="/winter-outlook/">Winter Guide <ArrowUpRight size={13} /></a>
           </div>
         </article>
@@ -62,12 +62,12 @@ const target = snapshot.forecast.data.rows.find(row => row.season === 'DJF') ?? 
         <article class="scenario-card">
           <div>
             <span class="scenario-badge"><CloudRain size={14} /> California & West</span>
-            <h3>Atmospheric River Risk</h3>
-            <p>An extended subtropical jet stream during strong El Niño winters brings elevated risks of back-to-back atmospheric rivers, flood hazards, and rapid reservoir filling across central and southern California.</p>
+            <h3>More Rain or More Snow?</h3>
+            <p>A wetter winter need not mean a deeper Sierra snowpack. Snow levels and snow water equivalent help distinguish precipitation from water stored as snow.</p>
           </div>
           <div class="scenario-footer">
-            <span>High flood sensitivity</span>
-            <a href="/winter-outlook/">Impact Notes <ArrowUpRight size={13} /></a>
+            <span>Snow levels & water supply</span>
+            <a href="/impacts/california-snow-vs-rain/">California Guide <ArrowUpRight size={13} /></a>
           </div>
         </article>
 
@@ -85,27 +85,17 @@ const target = snapshot.forecast.data.rows.find(row => row.season === 'DJF') ?? 
 
         <article class="scenario-card">
           <div>
-            <span class="scenario-badge"><Wind size={14} /> Atlantic Basin</span>
-            <h3>Hurricane Suppression Link</h3>
-            <p>Warmer Pacific waters shift tropical convection eastward, generating stronger vertical wind shear over the Caribbean and tropical Atlantic, tending to disrupt storm formation.</p>
+            <span class="scenario-badge"><CalendarDays size={14} /> Peak & Transition</span>
+            <h3>When Will El Niño End?</h3>
+            <p>The ocean peak, a return to neutral and regional impacts follow different clocks. Read the latest dated probabilities without treating them as an exact end date.</p>
           </div>
           <div class="scenario-footer">
-            <span>Basin-wide environment</span>
-            <a href="/hurricane-connection/">Connection Guide <ArrowUpRight size={13} /></a>
+            <span>Forecasts, not fixed dates</span>
+            <a href="/forecast/when-will-it-end/">Lifecycle Guide <ArrowUpRight size={13} /></a>
           </div>
         </article>
       </div>
 
-      <div class="sister-project-banner">
-        <div class="sister-info">
-          <span class="sister-badge">From the Same Independent Builder</span>
-          <h3>Looking for Active Tropical Storms?</h3>
-          <p>We also build and maintain Hurricane Tracker, delivering real-time storm cones, forecast tracks, intensity models, and radar loops for North American coastal communities.</p>
-        </div>
-        <a class="sister-btn" href="https://hurricanetracker.cc/" target="_blank" rel="noopener noreferrer">
-          Visit Hurricane Tracker <ArrowUpRight size={15} />
-        </a>
-      </div>
     </section>
     <div class="provenance-line"><span><Check size={14} /> Sources made visible</span><p>Official NOAA / CPC data. Each series retains its own observation period and source issue.</p><a href="/methodology/">Data notes <ArrowUpRight size={13} /></a></div>
   </div>

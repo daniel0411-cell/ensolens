@@ -56,7 +56,7 @@ Production checks cover seven pages, actual embedded chart data, the NOAA image,
 
 ## Hosting and indexing
 
-- Worker: ensolens; fallback: https://ensolens.hurricanehub-canbao1.workers.dev/.
+- Worker: ensolens. The per-Worker default workers.dev entry is disabled; use the custom production domains. The shared account subdomain is not renamed.
 - Both ensolens.com and www.ensolens.com are Worker custom domains in wrangler.toml.
 - www and HTTP requests redirect to the HTTPS primary domain with path and query preserved.
 - Registrar: Spaceship. Authoritative DNS: Cloudflare (brenda.ns.cloudflare.com and gerardo.ns.cloudflare.com).

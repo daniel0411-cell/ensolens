@@ -5,22 +5,216 @@ import DataNotice from '../components/DataNotice.astro';
 import { env } from 'cloudflare:workers';
 import { getData } from '../lib/data';
 import { seasonLabel } from '../lib/enso';
-import { ArrowUpRight, GitCompareArrows, CalendarDays } from '@lucide/astro';
+import {
+  ArrowUpRight,
+  ArrowRight,
+  GitCompareArrows,
+  CalendarDays,
+  ShieldAlert,
+  Info,
+  Compass,
+  CloudRain,
+  Snowflake,
+  Activity
+} from '@lucide/astro';
+
 const { snapshot, stale } = await getData(env);
 const forecast = snapshot.forecast.data;
 const target = forecast.rows.find(row => row.season === 'DJF') ?? forecast.rows[0];
-const previous = snapshot.previous?.rows.find(row => row.key === target.key);
-const delta = previous ? target.nino - previous.nino : null;
+const previous = snapshot.previous;
+const priorTarget = previous?.rows.find(row => row.key === target.key);
+const delta = priorTarget ? target.nino - priorTarget.nino : null;
+
+// Multi-season comparison rows matching identical target keys across consecutive monthly issues
+const comparisonRows = forecast.rows.map(row => {
+  const prev = previous?.rows.find(p => p.key === row.key);
+  const diff = prev !== undefined ? row.nino - prev.nino : null;
+  return {
+    ...row,
+    label: seasonLabel(row),
+    prevNino: prev?.nino ?? null,
+    delta: diff
+  };
+});
 ---
-<Layout title="ENSO Forecast & Probability Changes" active="forecast" description="Official NOAA CPC ENSO probabilities with dated seasonal targets and comparisons against the previous monthly issue.">
+<Layout title="ENSO Forecast & Probability Changes" active="forecast" description="Official NOAA CPC ENSO probabilities with dated seasonal targets, month-over-month fixed-target comparisons, interpretation boundaries, and decision-making next steps.">
   <div class="page-shell subpage">
-    <div class="page-intro"><div><span class="eyebrow">SEASONAL PROBABILITIES</span><h1>The outlook, <span>in perspective.</span></h1><p>Official CPC issue {forecast.issue}. Compare the same season across different issues.</p></div></div>
+    <div class="page-intro">
+      <div>
+        <span class="eyebrow">SEASONAL PROBABILITIES</span>
+        <h1>The outlook, <span>in perspective.</span></h1>
+        <p>Official CPC issue {forecast.issue}. Compare the same season across different issues and choose actionable next steps.</p>
+      </div>
+    </div>
+
     <DataNotice stale={stale} />
-    <p class="body-copy"><a href="/forecast/when-will-it-end/">When will El Niño peak and end?</a> Separate the ocean peak, the official phase and regional impacts.</p>
-    <p class="body-copy"><a href="/impacts/california-snow-vs-rain/">California: snow or rain?</a> Why a wetter winter need not mean a deeper Sierra snowpack.</p>
-    <div class="forecast-summary"><div><span class="eyebrow">{seasonLabel(target)} OUTLOOK</span><div class="forecast-big">{target.nino}<span>%</span></div><p>El Niño probability · {seasonLabel(target)}</p></div><div class="forecast-revision"><GitCompareArrows size={23} /><div><strong>{delta === null ? 'Comparison unavailable' : (delta > 0 ? '+' : '') + delta + ' percentage points'}</strong><p>{previous ? previous.nino + '% in ' + snapshot.previous!.issue + ' to ' + target.nino + '% in ' + forecast.issue + '. Both estimates refer to ' + seasonLabel(target) + '.' : 'No verified previous estimate exists for this target season.'}</p></div></div></div>
+
+    <!-- Active Winter Highlight -->
+    <div class="forecast-summary">
+      <div>
+        <span class="eyebrow">{seasonLabel(target)} OUTLOOK</span>
+        <div class="forecast-big">{target.nino}<span>%</span></div>
+        <p>El Niño probability · {seasonLabel(target)}</p>
+      </div>
+      <div class="forecast-revision">
+        <GitCompareArrows size={23} />
+        <div>
+          <strong>{delta === null ? 'Comparison unavailable' : (delta > 0 ? '+' : '') + delta + ' percentage points'}</strong>
+          <p>{priorTarget ? `${priorTarget.nino}% in ${snapshot.previous!.issue} to ${target.nino}% in ${forecast.issue}. Both estimates refer to ${seasonLabel(target)}.` : 'No verified previous estimate exists for this target season.'}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Interactive Probability Chart -->
     <ForecastChart expanded snapshot={snapshot} />
-    <section class="explanation-grid"><div><span class="eyebrow">READING THE CHART</span><h2>Three outcomes. One season.</h2><p>Each bar represents a three-month season. The three probabilities add up to approximately 100%, allowing for rounding. OND means October–December; DJF means December–February.</p></div><div><span class="eyebrow">COMPARING ISSUES</span><h2>Keep the target season fixed.</h2><p>Bars are matched by season and year. A target outside the previous issue's forecast horizon is left blank, never treated as zero probability.</p></div></section>
-    <div class="source-callout"><CalendarDays size={20} /><div><strong>Original probabilities: NOAA / CPC.</strong><p>Probabilities use CPC's Relative Oceanic Niño Index framework. ENSOLens does not produce its own forecast.</p></div><a href={forecast.source} target="_blank" rel="noreferrer">Open CPC probabilities <ArrowUpRight size={15} /></a></div>
-  </div><script>import { initCharts } from '../scripts/charts'; initCharts();</script>
+
+    <!-- 1. Full Multi-Season Fixed-Target Comparison Table -->
+    <section class="lifecycle-section" aria-labelledby="comparison-heading">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">MONTH-OVER-MONTH REVISIONS</span>
+          <h2 id="comparison-heading">Fixed-target season comparison</h2>
+        </div>
+      </div>
+      <p class="body-copy">
+        A genuine forecast change occurs only when probability estimates shift for the <strong>exact same target season</strong> across monthly releases. Comparing a winter target with a summer target compares different periods, not a revision to the same forecast.
+      </p>
+      <div class="probability-table-wrap">
+        <table class="data-table">
+          <caption>NOAA CPC · {previous ? `Comparing issues ${previous.issue} and ${forecast.issue} for identical target seasons` : `Issue ${forecast.issue}; previous issue unavailable`}</caption>
+          <thead>
+            <tr>
+              <th scope="col">Target Season</th>
+              <th scope="col">{previous?.issue ?? 'Previous'} El Niño</th>
+              <th scope="col">{forecast.issue} El Niño</th>
+              <th scope="col">Net Shift</th>
+              <th scope="col">Neutral</th>
+              <th scope="col">La Niña</th>
+            </tr>
+          </thead>
+          <tbody>
+            {comparisonRows.map(row => (
+              <tr>
+                <th scope="row">{row.label}</th>
+                <td>{row.prevNino !== null ? `${row.prevNino}%` : '—'}</td>
+                <td class="warm-text">{row.nino}%</td>
+                <td>
+                  {row.delta === null ? (
+                    <span class="subtle-text">Comparison unavailable</span>
+                  ) : row.delta > 0 ? (
+                    <span class="warm-text">+{row.delta} pp</span>
+                  ) : row.delta < 0 ? (
+                    <span class="cold-text">{row.delta} pp</span>
+                  ) : (
+                    <span class="subtle-text">±0 pp</span>
+                  )}
+                </td>
+                <td>{row.neutral}%</td>
+                <td>{row.nina}%</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="figure-note">
+        Comparison is unavailable when the previous issue or a matching target season is missing. Missing estimates are never treated as 0% probability. Net shift is measured in percentage points (pp).
+      </p>
+    </section>
+
+    <!-- 2. Interpretation Boundaries: What seasonal probabilities CANNOT decide -->
+    <section class="regional-section" aria-labelledby="boundaries-heading">
+      <span class="eyebrow">INTERPRETATION BOUNDARIES</span>
+      <h2 id="boundaries-heading">What seasonal probabilities cannot decide</h2>
+      <div class="regional-grid">
+        <article>
+          <ShieldAlert size={20} />
+          <h3>Not a daily weather forecast</h3>
+          <p>A seasonal probability describes an overlapping three-calendar-month period across the tropical Pacific. It is not an odds rating for daily precipitation, freezing levels, or severe weather in your city.</p>
+        </article>
+        <article>
+          <Info size={20} />
+          <h3>100% is not zero uncertainty</h3>
+          <p>These are CPC's official ENSO category probabilities, not counts of models in agreement. A displayed 100% is the published estimate for that issue and target season; new observations can lead to revisions. It does not specify event strength or guarantee local weather outcomes.</p>
+        </article>
+        <article>
+          <Compass size={20} />
+          <h3>Not a uniform regional script</h3>
+          <p>Tropical heat redistributes global jet streams probabilistically. As 1997–98 versus 2015–16 showed in California, similar ocean anomalies can produce sharply different regional winter precipitation outcomes.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- 3. Actionable Next Steps: Choose by your decision -->
+    <section class="lifecycle-section" aria-labelledby="routing-heading">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">DECISION ROUTING</span>
+          <h2 id="routing-heading">Where to look next: choose by your decision</h2>
+        </div>
+      </div>
+      <p class="body-copy">
+        A seasonal ENSO probability is a starting point, not an operational instruction. Select the specialized official tool or deep-dive matching your operational need:
+      </p>
+      <div class="scenario-grid">
+        <div class="scenario-card">
+          <div>
+            <span class="scenario-badge"><CloudRain size={13} /> 1–7 Day Storm Safety</span>
+            <h3>Local Weather & Warnings</h3>
+            <p>For immediate precipitation, high winds, snow levels, flash flood watches, or winter storm warnings, consult your local National Weather Service office. ENSO outlooks cannot resolve individual storm timing.</p>
+          </div>
+          <div class="scenario-footer">
+            <span>National Weather Service</span>
+            <a href="https://www.weather.gov/" target="_blank" rel="noreferrer">Find local NWS <ArrowUpRight size={13} /></a>
+          </div>
+        </div>
+
+        <div class="scenario-card">
+          <div>
+            <span class="scenario-badge"><Snowflake size={13} /> Winter Decisions</span>
+            <h3>California: Snow vs. Rain?</h3>
+            <p>Planning for Sierra snowpack, ski visits to Tahoe or Mammoth, or flood preparedness? Understand why atmospheric rivers can raise freezing levels and bring rain to lower elevations even in a wet winter.</p>
+          </div>
+          <div class="scenario-footer">
+            <span>ENSOLens Regional Guide</span>
+            <a href="/impacts/california-snow-vs-rain/">Open California guide <ArrowRight size={13} /></a>
+          </div>
+        </div>
+
+        <div class="scenario-card">
+          <div>
+            <span class="scenario-badge"><CalendarDays size={13} /> Peak Timing & Decay</span>
+            <h3>When Will El Niño Peak & End?</h3>
+            <p>Separate the ocean-temperature peak from the official return to neutral and downstream impacts. Review why winter peaks are common, how subsurface heat depletes, and how the spring barrier affects summer odds.</p>
+          </div>
+          <div class="scenario-footer">
+            <span>ENSOLens Lifecycle Guide</span>
+            <a href="/forecast/when-will-it-end/">Read lifecycle explanation <ArrowRight size={13} /></a>
+          </div>
+        </div>
+
+        <div class="scenario-card">
+          <div>
+            <span class="scenario-badge"><Activity size={13} /> 3-Month U.S. Outlooks</span>
+            <h3>CPC Regional Climate Maps</h3>
+            <p>Looking for 3-month continental U.S. temperature and precipitation shifts? Explore NOAA CPC's official seasonal outlook maps and our overview of the split-flow jet stream configuration.</p>
+          </div>
+          <div class="scenario-footer">
+            <span>U.S. Winter Analysis</span>
+            <a href="/winter-outlook/">View winter outlook <ArrowRight size={13} /></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Source Attribution -->
+    <div class="source-callout">
+      <CalendarDays size={20} />
+      <div>
+        <strong>Original probabilities: NOAA / CPC.</strong>
+        <p>Probabilities use CPC's Relative Oceanic Niño Index (RONI) framework. ENSOLens tracks and contextualizes official releases; it does not produce its own proprietary forecast.</p>
+      </div>
+      <a href={forecast.source} target="_blank" rel="noreferrer">Open CPC probabilities <ArrowUpRight size={15} /></a>
+    </div>
+  </div>
+  <script>import { initCharts } from '../scripts/charts'; initCharts();</script>
 </Layout>

@@ -755,6 +755,8 @@ main { min-height: 65vh; }
 .data-table thead { background: rgba(255, 255, 255, 0.04); color: var(--green); }
 .data-table th { font-weight: 600; }
 .warm-text { color: var(--warm); }
+.cold-text { color: var(--cold); }
+.subtle-text { color: var(--subtle); }
 
 .explanation-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; padding: 35px 0; }
 .explanation-grid h2 { font-size: 26px; margin-top: 8px; color: #fff; }

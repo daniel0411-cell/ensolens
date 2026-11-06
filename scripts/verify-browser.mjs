@@ -68,6 +68,16 @@ try {
     await page.evaluate(() => window.scrollTo(0, 0));
     await page.screenshot({ path: fileURLToPath(new URL('dashboard-' + width + '-viewport.png', output)), fullPage: false });
     await page.goto(base + '/forecast/', { waitUntil: 'networkidle' });
+    const forecastData = JSON.parse(await page.locator('#forecast-data').textContent());
+    const comparisonRows = page.locator('section[aria-labelledby="comparison-heading"] table tbody tr');
+    assert.equal(await comparisonRows.count(), forecastData.current.rows.length);
+    for (const [index, row] of forecastData.current.rows.entries()) {
+      const prior = forecastData.previous?.rows.find(item => item.key === row.key);
+      const cells = comparisonRows.nth(index).locator('td');
+      assert.equal(await cells.nth(0).innerText(), prior ? `${prior.nino}%` : '—');
+      const delta = prior ? row.nino - prior.nino : null;
+      assert.equal(await cells.nth(2).innerText(), delta === null ? 'Comparison unavailable' : delta === 0 ? '±0 pp' : `${delta > 0 ? '+' : ''}${delta} pp`);
+    }
     await page.getByText('Previous issue', { exact: true }).click();
     assert.equal(await page.locator('#compare-forecast').isChecked(), true);
     assert.equal(await page.locator('#forecast-comparison').isVisible(), true);

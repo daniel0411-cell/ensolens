@@ -2,6 +2,11 @@
 
 Updated: 2026-11-06 (Asia/Shanghai)
 
+## Collaboration rules update (November 6)
+
+- Expanded AGENTS.md with shared AI roles, owner decision authority, evidence and hypothesis distinctions, scientific boundaries, maintenance-budget tradeoffs, independent-review reporting and production/prototype separation.
+- Retained EDITORIAL.md as the scientific editing reference and PROGRESS.md as the implementation/release record. Documentation-only change; no application code or deployment configuration changed and no website deployment was performed.
+
 ## Forecast explanation update (November 6)
 
 - Integrated the pending fixed-target comparison table, interpretation boundaries and decision-routing cards, preserving the existing chart selectors and download controls.

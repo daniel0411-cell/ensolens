@@ -7,8 +7,10 @@ Updated: 2026-11-06 (Asia/Shanghai)
 - Added the RSS endpoint, global autodiscovery/footer subscription link and dated next-discussion reminder from the reviewed pending changes.
 - RSS omits optional publication/build timestamps when the source provides only an issue month, observation center week or retrieval time. Verified discussion and guide publication dates remain. Unchanged successful source checks do not alter the feed content.
 - Retained valid data during source failures and added channel-level degradation plus affected-item notices with last retrieval/check timestamps. A pure XML renderer enables regression checks without mocking the Worker runtime.
-- Added RSS tests for date stability, failure/expiry handling and XML escaping, and extended local browser and production checks for the new endpoint. Release validation and deployment are pending; the forecast release below remains the last verified production version.
-- Independent review identified a category-versus-strength wording error in the new release notice; corrected it to seasonal ENSO category probabilities. Pre-release type checks, 13 tests, build, NOAA refresh/KV and desktop/mobile browser checks passed; the formal deploy gate will recheck the final wording.
+- Added RSS tests for date stability, failure/expiry handling and XML escaping, and extended local browser and production checks for the new endpoint. Independent review identified a category-versus-strength wording error in the release notice; corrected it to seasonal ENSO category probabilities.
+- Code commit `b834594` pushed to `origin/master`; the remote SHA matched before upload. The complete `npm run deploy` gate passed: 40-file type check, 13 tests, build, real Worker NOAA refresh/KV checks, RSS XML parsing/headers and 1440px/390px browser suites.
+- Released version `6071cc76-ba2c-4155-aa0b-ba1a39cde0d2`, deployment `418c164a-f5cf-4ad9-b759-050a20e0e18a`, activated November 6 at 17:39:21 Asia/Shanghai with 100% traffic, confirmed by Wrangler. Both custom domains and the existing six-hour refresh schedule remain configured.
+- Production verification passed all 11 pages, RSS source-date semantics/headers, healthy official feeds, indexing configuration, sitemap, canonical redirects and 404 behavior. Fresh live desktop/mobile browser suites passed, including RSS XML parsing, subscription discovery and forecast notice bounds. Forecast screenshots were inspected. No search indexing submission was performed; actual search inclusion remains unverified.
 
 ## Collaboration rules update (November 6)
 

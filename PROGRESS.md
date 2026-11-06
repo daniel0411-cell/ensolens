@@ -7,7 +7,10 @@ Updated: 2026-11-06 (Asia/Shanghai)
 - Reproduced the live blank historical chart: valid embedded data with 43 current observations, an unpainted 300x150 canvas, inert benchmark toggles and no JavaScript exception. The shared initializer returned when the page lacked a forecast chart, before reaching the historical initializer.
 - Scoped forecast initialization to its own conditional block so historical chart setup and controls run independently, retaining existing chart-instance guards.
 - Added desktop/mobile browser coverage for historical canvas pixels, actual visual changes on benchmark toggles and CSV row counts. Browser screenshots use reduced motion to avoid capturing chart animations partway through drawing.
-- Verification and deployment pending; the RSS release below remains the last verified production version.
+- Independent review found no actionable regressions in the initialization fix. Code commit `217b4bd` was pushed to `origin/master`, and the remote SHA matched the isolated release checkout before deployment. Concurrent social-share changes remain uncommitted and were excluded, including their edits to shared verification/documentation files.
+- Deployed from `/private/tmp/ensolens-historical-release-20261106` through the full `npm run deploy` gate: type check, 13 tests, build, real NOAA refresh/KV validation, RSS checks and 1440px/390px browser suites, now including actual historical pixels, toggle visual changes and CSV download.
+- Released version `f6cb7b46-de1f-4452-bd16-13c96b21fc63`, deployment `6dfcda6c-dce5-44fb-bd22-6f98809fc884`, activated November 6 at 19:02:47 Asia/Shanghai with 100% traffic, confirmed by Wrangler. Both custom domains and the existing six-hour refresh schedule remain configured.
+- Post-deploy production checks passed all 11 pages, RSS, healthy feeds, indexing configuration, sitemap and redirects. Fresh live 1440px/390px browser suites confirmed the historical chart paints, all four toggles change pixels and CSV contains every expected data row. Desktop/mobile historical screenshots were inspected. No indexing submission performed.
 
 ## RSS subscription update (November 6)
 

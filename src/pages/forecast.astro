@@ -37,13 +37,13 @@ const comparisonRows = forecast.rows.map(row => {
   };
 });
 ---
-<Layout title="ENSO Forecast & Probability Changes" active="forecast" description="Official NOAA CPC ENSO probabilities with dated seasonal targets, month-over-month fixed-target comparisons, interpretation boundaries, and decision-making next steps.">
+<Layout title="El Niño & La Niña Forecast: ENSO Probabilities" active="forecast" description="Compare NOAA CPC El Niño, neutral and La Niña probabilities by season, changes since the previous issue, and dated El Niño strength estimates.">
   <div class="page-shell subpage">
     <div class="page-intro">
       <div>
         <span class="eyebrow">SEASONAL PROBABILITIES</span>
-        <h1>The outlook, <span>in perspective.</span></h1>
-        <p>Official CPC issue {forecast.issue}. Compare the same season across different issues and choose actionable next steps.</p>
+        <h1>El Niño & La Niña <span>forecast.</span></h1>
+        <p>NOAA CPC issue {forecast.issue} gives {seasonLabel(target)} probabilities of {target.nino}% El Niño, {target.neutral}% neutral and {target.nina}% La Niña. Compare seasonal targets and changes since the previous issue below.</p>
       </div>
     </div>
 

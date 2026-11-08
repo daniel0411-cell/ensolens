@@ -30,6 +30,8 @@ California guidance remains evergreen unless a dated regional source supports a 
 
 ## Release
 
+When a page's main content changes meaningfully, update its known editorial date in `src/pages/sitemap.xml.ts`. Omit dates without a verified record. A deploy, review without changes or successful source check is not a content modification; do not reset every URL to today's date.
+
 Use `npm run deploy` and then `ENSOLENS_EXPECT_INDEXING=true node scripts/verify-production.mjs`. Record Git and actual deployment IDs separately in PROGRESS.md. FAQ structured data must match visible answers. FAQ rich-result eligibility and actual search inclusion are not promised.
 
 The Python site in the parent research folder is an independent prototype, not the production source. Do not deploy its `public/` over ENSOLens or copy its fixed historical rankings into the validated data feed.

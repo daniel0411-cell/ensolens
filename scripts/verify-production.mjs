@@ -16,6 +16,9 @@ for (const path of paths) {
   const $ = load(html);
   assert.equal($('nav a[href="/hurricane-connection/"]').length, 0, 'Hurricane topic is not a primary navigation item');
   if (path === '/') {
+    assert.equal($('h1').text(), 'Current ENSO status.');
+    assert.match($('title').text(), /Current ENSO Status: El Niño & La Niña Tracker/);
+    assert.match($('.page-intro p').text(), /NOAA CPC reports .+ discussion\..+Niño 3.4.+Next scheduled discussion:/);
     assert.equal($('.sister-project-banner').length, 0);
     assert.equal($('.scenario-card a[href="/impacts/california-snow-vs-rain/"]').length, 1);
     assert.equal($('.scenario-card a[href="/hurricane-connection/"]').length, 0);
@@ -35,6 +38,10 @@ for (const path of paths) {
   }
   assert.doesNotMatch($('main').text(), /illustrative|synthetic|example phase/i);
   if (path === '/forecast/') {
+    assert.equal($('h1').text(), 'El Niño & La Niña forecast.');
+    const current = JSON.parse($('#forecast-data').text()).current;
+    const target = current.rows.find(row => row.season === 'DJF') ?? current.rows[0];
+    assert.ok($('.page-intro p').text().includes(`${target.nino}% El Niño, ${target.neutral}% neutral and ${target.nina}% La Niña`));
     assert.match($('#strength-table caption').text(), /October 2026.*dated reference/);
     assert.equal($('#strength-table tbody tr').length, 2);
   }
@@ -81,6 +88,19 @@ assert.match(robots, indexable ? /Allow: \/\n/ : /Disallow: \/\n/);
 if (indexable) assert.match(robots, /Sitemap: https:\/\/ensolens.com\/sitemap.xml/);
 const sitemap = await (await request('/sitemap.xml')).text();
 for (const path of paths) assert.ok(sitemap.includes('<loc>' + host + path + '</loc>'));
+const sitemapXml = load(sitemap, { xmlMode: true });
+assert.equal(sitemapXml('url').length, paths.length);
+for (const entry of sitemapXml('url').toArray()) {
+  const modified = sitemapXml(entry).find('lastmod').text();
+  if (modified) {
+    assert.match(modified, /^\d{4}-\d{2}-\d{2}$/);
+    assert.ok(Date.parse(modified) <= Date.now(), 'Sitemap dates must not be in the future');
+  }
+}
+for (const path of ['/', '/forecast/', '/winter-outlook/']) {
+  const entry = sitemapXml('url').filter((_, element) => sitemapXml(element).find('loc').text() === host + path);
+  assert.equal(entry.find('lastmod').text(), '2026-11-08');
+}
 const missing = await request('/missing-page-check/');
 assert.equal(missing.status, 404);
 assert.match(missing.headers.get('x-robots-tag'), /noindex/);

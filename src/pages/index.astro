@@ -15,9 +15,9 @@ const roni = snapshot.roni.data.at(-1)!;
 const discussion = snapshot.discussion.data;
 const target = snapshot.forecast.data.rows.find(row => row.season === 'DJF') ?? snapshot.forecast.data.rows[0];
 ---
-<Layout title="ENSO Tracker & Seasonal Outlook" active="overview">
+<Layout title="Current ENSO Status: El Niño & La Niña Tracker" active="overview" description="Check current ENSO status, dated Niño 3.4 temperatures and NOAA CPC El Niño and La Niña probabilities. Explore forecasts and U.S. winter context.">
   <div class="page-shell">
-    <div class="page-intro"><div><div class="eyebrow intro-eyebrow"><span class="live-dot"></span> THE ENSO OBSERVATORY</div><h1>A clearer view of <span>ENSO.</span></h1><p>The ocean signal. The seasonal outlook. The context that matters.</p></div><div class="snapshot-stamp"><CalendarDays size={15} /><div><strong>{formatDate(discussion.issued)}</strong><span>CPC discussion issued</span></div></div></div>
+    <div class="page-intro"><div><div class="eyebrow intro-eyebrow"><span class="live-dot"></span> EL NIÑO · NEUTRAL · LA NIÑA</div><h1>Current <span>ENSO status.</span></h1><p>NOAA CPC reports {discussion.phase} in its {formatDate(discussion.issued)} discussion. The latest weekly Niño 3.4 anomaly is {signed(weekly.anomaly)}°C for {formatDate(weekly.date)}. Next scheduled discussion: {formatDate(discussion.next)}.</p></div><div class="snapshot-stamp"><CalendarDays size={15} /><div><strong>{formatDate(discussion.issued)}</strong><span>CPC discussion issued</span></div></div></div>
     <DataNotice stale={stale} />
     <section class="status-band" aria-label="Official ENSO snapshot">
       <div class="phase-stat">

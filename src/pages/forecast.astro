@@ -76,6 +76,26 @@ const comparisonRows = forecast.rows.map(row => {
     <!-- Interactive Probability Chart -->
     <ForecastChart expanded snapshot={snapshot} />
 
+    <section class="lifecycle-section" aria-labelledby="strength-heading">
+      <span class="eyebrow">STRENGTH EXPLAINER · CPC ISSUE OCTOBER 2026</span>
+      <h2 id="strength-heading">El Niño odds are not strength odds.</h2>
+      <p class="body-copy">In CPC's October 2026 issue, the December 2026–February 2027 El Niño probability is 100%, while the probability of the very strong category is 81%. The first includes every El Niño strength; the second describes just one intensity range. Neither is a probability of extreme weather in your city.</p>
+      <p class="figure-note">Reviewed November 8, 2026. The percentages below refer to all outcomes, not just cases where El Niño occurs.</p>
+      <div class="probability-table-wrap" role="region" aria-label="Dated ENSO strength probabilities" tabindex="0">
+        <table class="data-table" id="strength-table">
+          <caption>CPC October 2026 · dated reference</caption>
+          <thead><tr><th scope="col">Target season</th><th scope="col">Weak<br />0.5 ≤ RONI &lt; 1.0°C</th><th scope="col">Moderate<br />1.0 ≤ RONI &lt; 1.5°C</th><th scope="col">Strong<br />1.5 ≤ RONI &lt; 2.0°C</th><th scope="col">Very strong<br />RONI ≥ 2.0°C</th><th scope="col">All El Niño</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">DJF 2026–27</th><td>0%</td><td>3%</td><td>16%</td><td>81%</td><td>100%</td></tr>
+            <tr><th scope="row">JFM 2027</th><td>2%</td><td>15%</td><td>37%</td><td>46%</td><td>100%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="figure-note">RONI is the three-month Relative Oceanic Niño Index, not the weekly Niño 3.4 anomaly. CPC uses the 1991–2020 base period for this product. JFM means January–March. Published probabilities are approximate; 0% is not an absolute impossibility.</p>
+      <p class="body-copy">For January–March 2027, the strong and very strong categories together total 83% (37% + 46%). That is different from the 46% chance of very strong alone. A strength category describes the tropical Pacific signal, not a guaranteed regional impact.</p>
+      <p class="figure-note">This manually reviewed October reference stays fixed when the live phase chart updates. <a href="https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/strengths/" target="_blank" rel="noreferrer">Check CPC's current strength issue <ArrowUpRight size={13} /></a>. For regional temperature and precipitation, see the <a href="/winter-outlook/">dated U.S. winter outlook</a>.</p>
+    </section>
+
     <!-- 1. Full Multi-Season Fixed-Target Comparison Table -->
     <section class="lifecycle-section" aria-labelledby="comparison-heading">
       <div class="section-heading">
@@ -226,3 +246,9 @@ const comparisonRows = forecast.rows.map(row => {
   </div>
   <script>import { initCharts } from '../scripts/charts'; initCharts();</script>
 </Layout>
+<style>
+  #strength-heading { scroll-margin-top: 100px; }
+  #strength-table { min-width: 720px; }
+  #strength-table th, #strength-table td { white-space: nowrap; }
+  section[aria-labelledby="strength-heading"] .figure-note { display: block; }
+</style>

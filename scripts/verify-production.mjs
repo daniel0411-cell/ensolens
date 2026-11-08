@@ -34,6 +34,19 @@ for (const path of paths) {
     }
   }
   assert.doesNotMatch($('main').text(), /illustrative|synthetic|example phase/i);
+  if (path === '/forecast/') {
+    assert.match($('#strength-table caption').text(), /October 2026.*dated reference/);
+    assert.equal($('#strength-table tbody tr').length, 2);
+  }
+  if (path === '/winter-outlook/') {
+    assert.equal($('.outlook-maps img').length, 2);
+    for (const image of $('.outlook-maps img').toArray()) {
+      const asset = await request($(image).attr('src'));
+      assert.equal(asset.status, 200);
+      assert.match(asset.headers.get('content-type'), /image\/gif/);
+      assert.ok((await asset.arrayBuffer()).byteLength > 10000);
+    }
+  }
   if (path === '/') {
     const forecast = JSON.parse($('#forecast-data').text());
     const trend = JSON.parse($('#trend-data').text());

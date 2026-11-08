@@ -87,6 +87,18 @@ try {
     const noticeBounds = await nextRelease.boundingBox();
     assert.ok(noticeBounds && noticeBounds.x >= 0 && noticeBounds.x + noticeBounds.width <= width + 1);
     const forecastData = JSON.parse(await page.locator('#forecast-data').textContent());
+    assert.match(await page.locator('#strength-table caption').innerText(), /October 2026.*dated reference/);
+    assert.equal(await page.locator('#strength-table tbody tr').count(), 2);
+    if (width === 390) {
+      const strengthRegion = page.getByRole('region', { name: 'Dated ENSO strength probabilities', exact: true });
+      assert.equal(await strengthRegion.evaluate(element => element.scrollWidth > element.clientWidth), true);
+      await strengthRegion.focus();
+      await page.keyboard.press('ArrowRight');
+      await page.waitForFunction(() => document.querySelector('[aria-label="Dated ENSO strength probabilities"]').scrollLeft > 0);
+      await page.keyboard.press('ArrowLeft');
+      await page.waitForFunction(() => document.querySelector('[aria-label="Dated ENSO strength probabilities"]').scrollLeft === 0);
+    }
+    await page.locator('#strength-table').screenshot({ path: fileURLToPath(new URL('strength-' + width + '.png', output)) });
     const comparisonRows = page.locator('section[aria-labelledby="comparison-heading"] table tbody tr');
     assert.equal(await comparisonRows.count(), forecastData.current.rows.length);
     for (const [index, row] of forecastData.current.rows.entries()) {
@@ -112,6 +124,14 @@ try {
       assert.equal(response.status(), 200, path);
       assert.doesNotMatch(await page.content(), /hurricanetracker\.cc|hurricanehub|Hurricane Tracker|same independent builder|same publisher as/i, path);
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), true, path + ' overflow at ' + width);
+      if (path === '/winter-outlook/') {
+        const maps = page.locator('.outlook-maps img');
+        assert.equal(await maps.count(), 2);
+        for (const map of await maps.all()) {
+          assert.equal(await map.evaluate(image => image.complete && image.naturalWidth === 3300 && image.naturalHeight === 2550), true);
+        }
+        await page.screenshot({ path: fileURLToPath(new URL('winter-' + width + '.png', output)), fullPage: true });
+      }
       if (path === '/historical/') {
         const canvas = page.locator('#analog-chart');
         await page.waitForFunction(() => {

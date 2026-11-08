@@ -1,5 +1,53 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { ArrowUpRight, Thermometer, CloudRain, Snowflake, Info } from '@lucide/astro';
+const maps = [
+  { name: 'Temperature', file: 'djf-temperature.gif', alt: 'CPC temperature outlook issued October 15, 2026 for December 2026 through February 2027: warmth favored across much of the northern U.S.; near-normal favored in parts of the Southeast; equal chances in parts of the Southwest.', note: 'Above-normal temperatures are favored across much of the northern U.S. Near-normal is favored in parts of the Southeast; parts of the Southwest have equal chances.' },
+  { name: 'Precipitation', file: 'djf-precipitation.gif', alt: 'CPC precipitation outlook issued October 15, 2026 for December 2026 through February 2027: wetter favored across much of California, the Southwest and Southeast; drier favored in the northern Rockies and parts of the Great Lakes.', note: 'Wetter conditions are favored across much of California, the Southwest and Southeast. Drier conditions are favored in the northern Rockies and parts of the Great Lakes.' },
+];
 ---
-<Layout title="ENSO & the U.S. Winter Outlook" active="winter"><div class="page-shell subpage"><div class="page-intro"><div><span class="eyebrow">NORTH AMERICA · SEASONAL CONTEXT</span><h1>A winter outlook.<br /><span>Not a weather promise.</span></h1><p>Understand what ENSO can tell you, and what it cannot.</p></div></div><div class="content-notice"><Info size={18} /><div><strong>Historical context and regional guidelines.</strong><p>The regional notes below describe broad historical tendencies. For official current three-month probabilities, consult the CPC seasonal outlook.</p></div></div><section class="winter-layout"><div><span class="eyebrow">TWO DIFFERENT QUESTIONS</span><h2>History is a starting point.<br />The official outlook goes further.</h2><p class="body-copy">ENSO is one influence on a U.S. winter. The strength, timing, and location of tropical Pacific warmth can differ between events. Other ocean and atmospheric patterns also matter.</p><p class="body-copy">A seasonal temperature or precipitation outlook describes probabilities across a large region and a multi-month period. It does not tell you whether a particular weekend will be snowy.</p><a class="primary-button" href="https://www.cpc.ncep.noaa.gov/products/predictions/long_range/" target="_blank" rel="noreferrer">Current CPC seasonal outlook <ArrowUpRight size={17} /></a></div><div class="winter-side"><Snowflake size={44} stroke-width={1} /><h3>Rain is not snow.</h3><p>Seasonal precipitation probabilities do not directly describe snowfall totals. Temperature, elevation, and individual storms affect what reaches the ground.</p></div></section><section class="regional-section"><span class="eyebrow">BROAD HISTORICAL CONTEXT · EL NIÑO WINTERS</span><h2>A regional lens</h2><div class="regional-grid"><article><Thermometer size={24} /><h3>Northern United States</h3><p>Some El Niño winters have favored warmer conditions across parts of the northern U.S. This is a tendency, not a uniform outcome.</p></article><article><CloudRain size={24} /><h3>Southern United States</h3><p>A more active southern storm track can favor wetter conditions in parts of the South. Timing and local outcomes vary.</p></article><article><Snowflake size={24} /><h3>Western mountains</h3><p>ENSO alone is not a reliable snow forecast for an individual resort. Use local forecasts for travel and mountain conditions.</p></article></div></section><div class="source-callout"><Info size={20} /><div><strong>Read the probabilities for the region and season you need.</strong><p>Historical impact guidance: NOAA Climate.gov. Current outlook: NOAA / CPC.</p></div><a href="https://www.climate.gov/enso" target="_blank" rel="noreferrer">NOAA ENSO resources <ArrowUpRight size={15} /></a></div></div></Layout>
+<Layout title="U.S. Winter Outlook 2026–27" active="winter" description="NOAA CPC's October 15 outlook for December 2026–February 2027: dated temperature and precipitation maps, regional interpretation, equal chances and snowfall limits.">
+  <div class="page-shell subpage lifecycle-page">
+    <div class="page-intro"><div><span class="eyebrow">CPC ISSUE OCTOBER 15, 2026 · REVIEWED NOVEMBER 8</span><h1>U.S. winter<br /><span>2026–27.</span></h1><p>December 2026–February 2027: the temperature and precipitation outlook, region by region.</p></div></div>
+    <div class="content-notice"><Info size={18} /><div><strong>A dated outlook, not a storm forecast.</strong><p>The maps and interpretation below preserve the October 15, 2026 issue for DJF 2026–27. They are reviewed manually and do not update with the dashboard's ENSO feed. Check the <a href="https://www.cpc.ncep.noaa.gov/products/predictions/long_range/">current CPC outlook</a> for subsequent revisions.</p></div></div>
+    <section class="lifecycle-section" aria-labelledby="winter-maps-heading">
+      <h2 id="winter-maps-heading">Two maps. Different questions.</h2>
+      <p class="body-copy">Temperature refers to the three-month average; precipitation refers to the three-month total. Both compare with the 1991–2020 climate reference period. Neither map predicts the timing of individual storms or cold spells.</p>
+      <div class="outlook-maps">
+        {maps.map(map => <figure>
+          <h3>{map.name}</h3>
+          <a href={'/images/outlooks/2026-10/' + map.file} target="_blank" rel="noreferrer" aria-label={'Open full-size ' + map.name.toLowerCase() + ' outlook map'}>
+            <img src={'/images/outlooks/2026-10/' + map.file} alt={map.alt} width="3300" height="2550" />
+          </a>
+          <figcaption>{map.note} <a href={'/images/outlooks/2026-10/' + map.file} target="_blank" rel="noreferrer">Full-size map <ArrowUpRight size={13} /></a></figcaption>
+        </figure>)}
+      </div>
+      <p class="figure-note">Original maps: NOAA / CPC, issued October 15, 2026; valid December 2026–February 2027. Copies saved November 8, 2026 with the original dates and legends intact.</p>
+    </section>
+    <section class="regional-section" aria-labelledby="regional-heading">
+      <span class="eyebrow">DJF 2026–27 · OCTOBER ISSUE</span><h2 id="regional-heading">A regional lens</h2>
+      <div class="regional-grid">
+        <article><CloudRain size={24} /><h3>California & Southwest</h3><p>The outlook favors above-normal precipitation across much of the region. Temperature odds vary: parts of the Southwest have equal chances. Wetter does not automatically mean more Sierra snow.</p><a href="/impacts/california-snow-vs-rain/">California snow and rain</a></article>
+        <article><Thermometer size={24} /><h3>Northern United States</h3><p>Above-normal seasonal temperatures are favored across much of the northern tier. Below-normal precipitation is favored in the northern Rockies and parts of the Great Lakes. A warmer average still allows cold outbreaks.</p></article>
+        <article><CloudRain size={24} /><h3>Southeast & Gulf Coast</h3><p>The outlook favors above-normal precipitation across much of the Southeast. Parts of the region favor near-normal temperatures, rather than a blanket forecast of a colder winter.</p></article>
+      </div>
+    </section>
+    <section class="explanation-grid">
+      <div><h2>Probability is not magnitude.</h2><p>A 50% chance of above-normal precipitation means a 50% chance of landing in the wettest of three climatological categories. It does not mean 50% more rain, or rain on half the days. Shading describes category probability; local totals remain uncertain.</p></div>
+      <div><h2>Equal chances is not near-normal.</h2><p>EC means no favored category: above-, near- and below-normal each have about a one-third chance. A near-normal forecast instead favors the middle category. White EC areas do not promise ordinary weather or an absence of extremes.</p></div>
+    </section>
+    <section class="winter-layout"><div><span class="eyebrow">FROM SEASON TO STORM</span><h2>Rain is not snow.</h2><p class="body-copy">Seasonal precipitation includes rain and the water equivalent of snow. Elevation, snow levels, storm temperature and subsequent melting determine mountain snowpack. These maps cannot forecast a resort's snowfall or conditions on a particular weekend.</p><p class="body-copy">ENSO is one input to CPC's outlook, alongside other ocean and atmospheric patterns, forecast tools and long-term trends. Event strength is not a local impact probability.</p><a class="primary-button" href="https://www.weather.gov/" target="_blank" rel="noreferrer">Local forecasts & warnings <ArrowUpRight size={17} /></a></div><div class="winter-side"><Snowflake size={36} stroke-width={1} /><h3>Read the right season.</h3><p>DJF means December–February. NDJ means November–January. Adjacent outlooks overlap but cover different periods. Use the dates printed on each map.</p><a href="/forecast/#strength-heading">ENSO phase and strength</a></div></section>
+    <div class="source-callout"><Info size={20} /><div><strong>Source and review dates</strong><p>NOAA / CPC seasonal discussion issued October 15, 2026; maps and text checked November 8, 2026. <a href="https://www.cpc.ncep.noaa.gov/products/predictions/long_range/seasonal.php?lead=2" target="_blank" rel="noreferrer">CPC map selector (rolling targets)</a>.</p></div><a href="https://www.cpc.ncep.noaa.gov/products/predictions/long_range/fxus05.html" target="_blank" rel="noreferrer">CPC discussion <ArrowUpRight size={15} /></a></div>
+  </div>
+</Layout>
+<style>
+  .outlook-maps { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; margin-top: 24px; }
+  figure { margin: 0; min-width: 0; }
+  figure h3 { font-size: 18px; margin-bottom: 12px; }
+  figure img { display: block; width: 100%; height: auto; aspect-ratio: 22 / 17; }
+  figcaption { margin-top: 12px; font-size: 13px; line-height: 1.7; color: var(--muted); }
+  figcaption a { display: inline-flex; align-items: center; gap: 4px; color: var(--green); }
+  .regional-grid a, .winter-side a { display: inline-block; color: var(--green); margin-top: 14px; font-size: 13px; }
+  .winter-side { border-radius: 8px; }
+  @media (max-width: 760px) { .outlook-maps { grid-template-columns: 1fr; } }
+</style>

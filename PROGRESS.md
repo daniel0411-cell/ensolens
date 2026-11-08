@@ -1,6 +1,15 @@
 # ENSOLens Delivery Status
 
-Updated: 2026-11-06 (Asia/Shanghai)
+Updated: 2026-11-08 (Asia/Shanghai)
+
+## Dated winter outlook and strength interpretation (November 8)
+
+- Based this update on `origin/master` at `1375b5a`, rather than the outdated local `main`. Preserved the existing independent branding, RSS, forecast comparison and historical repair.
+- Replaced the generic winter guide with the October 15, 2026 CPC DJF 2026-27 temperature/precipitation maps, dated regional interpretation, EC/category-probability explanations and snow limits. Original 3300x2550 GIFs are saved under issue-specific paths to prevent rolling NOAA images from changing underneath the text.
+- Added an explicitly fixed October 2026 RONI strength reference to the forecast page, with DJF/JFM bins, unconditional probabilities and the distinction between all El Nino, very strong and strong-or-greater probabilities. The live phase feed remains separate. Updated the homepage winter routing text to match.
+- Verified official sources in the background browser on November 8; URLs, target periods and values are in CONTENT-SOURCES-2026-11-08.md. Monthly maintenance instructions now cover both manually reviewed products. No unpublished November 12 bulletin values were invented.
+- Initial checks passed: 40-file type check (zero errors/warnings, two existing FAQ icon deprecation hints), 13 tests, build, real Worker NOAA refresh/KV checks, RSS and 1440px/390px browser suites. Winter screenshots inspected; mobile strength table refinement is undergoing the final deploy gate. Independent review found no actionable content/code issues; reviewer did not independently repeat live source or browser checks.
+- Release and post-deployment verification pending; no new production version recorded yet.
 
 ## Historical chart initialization fix (November 6)
 

@@ -2,6 +2,15 @@
 
 Updated: 2026-11-08 (Asia/Shanghai)
 
+## Search entry clarity and sitemap dates (November 8)
+
+- Code `6e04b78`: changed homepage and forecast titles, descriptions and H1s to name current ENSO status and El Nino/La Nina forecasts directly. Homepage summary uses the validated official phase and dated weekly observation; forecast summary uses all three probabilities from one matching issue/target. Existing stale-data notices remain visible.
+- Added known editorial modification dates to seven sitemap entries; four entries with no reviewed date remain undated. Dates do not advance on requests, deployments or unchanged source checks. EDITORIAL.md records the maintenance rule. No new topic pages or indexing submission were added.
+- Independent source/Git review found no blocking issues, but did not independently run browser or build checks. Full `npm run deploy` gate passed: 40-file type check (zero errors/warnings; two pre-existing FAQ icon hints), 13 tests, build, real Worker NOAA refresh/KV checks, RSS, 1440px/390px browser suites. Screenshots inspected.
+- Released version `1d51b14f-b47e-4063-a864-992a45ff9e51`, deployment `05734f0b-0e82-4c93-aa1c-a5c1993f2531`, activated November 8 at 14:36:33 Asia/Shanghai with 100% traffic, confirmed by actual Wrangler output. Both custom domains, schedule, indexing and disabled contact configuration remain configured.
+- Production verification passed all 11 pages, metadata, source health, maps, RSS, robots, sitemap and redirects. Added and passed focused checks for new H1s, probability-summary consistency and sitemap dates. Fresh production 1440px/390px browser suites passed; homepage and forecast screenshots inspected. Initial sandbox DNS failures were resolved by running checks with approved network access.
+- GSC/Bing account metrics and actual indexing remain unverified; this release does not establish traffic or ranking gains. Use subsequent 28-day query/page/indexing reports to select further content work.
+
 ## Dated winter outlook and strength interpretation (November 8)
 
 - Based this update on `origin/master` at `1375b5a`, rather than the outdated local `main`. Preserved the existing independent branding, RSS, forecast comparison and historical repair.

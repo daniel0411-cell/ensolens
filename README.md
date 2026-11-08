@@ -4,7 +4,7 @@ An independent English-language ENSO dashboard built with Astro, Chart.js, and C
 
 ## Status and recovery
 
-Latest verified release (November 8, 2026): code `67fad25` on `origin/master`, Cloudflare version `a668c075-4430-4e9b-8835-aee81539b34b`, deployment `420ded5d-aa15-40f9-92d7-5880c381b3e8`, activated at 12:38:37 Asia/Shanghai with 100% traffic. Added dated DJF 2026-27 CPC winter maps and regional interpretation, plus an October 2026 RONI strength reference separate from the live phase feed. The complete deploy gate, 13 tests, 11-page production/RSS/asset checks and live desktop/mobile suites passed. Older version statements below are historical checkpoints superseded by this release. Actual search inclusion remains unverified. See PROGRESS.md and CONTENT-SOURCES-2026-11-08.md for the release and source records.
+Latest verified release (November 8, 2026): code `6e04b78`, Cloudflare version `1d51b14f-b47e-4063-a864-992a45ff9e51`, deployment `05734f0b-0e82-4c93-aa1c-a5c1993f2531`, activated at 14:36:33 Asia/Shanghai with 100% traffic. Clarified homepage/forecast search titles, H1s and dated summaries; added verified editorial sitemap dates. The complete deploy gate, 13 tests, 11-page production/RSS/asset checks and live desktop/mobile suites passed. The earlier dated winter maps and October strength reference remain available. Older version statements below are historical checkpoints superseded by this release. Actual search inclusion and traffic gains remain unverified. See PROGRESS.md and CONTENT-SOURCES-2026-11-08.md for release and source records.
 
 Read PROGRESS.md and AGENTS.md before continuing work. Git checkpoints preserve the implementation separately from deployment state.
 

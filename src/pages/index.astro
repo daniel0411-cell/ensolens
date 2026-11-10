@@ -7,9 +7,11 @@ import DataNotice from '../components/DataNotice.astro';
 import { env } from 'cloudflare:workers';
 import { getData } from '../lib/data';
 import { formatDate, seasonLabel, signed } from '../lib/enso';
+import { anomalyScale } from '../lib/anomaly-scale';
 import { ArrowUpRight, ArrowRight, Activity, CalendarDays, Check, Snowflake, Thermometer, CloudRain } from '@lucide/astro';
 const { snapshot, stale } = await getData(env);
 const weekly = snapshot.weekly.data.at(-1)!;
+const scale = anomalyScale(weekly.anomaly);
 const priorWeek = snapshot.weekly.data.at(-2)!;
 const roni = snapshot.roni.data.at(-1)!;
 const discussion = snapshot.discussion.data;
@@ -24,10 +26,11 @@ const target = snapshot.forecast.data.rows.find(row => row.season === 'DJF') ?? 
         <div class="stat-label"><Activity size={14} /> OFFICIAL STATUS</div>
         <div class="phase-value"><span class="phase-dot" style={{ background: discussion.phase === 'El Niño' ? '#f97316' : discussion.phase === 'La Niña' ? '#06b6d4' : '#64748b' }}></span>{discussion.phase}<span class="phase-badge">{discussion.alert}</span></div>
         <p>CPC discussion · {formatDate(discussion.issued)}</p>
-        <div class="status-scale-wrap" aria-hidden="true" title={`Current Niño 3.4 anomaly is ${signed(weekly.anomaly)}°C on a -2°C to +2°C scale`}>
-          <div class="status-scale-labels"><span>Cool (-2°)</span><span>Neutral (0°)</span><span>Warm (+2°)</span></div>
+        <div class="status-scale-wrap" role="img" aria-label={`Weekly Niño 3.4 anomaly: ${signed(weekly.anomaly)}°C; scale from -${scale.limit}°C to +${scale.limit}°C. This is not an ENSO strength classification.`}>
+          <div class="status-scale-caption">Weekly Niño 3.4 anomaly</div>
+          <div class="status-scale-labels"><span>−{scale.limit}°C</span><span>0°C</span><span>+{scale.limit}°C</span></div>
           <div class="status-scale-track">
-            <span class="status-scale-pin" style={{ left: `${Math.max(4, Math.min(96, ((weekly.anomaly + 2) / 4) * 100))}%` }}></span>
+            <span class="status-scale-pin" style={{ left: `${scale.position}%` }}></span>
           </div>
         </div>
       </div>

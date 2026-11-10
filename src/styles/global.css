@@ -12,7 +12,7 @@
   --green-glow: rgba(16, 185, 129, 0.25);
   --ink: #f8fafc;
   --muted: #94a3b8;
-  --subtle: #64748b;
+  --subtle: #94a3b8;
   --warm: #f97316;
   --warm-glow: rgba(249, 115, 22, 0.28);
   --cold: #06b6d4;
@@ -304,9 +304,9 @@ main { min-height: 65vh; }
   font-weight: 600;
   color: var(--subtle);
   margin-bottom: 4px;
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
+  letter-spacing: 0;
 }
+.status-scale-caption { font-size: 11px; color: var(--subtle); margin-bottom: 4px; }
 .status-scale-track {
   height: 6px;
   background: linear-gradient(90deg, #06b6d4 0%, #64748b 50%, #f97316 100%);

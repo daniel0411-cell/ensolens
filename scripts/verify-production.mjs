@@ -99,7 +99,7 @@ for (const entry of sitemapXml('url').toArray()) {
 }
 for (const path of ['/', '/forecast/', '/winter-outlook/']) {
   const entry = sitemapXml('url').filter((_, element) => sitemapXml(element).find('loc').text() === host + path);
-  assert.equal(entry.find('lastmod').text(), '2026-11-08');
+  assert.equal(entry.find('lastmod').text(), path === '/' ? '2026-11-10' : '2026-11-08');
 }
 const missing = await request('/missing-page-check/');
 assert.equal(missing.status, 404);

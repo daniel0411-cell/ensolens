@@ -57,6 +57,35 @@ try {
     assert.equal(await page.locator('.sister-project-banner').count(), 0);
     assert.equal(await page.locator('nav a[href="/hurricane-connection/"]').count(), 0);
     assert.equal(await page.locator('.scenario-card a[href="/impacts/california-snow-vs-rain/"]').count(), 1);
+    const scale = page.locator('.status-scale-wrap');
+    const label = await scale.getAttribute('aria-label');
+    const scaleValues = label.match(/anomaly: ([+-]?[\d.]+)°C; scale from -([\d.]+)°C to \+([\d.]+)°C/);
+    assert.ok(scaleValues, 'Anomaly scale must identify the weekly value and range');
+    const [, value, minimum, maximum] = scaleValues.map(Number);
+    assert.equal(minimum, maximum);
+    assert.ok(maximum >= Math.abs(value) + 0.5);
+    const pinPosition = await page.locator('.status-scale-pin').evaluate(element => parseFloat(element.style.left));
+    assert.ok(Math.abs(pinPosition - (value + maximum) / (2 * maximum) * 100) < 1e-8);
+    const scaleBounds = await scale.boundingBox();
+    assert.ok(scaleBounds && scaleBounds.x >= 0 && scaleBounds.x + scaleBounds.width <= width + 1);
+    const contrasts = await page.locator('.stat-label, .snapshot-stamp span, .status-scale-labels, .status-scale-caption, .footer-note').evaluateAll(elements => {
+      const rgba = color => color.match(/[\d.]+/g).map(Number);
+      const over = (top, bottom) => top.slice(0, 3).map((channel, i) => channel * (top[3] ?? 1) + bottom[i] * (1 - (top[3] ?? 1)));
+      const luminance = rgb => rgb.reduce((sum, channel, i) => {
+        const c = channel / 255;
+        return sum + [0.2126, 0.7152, 0.0722][i] * (c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4);
+      }, 0);
+      return elements.filter(element => element.getClientRects().length).map(element => {
+        const ancestors = [];
+        for (let parent = element; parent; parent = parent.parentElement) ancestors.push(parent);
+        let background = [255, 255, 255];
+        for (const parent of ancestors.reverse()) background = over(rgba(getComputedStyle(parent).backgroundColor), background);
+        const foreground = over(rgba(getComputedStyle(element).color), background);
+        const light = luminance(foreground), dark = luminance(background);
+        return { text: element.textContent, ratio: (Math.max(light, dark) + 0.05) / (Math.min(light, dark) + 0.05) };
+      });
+    });
+    for (const sample of contrasts) assert.ok(sample.ratio >= 4.5, `${sample.text}: contrast ${sample.ratio}`);
     await page.waitForFunction(() => [...document.querySelectorAll('canvas')].every(canvas => canvas.width > 0 && canvas.getContext('2d').getImageData(0, 0, canvas.width, canvas.height).data.some((value, index) => index % 4 === 3 && value > 0)));
     assert.equal(await page.locator('#ocean-image').evaluate(image => image.complete && image.naturalWidth > 100), true);
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), true, 'Homepage overflow at ' + width);

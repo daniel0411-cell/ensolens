@@ -1,6 +1,14 @@
 # ENSOLens Delivery Status
 
-Updated: 2026-11-08 (Asia/Shanghai)
+Updated: 2026-11-10 (Asia/Shanghai)
+
+## Small-text contrast and weekly anomaly scale (November 10)
+
+- Code `f9f1945` raises the shared subtle text token to #94a3b8. The homepage weekly Nino 3.4 scale now expands symmetrically around zero, with at least 0.5C headroom and exact proportional positioning. It labels the weekly metric explicitly and does not classify ENSO event strength. Only the homepage sitemap modification date advances.
+- Added regression coverage for positive/negative extreme values, zero and invalid input, plus browser assertions for rendered scale range/position and representative small-text contrast over composited backgrounds. This is targeted contrast verification, not a full-site accessibility certification.
+- Independent review found no blocking issues and independently passed the scale unit test; reviewer did not independently repeat full build/browser checks. Complete `npm run deploy` gate passed: 42-file type check (zero errors/warnings, two existing FAQ icon hints), 14 tests, build, real Worker NOAA refresh/KV validation, RSS, 1440px/390px browser checks. Desktop/mobile screenshots inspected.
+- Released version `1d5f8fb7-eab2-4611-88d8-391eedf51f6a`, deployment `ecfded38-fcc3-443f-952b-bc2c5fdb8535`, activated November 10 at 12:10:04 Asia/Shanghai with 100% traffic, confirmed by actual Wrangler output. Both custom domains, six-hour schedule, indexing enabled and contact disabled remain configured.
+- Post-deploy 11-page production verification passed metadata, data/source health, sitemap, RSS, assets, indexing configuration and redirects. Fresh live 1440px/390px browser suites passed, including scale and representative text contrast checks; screenshots inspected. The latest validated weekly center date is November 4, 2026. Actual search inclusion and traffic impact remain unverified.
 
 ## Search entry clarity and sitemap dates (November 8)
 

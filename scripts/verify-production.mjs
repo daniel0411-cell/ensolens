@@ -38,6 +38,9 @@ for (const path of paths) {
   }
   assert.doesNotMatch($('main').text(), /illustrative|synthetic|example phase/i);
   if (path === '/forecast/') {
+    assert.equal($('#wmo-record-heading').text(), 'Will this El Niño be the strongest on record?');
+    assert.match($('section[aria-labelledby="wmo-record-heading"]').text(), /November 9, 2026.+not confirmation/s);
+    assert.equal($('section[aria-labelledby="wmo-record-heading"] a[href="https://wmo.int/news/media-centre/state-of-climate-2026-gives-new-meaning-phrase-charts"]').length, 1);
     assert.equal($('#super-el-nino-heading').text(), 'What is a super El Niño?');
     assert.equal($('h1').text(), 'El Niño & La Niña forecast.');
     const current = JSON.parse($('#forecast-data').text()).current;

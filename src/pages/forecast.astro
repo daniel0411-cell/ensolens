@@ -73,6 +73,19 @@ const comparisonRows = forecast.rows.map(row => {
       </div>
     </div>
 
+    <section class="lifecycle-section" aria-labelledby="wmo-record-heading">
+      <span class="eyebrow">DATED UPDATE · WMO RELEASE NOVEMBER 9, 2026</span>
+      <h2 id="wmo-record-heading">Will this El Niño be the strongest on record?</h2>
+      <p class="body-copy">In its November 9, 2026 climate update, the World Meteorological Organization (WMO) said El Niño <q>is expected to be the strongest on record by December</q>. This is WMO's forecast statement about December 2026, not confirmation that an observed seasonal record has already been broken.</p>
+      <h3>What does the record claim measure?</h3>
+      <p class="body-copy">The quoted sentence in WMO's press release does not specify the ENSO index, dataset version or averaging period used for the record comparison. ENSOLens therefore attributes the statement to WMO rather than assigning it an ONI or RONI threshold, a probability, or a new historical ranking. A weekly Niño 3.4 value alone cannot verify a seasonal event-strength record.</p>
+      <h3>How does this relate to the CPC forecast below?</h3>
+      <p class="body-copy">The chart below reports NOAA CPC's dated probabilities for El Niño, neutral and La Niña. The separate strength table preserves CPC's October 2026 RONI forecast. Neither product is a numerical translation of WMO's record statement, and the WMO release does not update those CPC figures.</p>
+      <h3>Does it predict the weather where I live?</h3>
+      <p class="body-copy">WMO expects El Niño to continue into early 2027 and describes added heat and climate risks against an already warm global background. That does not specify a city's storm dates, snowfall or flood probability. Use the <a href="/winter-outlook/">dated U.S. winter outlook</a> for regional seasonal context and <a href="https://www.weather.gov/" target="_blank" rel="noreferrer">the National Weather Service</a> for local forecasts and warnings.</p>
+      <p class="body-copy">Source: <a href="https://wmo.int/news/media-centre/state-of-climate-2026-gives-new-meaning-phrase-charts" target="_blank" rel="noreferrer">WMO, “State of the climate in 2026 gives new meaning to phrase ‘off the charts’” <ArrowUpRight size={13} /></a>, issued November 9; checked November 10, 2026. This dated interpretation remains separate from the automatically refreshed CPC chart.</p>
+    </section>
+
     <!-- Interactive Probability Chart -->
     <ForecastChart expanded snapshot={snapshot} />
 
@@ -260,7 +273,7 @@ const comparisonRows = forecast.rows.map(row => {
   <script>import { initCharts } from '../scripts/charts'; initCharts();</script>
 </Layout>
 <style>
-  #strength-heading, #super-el-nino-heading { scroll-margin-top: 100px; }
+  #strength-heading, #super-el-nino-heading, #wmo-record-heading { scroll-margin-top: 100px; }
   #strength-table { min-width: 720px; }
   #strength-table th, #strength-table td { white-space: nowrap; }
   section[aria-labelledby="strength-heading"] .figure-note,

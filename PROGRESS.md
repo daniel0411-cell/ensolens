@@ -2,6 +2,12 @@
 
 Updated: 2026-11-10 (Asia/Shanghai)
 
+## WMO December record forecast interpretation (November 10)
+
+- Added a dated forecast-page section citing WMO's November 9 release and its expected December 2026 record. Explicitly separates an attributed forecast from an already observed seasonal record, and notes that the quoted sentence does not specify index, dataset version or averaging period.
+- Keeps WMO interpretation separate from the automated CPC phase chart and fixed October RONI strength table. No new numerical probability, historical ranking or local hazard forecast inferred. Source evidence added to CONTENT-SOURCES-2026-11-10.md. Forecast sitemap date already reflects today's substantive edits and remains November 10.
+- Independent diff/source-note review found no actionable issues; reviewer could not reopen WMO in its browser and did not run build/browser checks. Release verification pending.
+
 ## ENSO strength terminology update (November 10)
 
 - Added a forecast explanation of "super El Nino", weekly versus seasonal measurements, ONI/RONI comparison limits and regional-impact uncertainty. Added matching FAQ content; corrected the threshold-as-physical-tipping-point claim and completed the RONI variance-adjustment description. FAQ numbering now supports ten entries.

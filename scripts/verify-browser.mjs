@@ -148,6 +148,7 @@ try {
     assert.doesNotMatch(csv, /ILLUSTRATIVE/);
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), true, 'Forecast overflow at ' + width);
     await page.screenshot({ path: fileURLToPath(new URL('forecast-' + width + '.png', output)), fullPage: true });
+    await page.locator('section[aria-labelledby="wmo-record-heading"]').screenshot({ path: fileURLToPath(new URL('wmo-update-' + width + '.png', output)) });
     for (const path of ['/forecast/when-will-it-end/', '/impacts/california-snow-vs-rain/', '/historical/', '/faq/', '/winter-outlook/', '/hurricane-connection/', '/methodology/', '/about/', '/privacy/']) {
       const response = await page.goto(base + path, { waitUntil: 'networkidle' });
       assert.equal(response.status(), 200, path);

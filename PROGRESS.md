@@ -6,7 +6,10 @@ Updated: 2026-11-10 (Asia/Shanghai)
 
 - Added a dated forecast-page section citing WMO's November 9 release and its expected December 2026 record. Explicitly separates an attributed forecast from an already observed seasonal record, and notes that the quoted sentence does not specify index, dataset version or averaging period.
 - Keeps WMO interpretation separate from the automated CPC phase chart and fixed October RONI strength table. No new numerical probability, historical ranking or local hazard forecast inferred. Source evidence added to CONTENT-SOURCES-2026-11-10.md. Forecast sitemap date already reflects today's substantive edits and remains November 10.
-- Independent diff/source-note review found no actionable issues; reviewer could not reopen WMO in its browser and did not run build/browser checks. Release verification pending.
+- Independent diff/source-note review found no actionable issues; reviewer could not reopen WMO in its browser and did not run build/browser checks.
+- Code `800fab3` pushed to `origin/master`. Complete `npm run deploy` gate passed: 42-file type check (zero errors/warnings, two existing icon hints), 14 tests, build, real local Worker NOAA refresh/KV validation, RSS and 1440px/390px browser checks.
+- Released version `88d7ef27-0c55-48da-836f-09314e70d705`, deployment `32eef6e7-a1a7-4cf7-9c95-88c2b0428e0e`, activated November 10 at 14:41:57 Asia/Shanghai with 100% traffic, confirmed by actual Wrangler output. Both domains, six-hour schedule, indexing enabled and contact disabled remain configured.
+- Post-release verification passed all 11 pages, including WMO text/date/source assertions, source health, RSS, sitemap, assets and redirects. Fresh live 1440px/390px browser suites passed. Section screenshots scrolled under the sticky header, so additional live anchor viewport screenshots were captured and inspected to verify unobscured headings and responsive text. Actual search inclusion and traffic gains remain unverified.
 
 ## ENSO strength terminology update (November 10)
 

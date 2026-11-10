@@ -1124,6 +1124,7 @@ dialog::backdrop { background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(4px); 
 .faq-anchor-link:hover {
   color: var(--green);
 }
+.faq-empty[hidden] { display: none; }
 .faq-empty {
   display: flex;
   flex-direction: column;

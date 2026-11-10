@@ -164,10 +164,16 @@ try {
       if (path === '/faq/') {
         await page.locator('#faq-search').fill('super');
         assert.equal(await page.locator('.faq-item:visible').count(), 1);
+        assert.equal(await page.locator('#faq-empty').isVisible(), false);
         await page.locator('#super-el-nino summary').click();
         assert.equal(await page.locator('#super-el-nino .faq-answer').isVisible(), true);
         assert.equal(await page.locator('.faq-num').last().textContent(), '10');
         await page.screenshot({ path: fileURLToPath(new URL('faq-strength-' + width + '.png', output)), fullPage: true });
+        await page.locator('#faq-search').fill('');
+        assert.equal(await page.locator('.faq-item:visible').count(), 10);
+        await page.locator('#faq-search').fill('no-matching-question-12345');
+        assert.equal(await page.locator('.faq-item:visible').count(), 0);
+        assert.equal(await page.locator('#faq-empty').isVisible(), true);
         await page.locator('#faq-search').fill('');
       }
       if (path === '/historical/') {

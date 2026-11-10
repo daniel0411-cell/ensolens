@@ -53,7 +53,7 @@ for (const path of paths) {
     for (const item of faq.mainEntity) {
       const visible = $('.faq-item').filter((_, element) => $(element).find('.faq-title').text() === item.name);
       assert.equal(visible.length, 1);
-      assert.equal(visible.find('.faq-answer > p').text(), load(item.acceptedAnswer.text).text());
+      assert.equal(visible.find('.faq-answer > p').text(), load(item.acceptedAnswer.text.replace(/<br\s*\/?>/g, '\n')).text());
     }
     assert.equal($('#super-el-nino').length, 1);
   }

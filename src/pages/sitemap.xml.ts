@@ -3,7 +3,8 @@ const paths = ['/', '/forecast/', '/forecast/when-will-it-end/', '/impacts/calif
 // Meaningful page edits only; deploys and successful source checks do not advance these dates.
 const modified: Record<string, string> = {
   '/': '2026-11-10',
-  '/forecast/': '2026-11-08',
+  '/forecast/': '2026-11-10',
+  '/faq/': '2026-11-10',
   '/forecast/when-will-it-end/': '2026-10-30',
   '/impacts/california-snow-vs-rain/': '2026-10-30',
   '/winter-outlook/': '2026-11-08',

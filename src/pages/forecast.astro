@@ -76,6 +76,19 @@ const comparisonRows = forecast.rows.map(row => {
     <!-- Interactive Probability Chart -->
     <ForecastChart expanded snapshot={snapshot} />
 
+    <section class="lifecycle-section" aria-labelledby="super-el-nino-heading">
+      <span class="eyebrow">READING ENSO STRENGTH</span>
+      <h2 id="super-el-nino-heading">What is a super El Niño?</h2>
+      <p class="body-copy">“Super El Niño” is a shorthand for an unusually intense event. It is not a separate category in CPC's strength-probability product, which uses weak, moderate, strong and very strong. Before comparing a headline with a measurement, check the index, averaging period and reference baseline.</p>
+      <h3>Can one very warm week establish event strength?</h3>
+      <p class="body-copy">No. A weekly Niño 3.4 anomaly measures one week's sea-surface temperature departure. CPC's strength probabilities refer to three-month RONI values. Even a weekly reading above +3°C cannot be placed directly into a seasonal RONI category or used on its own to declare a record event.</p>
+      <h3>Why do ONI and RONI give different numbers?</h3>
+      <p class="body-copy">ONI averages Niño 3.4 temperature anomalies over three months. RONI also accounts for the tropical ocean background: it subtracts the tropical-mean anomaly and applies an adjustment to match the variance of the original Niño 3.4 index. It is not simply a weekly value with a fixed amount subtracted. Compare historical events using the same index, dataset version, baseline method and averaging period; recent seasonal estimates can be revised.</p>
+      <h3>Does a stronger event guarantee worse local weather?</h3>
+      <p class="body-copy">No. Event strength describes the tropical Pacific signal. It does not give your city's chance of flooding, a cold outbreak or heavy snow. Use regional seasonal outlooks for temperature and precipitation probabilities, then local forecasts for individual storms.</p>
+      <p class="figure-note">Definitions checked November 10, 2026: <a href="https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/strengths/" target="_blank" rel="noreferrer">CPC strength categories</a>, <a href="https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/" target="_blank" rel="noreferrer">RONI method</a> and <a href="https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso/oni/v6/" target="_blank" rel="noreferrer">ONI method</a>. See also <a href="/faq/#super-el-nino">the ENSO FAQ</a> and <a href="/winter-outlook/">the dated U.S. winter outlook</a>.</p>
+    </section>
+
     <section class="lifecycle-section" aria-labelledby="strength-heading">
       <span class="eyebrow">STRENGTH EXPLAINER · CPC ISSUE OCTOBER 2026</span>
       <h2 id="strength-heading">El Niño odds are not strength odds.</h2>
@@ -247,8 +260,9 @@ const comparisonRows = forecast.rows.map(row => {
   <script>import { initCharts } from '../scripts/charts'; initCharts();</script>
 </Layout>
 <style>
-  #strength-heading { scroll-margin-top: 100px; }
+  #strength-heading, #super-el-nino-heading { scroll-margin-top: 100px; }
   #strength-table { min-width: 720px; }
   #strength-table th, #strength-table td { white-space: nowrap; }
-  section[aria-labelledby="strength-heading"] .figure-note { display: block; }
+  section[aria-labelledby="strength-heading"] .figure-note,
+  section[aria-labelledby="super-el-nino-heading"] .figure-note { display: block; }
 </style>

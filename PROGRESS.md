@@ -2,6 +2,13 @@
 
 Updated: 2026-11-10 (Asia/Shanghai)
 
+## ENSO strength terminology update (November 10)
+
+- Added a forecast explanation of "super El Nino", weekly versus seasonal measurements, ONI/RONI comparison limits and regional-impact uncertainty. Added matching FAQ content; corrected the threshold-as-physical-tipping-point claim and completed the RONI variance-adjustment description. FAQ numbering now supports ten entries.
+- Verified CPC strength, RONI and ONI pages in the background browser; source notes are in CONTENT-SOURCES-2026-11-10.md. October strength probabilities remain dated and unchanged. Existing winter guidance already covers cold outbreaks and rain versus snow, so no duplicate section was added.
+- Independent code/source-note review found a flex-layout issue in the new source paragraph; corrected before the build/browser gate. Reviewer did not independently revisit sources or run build/browser checks. Deployment and production verification pending.
+- Added FAQ search/expanded-answer browser verification and production FAQ/schema parity checks. Only forecast and FAQ editorial sitemap dates advance.
+
 ## Small-text contrast and weekly anomaly scale (November 10)
 
 - Code `f9f1945` raises the shared subtle text token to #94a3b8. The homepage weekly Nino 3.4 scale now expands symmetrically around zero, with at least 0.5C headroom and exact proportional positioning. It labels the weekly metric explicitly and does not classify ENSO event strength. Only the homepage sitemap modification date advances.

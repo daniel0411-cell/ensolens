@@ -38,12 +38,24 @@ for (const path of paths) {
   }
   assert.doesNotMatch($('main').text(), /illustrative|synthetic|example phase/i);
   if (path === '/forecast/') {
+    assert.equal($('#super-el-nino-heading').text(), 'What is a super El Niño?');
     assert.equal($('h1').text(), 'El Niño & La Niña forecast.');
     const current = JSON.parse($('#forecast-data').text()).current;
     const target = current.rows.find(row => row.season === 'DJF') ?? current.rows[0];
     assert.ok($('.page-intro p').text().includes(`${target.nino}% El Niño, ${target.neutral}% neutral and ${target.nina}% La Niña`));
     assert.match($('#strength-table caption').text(), /October 2026.*dated reference/);
     assert.equal($('#strength-table tbody tr').length, 2);
+  }
+  if (path === '/faq/') {
+    const faq = JSON.parse($('script[type="application/ld+json"]').last().text());
+    assert.equal(faq['@type'], 'FAQPage');
+    assert.equal(faq.mainEntity.length, $('.faq-item').length);
+    for (const item of faq.mainEntity) {
+      const visible = $('.faq-item').filter((_, element) => $(element).find('.faq-title').text() === item.name);
+      assert.equal(visible.length, 1);
+      assert.equal(visible.find('.faq-answer > p').text(), load(item.acceptedAnswer.text).text());
+    }
+    assert.equal($('#super-el-nino').length, 1);
   }
   if (path === '/winter-outlook/') {
     assert.equal($('.outlook-maps img').length, 2);
@@ -97,9 +109,9 @@ for (const entry of sitemapXml('url').toArray()) {
     assert.ok(Date.parse(modified) <= Date.now(), 'Sitemap dates must not be in the future');
   }
 }
-for (const path of ['/', '/forecast/', '/winter-outlook/']) {
+for (const path of ['/', '/forecast/', '/faq/', '/winter-outlook/']) {
   const entry = sitemapXml('url').filter((_, element) => sitemapXml(element).find('loc').text() === host + path);
-  assert.equal(entry.find('lastmod').text(), path === '/' ? '2026-11-10' : '2026-11-08');
+  assert.equal(entry.find('lastmod').text(), path === '/winter-outlook/' ? '2026-11-08' : '2026-11-10');
 }
 const missing = await request('/missing-page-check/');
 assert.equal(missing.status, 404);

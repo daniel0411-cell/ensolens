@@ -29,14 +29,21 @@ const faqs = [
     category: 'data',
     categoryLabel: 'Indices & Methods',
     question: 'What is the Niño 3.4 region, and why is ±0.5°C the critical threshold?',
-    answer: 'The Niño 3.4 region is a standardized ocean monitoring box bounded by 5°N to 5°S latitude and 170°W to 120°W longitude in the east-central equatorial Pacific. Decades of atmospheric research have proven that sea surface temperature anomalies in this specific corridor have the strongest statistical teleconnection to global jet streams and atmospheric circulation. A temperature anomaly of ±0.5°C represents the physical tipping point where equatorial ocean warmth is substantial enough to significantly alter atmospheric deep convection. Anomalies between +0.5°C and +0.9°C denote a weak event, +1.0°C to +1.4°C a moderate event, and +1.5°C or higher denotes a strong El Niño.'
+    answer: 'The Niño 3.4 region spans 5°N to 5°S and 170°W to 120°W in the equatorial Pacific. The ±0.5°C thresholds are classification conventions for seasonal ENSO indices, not a universal physical tipping point or a rule for labeling individual weeks. CPC historical episode tables require the threshold for at least five consecutive overlapping three-month seasons. Ocean-atmosphere coupling also matters when assessing ENSO conditions. In CPC\'s RONI strength product, El Niño categories are weak from +0.5 to below +1.0°C, moderate from +1.0 to below +1.5°C, strong from +1.5 to below +2.0°C, and very strong at +2.0°C or above.'
   },
   {
     id: 'oni-vs-roni',
     category: 'data',
     categoryLabel: 'Indices & Methods',
     question: 'What is the difference between ONI (Oceanic Niño Index) and RONI (Relative ONI)?',
-    answer: 'The Oceanic Niño Index (ONI) measures the 3-month running mean of Niño 3.4 sea surface temperature anomalies compared against 30-year base periods updated every five years. However, because global oceans are warming comprehensively under climate change, a +0.5°C anomaly today does not create the same atmospheric gradient as it did decades ago. To account for this background warming, NOAA CPC introduced the Relative Oceanic Niño Index (RONI). RONI subtracts the global tropical mean ocean temperature anomaly from the regional Niño 3.4 anomaly, isolating internal equatorial ocean dynamics from secular background warming.'
+    answer: 'ONI is the three-month running mean of Niño 3.4 sea-surface temperature anomalies, using centered 30-year base periods updated every five years. CPC\'s current RONI table uses ERSSTv6 and a 1991–2020 base period. RONI subtracts the tropical-mean anomaly (20°N–20°S) from Niño 3.4 and adjusts the difference so its variance matches the original Niño 3.4 index. This accounts for the tropical ocean background; it is not a fixed correction or a weekly measurement. Recent seasonal values can be revised. Compare events within the same index, dataset version, baseline method and averaging period.'
+  },
+  {
+    id: 'super-el-nino',
+    category: 'data',
+    categoryLabel: 'Indices & Methods',
+    question: 'What is a super El Niño, and can one warm week confirm it?',
+    answer: '“Super El Niño” is a shorthand for an unusually intense event, not a separate category in CPC\'s strength-probability product. That product uses weak, moderate, strong and very strong categories based on three-month RONI, with very strong starting at +2.0°C. A weekly Niño 3.4 anomaly above +3°C cannot be substituted for seasonal RONI or establish a historical record on its own. Check the index, averaging period and baseline behind any strength claim. Stronger ENSO does not guarantee more severe weather at a particular location.'
   },
   {
     id: 'event-duration',
@@ -123,7 +130,7 @@ const faqSchema = {
           <details class="faq-item" id={faq.id} data-category={faq.category}>
             <summary class="faq-question">
               <span class="faq-question-text">
-                <span class="faq-num">0{index + 1}</span>
+              <span class="faq-num">{String(index + 1).padStart(2, '0')}</span>
                 <span class="faq-category-tag">{faq.categoryLabel}</span>
                 <span class="faq-title">{faq.question}</span>
               </span>
@@ -148,7 +155,7 @@ const faqSchema = {
       <BookOpen size={20} />
       <div>
         <strong>Looking for technical definitions or raw equations?</strong>
-        <p>Review the full mathematical baselines, reference climatologies, and ERSSTv6 methodologies in our sources guide.</p>
+        <p>Index and strength definitions reviewed November 10, 2026: <a href="https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/" target="_blank" rel="noreferrer">CPC RONI method</a>, <a href="https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso/oni/v6/" target="_blank" rel="noreferrer">ONI method</a> and <a href="https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/strengths/" target="_blank" rel="noreferrer">strength categories</a>. <a href="/forecast/#super-el-nino-heading">Read the strength explainer</a>.</p>
       </div>
       <a href="/methodology/">Sources & methods <ArrowUpRight size={15} /></a>
     </div>

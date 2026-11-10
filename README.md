@@ -4,7 +4,7 @@ An independent English-language ENSO dashboard built with Astro, Chart.js, and C
 
 ## Status and recovery
 
-Latest release (November 10, 2026): code `f9f1945`, Cloudflare version `1d5f8fb7-eab2-4611-88d8-391eedf51f6a`, deployment `ecfded38-fcc3-443f-952b-bc2c5fdb8535`, activated at 12:10:04 Asia/Shanghai with 100% traffic. Improved small-text contrast and numerical weekly anomaly scaling. Full deploy gate (14 tests) and 11-page production verification passed. See PROGRESS.md for verification details; older release statements below are historical.
+Latest release (November 10, 2026): code `63fd712`, Cloudflare version `4fb00ee7-6316-4e9d-a570-85d19d060f4c`, deployment `d828740d-fabe-4c6a-bbf8-06b93fea1216`, activated at 13:53:01 Asia/Shanghai with 100% traffic. Added super El Nino / weekly versus seasonal strength explanations, corrected index definitions and fixed FAQ empty-state visibility. Full deploy gate (14 tests), 11-page production verification and fresh live desktop/mobile browser suites passed. See PROGRESS.md for verification details; older release statements below are historical.
 
 Previous release (November 8, 2026): code `6e04b78`, Cloudflare version `1d51b14f-b47e-4063-a864-992a45ff9e51`, deployment `05734f0b-0e82-4c93-aa1c-a5c1993f2531`, activated at 14:36:33 Asia/Shanghai with 100% traffic. Clarified homepage/forecast search titles, H1s and dated summaries; added verified editorial sitemap dates. The complete deploy gate, 13 tests, 11-page production/RSS/asset checks and live desktop/mobile suites passed. The earlier dated winter maps and October strength reference remain available. Actual search inclusion and traffic gains remain unverified. See PROGRESS.md and CONTENT-SOURCES-2026-11-08.md for release and source records.
 

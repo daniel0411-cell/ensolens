@@ -47,7 +47,7 @@ for (const path of paths) {
     assert.equal($('#strength-table tbody tr').length, 2);
   }
   if (path === '/faq/') {
-    const faq = JSON.parse($('script[type="application/ld+json"]').last().text());
+    const faq = JSON.parse($('script[type="application/ld+json"]').first().text()).mainEntity;
     assert.equal(faq['@type'], 'FAQPage');
     assert.equal(faq.mainEntity.length, $('.faq-item').length);
     for (const item of faq.mainEntity) {

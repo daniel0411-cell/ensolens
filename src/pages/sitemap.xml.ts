@@ -9,7 +9,7 @@ const modified: Record<string, string> = {
   '/forecast/': '2026-11-12',
   '/faq/': '2026-11-12',
   '/historical/': '2026-11-12',
-  '/forecast/when-will-it-end/': '2026-10-30',
+  '/forecast/when-will-it-end/': '2026-11-12',
   '/impacts/california-snow-vs-rain/': '2026-10-30',
   '/winter-outlook/': '2026-11-08',
   '/about/': '2026-11-06',

@@ -40,6 +40,13 @@ for (const path of paths) {
     }
   }
   assert.doesNotMatch($('main').text(), /illustrative|synthetic|example phase/i);
+  if (path === '/forecast/when-will-it-end/') {
+    for (const id of ['monitoring-change-heading', 'spring-barrier-heading', 'double-dip-heading']) assert.equal($('#' + id).length, 1);
+    assert.equal($('.evidence-table tbody tr').length, 4);
+    assert.equal($('.source-note a[href^="https://www.climate.gov/news-features/blogs/enso/"]').length, 2);
+    assert.match($('main').text(), /historical examples, not analog forecasts/);
+    assert.match($('main').text(), /Temporary neutral conditions can separate winter episodes/);
+  }
   if (path === '/impacts/' || path === '/impacts/pacific-northwest-winter/' || path === '/forecast/enso-neutral/') {
     assert.equal($('h1').length, 1);
     assert.match($('.eyebrow').first().text(), /NOVEMBER 12, 2026/);
@@ -143,7 +150,7 @@ for (const entry of sitemapXml('url').toArray()) {
     assert.ok(Date.parse(modified) <= Date.now(), 'Sitemap dates must not be in the future');
   }
 }
-for (const path of ['/', '/forecast/', '/faq/', '/historical/', '/winter-outlook/', '/impacts/', '/impacts/pacific-northwest-winter/', '/forecast/enso-neutral/']) {
+for (const path of ['/', '/forecast/', '/forecast/when-will-it-end/', '/faq/', '/historical/', '/winter-outlook/', '/impacts/', '/impacts/pacific-northwest-winter/', '/forecast/enso-neutral/']) {
   const entry = sitemapXml('url').filter((_, element) => sitemapXml(element).find('loc').text() === host + path);
   const expected = path === '/winter-outlook/' ? '2026-11-08' : '2026-11-12';
   assert.equal(entry.find('lastmod').text(), expected);

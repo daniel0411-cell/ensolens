@@ -66,3 +66,13 @@ Browser verification November 12, 2026; research only, no public-page changes in
 - Corrected chart range to include week 53; current-year positions use January 1 calendar bins rather than index into a potentially partial rolling feed. Month labels remain approximate; tooltip/CSV retain exact observation dates.
 - FAQ operational alert definitions follow the primary CPC alert page above; historical five-season classification is explicitly separate. Source checked November 12; no new source publication date inferred. Historical and FAQ sitemap dates reflect substantive edits today.
 - No new recurring publishing workload; check historical-source and alert links during existing periodic maintenance.
+
+## Lifecycle evidence, spring predictability and multi-winter La Nina
+
+Background browser research verified November 12, 2026, starting with a Google search for NOAA ENSO spring predictability sources and opening original articles.
+
+- https://www.climate.gov/news-features/blogs/enso/why-making-el-nino-forecasts-spring-especially-anxiety-inducing
+  - Michelle L'Heureux, published May 4, 2023. Archived by Climate.gov, no longer maintained. Explains uncertainty about persistent westerly wind anomalies and subsurface warmth during development, including contrasting 1997/2014 evolution. Historical cases support mechanisms only; no old forecast probabilities or historical sample frequencies reused as current odds.
+- https://www.climate.gov/news-features/blogs/enso/double-dipping-why-does-la-ni%C3%B1a-often-occur-consecutive-winters
+  - Nat Johnson, article publication July 7, 2021 (related-article listing differs). Archived content. Describes asymmetric wind response and equatorial ocean heat discharge/recharge as one explanation for La Nina recurrence, with other mechanisms and scientific uncertainty. Neutral intervals can separate cold winters. Historical counts and the 2021 forecast excluded from current probabilities.
+- Expanded the existing lifecycle route with a four-row evidence table, spring uncertainty and multi-winter recurrence. Current CPC probabilities remain the validated live product; neither archived article supplies current forecasts. No new runtime feed or route. Source review fits the existing monthly lifecycle review, with no separate recurring publication commitment.

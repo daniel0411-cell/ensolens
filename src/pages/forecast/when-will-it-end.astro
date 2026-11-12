@@ -15,7 +15,7 @@ const questions = [
 ---
 <Layout title="When will El Niño peak and end?" active="forecast" description="Separate the ocean-temperature peak, the official return to neutral and regional impacts. Read current NOAA probabilities with their dates and spring forecast uncertainty.">
   <div class="page-shell subpage lifecycle-page">
-    <div class="page-intro"><div><span class="eyebrow">ENSO LIFECYCLE · EDITORIAL REVIEW OCTOBER 30, 2026</span><h1>When will El Niño<br /><span>peak and end?</span></h1><p>Three different clocks. No single guaranteed end date.</p></div></div>
+    <div class="page-intro"><div><span class="eyebrow">ENSO LIFECYCLE · EDITORIAL REVIEW NOVEMBER 12, 2026</span><h1>When will El Niño<br /><span>peak and end?</span></h1><p>Separate the ocean peak, the official phase transition and regional impacts. Read the current outlook alongside the evidence needed to judge a change.</p></div></div>
     <DataNotice stale={stale} />
     <section class="lifecycle-section">
       <h2>Start with the official assessment.</h2>
@@ -34,10 +34,54 @@ const questions = [
       <p class="body-copy">A reported 100% does not remove real-world uncertainty. A change from 99% to 100% is one percentage point, not evidence of a significant forecast change. <a href="/forecast/">Compare the same season across official issues.</a></p>
     </section>
     <section class="explanation-grid"><div><h2>Why a winter peak is common</h2><p>ENSO events often reach their greatest amplitude around the end of the calendar year because of the seasonal cycle of ocean-atmosphere coupling. November–January is a monitoring window, not a guaranteed peak for every event.</p></div><div><h2>How an event can weaken</h2><p>Changes in winds, currents, upwelling and thermocline depth redistribute ocean heat. Oceanic waves transmit these adjustments. Surface warming alone cannot prove that a subsurface cooling wave has arrived or set a countdown to decay.</p></div></section>
-    <section class="lifecycle-section"><h2>The spring predictability barrier</h2><p class="body-copy">Forecasts that cross northern spring often have reduced skill. This varies by event, model and lead time; March–May is not a complete blind spot. Revisit a summer forecast as new monthly issues arrive, and do not extend probabilities beyond their stated horizon.</p></section>
+    <section class="lifecycle-section" aria-labelledby="monitoring-change-heading">
+      <h2 id="monitoring-change-heading">What evidence would show that El Niño is weakening?</h2>
+      <p class="body-copy">Cooling at the surface, changes below the surface and a weakening atmospheric response answer different questions. Read them together in the CPC discussion. This dashboard carries weekly Niño 3.4 and seasonal RONI; it does not provide a live subsurface heat-content or wind series.</p>
+      <div class="probability-table-wrap evidence-table" role="region" aria-label="Evidence for an ENSO transition" tabindex="0">
+        <table class="data-table"><caption>Monitoring evidence, not an automatic end-date rule</caption>
+          <thead><tr><th scope="col">Evidence</th><th scope="col">What it can tell you</th><th scope="col">What it cannot establish alone</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Weekly Niño 3.4</th><td>How the latest surface anomaly compares with earlier weeks in the same series.</td><td>One cooler week does not confirm a final peak or the return to neutral.</td></tr>
+            <tr><th scope="row">Three-month RONI</th><td>How the relative ocean signal changes over an overlapping seasonal window.</td><td>A slower-moving seasonal index does not identify the day conditions changed.</td></tr>
+            <tr><th scope="row">Winds, rainfall and subsurface heat</th><td>CPC's wider assessment of ocean-atmosphere coupling and the ocean's evolving heat supply.</td><td>A warm or cool subsurface feature does not set a fixed countdown to the next phase.</td></tr>
+            <tr><th scope="row">CPC discussion and alert</th><td>The operational assessment of whether event conditions are present and expected to continue.</td><td>An alert change does not end every regional impact on the same date.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="body-copy">For a useful comparison, keep the index, baseline and observation period the same. A lower weekly conventional anomaly and a higher three-month relative index need not contradict each other: their averaging windows and treatment of background ocean warmth differ. <a href="/methodology/#indices">Compare the indicators</a> and <a href="/faq/#alerts-explained">check what the alert labels mean</a>.</p>
+    </section>
+    <section class="lifecycle-section" aria-labelledby="spring-barrier-heading">
+      <h2 id="spring-barrier-heading">What is the spring predictability barrier?</h2>
+      <p class="body-copy">ENSO forecasts that cross Northern Hemisphere spring often have reduced skill. The difficulty depends on the event, model, starting conditions and lead time. It is a seasonal forecasting challenge, not a complete March–May blind spot or a claim that every forecast issued in spring will fail.</p>
+      <h3>Why a warm ocean is not enough</h3>
+      <p class="body-copy">NOAA's May 4, 2023 explanation highlights two uncertainties during El Niño development: whether westerly wind anomalies persist long enough to reinforce warming, and whether a reservoir of subsurface warmth actually leads to a sustained event. Short-lived wind changes can occur without becoming the persistent ocean-atmosphere feedback an event needs.</p>
+      <p class="body-copy">That article compares 1997 and 2014 to show why superficially promising early conditions can evolve differently. These are historical examples, not analog forecasts for 2026–27. Subsurface warmth is useful evidence, but it is not a guarantee of either onset or eventual strength.</p>
+      <h3>What this means for a summer or next-winter forecast</h3>
+      <p class="body-copy">Read the issue date and the exact three-month target. Compare later monthly issues for that same target as new ocean and atmospheric observations arrive. Model agreement does not remove shared model errors, and the barrier does not justify replacing CPC probabilities with a guessed adjustment.</p>
+      <p class="body-copy">A winter outlook for the current season cannot settle the following winter. If the target is outside the published table, this page has no official probability for it. <a href="/forecast/#reading-probabilities-heading">Read the probability guide</a> before interpreting a rising neutral or La Niña category as a transition date.</p>
+      <p class="body-copy source-note">Scientific background: <a href="https://www.climate.gov/news-features/blogs/enso/why-making-el-nino-forecasts-spring-especially-anxiety-inducing" target="_blank" rel="noreferrer">NOAA ENSO Blog, May 4, 2023</a>, checked November 12, 2026. Climate.gov identifies this as archived content; its 2023 forecasts are not current guidance.</p>
+    </section>
+    <section class="lifecycle-section" aria-labelledby="double-dip-heading">
+      <h2 id="double-dip-heading">Why can La Niña last for more than one winter?</h2>
+      <p class="body-copy">El Niño and La Niña are not perfectly symmetric. NOAA's July 7, 2021 explanation describes how differences in the location and strength of wind responses can affect the discharge and recharge of heat in the equatorial Pacific. After some La Niña winters, the ocean may not have recharged enough to support an immediate switch to El Niño; another La Niña winter can follow if ocean and atmospheric conditions favor it.</p>
+      <p class="body-copy">A “double-dip” describes La Niña in two consecutive winters; a “triple-dip” describes three. Those labels do not mean the index stays equally cold throughout, or that every intervening summer must remain in La Niña. Temporary neutral conditions can separate winter episodes.</p>
+      <p class="body-copy">This is one scientific explanation, not a complete rule for every event. The source notes that other processes matter and their relative importance is still debated. Historical persistence is not the probability for the next winter: use an outlook that actually covers that season, and allow for neutral as well as either event phase.</p>
+      <p class="body-copy source-note">Scientific background: <a href="https://www.climate.gov/news-features/blogs/enso/double-dipping-why-does-la-ni%C3%B1a-often-occur-consecutive-winters" target="_blank" rel="noreferrer">NOAA ENSO Blog, July 7, 2021</a>, checked November 12, 2026. This archived article's event counts and 2021 forecast are not used as current probabilities here. <a href="/forecast/enso-neutral/">What a neutral interval means</a>.</p>
+    </section>
     <section class="lifecycle-section" aria-labelledby="lifecycle-faq"><h2 id="lifecycle-faq">Questions readers ask</h2>{questions.map(item => <div class="lifecycle-answer"><h3>{item.question}</h3><p class="body-copy">{item.answer}</p></div>)}</section>
     <section class="lifecycle-section"><h2>Sources and update policy</h2><p class="body-copy"><a href={urls.discussion}>NOAA CPC diagnostic discussion</a> · <a href={forecast.source}>CPC probability source</a> · <a href={urls.weekly}>Weekly SST anomalies</a> · <a href="https://www.climate.gov/enso">NOAA ENSO background</a></p><p class="body-copy">The table uses the same validated feed as the dashboard. Failed checks retain dated values and show a notice above. This page uses CPC probabilities; it does not merge them with an IRI model outlook. Review the explanation monthly; a new weekly observation does not change a monthly forecast’s issue date.</p></section>
     <p class="body-copy">When a forecast favors neutral, <a href="/forecast/enso-neutral/">here is what ENSO-neutral means for weather</a>.</p>
   </div>
   <script type="application/ld+json" set:html={JSON.stringify({ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: questions.map(item => ({ '@type': 'Question', name: item.question, acceptedAnswer: { '@type': 'Answer', text: item.answer } })) }).replace(/</g, '\\u003c')} />
 </Layout>
+
+<style>
+  #monitoring-change-heading, #spring-barrier-heading, #double-dip-heading { scroll-margin-top: 100px; }
+  .evidence-table table { min-width: 720px; }
+  .evidence-table th, .evidence-table td { text-align: left; }
+  .evidence-table th:first-child { width: 22%; }
+  .evidence-table th:not(:first-child) { width: 39%; }
+  .evidence-table td { white-space: normal; vertical-align: top; }
+  .evidence-table th[scope="row"] { white-space: normal; min-width: 150px; }
+  .source-note { font-size: 13px; }
+</style>

@@ -243,6 +243,23 @@ try {
         assert.equal(await page.locator('h1').count(), 1);
         const faq = await page.locator('script[type="application/ld+json"]').last().textContent();
         assert.equal(JSON.parse(faq)['@type'], 'FAQPage');
+        if (path.includes('when-will')) {
+          for (const id of ['monitoring-change-heading', 'spring-barrier-heading', 'double-dip-heading']) {
+            const section = page.locator('section[aria-labelledby="' + id + '"]');
+            assert.equal(await section.count(), 1);
+            await page.locator('#' + id).evaluate(element => element.scrollIntoView());
+            await page.screenshot({ path: fileURLToPath(new URL(id + '-' + width + '.png', output)) });
+          }
+          const evidence = page.getByRole('region', { name: 'Evidence for an ENSO transition', exact: true });
+          assert.equal(await evidence.locator('tbody tr').count(), 4);
+          if (width === 390) {
+            await evidence.focus();
+            await page.keyboard.press('ArrowRight');
+            await page.waitForFunction(() => document.querySelector('[aria-label="Evidence for an ENSO transition"]').scrollLeft > 0);
+          }
+          await evidence.evaluate(element => { element.scrollLeft = 0; });
+        }
+        await page.evaluate(() => window.scrollTo(0, 0));
         await page.screenshot({ path: fileURLToPath(new URL(path.includes('when-will') ? 'lifecycle-' + width + '.png' : 'california-' + width + '.png', output)), fullPage: true });
       }
     }

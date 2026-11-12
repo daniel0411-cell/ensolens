@@ -2,6 +2,12 @@
 
 Updated: 2026-11-12 (Asia/Shanghai)
 
+## Lifecycle evidence and forecast uncertainty (November 12)
+
+- Expanded the existing lifecycle guide with a four-row monitoring evidence table, spring predictability barrier and multi-winter La Nina explanation. Historical NOAA articles are dated and marked archived; their old forecasts/counts are excluded from current guidance. Updated forecast discovery copy and lifecycle editorial sitemap date. Source notes saved in CONTENT-SOURCES-2026-11-12.md. No new route, feed or recurring publishing workload.
+- Independent read-only editorial review found no blocking scientific issues; adopted the suggestion to say another La Nina winter rather than another cold winter. Reviewer did not reopen sources or run tests. Primary source verification was performed by the implementing agent in the background browser.
+- Initial type checks (47 files, zero errors/warnings, two existing icon hints), 16 tests, build and desktop/mobile browser checks passed. Inspected screenshots and improved prose-table alignment; final visual verification and full release gate pending. Added focused release assertions for sections, evidence rows, source links, mobile keyboard scrolling and sitemap date.
+
 ## Historical comparison and alert definitions (November 12)
 
 - Verified all 210 stored historical weekly observations against NOAA CPC wksst9120.for. Corrected 1997/2023 extreme dates and 2020 minimum/date metadata; displayed summaries now derive from the actual series. Calendar-year coverage, weekly conventional anomalies and seasonal RONI are explicitly distinct. Removed unsupported records, seasonal labels and impact attribution. Added historical-analog limitations and links to winter/regional guides.

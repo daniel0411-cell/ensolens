@@ -2,6 +2,12 @@
 
 Updated: 2026-11-12 (Asia/Shanghai)
 
+## Next content research checkpoint (November 12)
+
+- Research only: verified NOAA winter precipitation/internal variability (November 30, 2023), MJO explainer (December 31, 2014), NOAA atmospheric-river definitions (updated February 21, 2025) and Drought.gov snow-drought/SWE interpretation. Archived articles and stale embedded snow-map dates are explicitly flagged in CONTENT-SOURCES-2026-11-12.md.
+- Prioritized existing-page additions: forecast horizon/product selection, SWE percentages and warm/dry snow drought, then a compact MJO distinction and atmospheric-river water-supply/hazard explanation. No new public page or current numerical forecast. Search demand and traffic effects not established. Proposed source/link maintenance fits existing periodic review.
+- Documentation-only checkpoint; no application deployment or application tests required. Previous verified website release remains in force.
+
 ## Lifecycle evidence and forecast uncertainty (November 12)
 
 - Expanded the existing lifecycle guide with a four-row monitoring evidence table, spring predictability barrier and multi-winter La Nina explanation. Historical NOAA articles are dated and marked archived; their old forecasts/counts are excluded from current guidance. Updated forecast discovery copy and lifecycle editorial sitemap date. Source notes saved in CONTENT-SOURCES-2026-11-12.md. No new route, feed or recurring publishing workload.

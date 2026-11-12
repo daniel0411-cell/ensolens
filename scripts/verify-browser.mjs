@@ -157,6 +157,7 @@ try {
       assert.doesNotMatch(await page.content(), /hurricanetracker\.cc|hurricanehub|Hurricane Tracker|same independent builder|same publisher as/i, path);
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), true, path + ' overflow at ' + width);
       const editorialSections = {
+        '/methodology/': ['ocean-atmosphere-heading'],
         '/winter-outlook/': ['forecast-horizon-heading', 'winter-variability-heading', 'mjo-enso-heading'],
         '/impacts/california-snow-vs-rain/': ['swe-percent-heading', 'atmospheric-river-heading'],
         '/impacts/pacific-northwest-winter/': ['snow-drought-heading'],
@@ -213,6 +214,11 @@ try {
         await page.locator('#alerts-explained summary').click();
         assert.equal(await page.locator('#alerts-explained .faq-answer').isVisible(), true);
         await page.locator('#alerts-explained').screenshot({ path: fileURLToPath(new URL('faq-alerts-' + width + '.png', output)) });
+        for (const id of ['enso-basics', 'el-nino-vs-la-nina']) {
+          await page.locator('#' + id + ' summary').click();
+          assert.equal(await page.locator('#' + id + ' .faq-answer').isVisible(), true);
+          await page.locator('#' + id).screenshot({ path: fileURLToPath(new URL('faq-' + id + '-' + width + '.png', output)) });
+        }
       }
       if (path === '/historical/') {
         const canvas = page.locator('#analog-chart');

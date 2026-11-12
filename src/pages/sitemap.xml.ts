@@ -12,6 +12,7 @@ const modified: Record<string, string> = {
   '/forecast/when-will-it-end/': '2026-11-12',
   '/impacts/california-snow-vs-rain/': '2026-11-12',
   '/winter-outlook/': '2026-11-12',
+  '/methodology/': '2026-11-12',
   '/about/': '2026-11-06',
   '/privacy/': '2026-11-06',
 };

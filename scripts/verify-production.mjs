@@ -75,6 +75,7 @@ for (const path of paths) {
     assert.equal($('#strength-table tbody tr').length, 2);
   }
   if (path === '/faq/') {
+    assert.equal($('a[href="/methodology/#ocean-atmosphere-heading"]').length, 2);
     const faq = JSON.parse($('script[type="application/ld+json"]').first().text()).mainEntity;
     assert.equal(faq['@type'], 'FAQPage');
     assert.equal(faq.mainEntity.length, $('.faq-item').length);
@@ -97,6 +98,11 @@ for (const path of paths) {
     assert.match($('.analog-summary-table').text(), /-1.7°C/);
     assert.equal($('#analog-limits-heading').length, 1);
     assert.equal($('a[href$="wksst9120.for"]').length, 1);
+  }
+  if (path === '/methodology/') {
+    assert.equal($('#ocean-atmosphere-heading').length, 1);
+    assert.equal($('a[href="https://www.weather.gov/fwd/basics"]').length, 1);
+    assert.equal($('a[href="https://www.noaa.gov/understanding-el-nino"]').length, 1);
   }
   if (path === '/winter-outlook/') {
     assert.equal($('#forecast-horizon-heading').length, 1);
@@ -169,7 +175,7 @@ for (const entry of sitemapXml('url').toArray()) {
     assert.ok(Date.parse(modified) <= Date.now(), 'Sitemap dates must not be in the future');
   }
 }
-for (const path of ['/', '/forecast/', '/forecast/when-will-it-end/', '/faq/', '/historical/', '/winter-outlook/', '/impacts/', '/impacts/california-snow-vs-rain/', '/impacts/pacific-northwest-winter/', '/forecast/enso-neutral/']) {
+for (const path of ['/', '/forecast/', '/forecast/when-will-it-end/', '/faq/', '/historical/', '/winter-outlook/', '/impacts/', '/impacts/california-snow-vs-rain/', '/impacts/pacific-northwest-winter/', '/forecast/enso-neutral/', '/methodology/']) {
   const entry = sitemapXml('url').filter((_, element) => sitemapXml(element).find('loc').text() === host + path);
   const expected = '2026-11-12';
   assert.equal(entry.find('lastmod').text(), expected);

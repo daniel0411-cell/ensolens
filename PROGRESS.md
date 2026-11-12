@@ -2,6 +2,12 @@
 
 Updated: 2026-11-12 (Asia/Shanghai)
 
+## Ocean–atmosphere coupling and FAQ clarity (November 12)
+
+- Added an existing methodology-page explanation of trade winds, upwelling, Walker circulation and coupled feedback across neutral/El Niño/La Niña conditions. Rewrote the first two FAQ answers to remove misleading cold-water transport and thermocline simplifications, distinguish atmospheric response and avoid single-week phase classification. Added source links and internal discovery; FAQ/schema remain generated from the same answer text.
+- Background-browser verification of NOAA overview (updated June 10, 2026) and NWS Fort Worth mechanism page (no publication date displayed) documented in CONTENT-SOURCES-2026-11-12.md. NOAA overview's conflation of historical persistence and operational declaration was not reused; existing CPC alert definitions retained. No new route, data feed or numerical forecast. Methodology substantive lastmod recorded November 12; FAQ already dated November 12.
+- Independent read-only scientific review found no actionable issues; reviewer did not independently reopen sources, run tests or inspect layout. Type checks across 47 files passed with zero errors/warnings and two existing icon hints; all 16 tests and build passed. Real local Worker NOAA refresh/KV, RSS and 1440px/390px browser suites passed. New mechanism-section and revised FAQ screenshots inspected with no overflow or obscured headings. Deployment and production verification pending.
+
 ## MJO and atmospheric-river explanations (November 12)
 
 - Expanded the existing winter guide with MJO versus ENSO timescales, jet-stream influence and forecast limits; expanded California guidance with atmospheric-river water supply, snow levels, flood conditions and Pineapple Express scope. No new route, live MJO claim or recurring publication workload. Existing November 12 sitemap dates and original winter-map dates retained.

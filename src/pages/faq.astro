@@ -8,14 +8,14 @@ const faqs = [
     category: 'fundamentals',
     categoryLabel: 'Fundamentals',
     question: 'What is ENSO and how does it drive global weather patterns?',
-    answer: 'The El Niño-Southern Oscillation (ENSO) is a coupled ocean-atmosphere climate cycle centered over the equatorial Pacific Ocean. In neutral conditions, easterly trade winds push sun-warmed surface water toward Indonesia, while cold, nutrient-rich water upwells along the coasts of Peru and Ecuador. During El Niño, these trade winds weaken or reverse, allowing deep pools of warm water to surge eastward across the Pacific basin. During La Niña, easterly trade winds strengthen even further, driving colder-than-normal water westward. This massive redistribution of ocean heat forces convection into the upper troposphere, steering the polar and subtropical jet streams across thousands of miles and shifting seasonal storm tracks worldwide.'
+    answer: 'ENSO is a coupled ocean–atmosphere climate pattern in the tropical Pacific. In neutral conditions, easterly trade winds blow from east to west, helping maintain warm surface water in the western Pacific while cooler water rises through upwelling in the east. During El Niño, weaker trades allow warm water to spread eastward and tropical rainfall shifts toward the central and eastern Pacific. During La Niña, stronger trades favor cooler central and eastern equatorial Pacific waters. Changes in tropical rainfall and atmospheric heating can influence jet streams and seasonal weather elsewhere. The ocean and atmosphere influence each other; one warm week or a warm patch on a map is not a complete ENSO diagnosis.'
   },
   {
     id: 'el-nino-vs-la-nina',
     category: 'fundamentals',
     categoryLabel: 'Fundamentals',
     question: 'What is the fundamental difference between El Niño and La Niña?',
-    answer: 'El Niño represents the warm phase of ENSO, characterized by warmer-than-average sea surface temperatures (+0.5°C or greater departure) across the central and eastern equatorial Pacific, accompanied by reduced trade winds, lowered thermocline depth in the west, and suppressed eastern upwelling. La Niña represents the cold phase, characterized by cooler-than-average ocean temperatures (-0.5°C or lower departure), intensified easterly trade winds, a shallower thermocline in the east, and enhanced upwelling. Meteorologically, El Niño typically favors an extended Pacific jet stream and active southern storm tracks in North America, while La Niña drives a more variable, wavy jet stream with colder northern intrusions and enhanced Atlantic hurricane activity.'
+    answer: 'El Niño is the warm phase and La Niña the cool phase of ENSO in the central and eastern equatorial Pacific. El Niño generally has weaker easterly trade winds and a weaker Walker circulation, with tropical rainfall shifted eastward. La Niña generally has stronger easterly trades, a stronger Walker circulation and cooler waters farther east. The trades help move warm surface water westward; La Niña does not simply push a pool of cold water west across the ocean. Phase classification depends on the index, averaging period, persistence and atmospheric response, rather than a single ±0.5°C weekly reading. Regional effects vary with season and location, and are not always exact opposites.'
   },
   {
     id: 'alerts-explained',
@@ -92,7 +92,7 @@ const faqSchema = {
 
 <Layout
   title="ENSO FAQ: El Niño, La Niña & Climate Index Questions"
-  description="Authoritative, scientifically grounded answers to the most common questions about El Niño, La Niña, Niño 3.4 anomalies, NOAA alerts, and seasonal climate impacts."
+  description="Source-linked answers to common questions about El Niño, La Niña, Niño 3.4 anomalies, NOAA alerts, and seasonal climate impacts."
   active="faq"
   extraSchema={faqSchema}
 >
@@ -101,7 +101,7 @@ const faqSchema = {
       <div>
         <span class="eyebrow">FREQUENTLY ASKED QUESTIONS · CLIMATE CONTEXT</span>
         <h1>Understanding ENSO.<br /><span>Clear answers to complex science.</span></h1>
-        <p>Authoritative guidance on oceanic indices, NOAA diagnostic alert criteria, and seasonal climate teleconnections.</p>
+        <p>Source-linked explanations of oceanic indices, NOAA alert criteria, and seasonal climate influences.</p>
       </div>
     </div>
 
@@ -138,6 +138,7 @@ const faqSchema = {
             </summary>
             <div class="faq-answer">
               <p>{faq.answer}</p>
+              {['enso-basics', 'el-nino-vs-la-nina'].includes(faq.id) && <p>Mechanism reviewed November 12, 2026. Read our <a href="/methodology/#ocean-atmosphere-heading">ocean–atmosphere coupling guide</a>, with <a href="https://www.weather.gov/fwd/basics">NWS source explanation</a>.</p>}
               {faq.id === 'alerts-explained' && <p>Source: <a href="https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_advisory/enso-alert-readme.shtml" target="_blank" rel="noreferrer">CPC ENSO Alert System definitions</a>, checked November 12, 2026.</p>}
               <div class="faq-footer">
                 <a class="faq-anchor-link" href={`#${faq.id}`} title="Direct link to this question">Direct link #</a>

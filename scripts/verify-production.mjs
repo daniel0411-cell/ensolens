@@ -99,6 +99,11 @@ for (const path of paths) {
     assert.equal($('a[href$="wksst9120.for"]').length, 1);
   }
   if (path === '/winter-outlook/') {
+    assert.equal($('#forecast-horizon-heading').length, 1);
+    assert.equal($('#winter-variability-heading').length, 1);
+    for (const product of ['WK34', '610day', '814day', '30day']) {
+      assert.equal($('a[href="https://www.cpc.ncep.noaa.gov/products/predictions/' + product + '/"]').length, 1);
+    }
     assert.equal($('.outlook-maps img').length, 2);
     for (const image of $('.outlook-maps img').toArray()) {
       const asset = await request($(image).attr('src'));
@@ -106,6 +111,15 @@ for (const path of paths) {
       assert.match(asset.headers.get('content-type'), /image\/gif/);
       assert.ok((await asset.arrayBuffer()).byteLength > 10000);
     }
+  }
+  if (path === '/impacts/california-snow-vs-rain/') {
+    assert.equal($('#swe-percent-heading').length, 1);
+    assert.match($('main').text(), /Hypothetical example/);
+    assert.equal($('a[href="https://www.drought.gov/topics/snow-drought"]').length, 1);
+  }
+  if (path === '/impacts/pacific-northwest-winter/') {
+    assert.equal($('#snow-drought-heading').length, 1);
+    assert.equal($('a[href="/impacts/california-snow-vs-rain/#swe-percent-heading"]').length, 1);
   }
   if (path === '/') {
     const forecast = JSON.parse($('#forecast-data').text());
@@ -150,9 +164,9 @@ for (const entry of sitemapXml('url').toArray()) {
     assert.ok(Date.parse(modified) <= Date.now(), 'Sitemap dates must not be in the future');
   }
 }
-for (const path of ['/', '/forecast/', '/forecast/when-will-it-end/', '/faq/', '/historical/', '/winter-outlook/', '/impacts/', '/impacts/pacific-northwest-winter/', '/forecast/enso-neutral/']) {
+for (const path of ['/', '/forecast/', '/forecast/when-will-it-end/', '/faq/', '/historical/', '/winter-outlook/', '/impacts/', '/impacts/california-snow-vs-rain/', '/impacts/pacific-northwest-winter/', '/forecast/enso-neutral/']) {
   const entry = sitemapXml('url').filter((_, element) => sitemapXml(element).find('loc').text() === host + path);
-  const expected = path === '/winter-outlook/' ? '2026-11-08' : '2026-11-12';
+  const expected = '2026-11-12';
   assert.equal(entry.find('lastmod').text(), expected);
 }
 const missing = await request('/missing-page-check/');

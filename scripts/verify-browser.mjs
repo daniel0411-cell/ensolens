@@ -156,6 +156,20 @@ try {
       assert.equal(response.status(), 200, path);
       assert.doesNotMatch(await page.content(), /hurricanetracker\.cc|hurricanehub|Hurricane Tracker|same independent builder|same publisher as/i, path);
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), true, path + ' overflow at ' + width);
+      const editorialSections = {
+        '/winter-outlook/': ['forecast-horizon-heading', 'winter-variability-heading'],
+        '/impacts/california-snow-vs-rain/': ['swe-percent-heading'],
+        '/impacts/pacific-northwest-winter/': ['snow-drought-heading'],
+      };
+      for (const id of editorialSections[path] ?? []) {
+        const heading = page.locator('#' + id);
+        assert.equal(await heading.count(), 1);
+        await heading.evaluate(element => element.scrollIntoView());
+        const bounds = await heading.boundingBox();
+        assert.ok(bounds && bounds.y >= 90, 'Editorial anchor must clear the sticky header');
+        await page.screenshot({ path: fileURLToPath(new URL(id + '-' + width + '.png', output)) });
+      }
+      await page.evaluate(() => window.scrollTo(0, 0));
       if (['/impacts/', '/impacts/pacific-northwest-winter/', '/forecast/enso-neutral/'].includes(path)) {
         assert.equal(await page.locator('h1').count(), 1);
         for (const img of await page.locator('main img').all()) {

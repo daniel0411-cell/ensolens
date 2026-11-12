@@ -2,6 +2,12 @@
 
 Updated: 2026-11-12 (Asia/Shanghai)
 
+## Forecast horizon and snow interpretation (November 12)
+
+- Expanded three existing guides: winter forecast-product selection and ensemble variability; California SWE percentages and comparison baselines; Northwest warm/dry snow drought. Saved October 15 winter maps and November 8 map review retained, separate from November 12 evergreen additions. No new route, numerical regional forecast, data feed or recurring publication workload.
+- Official CPC destination links and valid periods verified in the background browser; source notes saved in CONTENT-SOURCES-2026-11-12.md. Independent read-only scientific review found no actionable issues; reviewer did not independently reopen sources, run tests or inspect layouts. Requested product-verification documentation has been added.
+- Type checks passed across 47 files (zero errors/warnings, two existing icon hints), all 16 tests and build passed. Real local Worker NOAA refresh/KV persistence, RSS and desktop 1440px/mobile 390px browser suites passed. New section screenshots inspected at both widths; no overflow or heading occlusion. Focused section/link/sitemap release assertions added. Code push, full deployment gate and production verification pending at this checkpoint.
+
 ## Next content research checkpoint (November 12)
 
 - Research only: verified NOAA winter precipitation/internal variability (November 30, 2023), MJO explainer (December 31, 2014), NOAA atmospheric-river definitions (updated February 21, 2025) and Drought.gov snow-drought/SWE interpretation. Archived articles and stale embedded snow-map dates are explicitly flagged in CONTENT-SOURCES-2026-11-12.md.

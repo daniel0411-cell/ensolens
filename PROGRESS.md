@@ -6,7 +6,10 @@ Updated: 2026-11-12 (Asia/Shanghai)
 
 - Added forecast guidance on leading category versus majority, overlapping three-month seasons, same-target/year revisions, percentage points, expert assessment and approximate zero probabilities. Explicit teaching examples are separate from live official data. Homepage now explains differences between assessment, weekly observations, seasonal RONI, forecast issue dates, retrieval checks and scheduled releases.
 - Reopened CPC probability/outlook and discussion pages in the background browser; still October products at review. No November values inferred. Source note appended to CONTENT-SOURCES-2026-11-12.md. Forecast editorial sitemap date advances; homepage already dated November 12.
-- Independent code/source-note review found no actionable issues; reviewer did not independently reopen sources or run build/browser checks. Added section screenshots and focused production assertions. Full release gate and deployment pending.
+- Independent code/source-note review found no actionable issues; reviewer did not independently reopen sources or run build/browser checks. Added section screenshots and focused production assertions.
+- Code `28b23d8` pushed to `origin/master`; remote SHA verified. Full `npm run deploy` gate passed: 45-file type check (zero errors/warnings, two existing icon hints), 14 tests, build, real local Worker NOAA refresh/KV validation, RSS and 1440px/390px browser checks.
+- Released version `0a414149-937a-4722-9cd2-6b5b6923c018`, deployment `243ba060-5066-4243-b521-e8f4a0991ad0`, activated November 12 at 17:23:36 Asia/Shanghai with 100% traffic, confirmed by actual Wrangler output. Both domains, schedule, indexing enabled and contact disabled remain configured.
+- Post-release verification passed all 14 pages, new content/link assertions, sitemap dates, data health, RSS, assets and redirects. Fresh live desktop/mobile browser suites passed. Section screenshots inspected; an element screenshot captured the sticky header over the mobile heading, so additional direct-anchor viewport checks confirmed the actual linked heading clears the header at both widths (top approximately 100px). Live anchor screenshots inspected. GSC/Bing ranking or traffic effects of this update are not established.
 
 ## Regional impacts and neutral-phase guides (November 12)
 

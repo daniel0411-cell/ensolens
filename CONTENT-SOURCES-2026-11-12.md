@@ -31,8 +31,6 @@ Verified November 12, 2026 in the background in-app browser. New evergreen guide
 - Equal chances versus near-normal and category probabilities follow the November 8 verified seasonal-map review (CONTENT-SOURCES-2026-11-08.md); no new regional probabilities introduced.
 - Neutral probabilities refer to target seasons, not share of neutral days or a city's chance of normal weather. No automatic neutral-to-La Nina succession is asserted.
 
-## Scope and maintenance
-
 ## Follow-up: probability reading and status clocks
 
 - Background browser recheck November 12, 2026, approximately 17:18 Asia/Shanghai: https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/probabilities/ and /enso/roni/outlook/ still show October 2026. The discussion URL above still shows October 8, with November 12 scheduled. No new November values used.

@@ -3,7 +3,7 @@ import { load } from 'cheerio/slim';
 
 const indexable = process.env.ENSOLENS_EXPECT_INDEXING === 'true';
 const host = 'https://ensolens.com';
-const paths = ['/', '/forecast/', '/forecast/when-will-it-end/', '/forecast/enso-neutral/', '/impacts/', '/impacts/california-snow-vs-rain/', '/impacts/pacific-northwest-winter/', '/historical/', '/faq/', '/winter-outlook/', '/hurricane-connection/', '/methodology/', '/about/', '/privacy/'];
+const paths = ['/learn/', '/learn/kelvin-waves-and-enso/', '/learn/soi-vs-ocean-indices/', '/learn/nino-regions-explained/', '/learn/enso-and-climate-change/', '/learn/marine-heatwaves-vs-el-nino/', '/learn/el-nino-and-drought-recovery/', '/learn/enso-jet-stream-teleconnections/', '/learn/enso-model-plumes-and-probabilities/', '/learn/climate-normals-and-anomalies/', '/learn/how-enso-is-observed/', '/', '/forecast/', '/forecast/when-will-it-end/', '/forecast/enso-neutral/', '/impacts/', '/impacts/california-snow-vs-rain/', '/impacts/pacific-northwest-winter/', '/historical/', '/faq/', '/winter-outlook/', '/hurricane-connection/', '/methodology/', '/about/', '/privacy/'];
 async function request(path, options = {}) {
   return fetch(path.startsWith('http') ? path : host + path, { signal: AbortSignal.timeout(30000), ...options });
 }
@@ -38,6 +38,19 @@ for (const path of paths) {
       assert.ok($('main').text().includes(item.name));
       assert.ok($('main').text().includes(item.acceptedAnswer.text));
     }
+  }
+  if (path === '/learn/') assert.equal($('.library-grid article').length, 10);
+  if (path.startsWith('/learn/') && path !== '/learn/') {
+    assert.equal($('h1').length, 1);
+    assert.equal($('.guide-section').length, 4);
+    assert.equal($('.checklist li').length, 3);
+    const article = JSON.parse($('script[type="application/ld+json"]').last().text());
+    assert.equal(article['@type'], 'Article');
+    assert.equal(article.headline, $('h1').text());
+    assert.equal(article.datePublished, '2026-11-12');
+    assert.equal(article.url, host + path);
+    assert.deepEqual(article.citation, $('.sources a').toArray().map(el => $(el).attr('href')));
+    for (const el of $('main a[href^="/"]').toArray()) assert.ok(paths.includes($(el).attr('href').split('#')[0]), path + ' unknown internal link');
   }
   assert.doesNotMatch($('main').text(), /illustrative|synthetic|example phase/i);
   if (path === '/forecast/when-will-it-end/') {

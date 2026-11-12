@@ -1,0 +1,6 @@
+---
+import LearningGuide from '../../components/LearningGuide.astro';
+import { guides } from '../../content/guides';
+const guide = guides.find(g => g.slug === 'soi-vs-ocean-indices')!;
+---
+<LearningGuide guide={guide} />

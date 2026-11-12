@@ -2,6 +2,12 @@
 
 Updated: 2026-11-12 (Asia/Shanghai)
 
+## Ten-guide ENSO learning library (November 12)
+
+- Implemented ten original evergreen explanations: Kelvin waves, SOI, Niño regions, ENSO/climate change, marine heatwaves, drought recovery, jet-stream teleconnections, model plumes, climate baselines and observing systems. Added /learn/ with categorized discovery, Article schema, visible source dates, reading checklists and related links. Sitemap now covers 25 routes. Existing dashboard, methods and impacts pages plus footer link to the library. No numerical forecast/feed or release configuration changed.
+- Primary sources verified through background browser research; URLs, observed dates and exclusions recorded in CONTENT-SOURCES-2026-11-12.md. Independent read-only review read all ten drafts and existing related material; corrected SST skin-temperature conflation. Reviewer did not independently reopen sources, run tests or inspect layouts. Some shared forecast-limit context remains intentionally brief and linked to existing regional guides.
+- Type checks across 60 files passed with zero errors/warnings and two pre-existing icon hints; all 16 unit tests and build passed. Real local Worker NOAA refresh/KV persistence, RSS and all 25 routes at 1440px/390px passed; all eleven new-page screenshots inspected at both widths with no overflow or obscured anchor headings. Release and production verification pending. Estimated source/link review for this evergreen batch: 30–45 minutes per quarter, a planning estimate within existing maintenance. Search inclusion and traffic benefits unmeasured.
+
 ## Ocean–atmosphere coupling and FAQ clarity (November 12)
 
 - Added an existing methodology-page explanation of trade winds, upwelling, Walker circulation and coupled feedback across neutral/El Niño/La Niña conditions. Rewrote the first two FAQ answers to remove misleading cold-water transport and thermocline simplifications, distinguish atmospheric response and avoid single-week phase classification. Added source links and internal discovery; FAQ/schema remain generated from the same answer text.

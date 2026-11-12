@@ -1,0 +1,6 @@
+---
+import LearningGuide from '../../components/LearningGuide.astro';
+import { guides } from '../../content/guides';
+const guide = guides.find(g => g.slug === 'kelvin-waves-and-enso')!;
+---
+<LearningGuide guide={guide} />

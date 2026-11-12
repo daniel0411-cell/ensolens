@@ -151,11 +151,22 @@ try {
     await page.screenshot({ path: fileURLToPath(new URL('forecast-' + width + '.png', output)), fullPage: true });
     await page.locator('section[aria-labelledby="wmo-record-heading"]').screenshot({ path: fileURLToPath(new URL('wmo-update-' + width + '.png', output)) });
     await page.locator('section[aria-labelledby="reading-probabilities-heading"]').screenshot({ path: fileURLToPath(new URL('probability-reading-' + width + '.png', output)) });
-    for (const path of ['/forecast/when-will-it-end/', '/forecast/enso-neutral/', '/impacts/', '/impacts/california-snow-vs-rain/', '/impacts/pacific-northwest-winter/', '/historical/', '/faq/', '/winter-outlook/', '/hurricane-connection/', '/methodology/', '/about/', '/privacy/']) {
+    for (const path of ['/learn/', '/learn/kelvin-waves-and-enso/', '/learn/soi-vs-ocean-indices/', '/learn/nino-regions-explained/', '/learn/enso-and-climate-change/', '/learn/marine-heatwaves-vs-el-nino/', '/learn/el-nino-and-drought-recovery/', '/learn/enso-jet-stream-teleconnections/', '/learn/enso-model-plumes-and-probabilities/', '/learn/climate-normals-and-anomalies/', '/learn/how-enso-is-observed/', '/forecast/when-will-it-end/', '/forecast/enso-neutral/', '/impacts/', '/impacts/california-snow-vs-rain/', '/impacts/pacific-northwest-winter/', '/historical/', '/faq/', '/winter-outlook/', '/hurricane-connection/', '/methodology/', '/about/', '/privacy/']) {
       const response = await page.goto(base + path, { waitUntil: 'networkidle' });
       assert.equal(response.status(), 200, path);
       assert.doesNotMatch(await page.content(), /hurricanetracker\.cc|hurricanehub|Hurricane Tracker|same independent builder|same publisher as/i, path);
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), true, path + ' overflow at ' + width);
+      if (path.startsWith('/learn/')) {
+        assert.equal(await page.locator('h1').count(), 1);
+        if (path !== '/learn/') {
+          assert.equal(await page.locator('.guide-section').count(), 4);
+          await page.locator('.contents a').first().click();
+          const bounds = await page.locator('#section-1').boundingBox();
+          assert.ok(bounds && bounds.y >= 90, 'Guide anchor must clear header');
+        } else assert.equal(await page.locator('.library-grid article').count(), 10);
+        await page.evaluate(() => window.scrollTo(0, 0));
+        await page.screenshot({ path: fileURLToPath(new URL(path.slice(1).replaceAll('/', '-') + width + '.png', output)), fullPage: true });
+      }
       const editorialSections = {
         '/methodology/': ['ocean-atmosphere-heading'],
         '/winter-outlook/': ['forecast-horizon-heading', 'winter-variability-heading', 'mjo-enso-heading'],

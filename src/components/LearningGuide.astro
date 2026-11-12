@@ -1,0 +1,47 @@
+---
+import Layout from '../layouts/Layout.astro';
+import type { Guide } from '../content/guides';
+interface Props { guide: Guide }
+const { guide } = Astro.props;
+const url = `https://ensolens.com/learn/${guide.slug}/`;
+const schema = JSON.stringify({ '@context':'https://schema.org', '@type':'Article', headline:guide.title, description:guide.description, url, mainEntityOfPage:url, datePublished:'2026-11-12', dateModified:'2026-11-12', inLanguage:'en', author:{'@type':'Organization',name:'ENSOLens',url:'https://ensolens.com/about/'}, publisher:{'@type':'Organization',name:'ENSOLens',url:'https://ensolens.com/about/'}, citation:guide.sources.map(s=>s.url) }).replace(/</g, '\\u003c');
+---
+<Layout title={guide.title} description={guide.description} active="learn">
+  <article class="guide page-shell">
+    <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true"> / </span><a href="/learn/">ENSO learning library</a></nav>
+    <header><span class="eyebrow">{guide.category}</span><h1>{guide.title}</h1><p class="byline">By <a href="/about/">ENSOLens</a> · Published <time datetime="2026-11-12">November 12, 2026</time> · 4 min read</p></header>
+    <section class="short-answer" aria-labelledby="short-answer-heading"><h2 id="short-answer-heading">The short answer</h2><p>{guide.answer}</p></section>
+    <nav class="contents" aria-label="On this page"><h2>On this page</h2><ol>{guide.sections.map((section,i)=><li><a href={`#section-${i+1}`}>{section.title}</a></li>)}</ol></nav>
+    {guide.sections.map((section,i)=><section class="guide-section" aria-labelledby={`section-${i+1}`}><h2 id={`section-${i+1}`}>{section.title}</h2>{section.paragraphs.map(p=><p>{p}</p>)}</section>)}
+    <section class="checklist" aria-labelledby="checklist-heading"><h2 id="checklist-heading">Before you use the signal</h2><ul>{guide.checklist.map(item=><li>{item}</li>)}</ul></section>
+    <section class="sources" aria-labelledby="sources-heading"><h2 id="sources-heading">Sources and scope</h2><p>Sources checked November 12, 2026. This guide explains enduring concepts; it is not a live forecast. Consult the relevant official weather service for local forecasts and warnings.</p><ul>{guide.sources.map(source=><li><a href={source.url}>{source.title}</a><span>{source.date}</span></li>)}</ul></section>
+    <section class="related" aria-labelledby="related-heading"><h2 id="related-heading">Continue reading</h2><div>{guide.related.map(link=><a href={link.href}>{link.title}<span aria-hidden="true"> →</span></a>)}</div><p><a href="/learn/">Explore all ten guides →</a></p></section>
+  </article>
+  <script type="application/ld+json" set:html={schema}/>
+</Layout>
+<style>
+.guide { max-width: 920px; padding-top: 36px; padding-bottom: 70px; }
+.breadcrumbs,.byline { color: var(--muted); font-size: 14px; }
+.breadcrumbs { margin-bottom: 35px; }
+.guide header h1 { font-size: clamp(32px,4.4vw,54px); line-height: 1.2; margin: 16px 0 24px; }
+.guide a { color: var(--green); text-decoration: underline; text-underline-offset: 4px; }
+.guide h2 { font-size: 27px; line-height: 1.35; margin-bottom: 20px; scroll-margin-top: 110px; }
+.guide p,.guide li { font-size: 17px; line-height: 1.95; }
+.guide .byline { font-size: 14px; }
+.short-answer { background: var(--card); border: 1px solid var(--line-strong); border-left: 3px solid var(--green); border-radius: 10px; padding: 28px; margin-top: 36px; }
+.short-answer h2,.contents h2 { font-size: 21px; }
+.contents { margin: 36px 0; }
+.contents ol { padding-left: 23px; }
+.guide-section { margin: 43px 0; }
+.guide-section p+p { margin-top: 19px; }
+.checklist,.sources,.related { border-top: 1px solid var(--line-strong); padding-top: 32px; margin-top: 38px; }
+.guide ul { padding-left: 24px; }
+.guide li { margin-bottom: 12px; }
+.sources p,.sources li,.sources span { font-size: 14px; color: var(--muted); line-height: 1.8; }
+.sources span { display: block; }
+.sources a { overflow-wrap: anywhere; }
+.related>div { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.related>div a { display: block; border: 1px solid var(--line-strong); border-radius: 10px; padding: 22px; }
+.related>p { margin-top: 24px; }
+@media(max-width:650px) { .guide p,.guide li { font-size: 16px; } .guide h2 { font-size: 24px; } .short-answer { padding: 22px; } .related>div { grid-template-columns: 1fr; } }
+</style>

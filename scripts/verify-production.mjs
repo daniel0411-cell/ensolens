@@ -20,6 +20,8 @@ for (const path of paths) {
     assert.match($('title').text(), /Current ENSO Status: El Niño & La Niña Tracker/);
     assert.match($('.page-intro p').text(), /NOAA CPC reports .+ discussion\..+Niño 3.4.+Next scheduled discussion:/);
     assert.equal($('.sister-project-banner').length, 0);
+    assert.equal($('#status-reading-heading').length, 1);
+    assert.equal($('a[href="/forecast/#reading-probabilities-heading"]').length, 1);
     assert.equal($('.scenario-card a[href="/impacts/california-snow-vs-rain/"]').length, 1);
     assert.equal($('.scenario-card a[href="/hurricane-connection/"]').length, 0);
     for (const href of ['/impacts/', '/impacts/pacific-northwest-winter/', '/forecast/enso-neutral/']) assert.ok($(`main a[href="${href}"]`).length, href + ' must be discoverable from homepage');
@@ -52,6 +54,8 @@ for (const path of paths) {
     }
   }
   if (path === '/forecast/') {
+    assert.equal($('#reading-probabilities-heading').length, 1);
+    assert.match($('section[aria-labelledby="reading-probabilities-heading"]').text(), /teaching example, not a current CPC forecast/);
     assert.equal($('#wmo-record-heading').text(), 'Will this El Niño be the strongest on record?');
     assert.match($('section[aria-labelledby="wmo-record-heading"]').text(), /November 9, 2026.+not confirmation/s);
     assert.equal($('section[aria-labelledby="wmo-record-heading"] a[href="https://wmo.int/news/media-centre/state-of-climate-2026-gives-new-meaning-phrase-charts"]').length, 1);
@@ -128,7 +132,7 @@ for (const entry of sitemapXml('url').toArray()) {
 }
 for (const path of ['/', '/forecast/', '/faq/', '/winter-outlook/', '/impacts/', '/impacts/pacific-northwest-winter/', '/forecast/enso-neutral/']) {
   const entry = sitemapXml('url').filter((_, element) => sitemapXml(element).find('loc').text() === host + path);
-  const expected = path === '/winter-outlook/' ? '2026-11-08' : ['/forecast/', '/faq/'].includes(path) ? '2026-11-10' : '2026-11-12';
+  const expected = path === '/winter-outlook/' ? '2026-11-08' : path === '/faq/' ? '2026-11-10' : '2026-11-12';
   assert.equal(entry.find('lastmod').text(), expected);
 }
 const missing = await request('/missing-page-check/');

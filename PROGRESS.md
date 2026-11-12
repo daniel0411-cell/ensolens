@@ -2,6 +2,12 @@
 
 Updated: 2026-11-12 (Asia/Shanghai)
 
+## Probability reading and status clocks (November 12)
+
+- Added forecast guidance on leading category versus majority, overlapping three-month seasons, same-target/year revisions, percentage points, expert assessment and approximate zero probabilities. Explicit teaching examples are separate from live official data. Homepage now explains differences between assessment, weekly observations, seasonal RONI, forecast issue dates, retrieval checks and scheduled releases.
+- Reopened CPC probability/outlook and discussion pages in the background browser; still October products at review. No November values inferred. Source note appended to CONTENT-SOURCES-2026-11-12.md. Forecast editorial sitemap date advances; homepage already dated November 12.
+- Independent code/source-note review found no actionable issues; reviewer did not independently reopen sources or run build/browser checks. Added section screenshots and focused production assertions. Full release gate and deployment pending.
+
 ## Regional impacts and neutral-phase guides (November 12)
 
 - Added /impacts/ regional index, /impacts/pacific-northwest-winter/ and /forecast/enso-neutral/. Explains regional tendencies, mountain versus lowland snow, runoff limits and neutral versus near-normal/EC without new numerical regional forecasts.

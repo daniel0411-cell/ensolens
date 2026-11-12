@@ -33,6 +33,16 @@ Verified November 12, 2026 in the background in-app browser. New evergreen guide
 
 ## Scope and maintenance
 
+## Follow-up: probability reading and status clocks
+
+- Background browser recheck November 12, 2026, approximately 17:18 Asia/Shanghai: https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/probabilities/ and /enso/roni/outlook/ still show October 2026. The discussion URL above still shows October 8, with November 12 scheduled. No new November values used.
+- CPC probabilities: nine overlapping three-month seasons, three alternative phases, expert assessment combining observations and multiple models, RONI verification and 1991-2020 baseline. Published 0% is approximate, not exact.
+- New forecast text explains largest category versus majority, overlapping DJF/JFM windows, same-target/year revisions and percentage points. 45/40/15 and 60-to-70 are explicitly teaching examples, never official forecast values or chart inputs. No multiplication of dependent seasonal probabilities.
+- Homepage distinguishes official coupled-system assessment, weekly observation, three-month relative index, issue date, retrieval check and scheduled release. Index methodology follows the previously verified CPC RONI review in CONTENT-SOURCES-2026-11-10.md; no calculation or feed change.
+- Direction follows the owner's authorized GSC review: visible queries concerned forecasts/status/probabilities, but the sample is too small to establish stable demand or a ranking effect. No new route or recurring editorial workload introduced.
+
+## Regional batch scope
+
 Three new routes: /impacts/, /impacts/pacific-northwest-winter/, /forecast/enso-neutral/. Existing pages get contextual inbound links. Homepage regional card now covers Northwest snowpack. Sitemap dates advance for new pages and substantive homepage edit; link-only edits retain existing content dates.
 
 Quarterly source/link review expected to take about 15-20 minutes for this batch. No new recurring publication schedule, city-page series or automated data product.

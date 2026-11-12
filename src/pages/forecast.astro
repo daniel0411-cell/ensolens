@@ -90,6 +90,20 @@ const comparisonRows = forecast.rows.map(row => {
     <!-- Interactive Probability Chart -->
     <ForecastChart expanded snapshot={snapshot} />
 
+    <section class="lifecycle-section" aria-labelledby="reading-probabilities-heading">
+      <span class="eyebrow">READING THE ENSO FORECAST</span>
+      <h2 id="reading-probabilities-heading">How to read El Niño, neutral and La Niña probabilities</h2>
+      <p class="body-copy">Read all three probabilities in one row, together with the issue date and target season. They describe alternative ENSO states for that season. They are not the share of days in each state, the percentage of forecast models voting for it, or the chance of a local weather impact.</p>
+      <h3>Does the largest probability mean more likely than not?</h3>
+      <p class="body-copy">Not always. In a <strong>teaching example, not a current CPC forecast</strong>, El Niño at 45%, neutral at 40% and La Niña at 15% makes El Niño the most likely single category. But the other two categories together have a 55% chance. The leading category need not have a majority; retain the alternatives when describing the outlook.</p>
+      <h3>Why do the target seasons overlap?</h3>
+      <p class="body-copy">DJF means December–January–February; JFM means January–February–March. They share January and February, so adjacent rows are related seasonal windows, not independent monthly forecasts. Do not add their probabilities or interpret a difference between rows as the change expected in one particular month. Keep the year in view when a season crosses December.</p>
+      <h3>What counts as a month-to-month forecast change?</h3>
+      <p class="body-copy">Compare the same target season and year across two issue dates. A teaching example of 60% becoming 70% is a rise of <strong>10 percentage points</strong>, not 10%. A lower El Niño probability does not by itself mean La Niña is next: check whether neutral, La Niña or both gained probability. The <a href="#comparison-heading">fixed-target comparison</a> below preserves missing estimates instead of treating them as zero.</p>
+      <p class="body-copy">CPC combines observations and multiple models in an expert assessment. Its published 0% is approximate rather than an absolute impossibility. Phase probability also differs from <a href="#strength-heading">event-strength probability</a>; for local seasonal weather, use the <a href="/winter-outlook/">regional outlook</a>.</p>
+      <p class="figure-note">Definitions checked November 12, 2026: <a href="https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/probabilities/" target="_blank" rel="noreferrer">CPC ENSO probabilities</a>. The numerical teaching examples above remain separate from the live official table.</p>
+    </section>
+
     <section class="lifecycle-section" aria-labelledby="super-el-nino-heading">
       <span class="eyebrow">READING ENSO STRENGTH</span>
       <h2 id="super-el-nino-heading">What is a super El Niño?</h2>
@@ -274,9 +288,10 @@ const comparisonRows = forecast.rows.map(row => {
   <script>import { initCharts } from '../scripts/charts'; initCharts();</script>
 </Layout>
 <style>
-  #strength-heading, #super-el-nino-heading, #wmo-record-heading { scroll-margin-top: 100px; }
+  #strength-heading, #super-el-nino-heading, #wmo-record-heading, #reading-probabilities-heading, #comparison-heading { scroll-margin-top: 100px; }
   #strength-table { min-width: 720px; }
   #strength-table th, #strength-table td { white-space: nowrap; }
   section[aria-labelledby="strength-heading"] .figure-note,
+  section[aria-labelledby="reading-probabilities-heading"] .figure-note,
   section[aria-labelledby="super-el-nino-heading"] .figure-note { display: block; }
 </style>

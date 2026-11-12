@@ -105,6 +105,7 @@ try {
       assert.equal(await page.locator('#mobile-navigation').isVisible(), true);
       await page.getByRole('button', { name: 'Close navigation', exact: true }).click();
     }
+    await page.locator('section[aria-labelledby="status-reading-heading"]').screenshot({ path: fileURLToPath(new URL('status-reading-' + width + '.png', output)) });
     await page.screenshot({ path: fileURLToPath(new URL('dashboard-' + width + '.png', output)), fullPage: true });
     await page.evaluate(() => window.scrollTo(0, 0));
     await page.screenshot({ path: fileURLToPath(new URL('dashboard-' + width + '-viewport.png', output)), fullPage: false });
@@ -149,6 +150,7 @@ try {
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), true, 'Forecast overflow at ' + width);
     await page.screenshot({ path: fileURLToPath(new URL('forecast-' + width + '.png', output)), fullPage: true });
     await page.locator('section[aria-labelledby="wmo-record-heading"]').screenshot({ path: fileURLToPath(new URL('wmo-update-' + width + '.png', output)) });
+    await page.locator('section[aria-labelledby="reading-probabilities-heading"]').screenshot({ path: fileURLToPath(new URL('probability-reading-' + width + '.png', output)) });
     for (const path of ['/forecast/when-will-it-end/', '/forecast/enso-neutral/', '/impacts/', '/impacts/california-snow-vs-rain/', '/impacts/pacific-northwest-winter/', '/historical/', '/faq/', '/winter-outlook/', '/hurricane-connection/', '/methodology/', '/about/', '/privacy/']) {
       const response = await page.goto(base + path, { waitUntil: 'networkidle' });
       assert.equal(response.status(), 200, path);

@@ -1,6 +1,14 @@
 # ENSOLens Delivery Status
 
-Updated: 2026-11-10 (Asia/Shanghai)
+Updated: 2026-11-12 (Asia/Shanghai)
+
+## Regional impacts and neutral-phase guides (November 12)
+
+- Added /impacts/ regional index, /impacts/pacific-northwest-winter/ and /forecast/enso-neutral/. Explains regional tendencies, mountain versus lowland snow, runoff limits and neutral versus near-normal/EC without new numerical regional forecasts.
+- Verified USDA and NWS primary sources in the background browser; notes and attributed local image provenance saved in CONTENT-SOURCES-2026-11-12.md. USDA's old La Nina outlook is explicitly excluded from current claims. NOAA discussion page still showed October 8 at review; no November numbers invented. Production API reported healthy feeds.
+- Homepage card and contextual links connect new routes with forecast, winter, lifecycle and California guides. Sitemap adds three entries dated November 12 and advances the substantive homepage edit; link-only edits retain their prior dates. Added release checks for new routes, FAQ parity, image decoding/dimensions, keyboard table scrolling and screenshots.
+- Independent review identified incorrect image dimensions and incomplete discovery wiring during implementation; both corrected. Final code/source-note review found no remaining actionable issues; reviewer did not independently reopen primary sources or run build/browser checks.
+- Preparatory verification passed: 45-file type check (zero errors/warnings, two existing icon hints), 14 tests, build, real local Worker NOAA refresh/KV validation, RSS and 1440px/390px browser checks. New page screenshots inspected. Full release gate and production verification pending.
 
 ## WMO December record forecast interpretation (November 10)
 

@@ -149,11 +149,29 @@ try {
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), true, 'Forecast overflow at ' + width);
     await page.screenshot({ path: fileURLToPath(new URL('forecast-' + width + '.png', output)), fullPage: true });
     await page.locator('section[aria-labelledby="wmo-record-heading"]').screenshot({ path: fileURLToPath(new URL('wmo-update-' + width + '.png', output)) });
-    for (const path of ['/forecast/when-will-it-end/', '/impacts/california-snow-vs-rain/', '/historical/', '/faq/', '/winter-outlook/', '/hurricane-connection/', '/methodology/', '/about/', '/privacy/']) {
+    for (const path of ['/forecast/when-will-it-end/', '/forecast/enso-neutral/', '/impacts/', '/impacts/california-snow-vs-rain/', '/impacts/pacific-northwest-winter/', '/historical/', '/faq/', '/winter-outlook/', '/hurricane-connection/', '/methodology/', '/about/', '/privacy/']) {
       const response = await page.goto(base + path, { waitUntil: 'networkidle' });
       assert.equal(response.status(), 200, path);
       assert.doesNotMatch(await page.content(), /hurricanetracker\.cc|hurricanehub|Hurricane Tracker|same independent builder|same publisher as/i, path);
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), true, path + ' overflow at ' + width);
+      if (['/impacts/', '/impacts/pacific-northwest-winter/', '/forecast/enso-neutral/'].includes(path)) {
+        assert.equal(await page.locator('h1').count(), 1);
+        for (const img of await page.locator('main img').all()) {
+          assert.equal(await img.evaluate(el => el.complete && el.naturalWidth > 500 && Number(el.getAttribute('width')) === el.naturalWidth && Number(el.getAttribute('height')) === el.naturalHeight), true, 'Guide image must decode and reserve its actual aspect ratio');
+        }
+        const table = page.locator('.probability-table-wrap');
+        if (await table.count()) {
+          await table.focus();
+          const needsScroll = await table.evaluate(el => el.scrollWidth > el.clientWidth);
+          if (needsScroll) {
+            await page.keyboard.press('ArrowRight');
+            await page.waitForFunction(() => document.querySelector('.probability-table-wrap').scrollLeft > 0);
+          }
+        }
+        await page.evaluate(() => window.scrollTo(0, 0));
+        const name = path === '/impacts/' ? 'impacts' : path.includes('northwest') ? 'northwest' : 'neutral';
+        await page.screenshot({ path: fileURLToPath(new URL(name + '-' + width + '.png', output)), fullPage: true });
+      }
       if (path === '/winter-outlook/') {
         const maps = page.locator('.outlook-maps img');
         assert.equal(await maps.count(), 2);

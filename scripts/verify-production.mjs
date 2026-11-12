@@ -3,7 +3,7 @@ import { load } from 'cheerio/slim';
 
 const indexable = process.env.ENSOLENS_EXPECT_INDEXING === 'true';
 const host = 'https://ensolens.com';
-const paths = ['/', '/forecast/', '/forecast/when-will-it-end/', '/impacts/california-snow-vs-rain/', '/historical/', '/faq/', '/winter-outlook/', '/hurricane-connection/', '/methodology/', '/about/', '/privacy/'];
+const paths = ['/', '/forecast/', '/forecast/when-will-it-end/', '/forecast/enso-neutral/', '/impacts/', '/impacts/california-snow-vs-rain/', '/impacts/pacific-northwest-winter/', '/historical/', '/faq/', '/winter-outlook/', '/hurricane-connection/', '/methodology/', '/about/', '/privacy/'];
 async function request(path, options = {}) {
   return fetch(path.startsWith('http') ? path : host + path, { signal: AbortSignal.timeout(30000), ...options });
 }
@@ -22,12 +22,13 @@ for (const path of paths) {
     assert.equal($('.sister-project-banner').length, 0);
     assert.equal($('.scenario-card a[href="/impacts/california-snow-vs-rain/"]').length, 1);
     assert.equal($('.scenario-card a[href="/hurricane-connection/"]').length, 0);
+    for (const href of ['/impacts/', '/impacts/pacific-northwest-winter/', '/forecast/enso-neutral/']) assert.ok($(`main a[href="${href}"]`).length, href + ' must be discoverable from homepage');
   }
   assert.equal($('link[rel=canonical]').attr('href'), host + path);
   assert.match($('meta[name=robots]').attr('content'), indexable ? /^index, follow$/ : /noindex/);
   assert.ok($('meta[name=description]').attr('content')?.length > 20);
   assert.equal(JSON.parse($('script[type="application/ld+json"]').first().text())['@type'], 'WebSite');
-  if (path === '/forecast/when-will-it-end/' || path === '/impacts/california-snow-vs-rain/') {
+  if (['/forecast/when-will-it-end/', '/impacts/california-snow-vs-rain/', '/impacts/pacific-northwest-winter/', '/forecast/enso-neutral/'].includes(path)) {
     const faq = JSON.parse($('script[type="application/ld+json"]').last().text());
     assert.equal(faq['@type'], 'FAQPage');
     assert.equal(faq.mainEntity.length, 3);
@@ -37,6 +38,19 @@ for (const path of paths) {
     }
   }
   assert.doesNotMatch($('main').text(), /illustrative|synthetic|example phase/i);
+  if (path === '/impacts/' || path === '/impacts/pacific-northwest-winter/' || path === '/forecast/enso-neutral/') {
+    assert.equal($('h1').length, 1);
+    assert.match($('.eyebrow').first().text(), /NOVEMBER 12, 2026/);
+    for (const element of $('main a[href^="/"]').toArray()) {
+      const target = $(element).attr('href').split('#')[0];
+      assert.ok(paths.includes(target) || target.startsWith('/images/'), path + ' has an unknown internal destination: ' + target);
+    }
+    for (const element of $('main img').toArray()) {
+      const asset = await request($(element).attr('src'));
+      assert.equal(asset.status, 200);
+      assert.match(asset.headers.get('content-type'), /image\/jpeg/);
+    }
+  }
   if (path === '/forecast/') {
     assert.equal($('#wmo-record-heading').text(), 'Will this El Niño be the strongest on record?');
     assert.match($('section[aria-labelledby="wmo-record-heading"]').text(), /November 9, 2026.+not confirmation/s);
@@ -112,9 +126,10 @@ for (const entry of sitemapXml('url').toArray()) {
     assert.ok(Date.parse(modified) <= Date.now(), 'Sitemap dates must not be in the future');
   }
 }
-for (const path of ['/', '/forecast/', '/faq/', '/winter-outlook/']) {
+for (const path of ['/', '/forecast/', '/faq/', '/winter-outlook/', '/impacts/', '/impacts/pacific-northwest-winter/', '/forecast/enso-neutral/']) {
   const entry = sitemapXml('url').filter((_, element) => sitemapXml(element).find('loc').text() === host + path);
-  assert.equal(entry.find('lastmod').text(), path === '/winter-outlook/' ? '2026-11-08' : '2026-11-10');
+  const expected = path === '/winter-outlook/' ? '2026-11-08' : ['/forecast/', '/faq/'].includes(path) ? '2026-11-10' : '2026-11-12';
+  assert.equal(entry.find('lastmod').text(), expected);
 }
 const missing = await request('/missing-page-check/');
 assert.equal(missing.status, 404);

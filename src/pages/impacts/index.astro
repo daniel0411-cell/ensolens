@@ -1,0 +1,29 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { ArrowUpRight, CloudRain, Snowflake, Thermometer } from '@lucide/astro';
+---
+<Layout title="El Niño & La Niña Impacts: U.S. Regional Guides" active="winter" description="Compare ENSO winter tendencies across U.S. regions, then find California rain and snow, Pacific Northwest snowpack and dated seasonal outlook guides.">
+  <div class="page-shell subpage lifecycle-page">
+    <div class="page-intro"><div><span class="eyebrow">REGIONAL ENSO GUIDES · REVIEWED NOVEMBER 12, 2026</span><h1>El Niño &amp; La Niña<br /><span>regional impacts.</span></h1><p>Start with a regional tendency, then check the season, elevation and local forecast that matter to your decision.</p></div></div>
+    <section class="regional-section" aria-labelledby="guides-heading"><h2 id="guides-heading">Choose your region or question</h2><div class="regional-grid">
+      <article><CloudRain size={24} /><h3>California rain or Sierra snow?</h3><p>A wetter outlook cannot determine the snow line. Separate storm precipitation, resort snowfall and water stored in the snowpack.</p><a href="/impacts/california-snow-vs-rain/">California rain and snow <ArrowUpRight size={13} /></a></article>
+      <article><Snowflake size={24} /><h3>Pacific Northwest winters</h3><p>How El Niño and La Niña can shift winter conditions in Washington, Oregon and Idaho, and why mountain snow differs from city snow.</p><a href="/impacts/pacific-northwest-winter/">Northwest winter and snowpack <ArrowUpRight size={13} /></a></article>
+      <article><Thermometer size={24} /><h3>U.S. winter 2026–27</h3><p>The saved October 15, 2026 CPC maps for December–February, with category probabilities and regional interpretation.</p><a href="/winter-outlook/">Dated U.S. winter outlook <ArrowUpRight size={13} /></a></article>
+    </div></section>
+    <section class="lifecycle-section"><h2>How do U.S. winter tendencies compare?</h2><p class="body-copy">These are broad late-fall and winter relationships described by the National Weather Service, not a forecast for a particular winter. The relationship varies by region and event; La Niña is not an exact mirror of El Niño.</p>
+      <div class="probability-table-wrap" role="region" aria-label="Broad U.S. ENSO winter tendencies" tabindex="0"><table class="data-table"><caption>Historical tendencies · no local numerical probabilities assigned</caption><thead><tr><th scope="col">Region</th><th scope="col">El Niño tendency</th><th scope="col">La Niña tendency</th><th scope="col">What still needs a forecast?</th></tr></thead><tbody>
+        <tr><th scope="row">Pacific Northwest</th><td>Warmer; often drier</td><td>Cooler; can be wetter</td><td>Snow levels, storm totals and runoff</td></tr>
+        <tr><th scope="row">Northern U.S.</th><td>Warmer seasonal conditions</td><td>Cooler seasonal conditions</td><td>Cold outbreaks and individual snowstorms</td></tr>
+        <tr><th scope="row">Southern U.S.</th><td>More active southern storm track; wetter tendency</td><td>Drier and warmer tendency</td><td>Where and when storms occur</td></tr>
+      </tbody></table></div>
+      <p class="body-copy">An ENSO phase does not settle every regional outlook. In a specific issue, CPC may favor above-, near- or below-normal conditions, or show equal chances. Use the dated regional product rather than treating this table as a replacement.</p>
+    </section>
+    <section class="explanation-grid"><div><h2>Neutral is a third state.</h2><p>ENSO-neutral does not promise near-normal local weather. Other drivers and long-term trends still matter, and regional outlooks can favor a category during neutral conditions.</p><a href="/forecast/enso-neutral/">What ENSO-neutral means</a></div><div><h2>A phase is not a warning.</h2><p>Flooding, heavy snow and dangerous cold can occur in different ENSO phases. Use current National Weather Service forecasts and warnings for travel and safety decisions.</p><a href="https://www.weather.gov/">Local forecasts and warnings</a></div></section>
+    <section class="lifecycle-section"><h2>Sources and scope</h2><p class="body-copy">Sources checked November 12, 2026: <a href="https://www.weather.gov/mhx/ensowhat">NWS ENSO definitions and typical winter circulation</a>; USDA Northwest Climate Hub guides to <a href="https://www.climatehubs.usda.gov/hubs/northwest/topic/el-nino-northwest-what-can-we-expect">El Niño</a> and <a href="https://www.climatehubs.usda.gov/hubs/northwest/topic/la-nina-northwest-what-can-we-expect">La Niña</a>. This index focuses on U.S. winter questions. It does not provide a global hazard forecast. For current ENSO state probabilities, use the <a href="/forecast/">dated CPC forecast</a>.</p></section>
+  </div>
+</Layout>
+<style>
+  .regional-grid a, .explanation-grid a { display: inline-block; margin-top: 14px; color: var(--green); font-size: 13px; }
+  table { min-width: 740px; }
+  th, td { white-space: normal; min-width: 150px; }
+</style>

@@ -101,6 +101,9 @@ for (const path of paths) {
   if (path === '/winter-outlook/') {
     assert.equal($('#forecast-horizon-heading').length, 1);
     assert.equal($('#winter-variability-heading').length, 1);
+    assert.equal($('#mjo-enso-heading').length, 1);
+    assert.equal($('a[href="https://www.cpc.ncep.noaa.gov/products/precip/CWlink/MJO/mjo.shtml"]').length, 1);
+    assert.equal($('a[href="https://www.climate.gov/news-features/blogs/enso/what-mjo-and-why-do-we-care"]').length, 1);
     for (const product of ['WK34', '610day', '814day', '30day']) {
       assert.equal($('a[href="https://www.cpc.ncep.noaa.gov/products/predictions/' + product + '/"]').length, 1);
     }
@@ -114,6 +117,8 @@ for (const path of paths) {
   }
   if (path === '/impacts/california-snow-vs-rain/') {
     assert.equal($('#swe-percent-heading').length, 1);
+    assert.equal($('#atmospheric-river-heading').length, 1);
+    assert.equal($('a[href="https://www.noaa.gov/stories/what-are-atmospheric-rivers"]').length, 1);
     assert.match($('main').text(), /Hypothetical example/);
     assert.equal($('a[href="https://www.drought.gov/topics/snow-drought"]').length, 1);
   }

@@ -157,8 +157,8 @@ try {
       assert.doesNotMatch(await page.content(), /hurricanetracker\.cc|hurricanehub|Hurricane Tracker|same independent builder|same publisher as/i, path);
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), true, path + ' overflow at ' + width);
       const editorialSections = {
-        '/winter-outlook/': ['forecast-horizon-heading', 'winter-variability-heading'],
-        '/impacts/california-snow-vs-rain/': ['swe-percent-heading'],
+        '/winter-outlook/': ['forecast-horizon-heading', 'winter-variability-heading', 'mjo-enso-heading'],
+        '/impacts/california-snow-vs-rain/': ['swe-percent-heading', 'atmospheric-river-heading'],
         '/impacts/pacific-northwest-winter/': ['snow-drought-heading'],
       };
       for (const id of editorialSections[path] ?? []) {

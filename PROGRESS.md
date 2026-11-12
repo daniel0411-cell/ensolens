@@ -2,6 +2,12 @@
 
 Updated: 2026-11-12 (Asia/Shanghai)
 
+## MJO and atmospheric-river explanations (November 12)
+
+- Expanded the existing winter guide with MJO versus ENSO timescales, jet-stream influence and forecast limits; expanded California guidance with atmospheric-river water supply, snow levels, flood conditions and Pineapple Express scope. No new route, live MJO claim or recurring publication workload. Existing November 12 sitemap dates and original winter-map dates retained.
+- Official source pages rechecked in the background browser; notes in CONTENT-SOURCES-2026-11-12.md. Independent read-only scientific review found no blocking issues; adopted the recurrence-timescale wording suggestion. Reviewer did not reopen sources, run tests or inspect layouts.
+- Type checks across 47 files passed with zero errors/warnings and two existing icon hints; all 16 tests and build passed. Focused browser-section and production-source assertions added. Initial preview process exited before verification; clean retry passed real NOAA refresh/KV, RSS and both 1440px/390px browser suites. New section screenshots inspected at both widths with no overflow or heading occlusion. Release and production verification pending.
+
 ## Forecast horizon and snow interpretation (November 12)
 
 - Expanded three existing guides: winter forecast-product selection and ensemble variability; California SWE percentages and comparison baselines; Northwest warm/dry snow drought. Saved October 15 winter maps and November 8 map review retained, separate from November 12 evergreen additions. No new route, numerical regional forecast, data feed or recurring publication workload.

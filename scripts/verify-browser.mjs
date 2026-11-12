@@ -196,6 +196,9 @@ try {
         assert.equal(await page.locator('.faq-item:visible').count(), 0);
         assert.equal(await page.locator('#faq-empty').isVisible(), true);
         await page.locator('#faq-search').fill('');
+        await page.locator('#alerts-explained summary').click();
+        assert.equal(await page.locator('#alerts-explained .faq-answer').isVisible(), true);
+        await page.locator('#alerts-explained').screenshot({ path: fileURLToPath(new URL('faq-alerts-' + width + '.png', output)) });
       }
       if (path === '/historical/') {
         const canvas = page.locator('#analog-chart');
@@ -222,6 +225,15 @@ try {
         assert.equal(analogCsv.split('\r\n').length, expectedRows);
         assert.match(analogCsv, /observation_date/);
         assert.ok(analogCsv.includes(analogData.current.at(-1).date));
+        assert.ok(analogCsv.includes('1997-12-31'));
+        assert.ok(analogCsv.includes('2020-12-30'));
+        assert.equal(await page.locator('#analog-limits-heading').count(), 1);
+        const benchmarkTable = page.getByRole('region', { name: 'Weekly benchmark comparison', exact: true });
+        if (width === 390) {
+          await benchmarkTable.focus();
+          await page.keyboard.press('ArrowRight');
+          await page.waitForFunction(() => document.querySelector('[aria-label="Weekly benchmark comparison"]').scrollLeft > 0);
+        }
         await canvas.screenshot({ path: fileURLToPath(new URL('historical-chart-' + width + '.png', output)) });
         await page.screenshot({ path: fileURLToPath(new URL('historical-' + width + '.png', output)), fullPage: true });
       }

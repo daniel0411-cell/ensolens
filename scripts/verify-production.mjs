@@ -74,9 +74,22 @@ for (const path of paths) {
     for (const item of faq.mainEntity) {
       const visible = $('.faq-item').filter((_, element) => $(element).find('.faq-title').text() === item.name);
       assert.equal(visible.length, 1);
-      assert.equal(visible.find('.faq-answer > p').text(), load(item.acceptedAnswer.text.replace(/<br\s*\/?>/g, '\n')).text());
+      assert.equal(visible.find('.faq-answer > p').first().text(), load(item.acceptedAnswer.text.replace(/<br\s*\/?>/g, '\n')).text());
     }
     assert.equal($('#super-el-nino').length, 1);
+    assert.match($('#alerts-explained').text(), /not a waiting requirement/);
+    assert.equal($('#alerts-explained a[href$="enso-alert-readme.shtml"]').length, 1);
+  }
+  if (path === '/historical/') {
+    const analog = JSON.parse($('#analog-data').text());
+    for (const b of analog.benchmarks) {
+      assert.ok($('.analog-summary-table').text().includes(b.peakDate));
+      assert.equal(b.extreme.anomaly, b.peakAnomaly);
+      assert.equal(b.extreme.date, b.peakDate);
+    }
+    assert.match($('.analog-summary-table').text(), /-1.7°C/);
+    assert.equal($('#analog-limits-heading').length, 1);
+    assert.equal($('a[href$="wksst9120.for"]').length, 1);
   }
   if (path === '/winter-outlook/') {
     assert.equal($('.outlook-maps img').length, 2);
@@ -130,9 +143,9 @@ for (const entry of sitemapXml('url').toArray()) {
     assert.ok(Date.parse(modified) <= Date.now(), 'Sitemap dates must not be in the future');
   }
 }
-for (const path of ['/', '/forecast/', '/faq/', '/winter-outlook/', '/impacts/', '/impacts/pacific-northwest-winter/', '/forecast/enso-neutral/']) {
+for (const path of ['/', '/forecast/', '/faq/', '/historical/', '/winter-outlook/', '/impacts/', '/impacts/pacific-northwest-winter/', '/forecast/enso-neutral/']) {
   const entry = sitemapXml('url').filter((_, element) => sitemapXml(element).find('loc').text() === host + path);
-  const expected = path === '/winter-outlook/' ? '2026-11-08' : path === '/faq/' ? '2026-11-10' : '2026-11-12';
+  const expected = path === '/winter-outlook/' ? '2026-11-08' : '2026-11-12';
   assert.equal(entry.find('lastmod').text(), expected);
 }
 const missing = await request('/missing-page-check/');

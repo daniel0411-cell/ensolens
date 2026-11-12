@@ -44,3 +44,25 @@ Verified November 12, 2026 in the background in-app browser. New evergreen guide
 Three new routes: /impacts/, /impacts/pacific-northwest-winter/, /forecast/enso-neutral/. Existing pages get contextual inbound links. Homepage regional card now covers Northwest snowpack. Sitemap dates advance for new pages and substantive homepage edit; link-only edits retain existing content dates.
 
 Quarterly source/link review expected to take about 15-20 minutes for this batch. No new recurring publication schedule, city-page series or automated data product.
+
+## Follow-up: next editorial priorities
+
+Browser verification November 12, 2026; research only, no public-page changes in this follow-up.
+
+- Search: Google query `NOAA CPC ENSO Alert System Advisory criteria Watch`, followed by the original English primary source: https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_advisory/enso-alert-readme.shtml
+  - Watch: favorable development conditions within six months. Advisory: conditions observed and expected to continue. Final Advisory: conditions have ended. NA: alert system not active.
+  - Conditions combine a one-month relative Nino-3.4 anomaly threshold, expected three-month RONI threshold and an observed atmospheric response. The page footer says June 13, 2018 despite the current RONI wording; verification date is distinct from that footer date.
+  - Existing FAQ adds a five-overlapping-season persistence requirement to the operational Advisory definition. Correct this distinction from retrospective episode classification. The official definition on this page also does not specify the FAQ's approximate 50% Watch threshold.
+- The current discussion URL cited above still displayed the October 8, 2026 issue and a November 12 scheduled release on this recheck. Do not infer publication from the calendar.
+- Historical-page code review: the summary table presents +3.0, +2.3, +2.1 and -1.4 C beside three-month season labels, while the benchmark JSON identifies weekly anomalies. Clarify the metric and use actual weekly peak dates, or separately source seasonal values; numerical accuracy and full data provenance still require verification. The page also calls the CPC outlook a model consensus, inconsistent with the verified expert-assessment explanation.
+- A useful follow-up section can explain why historical strength comparisons do not determine local impacts. The October 8 discussion itself says stronger-event impacts are more likely but not guaranteed and directs readers to CPC seasonal outlooks. Extend existing historical/winter pages rather than duplicate the recently published strength and probability guides.
+- These are editorial priorities, not measured search-volume or ranking forecasts. Previously observed GSC samples are small. No new recurring publication commitment proposed.
+
+## Historical comparison and alert correction implementation
+
+- Primary weekly source opened in the background browser November 12, 2026: https://www.cpc.ncep.noaa.gov/data/indices/wksst9120.for . Subsequently fetched for programmatic comparison of dates, SST and anomalies: all 210 stored observations match (2015: 52; 1997: 53; 2023: 52; 2020: 53). Original retrieval timestamp retained; this is a new verification, not a replacement dataset.
+- Calendar-year extremes in the 1991-2020 conventional weekly series: 2015 +3.0 C, centered November 18; 1997 +2.3 C, centered December 17; 2023 +2.1 C, centered November 22; 2020 -1.7 C, centered October 28. Existing metadata dates for 1997/2023 and value/date for 2020 were inconsistent with their own series and corrected. These are not seasonal RONI peaks or full-episode rankings.
+- Replaced unsupported record/impact attribution and seasonal classifications with calendar-year coverage and data-derived summaries. 2020 explicitly excludes the later winters of the multi-year episode. Historical analog limitations route readers to existing dated winter and evergreen regional guides. No new impact probability or ranking inferred.
+- Corrected chart range to include week 53; current-year positions use January 1 calendar bins rather than index into a potentially partial rolling feed. Month labels remain approximate; tooltip/CSV retain exact observation dates.
+- FAQ operational alert definitions follow the primary CPC alert page above; historical five-season classification is explicitly separate. Source checked November 12; no new source publication date inferred. Historical and FAQ sitemap dates reflect substantive edits today.
+- No new recurring publishing workload; check historical-source and alert links during existing periodic maintenance.

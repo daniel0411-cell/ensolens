@@ -7,14 +7,14 @@
   "benchmarks": [
     {
       "id": "2015",
-      "name": "2015–2016 Super El Niño",
-      "shortName": "2015 Super Niño",
+      "name": "2015 calendar year",
+      "shortName": "2015",
       "category": "el-nino",
-      "type": "Super El Niño",
+      "type": "Warm-year comparison",
       "peakAnomaly": 3,
       "peakDate": "2015-11-18",
       "color": "#f97316",
-      "description": "The strongest weekly anomaly on record (+3.0°C). Produced record-shattering Central Pacific hurricane activity and extreme coral bleaching worldwide.",
+      "description": "The 2015 line rises toward a late-year weekly maximum. Its +3.0°C value belongs to this conventional weekly series, not a seasonal RONI category.",
       "weeks": [
         {
           "week": 1,
@@ -332,14 +332,14 @@
     },
     {
       "id": "1997",
-      "name": "1997–1998 Monster El Niño",
-      "shortName": "1997 Monster Niño",
+      "name": "1997 calendar year",
+      "shortName": "1997",
       "category": "el-nino",
-      "type": "Super El Niño",
+      "type": "Warm-year comparison",
       "peakAnomaly": 2.3,
-      "peakDate": "1997-11-26",
+      "peakDate": "1997-12-17",
       "color": "#eab308",
-      "description": "The benchmark modern El Niño. Fueled historic winter storms across California, torrential flooding in Peru, and widespread Southeast Asian fires.",
+      "description": "The 1997 line changes from negative early-year departures to a December maximum. The following 1998 winter months are outside this calendar-year chart.",
       "weeks": [
         {
           "week": 1,
@@ -663,14 +663,14 @@
     },
     {
       "id": "2023",
-      "name": "2023–2024 Strong El Niño",
-      "shortName": "2023 Strong Niño",
+      "name": "2023 calendar year",
+      "shortName": "2023",
       "category": "el-nino",
-      "type": "Strong El Niño",
+      "type": "Warm-year comparison",
       "peakAnomaly": 2.1,
-      "peakDate": "2023-12-13",
+      "peakDate": "2023-11-22",
       "color": "#ec4899",
-      "description": "Rapidly developed out of a triple-dip La Niña, driving historic global sea surface temperatures and devastating drought across the Amazon basin.",
+      "description": "The 2023 series moves from cold departures to a warm November maximum. This line does not include the 2024 portion of the episode.",
       "weeks": [
         {
           "week": 1,
@@ -988,14 +988,14 @@
     },
     {
       "id": "2020",
-      "name": "2020–2021 La Niña",
-      "shortName": "2020 La Niña",
+      "name": "2020 calendar year",
+      "shortName": "2020",
       "category": "la-nina",
-      "type": "Strong La Niña",
-      "peakAnomaly": -1.4,
-      "peakDate": "2020-11-18",
+      "type": "Cold-year comparison",
+      "peakAnomaly": -1.7,
+      "peakDate": "2020-10-28",
       "color": "#06b6d4",
-      "description": "The first phase of a rare three-year triple-dip La Niña. Intensified the 2020 record Atlantic hurricane season (30 named storms) and Southwestern US drought.",
+      "description": "The 2020 series shifts toward cold departures, reaching its minimum in October. Only 2020 observations are plotted; the later winters of the multi-year La Niña are not shown.",
       "weeks": [
         {
           "week": 1,

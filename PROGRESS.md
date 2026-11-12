@@ -2,6 +2,13 @@
 
 Updated: 2026-11-12 (Asia/Shanghai)
 
+## Historical comparison and alert definitions (November 12)
+
+- Verified all 210 stored historical weekly observations against NOAA CPC wksst9120.for. Corrected 1997/2023 extreme dates and 2020 minimum/date metadata; displayed summaries now derive from the actual series. Calendar-year coverage, weekly conventional anomalies and seasonal RONI are explicitly distinct. Removed unsupported records, seasonal labels and impact attribution. Added historical-analog limitations and links to winter/regional guides.
+- Corrected FAQ Watch, Advisory, Final Advisory and Not Active definitions with the CPC source, separating operational alerts from historical five-season classification. Updated FAQ/historical editorial sitemap dates. No new recurring publishing workload.
+- Fixed chart week-53 clipping and current-year alignment for partial rolling feeds; exact week-centered dates retained in tooltips/CSV. Added focused calendar/metadata regressions and release assertions. Independent reviewer found no actionable issues and independently passed the two historical tests; did not independently reopen primary sources or run full build/browser checks.
+- Initial full gate passed 47-file type checks (zero errors/warnings, two existing icon hints), 16 tests, build, real local Worker NOAA refresh/KV validation, RSS and desktop/mobile suites. Initial upload returned version `8e14a4c1-dac5-451e-ab19-77bf3ac6310c`. Screenshot inspection then identified cramped mobile table/source-note layout; corrected with a scrollable keyboard-accessible table and inline source prose. Final gate and post-release checks are pending at this checkpoint.
+
 ## Probability reading and status clocks (November 12)
 
 - Added forecast guidance on leading category versus majority, overlapping three-month seasons, same-target/year revisions, percentage points, expert assessment and approximate zero probabilities. Explicit teaching examples are separate from live official data. Homepage now explains differences between assessment, weekly observations, seasonal RONI, forecast issue dates, retrieval checks and scheduled releases.

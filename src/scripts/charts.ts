@@ -140,7 +140,7 @@ export function initCharts() {
 
     const currentDataset = {
       label: '2026 (Current)',
-      data: payload.current.map(w => ({ x: w.week, y: w.anomaly })),
+      data: payload.current.map(w => ({ x: w.week, y: w.anomaly, date: w.date })),
       borderColor: '#10b981',
       backgroundColor: 'rgba(16, 185, 129, 0.15)',
       borderWidth: 3,
@@ -152,7 +152,7 @@ export function initCharts() {
 
     const benchmarkDatasets = payload.benchmarks.map((b, i) => ({
       label: b.name,
-      data: b.weeks.map(w => ({ x: w.week, y: w.anomaly })),
+      data: b.weeks.map(w => ({ x: w.week, y: w.anomaly, date: w.date })),
       borderColor: b.color,
       backgroundColor: 'transparent',
       borderWidth: 2,
@@ -180,7 +180,7 @@ export function initCharts() {
             borderWidth: 1,
             callbacks: {
               title: items => 'Week ' + items[0].parsed.x + ' (Annual Progression)',
-              label: ctx => ctx.dataset.label + ': ' + ((ctx.parsed.y ?? 0) > 0 ? '+' : '') + ctx.parsed.y?.toFixed(1) + '°C'
+              label: ctx => ctx.dataset.label + ': ' + ((ctx.parsed.y ?? 0) > 0 ? '+' : '') + ctx.parsed.y?.toFixed(1) + '°C (week centered ' + (ctx.raw as { date?: string }).date + ')'
             }
           }
         },
@@ -188,7 +188,7 @@ export function initCharts() {
           x: {
             type: 'linear',
             min: 1,
-            max: 52,
+            max: 53,
             grid: { color: 'rgba(255, 255, 255, 0.05)' },
             ticks: {
               stepSize: 1,

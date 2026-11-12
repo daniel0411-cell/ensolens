@@ -22,7 +22,7 @@ const faqs = [
     category: 'alerts',
     categoryLabel: 'NOAA Alerts & Forecasts',
     question: 'What is the difference between an ENSO Watch, Advisory, and Not Active status?',
-    answer: 'The NOAA Climate Prediction Center (CPC) classifies ENSO diagnostic alerts using strict, operational criteria: \n• Not Active: The tropical Pacific is in an ENSO-neutral state, with ocean temperatures within ±0.5°C of climatological averages and normal Walker circulation.\n• ENSO Watch: Oceanic and atmospheric conditions are favorable for the development of El Niño or La Niña within the next six months, typically supported by model consensus around a 50% or higher probability.\n• ENSO Advisory: Official El Niño or La Niña conditions are actively observed, with tropical Pacific temperature anomalies meeting threshold criteria, atmospheric coupling established, and forecasts indicating the phase will persist for at least five consecutive overlapping three-month seasons.'
+    answer: 'CPC alert labels describe an operational assessment, rather than a threshold applied to a single weekly observation.\n• Watch: Conditions are favorable for El Niño or La Niña to develop within the next six months. The definition does not specify a universal 50% probability trigger.\n• Advisory: El Niño or La Niña conditions are observed and expected to continue. CPC considers a one-month relative Niño 3.4 anomaly of at least +0.5°C or at most -0.5°C, the expected three-month RONI threshold, and an observed atmospheric response.\n• Final Advisory: El Niño or La Niña conditions have ended.\n• Not Active: The ENSO Alert System is not active. This label alone does not establish that every ocean or atmospheric measure is exactly normal.\nThe five consecutive overlapping three-month seasons used in historical episode tables are not a waiting requirement for issuing an Advisory.'
   },
   {
     id: 'nino-34-threshold',
@@ -138,6 +138,7 @@ const faqSchema = {
             </summary>
             <div class="faq-answer">
               <p>{faq.answer}</p>
+              {faq.id === 'alerts-explained' && <p class="figure-note">Source: <a href="https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_advisory/enso-alert-readme.shtml" target="_blank" rel="noreferrer">CPC ENSO Alert System definitions</a>, checked November 12, 2026.</p>}
               <div class="faq-footer">
                 <a class="faq-anchor-link" href={`#${faq.id}`} title="Direct link to this question">Direct link #</a>
               </div>

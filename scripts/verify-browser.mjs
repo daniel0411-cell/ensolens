@@ -235,6 +235,8 @@ try {
           await page.waitForFunction(() => document.querySelector('[aria-label="Weekly benchmark comparison"]').scrollLeft > 0);
         }
         await canvas.screenshot({ path: fileURLToPath(new URL('historical-chart-' + width + '.png', output)) });
+        await benchmarkTable.evaluate(element => { element.scrollLeft = 0; });
+        await page.evaluate(() => window.scrollTo(0, 0));
         await page.screenshot({ path: fileURLToPath(new URL('historical-' + width + '.png', output)), fullPage: true });
       }
       if (path === '/forecast/when-will-it-end/' || path === '/impacts/california-snow-vs-rain/') {

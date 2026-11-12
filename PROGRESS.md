@@ -8,6 +8,10 @@ Updated: 2026-11-12 (Asia/Shanghai)
 - Official source pages rechecked in the background browser; notes in CONTENT-SOURCES-2026-11-12.md. Independent read-only scientific review found no blocking issues; adopted the recurrence-timescale wording suggestion. Reviewer did not reopen sources, run tests or inspect layouts.
 - Type checks across 47 files passed with zero errors/warnings and two existing icon hints; all 16 tests and build passed. Focused browser-section and production-source assertions added. Initial preview process exited before verification; clean retry passed real NOAA refresh/KV, RSS and both 1440px/390px browser suites. New section screenshots inspected at both widths with no overflow or heading occlusion. Release and production verification pending.
 
+- Code `7116f86` pushed to `origin/master`; remote SHA verified. Full deploy gate repeated successfully: types, 16 tests, build, real NOAA Worker refresh/KV, RSS and desktop/mobile browser checks.
+- Released version `29cc2fc7-4246-40b5-bb7d-186c48e2add2`, deployment `b8be5f92-e97f-4cb4-9f1b-f25a27b54fde`, activated November 12 at 18:57:01 Asia/Shanghai with 100% traffic, confirmed by Wrangler. Both domains and six-hour schedule retained; indexing enabled, contact disabled.
+- Post-release production verification passed all 14 routes, new sections/source links, FAQ parity, sitemap, feed health, RSS, assets and redirects. Fresh live desktop/mobile browser suites passed; all four new-section screenshots inspected. Live source dates remain discussion October 8, weekly November 4, RONI October 31 and forecast October. No new November publication inferred. Search inclusion and traffic effects remain unmeasured.
+
 ## Forecast horizon and snow interpretation (November 12)
 
 - Expanded three existing guides: winter forecast-product selection and ensemble variability; California SWE percentages and comparison baselines; Northwest warm/dry snow drought. Saved October 15 winter maps and November 8 map review retained, separate from November 12 evergreen additions. No new route, numerical regional forecast, data feed or recurring publication workload.

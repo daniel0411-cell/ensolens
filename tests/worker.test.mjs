@@ -28,3 +28,9 @@ test('indexing requires an explicit switch and the production hostname', () => {
   }
   assert.equal(canonicalRedirect(new Request('https://ensolens.com/')), null);
 });
+
+test('private correction response is never converted into shared HTML cache', () => {
+  const response = secureResponse(new Response('<p>Report saved</p>', {status:201,headers:{'Content-Type':'text/html','Cache-Control':'no-store'}}),false);
+  assert.equal(response.headers.get('cache-control'),'no-store');
+  assert.match(response.headers.get('x-robots-tag'),/noindex/);
+});

@@ -1,21 +1,23 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { sectionEvidence } from '../content/teaching';
+import GuideTeaching from './GuideTeaching.astro';
 import type { Guide } from '../content/guides';
 interface Props { guide: Guide }
 const { guide } = Astro.props;
 const url = `https://ensolens.com/learn/${guide.slug}/`;
-const schema = JSON.stringify({ '@context':'https://schema.org', '@type':'Article', headline:guide.title, description:guide.description, url, mainEntityOfPage:url, datePublished:'2026-11-12', dateModified:'2026-11-12', inLanguage:'en', author:{'@type':'Organization',name:'ENSOLens',url:'https://ensolens.com/about/'}, publisher:{'@type':'Organization',name:'ENSOLens',url:'https://ensolens.com/about/'}, citation:guide.sources.map(s=>s.url) }).replace(/</g, '\\u003c');
+const schema = JSON.stringify({ '@context':'https://schema.org', '@type':'Article', headline:guide.title, description:guide.description, url, mainEntityOfPage:url, datePublished:guide.published, dateModified:guide.modified, inLanguage:'en', author:{'@type':'Organization',name:'ENSOLens',url:'https://ensolens.com/about/'}, publisher:{'@type':'Organization',name:'ENSOLens',url:'https://ensolens.com/about/'}, citation:guide.sources.map(s=>s.url) }).replace(/</g, '\\u003c');
 ---
 <Layout title={guide.title} description={guide.description} active="learn">
   <article class="guide page-shell">
     <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true"> / </span><a href="/learn/">ENSO learning library</a></nav>
-    <header><span class="eyebrow">{guide.category}</span><h1>{guide.title}</h1><p class="byline">By <a href="/about/">ENSOLens</a> · Published <time datetime="2026-11-12">November 12, 2026</time> · 4 min read</p></header>
+    <header><span class="eyebrow">{guide.category}</span><h1>{guide.title}</h1><p class="byline">By <a href="/about/">ENSOLens</a> · Published <time datetime={guide.published}>{guide.published}</time> · Updated <time datetime={guide.modified}>{guide.modified}</time> · Editorial review {guide.reviewed}</p></header>
     <section class="short-answer" aria-labelledby="short-answer-heading"><h2 id="short-answer-heading">The short answer</h2><p>{guide.answer}</p></section>
     <nav class="contents" aria-label="On this page"><h2>On this page</h2><ol>{guide.sections.map((section,i)=><li><a href={`#section-${i+1}`}>{section.title}</a></li>)}</ol></nav>
-    {guide.sections.map((section,i)=><section class="guide-section" aria-labelledby={`section-${i+1}`}><h2 id={`section-${i+1}`}>{section.title}</h2>{section.paragraphs.map(p=><p>{p}</p>)}</section>)}
+    {guide.sections.map((section,i)=><section class="guide-section" aria-labelledby={`section-${i+1}`}><h2 id={`section-${i+1}`}>{section.title}</h2>{section.paragraphs.map(p=><p>{p}</p>)}{i === 0 && <GuideTeaching slug={guide.slug} />}<p class="section-evidence">Section sources: {(sectionEvidence[guide.slug]?.[i] ?? [0]).map(j=><a href={`#source-${j+1}`} aria-label={`Source ${j+1}: ${guide.sources[j].title}`}>[{j+1}] </a>)}</p></section>)}
     <section class="checklist" aria-labelledby="checklist-heading"><h2 id="checklist-heading">Before you use the signal</h2><ul>{guide.checklist.map(item=><li>{item}</li>)}</ul></section>
-    <section class="sources" aria-labelledby="sources-heading"><h2 id="sources-heading">Sources and scope</h2><p>Sources checked November 12, 2026. This guide explains enduring concepts; it is not a live forecast. Consult the relevant official weather service for local forecasts and warnings.</p><ul>{guide.sources.map(source=><li><a href={source.url}>{source.title}</a><span>{source.date}</span></li>)}</ul></section>
-    <section class="related" aria-labelledby="related-heading"><h2 id="related-heading">Continue reading</h2><div>{guide.related.map(link=><a href={link.href}>{link.title}<span aria-hidden="true"> →</span></a>)}</div><p><a href="/learn/">Explore all ten guides →</a></p></section>
+    <section class="sources" aria-labelledby="sources-heading"><h2 id="sources-heading">Sources and scope</h2><p>Original source review {guide.sourcesChecked}; editorial revision {guide.reviewed}. Additional source checks, where applicable, are dated below. This guide explains enduring concepts; it is not a live forecast. Consult the relevant official weather service for local forecasts and warnings.</p><ul>{guide.sources.map(source=><li id={`source-${guide.sources.indexOf(source)+1}`}><a href={source.url}>{source.title}</a><span>{source.date}</span></li>)}</ul></section>
+    <section class="related" aria-labelledby="related-heading"><h2 id="related-heading">Continue reading</h2><div>{guide.related.map(link=><a href={link.href}>{link.title}<span aria-hidden="true"> →</span></a>)}</div><p><a href="/learn/">Choose another learning topic →</a></p></section>
   </article>
   <script type="application/ld+json" set:html={schema}/>
 </Layout>
@@ -37,6 +39,8 @@ const schema = JSON.stringify({ '@context':'https://schema.org', '@type':'Articl
 .checklist,.sources,.related { border-top: 1px solid var(--line-strong); padding-top: 32px; margin-top: 38px; }
 .guide ul { padding-left: 24px; }
 .guide li { margin-bottom: 12px; }
+.section-evidence { font-size: 13px !important; color: var(--muted); }
+.sources li { scroll-margin-top: 110px; }
 .sources p,.sources li,.sources span { font-size: 14px; color: var(--muted); line-height: 1.8; }
 .sources span { display: block; }
 .sources a { overflow-wrap: anywhere; }

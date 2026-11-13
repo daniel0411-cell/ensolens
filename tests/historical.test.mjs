@@ -25,3 +25,22 @@ test('benchmark metadata agrees with complete calendar-year series', async () =>
     }
   }
 });
+
+test('historical view retains failed-source dates and follows observation year rather than clock year', async () => {
+  const { historicalView } = await import('../src/lib/historical.ts');
+  const { refreshSnapshot, freshness } = await import('../src/lib/enso.ts');
+  const seed = JSON.parse(await readFile(new URL('../src/data/official.json', import.meta.url), 'utf8'));
+  const now = new Date(seed.weekly.retrievedAt);
+  const failed = await refreshSnapshot(seed, async () => { throw new Error('outage'); }, now);
+  const view = historicalView(failed, freshness(failed, now));
+  assert.ok(view.stale.includes('weekly'));
+  assert.equal(view.latestDate, seed.weekly.data.at(-1).date);
+  assert.equal(view.retrievedAt, seed.weekly.retrievedAt);
+  assert.deepEqual(view.current.map(({week,...point})=>point), seed.weekly.data.filter(p=>p.date.startsWith(view.year)));
+  // A clock rollover alone must not relabel December as January observations.
+  assert.equal(historicalView(seed, freshness(seed, new Date('2027-01-01'))).year, seed.weekly.data.at(-1).date.slice(0,4));
+  failed.weekly.data.push({date:'2027-01-06',anomaly:1.2,sst:27});
+  const january = historicalView(failed, ['weekly']);
+  assert.equal(january.year, '2027');
+  assert.deepEqual(january.current, [{date:'2027-01-06',anomaly:1.2,sst:27,week:1}]);
+});

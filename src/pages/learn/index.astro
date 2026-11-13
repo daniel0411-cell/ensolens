@@ -3,15 +3,19 @@ import Layout from '../../layouts/Layout.astro';
 import { guides } from '../../content/guides';
 const categories = [...new Set(guides.map(g => g.category))];
 ---
-<Layout title="ENSO Learning Library: Ocean Signals, Forecasts & Weather" description="Ten practical guides to ENSO indicators, model forecasts, ocean processes and weather impacts, with dated NOAA, NWS, USGS, WMO and IRI sources." active="learn">
+<Layout title="ENSO Learning Library: Ocean Signals, Forecasts & Weather" description="Practical guides to ENSO indicators, model forecasts, ocean processes and weather impacts, with dated NOAA, NWS, USGS, WMO and IRI sources." active="learn">
   <div class="page-shell subpage lifecycle-page">
-    <div class="page-intro"><div><span class="eyebrow">ENSO LEARNING LIBRARY · NOVEMBER 12, 2026</span><h1>Understand the signal.<br /><span>Read beyond the headline.</span></h1><p>Ten focused guides to interpreting ocean observations, climate forecasts and weather connections. Start with the question behind the chart.</p></div></div>
+    <div class="page-intro"><div><span class="eyebrow">ENSO LEARNING LIBRARY · UPDATED NOVEMBER 13, 2026</span><h1>Understand the signal.<br /><span>Read beyond the headline.</span></h1><p>Build a reading path from measurements to forecasts and regional decisions. Each guide includes a worked comparison or conceptual diagram.</p></div></div>
+    <section class="lifecycle-section"><h2>Choose a learning path</h2><ol class="learning-paths"><li><strong>New to the dashboard?</strong> Start with <a href="/learn/nino-regions-explained/">the Niño boxes</a>, then <a href="/learn/climate-normals-and-anomalies/">baselines</a> and <a href="/learn/soi-vs-ocean-indices/">ocean versus atmosphere</a>.</li><li><strong>Reading a forecast?</strong> Compare <a href="/learn/enso-model-plumes-and-probabilities/">model lines and probabilities</a>, then the <a href="/forecast/">official seasonal table</a>.</li><li><strong>Making a water or winter decision?</strong> Follow <a href="/learn/enso-jet-stream-teleconnections/">the winter pathway</a> to <a href="/learn/el-nino-and-drought-recovery/">water-store diagnostics</a> and the <a href="/impacts/">regional guides</a>.</li></ol></section>
     <nav class="library-topics" aria-label="Guide topics">{categories.map((category, i) => <a href={`#topic-${i}`}>{category}</a>)}</nav>
     {categories.map((category, i) => <section class="library-section" aria-labelledby={`topic-${i}`}><h2 id={`topic-${i}`}>{category}</h2><div class="library-grid">{guides.filter(g => g.category === category).map(g => <article><h3><a href={`/learn/${g.slug}/`}>{g.title}</a></h3><p>{g.description}</p><a class="read-guide" href={`/learn/${g.slug}/`}>Read the guide <span aria-hidden="true">→</span></a></article>)}</div></section>)}
     <section class="lifecycle-section"><h2>Need today’s assessment?</h2><p class="body-copy">These explanations are evergreen. For the latest validated observations and official seasonal probabilities, use the <a href="/">ENSO dashboard</a> and <a href="/forecast/">dated CPC forecast</a>. For North American planning, begin with the <a href="/impacts/">regional guides</a>. Seasonal tendencies do not replace local forecasts or warnings.</p></section>
   </div>
 </Layout>
 <style>
+  .learning-paths { padding-left:24px; line-height:1.9; }
+  .learning-paths li { margin:16px 0; }
+  .learning-paths a { color:var(--green); text-decoration:underline; }
   .library-topics { display: flex; gap: 12px; flex-wrap: wrap; margin: 30px 0 46px; }
   .library-topics a { padding: 10px 14px; border: 1px solid var(--line-strong); border-radius: 24px; color: var(--green); font-size: 13px; }
   .library-section { margin: 38px 0; }

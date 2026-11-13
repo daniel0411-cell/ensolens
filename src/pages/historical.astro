@@ -3,28 +3,31 @@ import Layout from '../layouts/Layout.astro';
 import { Download, ArrowUpRight, Clock, Flame, Snowflake } from '@lucide/astro';
 import { env } from 'cloudflare:workers';
 import { getData } from '../lib/data';
-import { calendarWeek } from '../lib/historical';
+import DataNotice from '../components/DataNotice.astro';
+import { historicalView } from '../lib/historical';
 import historicalData from '../data/historical-analogs.json';
 
-const { snapshot } = await getData(env);
-const weeks2026 = snapshot.weekly.data
-  .filter(p => p.date.startsWith('2026'))
-  .map(p => ({ ...p, week: calendarWeek(p.date) }));
+const { snapshot, stale } = await getData(env);
+const view = historicalView(snapshot, stale);
+const currentYear = view.year ?? 'Unavailable';
 const benchmarks = historicalData.benchmarks.map(b => ({
   ...b,
   extreme: b.weeks.reduce((a, p) => Math.abs(p.anomaly) > Math.abs(a.anomaly) ? p : a),
 }));
 const signed = (value: number) => (value > 0 ? '+' : '') + value.toFixed(1) + '°C';
-const payload = JSON.stringify({ current: weeks2026, benchmarks }).replace(/</g, '\\u003c');
+const payload = JSON.stringify({ current: view.current, currentYear, benchmarks }).replace(/</g, '\\u003c');
 ---
 
-<Layout title="Historical ENSO Comparison: 1997, 2015, 2020 & 2023" description="Compare 2026 weekly Niño 3.4 anomalies with 1997, 2015, 2020 and 2023 using NOAA CPC data. See dated extremes and the limits of historical analogs." active="historical">
+<Layout title="Historical ENSO Comparison: 1997, 2015, 2020 & 2023" description={`Compare ${currentYear} weekly Niño 3.4 anomalies with 1997, 2015, 2020 and 2023 using NOAA CPC data. See dates and historical-analog limits.`} active="historical">
   <div class="page-shell subpage">
     <div class="page-intro"><div>
       <span class="eyebrow">HISTORICAL COMPARISON · WEEKLY NIÑO 3.4</span>
-      <h1>Historical ENSO comparison.<br /><span>2026 against four benchmark years.</span></h1>
+      <h1>Historical ENSO comparison.<br /><span>{currentYear} against four benchmark years.</span></h1>
       <p>Compare weekly sea-surface temperature departures in the same NOAA CPC series and 1991–2020 baseline. Each line covers one calendar year, not a complete ENSO episode.</p>
     </div></div>
+
+    <DataNotice stale={view.stale} />
+    <p class="figure-note">Current curve: latest validated week {view.latestDate ?? 'unavailable'}. Source checked {view.checkedAt}; last successful retrieval {view.retrievedAt}. The displayed year follows the latest observation, including across January.</p>
 
     <section class="trend-section analog-chart-section" aria-labelledby="analog-heading">
       <div class="section-heading">
@@ -32,14 +35,14 @@ const payload = JSON.stringify({ current: weeks2026, benchmarks }).replace(/</g,
         <button class="icon-button download-analog-data" title="Download official historical analog data (CSV)" aria-label="Download official historical analog data as CSV"><Download size={17} /></button>
       </div>
       <div class="chart-toolbar analog-toolbar"><div class="analog-legend-pills">
-        <span class="analog-current-pill"><i class="legend-dot current-glow"></i>2026 (Current)</span>
+        <span class="analog-current-pill"><i class="legend-dot current-glow"></i>{currentYear} (Current)</span>
         {benchmarks.map(b => (
           <button class="analog-toggle-pill active" data-analog-toggle={b.id} aria-pressed="true" style={`--pill-color: ${b.color};`}>
             <i class="legend-dot" style={`background-color: ${b.color};`}></i>{b.shortName}
           </button>
         ))}
       </div></div>
-      <div class="line-chart-wrap analog-canvas-wrap"><canvas id="analog-chart" role="img" aria-label="Interactive multi-line chart comparing 2026 weekly Niño 3.4 anomalies against benchmark years 1997, 2015, 2020, and 2023"></canvas></div>
+      <div class="line-chart-wrap analog-canvas-wrap"><canvas id="analog-chart" role="img" aria-label={`Interactive multi-line chart comparing ${currentYear} weekly Niño 3.4 anomalies against benchmark years 1997, 2015, 2020, and 2023`}></canvas></div>
       <script id="analog-data" type="application/json" set:html={payload} />
       <div class="chart-footer"><span>NOAA CPC WEEKLY DATA · 1991–2020 BASELINE</span><a href="/methodology/#indices">Niño 3.4 method <ArrowUpRight size={13} /></a></div>
       <p class="figure-note">Weeks are numbered from January 1 in seven-day bins, including week 53 where present; month labels are approximate. Dates identify the center of each observation week. Similar curves do not predict the same regional weather.</p>
@@ -81,7 +84,7 @@ const payload = JSON.stringify({ current: weeks2026, benchmarks }).replace(/</g,
       <p>A larger Niño 3.4 anomaly describes a bigger ocean-temperature departure in that region. It does not specify rainfall, snowfall or storm counts at your location. Weekly conventional anomalies here also differ from the relative, three-month RONI used in CPC strength assessments.</p>
       <p>Historical analogs put the timing and size of an ocean signal in context. They are a small selected sample, not a probability forecast or a ranking of local damage. Other ocean patterns and atmospheric variability affect seasonal outcomes; individual storms and snow levels depend on shorter-range weather.</p>
       <p>For a North American winter question, start with the <a href="/winter-outlook/">dated U.S. winter outlook</a>, then the <a href="/impacts/california-snow-vs-rain/">California rain versus mountain snow</a> or <a href="/impacts/pacific-northwest-winter/">Pacific Northwest winter</a> guide. For other regions, see the <a href="/impacts/">regional impacts overview</a>. Use official local weather forecasts for travel and safety decisions.</p>
-      <p class="figure-note">Interpretation reference: <a href="https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_advisory/ensodisc.shtml" target="_blank" rel="noreferrer">CPC ENSO Diagnostics Discussion</a>, October 8, 2026 issue checked November 12. CPC notes that stronger events increase the likelihood of impacts without guaranteeing them. <a href="/forecast/#super-el-nino-heading">Compare weekly anomalies and seasonal strength</a>.</p>
+      <p class="figure-note">Interpretation reference: <a href="/references/cpc-november-2026.txt">preserved November 12, 2026 CPC issue extracts and values</a>, checked November 13. This preserved record documents the index thresholds and dated probabilities, rather than a ranking of regional impacts. For seasonal circulation and geographic limits, see <a href="https://www.weather.gov/mhx/ensowhat">NWS ENSO background</a>. <a href="https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_advisory/ensodisc.shtml">Current rolling CPC discussion</a>. <a href="/forecast/#super-el-nino-heading">Compare weekly anomalies and seasonal strength</a>.</p>
     </section>
 
     <div class="source-callout"><Clock size={20} /><div><strong>What does CPC expect next?</strong><p>The official phase probabilities are a monthly expert assessment informed by observations and models. They are separate from these historical curves.</p></div><a href="/forecast/">Official forecast <ArrowUpRight size={15} /></a></div>

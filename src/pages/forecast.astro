@@ -57,6 +57,7 @@ const comparisonRows = forecast.rows.map(row => {
       </div>
     </div>
 
+    <nav class="forecast-contents" aria-label="Forecast tasks"><a href="#probability-heading">Current probabilities</a><a href="#comparison-heading">Changes since last issue</a><a href="#strength-heading">Strength</a><a href="#reading-probabilities-heading">How to read the odds</a><a href="#wmo-record-heading">Record claims</a></nav>
     <!-- Active Winter Highlight -->
     <div class="forecast-summary">
       <div>
@@ -73,83 +74,8 @@ const comparisonRows = forecast.rows.map(row => {
       </div>
     </div>
 
-    <section class="lifecycle-section" aria-labelledby="november-update-heading">
-      <span class="eyebrow">CPC DISCUSSION · NOVEMBER 12, 2026 · CHECKED NOVEMBER 13</span>
-      <h2 id="november-update-heading">November update: a very strong winter signal, with limits.</h2>
-      <p class="body-copy">NOAA CPC retained an El Niño Advisory in its November 12 discussion and described continued strengthening before weakening in early 2027. This is a basin-scale assessment of the coupled ocean and atmosphere, not a forecast of a particular winter storm.</p>
-      <h3>The same phase can cover different strengths</h3>
-      <p class="body-copy">The November strength table gives December 2026–February 2027 a 79% probability of very strong El Niño (three-month RONI ≥ 2.0°C), while January–March 2027 has 35% very strong and 44% strong. Those last two categories total 79%. Both seasons retain a published 100% El Niño phase probability. A decline in the most intense category is therefore different from an immediate return to neutral.</p>
-      <h3>A record forecast needs a separate threshold</h3>
-      <p class="body-copy">CPC's discussion puts the chance of a three-month RONI of at least +2.5°C at about 60% for October–December 2026 and November 2026–January 2027. That threshold is higher than the ≥ 2.0°C very strong category in the table below. It is a forecast for named overlapping seasons, not an observed record, a December-only measurement or a 60% chance of local extreme weather.</p>
-      <h3>Weakening, neutral conditions and impacts have different clocks</h3>
-      <p class="body-copy">The November phase outlook favors neutral in April–June 2027 (61%), with El Niño at 38% and La Niña at 1%. This is a seasonal forecast, not an exact end date. Later seasons approach the <a href="/forecast/when-will-it-end/#spring-barrier-heading">spring predictability barrier</a>; regional effects also need their own outlook. See the <a href="#strength-heading">dated strength table</a>, <a href="#comparison-heading">same-target issue comparison</a> and <a href="/winter-outlook/">U.S. winter guidance</a> for the different questions.</p>
-      <p class="figure-note">Sources: <a href="https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_advisory/ensodisc.shtml">CPC discussion issued November 12, 2026</a>, <a href="https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/strengths/">November strength probabilities</a> and <a href="https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/probabilities/">November phase probabilities</a>; checked November 13. This editorial summary preserves those issue values; the live chart can advance to a later issue. The next discussion is scheduled for December 10, 2026.</p>
-    </section>
-
-    <section class="lifecycle-section" aria-labelledby="wmo-record-heading">
-      <span class="eyebrow">DATED UPDATE · WMO RELEASE NOVEMBER 9, 2026</span>
-      <h2 id="wmo-record-heading">Will this El Niño be the strongest on record?</h2>
-      <p class="body-copy">In its November 9, 2026 climate update, the World Meteorological Organization (WMO) said El Niño <q>is expected to be the strongest on record by December</q>. This is WMO's forecast statement about December 2026, not confirmation that an observed seasonal record has already been broken.</p>
-      <h3>What does the record claim measure?</h3>
-      <p class="body-copy">The quoted sentence in WMO's press release does not specify the ENSO index, dataset version or averaging period used for the record comparison. ENSOLens therefore attributes the statement to WMO rather than assigning it an ONI or RONI threshold, a probability, or a new historical ranking. A weekly Niño 3.4 value alone cannot verify a seasonal event-strength record.</p>
-      <h3>How does this relate to the CPC forecast below?</h3>
-      <p class="body-copy">The chart below reports NOAA CPC's dated probabilities for El Niño, neutral and La Niña. The separate strength table preserves CPC's November 2026 RONI forecast. Neither product is a numerical translation of WMO's record statement, and the WMO release does not update those CPC figures.</p>
-      <h3>Does it predict the weather where I live?</h3>
-      <p class="body-copy">WMO expects El Niño to continue into early 2027 and describes added heat and climate risks against an already warm global background. That does not specify a city's storm dates, snowfall or flood probability. Use the <a href="/winter-outlook/">dated U.S. winter outlook</a> for regional seasonal context and <a href="https://www.weather.gov/" target="_blank" rel="noreferrer">the National Weather Service</a> for local forecasts and warnings.</p>
-      <p class="body-copy">Source: <a href="https://wmo.int/news/media-centre/state-of-climate-2026-gives-new-meaning-phrase-charts" target="_blank" rel="noreferrer">WMO, “State of the climate in 2026 gives new meaning to phrase ‘off the charts’” <ArrowUpRight size={13} /></a>, issued November 9; checked November 10, 2026. This dated interpretation remains separate from the automatically refreshed CPC chart.</p>
-    </section>
-
-    <p class="body-copy">Reading the three possible outcomes? <a href="/forecast/enso-neutral/">ENSO-neutral does not mean normal local weather.</a> For regional context, browse the <a href="/impacts/">U.S. impact guides</a>.</p>
     <!-- Interactive Probability Chart -->
     <ForecastChart expanded snapshot={snapshot} />
-
-    <section class="lifecycle-section" aria-labelledby="reading-probabilities-heading">
-      <span class="eyebrow">READING THE ENSO FORECAST</span>
-      <h2 id="reading-probabilities-heading">How to read El Niño, neutral and La Niña probabilities</h2>
-      <p class="body-copy">Read all three probabilities in one row, together with the issue date and target season. They describe alternative ENSO states for that season. They are not the share of days in each state, the percentage of forecast models voting for it, or the chance of a local weather impact.</p>
-      <h3>Does the largest probability mean more likely than not?</h3>
-      <p class="body-copy">Not always. In a <strong>teaching example, not a current CPC forecast</strong>, El Niño at 45%, neutral at 40% and La Niña at 15% makes El Niño the most likely single category. But the other two categories together have a 55% chance. The leading category need not have a majority; retain the alternatives when describing the outlook.</p>
-      <h3>Why do the target seasons overlap?</h3>
-      <p class="body-copy">DJF means December–January–February; JFM means January–February–March. They share January and February, so adjacent rows are related seasonal windows, not independent monthly forecasts. Do not add their probabilities or interpret a difference between rows as the change expected in one particular month. Keep the year in view when a season crosses December.</p>
-      <h3>What counts as a month-to-month forecast change?</h3>
-      <p class="body-copy">Compare the same target season and year across two issue dates. A teaching example of 60% becoming 70% is a rise of <strong>10 percentage points</strong>, not 10%. A lower El Niño probability does not by itself mean La Niña is next: check whether neutral, La Niña or both gained probability. The <a href="#comparison-heading">fixed-target comparison</a> below preserves missing estimates instead of treating them as zero.</p>
-      <p class="body-copy">CPC combines observations and multiple models in an expert assessment. Its published 0% is approximate rather than an absolute impossibility. Phase probability also differs from <a href="#strength-heading">event-strength probability</a>; for local seasonal weather, use the <a href="/winter-outlook/">regional outlook</a>.</p>
-      <p class="figure-note">Definitions checked November 12, 2026: <a href="https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/probabilities/" target="_blank" rel="noreferrer">CPC ENSO probabilities</a>. The numerical teaching examples above remain separate from the live official table.</p>
-    </section>
-
-    <section class="lifecycle-section" aria-labelledby="super-el-nino-heading">
-      <span class="eyebrow">READING ENSO STRENGTH</span>
-      <h2 id="super-el-nino-heading">What is a super El Niño?</h2>
-      <p class="body-copy">“Super El Niño” is a shorthand for an unusually intense event. It is not a separate category in CPC's strength-probability product, which uses weak, moderate, strong and very strong. Before comparing a headline with a measurement, check the index, averaging period and reference baseline.</p>
-      <h3>Can one very warm week establish event strength?</h3>
-      <p class="body-copy">No. A weekly Niño 3.4 anomaly measures one week's sea-surface temperature departure. CPC's strength probabilities refer to three-month RONI values. Even a weekly reading above +3°C cannot be placed directly into a seasonal RONI category or used on its own to declare a record event.</p>
-      <h3>Why do ONI and RONI give different numbers?</h3>
-      <p class="body-copy">ONI averages Niño 3.4 temperature anomalies over three months. RONI also accounts for the tropical ocean background: it subtracts the tropical-mean anomaly and applies an adjustment to match the variance of the original Niño 3.4 index. It is not simply a weekly value with a fixed amount subtracted. Compare historical events using the same index, dataset version, baseline method and averaging period; recent seasonal estimates can be revised.</p>
-      <h3>Does a stronger event guarantee worse local weather?</h3>
-      <p class="body-copy">No. Event strength describes the tropical Pacific signal. It does not give your city's chance of flooding, a cold outbreak or heavy snow. Use regional seasonal outlooks for temperature and precipitation probabilities, then local forecasts for individual storms.</p>
-      <p class="figure-note">Definitions checked November 10, 2026: <a href="https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/strengths/" target="_blank" rel="noreferrer">CPC strength categories</a>, <a href="https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/" target="_blank" rel="noreferrer">RONI method</a> and <a href="https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso/oni/v6/" target="_blank" rel="noreferrer">ONI method</a>. See also <a href="/faq/#super-el-nino">the ENSO FAQ</a> and <a href="/winter-outlook/">the dated U.S. winter outlook</a>.</p>
-    </section>
-
-    <section class="lifecycle-section" aria-labelledby="strength-heading">
-      <span class="eyebrow">STRENGTH EXPLAINER · CPC ISSUE NOVEMBER 2026</span>
-      <h2 id="strength-heading">El Niño odds are not strength odds.</h2>
-      <p class="body-copy">In CPC's November 2026 issue, the December 2026–February 2027 El Niño probability is 100%, while the probability of the very strong category is 79%. The first includes every El Niño strength; the second describes just one intensity range. Neither is a probability of extreme weather in your city.</p>
-      <p class="figure-note">Reviewed November 13, 2026. The percentages below refer to all outcomes, not just cases where El Niño occurs.</p>
-      <div class="probability-table-wrap" role="region" aria-label="Dated ENSO strength probabilities" tabindex="0">
-        <table class="data-table" id="strength-table">
-          <caption>CPC November 2026 · dated reference</caption>
-          <thead><tr><th scope="col">Target season</th><th scope="col">Weak<br />0.5 ≤ RONI &lt; 1.0°C</th><th scope="col">Moderate<br />1.0 ≤ RONI &lt; 1.5°C</th><th scope="col">Strong<br />1.5 ≤ RONI &lt; 2.0°C</th><th scope="col">Very strong<br />RONI ≥ 2.0°C</th><th scope="col">All El Niño</th></tr></thead>
-          <tbody>
-            <tr><th scope="row">DJF 2026–27</th><td>0%</td><td>2%</td><td>19%</td><td>79%</td><td>100%</td></tr>
-            <tr><th scope="row">JFM 2027</th><td>3%</td><td>18%</td><td>44%</td><td>35%</td><td>100%</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <p class="figure-note">RONI is the three-month Relative Oceanic Niño Index, not the weekly Niño 3.4 anomaly. CPC uses the 1991–2020 base period for this product. JFM means January–March. Published probabilities are approximate; 0% is not an absolute impossibility.</p>
-      <p class="body-copy">For January–March 2027, the strong and very strong categories together total 79% (44% + 35%). That is different from the 35% chance of very strong alone. A strength category describes the tropical Pacific signal, not a guaranteed regional impact.</p>
-      <p class="figure-note">This manually reviewed November reference stays fixed when the live phase chart updates. <a href="https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/strengths/" target="_blank" rel="noreferrer">Check CPC's current strength issue <ArrowUpRight size={13} /></a>. For regional temperature and precipitation, see the <a href="/winter-outlook/">dated U.S. winter outlook</a>.</p>
-    </section>
-
     <!-- 1. Full Multi-Season Fixed-Target Comparison Table -->
     <section class="lifecycle-section" aria-labelledby="comparison-heading">
       <div class="section-heading">
@@ -201,6 +127,70 @@ const comparisonRows = forecast.rows.map(row => {
       <p class="figure-note">
         Comparison is unavailable when the previous issue or a matching target season is missing. Missing estimates are never treated as 0% probability. Net shift is measured in percentage points (pp).
       </p>
+    </section>
+
+    <section class="lifecycle-section" aria-labelledby="strength-heading">
+      <span class="eyebrow">STRENGTH EXPLAINER · CPC ISSUE NOVEMBER 2026</span>
+      <h2 id="strength-heading">El Niño odds are not strength odds.</h2>
+      <p class="body-copy">In CPC's November 2026 issue, the December 2026–February 2027 El Niño probability is 100%, while the probability of the very strong category is 79%. The first includes every El Niño strength; the second describes just one intensity range. Neither is a probability of extreme weather in your city.</p>
+      <p class="figure-note">Reviewed November 13, 2026. The percentages below refer to all outcomes, not just cases where El Niño occurs.</p>
+      <div class="probability-table-wrap" role="region" aria-label="Dated ENSO strength probabilities" tabindex="0">
+        <table class="data-table" id="strength-table">
+          <caption>CPC November 2026 · dated reference</caption>
+          <thead><tr><th scope="col">Target season</th><th scope="col">Weak<br />0.5 ≤ RONI &lt; 1.0°C</th><th scope="col">Moderate<br />1.0 ≤ RONI &lt; 1.5°C</th><th scope="col">Strong<br />1.5 ≤ RONI &lt; 2.0°C</th><th scope="col">Very strong<br />RONI ≥ 2.0°C</th><th scope="col">All El Niño</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">DJF 2026–27</th><td>0%</td><td>2%</td><td>19%</td><td>79%</td><td>100%</td></tr>
+            <tr><th scope="row">JFM 2027</th><td>3%</td><td>18%</td><td>44%</td><td>35%</td><td>100%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="figure-note">RONI is the three-month Relative Oceanic Niño Index, not the weekly Niño 3.4 anomaly. CPC uses the 1991–2020 base period for this product. JFM means January–March. Published probabilities are approximate; 0% is not an absolute impossibility.</p>
+      <p class="body-copy">For January–March 2027, the strong and very strong categories together total 79% (44% + 35%). That is different from the 35% chance of very strong alone. A strength category describes the tropical Pacific signal, not a guaranteed regional impact.</p>
+      <p class="figure-note">This manually reviewed November reference stays fixed when the live phase chart updates. <a href="/references/cpc-november-2026.txt">Read the preserved November issue values and source record</a>. <a href="https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/strengths/" target="_blank" rel="noreferrer">Check CPC's current strength issue <ArrowUpRight size={13} /></a>. For regional temperature and precipitation, see the <a href="/winter-outlook/">dated U.S. winter outlook</a>.</p>
+    </section>
+
+
+
+    <section class="lifecycle-section" aria-labelledby="reading-probabilities-heading">
+      <span class="eyebrow">READING THE ENSO FORECAST</span>
+      <h2 id="reading-probabilities-heading">How to read El Niño, neutral and La Niña probabilities</h2>
+      <p class="body-copy">Read all three probabilities in one row, together with the issue date and target season. They describe alternative ENSO states for that season. They are not the share of days in each state, the percentage of forecast models voting for it, or the chance of a local weather impact.</p>
+      <h3>Does the largest probability mean more likely than not?</h3>
+      <p class="body-copy">Not always. In a <strong>teaching example, not a current CPC forecast</strong>, El Niño at 45%, neutral at 40% and La Niña at 15% makes El Niño the most likely single category. But the other two categories together have a 55% chance. The leading category need not have a majority; retain the alternatives when describing the outlook.</p>
+      <h3>Why do the target seasons overlap?</h3>
+      <p class="body-copy">DJF means December–January–February; JFM means January–February–March. They share January and February, so adjacent rows are related seasonal windows, not independent monthly forecasts. Do not add their probabilities or interpret a difference between rows as the change expected in one particular month. Keep the year in view when a season crosses December.</p>
+      <h3>What counts as a month-to-month forecast change?</h3>
+      <p class="body-copy">Compare the same target season and year across two issue dates. A teaching example of 60% becoming 70% is a rise of <strong>10 percentage points</strong>, not 10%. A lower El Niño probability does not by itself mean La Niña is next: check whether neutral, La Niña or both gained probability. The <a href="#comparison-heading">fixed-target comparison</a> above preserves missing estimates instead of treating them as zero.</p>
+      <p class="body-copy">CPC combines observations and multiple models in an expert assessment. Its published 0% is approximate rather than an absolute impossibility. Phase probability also differs from <a href="#strength-heading">event-strength probability</a>; for local seasonal weather, use the <a href="/winter-outlook/">regional outlook</a>.</p>
+      <p class="figure-note">Definitions checked November 12, 2026: <a href="https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/probabilities/" target="_blank" rel="noreferrer">CPC ENSO probabilities</a>. The numerical teaching examples above remain separate from the live official table.</p>
+    </section>
+
+    <section class="lifecycle-section" aria-labelledby="super-el-nino-heading">
+      <span class="eyebrow">READING ENSO STRENGTH</span>
+      <h2 id="super-el-nino-heading">What is a super El Niño?</h2>
+      <p class="body-copy">“Super El Niño” is a shorthand for an unusually intense event. It is not a separate category in CPC's strength-probability product, which uses weak, moderate, strong and very strong. Before comparing a headline with a measurement, check the index, averaging period and reference baseline.</p>
+      <h3>Can one very warm week establish event strength?</h3>
+      <p class="body-copy">No. A weekly Niño 3.4 anomaly measures one week's sea-surface temperature departure. CPC's strength probabilities refer to three-month RONI values. Even a weekly reading above +3°C cannot be placed directly into a seasonal RONI category or used on its own to declare a record event.</p>
+      <h3>Why do ONI and RONI give different numbers?</h3>
+      <p class="body-copy">ONI averages Niño 3.4 temperature anomalies over three months. RONI also accounts for the tropical ocean background: it subtracts the tropical-mean anomaly and applies an adjustment to match the variance of the original Niño 3.4 index. It is not simply a weekly value with a fixed amount subtracted. Compare historical events using the same index, dataset version, baseline method and averaging period; recent seasonal estimates can be revised.</p>
+      <h3>Does a stronger event guarantee worse local weather?</h3>
+      <p class="body-copy">No. Event strength describes the tropical Pacific signal. It does not give your city's chance of flooding, a cold outbreak or heavy snow. Use regional seasonal outlooks for temperature and precipitation probabilities, then local forecasts for individual storms.</p>
+      <p class="figure-note">Definitions checked November 10, 2026: <a href="https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/strengths/" target="_blank" rel="noreferrer">CPC strength categories</a>, <a href="https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/" target="_blank" rel="noreferrer">RONI method</a> and <a href="https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso/oni/v6/" target="_blank" rel="noreferrer">ONI method</a>. See also <a href="/faq/#super-el-nino">the ENSO FAQ</a> and <a href="/winter-outlook/">the dated U.S. winter outlook</a>.</p>
+    </section>
+
+    <section class="lifecycle-section" aria-labelledby="november-update-heading">
+      <span class="eyebrow">DATED CPC COMMENTARY · NOVEMBER 12, 2026 · CHECKED NOVEMBER 13</span>
+      <h2 id="november-update-heading">November update: strengthening, then weakening.</h2>
+      <p class="body-copy">CPC retained an El Niño Advisory and described further strengthening before weakening in early 2027. Its discussion gives about 60% odds of three-month RONI ≥ +2.5°C for OND 2026 and NDJ 2026–27. This record-related threshold differs from the ≥ +2.0°C very strong category above.</p>
+      <p class="body-copy">The November phase outlook favors neutral in April–June 2027 (61%; El Niño 38%, La Niña 1%). A decline in intensity can precede a phase transition. Neither is a precise end date or a local weather forecast. Forecasts crossing spring have additional uncertainty.</p>
+      <p class="figure-note"><a href="/references/cpc-november-2026.txt">Preserved issue extracts, tables, dates and original URLs</a>. This manual reference stays fixed when the live chart advances. The next discussion is scheduled for December 10, 2026.</p>
+    </section>
+    <section class="lifecycle-section" aria-labelledby="wmo-record-heading">
+      <h2 id="wmo-record-heading">Will this El Niño be the strongest on record?</h2>
+      <details class="record-context"><summary>Read the dated WMO statement and its limits</summary>
+      <p class="body-copy">WMO’s November 9, 2026 update said El Niño <q>is expected to be the strongest on record by December</q>. This is an attributed forecast about December 2026, not an observed seasonal record. The sentence does not specify an ENSO index, dataset version or averaging period. We do not translate it into a CPC probability or assign it a historical ranking.</p>
+      <p class="body-copy">The CPC chart and November strength reference answer separate, explicitly defined questions. A weekly Niño 3.4 anomaly alone cannot verify a seasonal record. Regional weather still requires its own outlook.</p>
+      <p class="figure-note">Source: <a href="https://wmo.int/news/media-centre/state-of-climate-2026-gives-new-meaning-phrase-charts">WMO climate update</a>, November 9, 2026; checked November 10. Provisional annual update, not a final annual assessment.</p></details>
     </section>
 
     <!-- 2. Interpretation Boundaries: What seasonal probabilities CANNOT decide -->
@@ -301,6 +291,12 @@ const comparisonRows = forecast.rows.map(row => {
   <script>import { initCharts } from '../scripts/charts'; initCharts();</script>
 </Layout>
 <style>
+  .forecast-contents { display:flex; flex-wrap:wrap; gap:14px; margin:20px 0; font-size:14px; }
+  .forecast-contents a { color:var(--green); text-decoration:underline; }
+  .forecast-summary { padding:20px; margin:24px 0; }
+  .forecast-big { font-size:48px; }
+  .record-context summary { cursor:pointer; color:var(--green); line-height:1.6; }
+  .record-context .figure-note { display:block; }
   #november-update-heading, #strength-heading, #super-el-nino-heading, #wmo-record-heading, #reading-probabilities-heading, #comparison-heading { scroll-margin-top: 100px; }
   #strength-table { min-width: 720px; }
   #strength-table th, #strength-table td { white-space: nowrap; }

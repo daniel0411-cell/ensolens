@@ -127,7 +127,7 @@ export function initCharts() {
   if (analogCanvas && !Chart.getChart(analogCanvas)) {
     interface AnalogWeek { week: number; anomaly: number; date?: string; sst?: number }
     interface AnalogBenchmark { id: string; name: string; color: string; weeks: AnalogWeek[] }
-    interface AnalogPayload { current: AnalogWeek[]; benchmarks: AnalogBenchmark[] }
+    interface AnalogPayload { currentYear: string; current: AnalogWeek[]; benchmarks: AnalogBenchmark[] }
 
     const raw = document.querySelector('#analog-data')?.textContent;
     if (!raw) return;
@@ -139,7 +139,7 @@ export function initCharts() {
     };
 
     const currentDataset = {
-      label: '2026 (Current)',
+      label: `${payload.currentYear} (Current)`,
       data: payload.current.map(w => ({ x: w.week, y: w.anomaly, date: w.date })),
       borderColor: '#10b981',
       backgroundColor: 'rgba(16, 185, 129, 0.15)',
@@ -224,7 +224,7 @@ export function initCharts() {
     document.querySelector('.download-analog-data')?.addEventListener('click', () => {
       const rows: (string | number)[][] = [
         ['series', 'week_number', 'observation_date', 'sst_anomaly_c'],
-        ...payload.current.map(w => ['2026 (Current)', w.week, w.date || '', w.anomaly]),
+        ...payload.current.map(w => [`${payload.currentYear} (Current)`, w.week, w.date || '', w.anomaly]),
         ...payload.benchmarks.flatMap(b => b.weeks.map(w => [b.name, w.week, w.date || '', w.anomaly]))
       ];
       downloadCsv('ensolens-historical-analogs.csv', rows);

@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
-import { mkdir, readFile } from 'node:fs/promises';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
-import { spawn } from 'node:child_process';
+import { spawn, execFile } from 'node:child_process';
 import { createServer } from 'node:net';
 import { fileURLToPath } from 'node:url';
 
@@ -116,6 +116,9 @@ try {
     assert.equal(await nextRelease.count(), 1);
     const noticeBounds = await nextRelease.boundingBox();
     assert.ok(noticeBounds && noticeBounds.x >= 0 && noticeBounds.x + noticeBounds.width <= width + 1);
+    assert.ok(await page.locator('#probability-heading').evaluate(el=>el.getBoundingClientRect().top + scrollY < 1250), 'Core chart must follow compact summary');
+    assert.ok(await page.locator('#probability-heading').evaluate(el=>!!(el.compareDocumentPosition(document.querySelector('#november-update-heading')) & Node.DOCUMENT_POSITION_FOLLOWING)));
+    for(const a of await page.locator('.forecast-contents a').all()) assert.equal(await page.locator(await a.getAttribute('href')).count(),1);
     const forecastData = JSON.parse(await page.locator('#forecast-data').textContent());
     assert.match(await page.locator('#strength-table caption').innerText(), /November 2026.*dated reference/);
     assert.equal(await page.locator('#strength-table tbody tr').count(), 2);
@@ -168,6 +171,15 @@ try {
         assert.equal(await page.locator('h1').count(), 1);
         if (path !== '/learn/') {
           assert.equal(await page.locator('.guide-section').count(), 4);
+          assert.equal(await page.locator('.teaching-figure').count(),1);
+          if(width===390) for(const region of await page.locator('.teaching-figure .diagram-scroll, .teaching-figure .teaching-table').all()) {
+            await region.focus();
+            await page.keyboard.press('End');
+            await page.waitForFunction(el=>el.scrollLeft>0,await region.elementHandle());
+            await region.evaluate(el=>{el.scrollLeft=0;});
+          }
+          for(const a of await page.locator('.section-evidence a').all()) assert.equal(await page.locator(await a.getAttribute('href')).count(),1);
+          await page.locator('.teaching-figure').screenshot({path:fileURLToPath(new URL(path.slice(1).replaceAll('/','-')+'teaching-'+width+'.png',output))});
           await page.locator('.contents a').first().click();
           const bounds = await page.locator('#section-1').boundingBox();
           assert.ok(bounds && bounds.y >= 90, 'Guide anchor must clear header');
@@ -193,6 +205,7 @@ try {
       if (['/impacts/', '/impacts/pacific-northwest-winter/', '/forecast/enso-neutral/'].includes(path)) {
         assert.equal(await page.locator('h1').count(), 1);
         for (const img of await page.locator('main img').all()) {
+          await img.evaluate(el => el.decode());
           assert.equal(await img.evaluate(el => el.complete && el.naturalWidth > 500 && Number(el.getAttribute('width')) === el.naturalWidth && Number(el.getAttribute('height')) === el.naturalHeight), true, 'Guide image must decode and reserve its actual aspect ratio');
         }
         const table = page.locator('.probability-table-wrap');
@@ -237,6 +250,16 @@ try {
           await page.locator('#' + id + ' summary').click();
           assert.equal(await page.locator('#' + id + ' .faq-answer').isVisible(), true);
           await page.locator('#' + id).screenshot({ path: fileURLToPath(new URL('faq-' + id + '-' + width + '.png', output)) });
+        }
+      }
+      if(path === '/about/') {
+        assert.equal(await page.locator('form[action="/api/corrections/"]').count(),1);
+        if(server && width === 1440) {
+          await page.locator('#correction-page').fill('/about/');
+          await page.locator('#correction-explanation').fill('Local release gate test of correction report persistence.');
+          await page.getByRole('button',{name:'Send correction report',exact:true}).click();
+          assert.match(await page.locator('main').innerText(),/Your report has been saved/);
+          await page.goto(base+path,{waitUntil:'networkidle'});
         }
       }
       if (path === '/historical/') {
@@ -308,6 +331,26 @@ try {
     assert.deepEqual(errors, [], 'Browser JavaScript errors');
     console.log('PASS ' + width + 'px: pages, chart pixels, source image, range, comparison, CSV, map, navigation, overflow, 404');
     await context.close();
+  }
+  if(server) {
+    const cli = args => new Promise((resolve,reject)=>execFile(process.execPath,['node_modules/wrangler/bin/wrangler.js',...args],{env:{...process.env,WRANGLER_LOG_PATH:'.wrangler/logs'}},(err,stdout)=>err?reject(err):resolve(stdout)));
+    const common=['--binding','ENSO_CACHE','--local','--config','dist/server/wrangler.json'];
+    const original=JSON.parse(await cli(['kv','key','get','snapshot:v1',...common]));
+    const fixture=structuredClone(original);fixture.weekly.error='Simulated verification outage; last validated data retained';
+    const fixturePath=fileURLToPath(new URL('historical-stale-fixture.json',output));
+    const restorePath=fileURLToPath(new URL('historical-restore.json',output));
+    await writeFile(fixturePath,JSON.stringify(fixture));await writeFile(restorePath,JSON.stringify(original));
+    const page=await browser.newPage({viewport:{width:390,height:900}});
+    try {
+      await cli(['kv','key','put','snapshot:v1','--path',fixturePath,...common]);
+      await page.goto(base+'/historical/',{waitUntil:'networkidle'});
+      assert.match(await page.getByRole('status').innerText(),/weekly/);
+      assert.match(await page.getByRole('status').innerText(),/last validated/);
+      const payload=JSON.parse(await page.locator('#analog-data').textContent());
+      assert.equal(payload.current.at(-1).date,original.weekly.data.at(-1).date);
+      await page.screenshot({path:fileURLToPath(new URL('historical-stale-390.png',output)),fullPage:false});
+      console.log('PASS real Worker historical failure path: visible delayed-feed notice, retained observation date');
+    } finally { await cli(['kv','key','put','snapshot:v1','--path',restorePath,...common]);await page.close(); }
   }
 } finally {
   await browser?.close();

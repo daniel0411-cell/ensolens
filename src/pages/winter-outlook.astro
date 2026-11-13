@@ -10,6 +10,7 @@ const maps = [
   <div class="page-shell subpage lifecycle-page">
     <div class="page-intro"><div><span class="eyebrow">CPC ISSUE OCTOBER 15, 2026 · REVIEWED NOVEMBER 8</span><h1>U.S. winter<br /><span>2026–27.</span></h1><p>December 2026–February 2027: the temperature and precipitation outlook, region by region.</p></div></div>
     <div class="content-notice"><Info size={18} /><div><strong>A dated outlook, not a storm forecast.</strong><p>The maps and interpretation below preserve the October 15, 2026 issue for DJF 2026–27. They are reviewed manually and do not update with the dashboard's ENSO feed. Check the <a href="https://www.cpc.ncep.noaa.gov/products/predictions/long_range/">current CPC outlook</a> for subsequent revisions.</p></div></div>
+    <nav class="winter-contents" aria-label="Winter outlook topics"><a href="#winter-maps-heading">Saved maps</a> · <a href="#regional-heading">Regional reading</a> · <a href="#forecast-horizon-heading">Choose a forecast horizon</a> · <a href="#mjo-enso-heading">MJO and ENSO</a></nav>
     <section class="lifecycle-section" aria-labelledby="winter-maps-heading">
       <h2 id="winter-maps-heading">Two maps. Different questions.</h2>
       <p class="body-copy">Temperature refers to the three-month average; precipitation refers to the three-month total. Both compare with the 1991–2020 climate reference period. Neither map predicts the timing of individual storms or cold spells.</p>
@@ -36,7 +37,7 @@ const maps = [
       <div><h2>Probability is not magnitude.</h2><p>A 50% chance of above-normal precipitation means a 50% chance of landing in the wettest of three climatological categories. It does not mean 50% more rain, or rain on half the days. Shading describes category probability; local totals remain uncertain.</p></div>
       <div><h2>Equal chances is not near-normal.</h2><p>EC means no favored category: above-, near- and below-normal each have about a one-third chance. A near-normal forecast instead favors the middle category. White EC areas do not promise ordinary weather or an absence of extremes.</p></div>
     </section>
-    <section class="winter-layout"><div><span class="eyebrow">FROM SEASON TO STORM</span><h2>Rain is not snow.</h2><p class="body-copy">Seasonal precipitation includes rain and the water equivalent of snow. Elevation, snow levels, storm temperature and subsequent melting determine mountain snowpack. These maps cannot forecast a resort's snowfall or conditions on a particular weekend.</p><p class="body-copy">ENSO is one input to CPC's outlook, alongside other ocean and atmospheric patterns, forecast tools and long-term trends. Event strength is not a local impact probability.</p><a class="primary-button" href="https://www.weather.gov/" target="_blank" rel="noreferrer">Local forecasts & warnings <ArrowUpRight size={17} /></a></div><div class="winter-side"><Snowflake size={36} stroke-width={1} /><h3>Read the right season.</h3><p>DJF means December–February. NDJ means November–January. Adjacent outlooks overlap but cover different periods. Use the dates printed on each map.</p><a href="/forecast/#strength-heading">ENSO phase and strength</a></div></section>
+    <section class="winter-layout"><div><span class="eyebrow">FROM SEASON TO STORM</span><h2>Rain is not snow.</h2><p class="body-copy">Seasonal precipitation includes rain and the water equivalent of snow. Elevation, storm snow levels and later melt determine the stored snowpack. For a resort visit, use local forecasts at the relevant elevation. ENSO is one input to the seasonal assessment alongside other climate patterns, forecast tools and long-term trends.</p><a class="primary-button" href="https://www.weather.gov/" target="_blank" rel="noreferrer">Local forecasts & warnings <ArrowUpRight size={17} /></a></div><div class="winter-side"><Snowflake size={36} stroke-width={1} /><h3>Read the right season.</h3><p>DJF means December–February. NDJ means November–January. Adjacent outlooks overlap but cover different periods. Use the dates printed on each map.</p><a href="/forecast/#strength-heading">ENSO phase and strength</a></div></section>
     <section class="lifecycle-section" aria-labelledby="forecast-horizon-heading">
       <h2 id="forecast-horizon-heading">Which forecast should I use?</h2>
       <p class="body-copy">Match the product's valid period to your question. A three-month outlook and a shorter outlook can favor different categories without contradicting each other: a wet fortnight can occur within a dry season. Read the issue date, target dates and legend each time.</p>
@@ -58,6 +59,9 @@ const maps = [
   </div>
 </Layout>
 <style>
+  .winter-contents { line-height:2; margin:24px 0; }
+  .winter-contents a { color:var(--green); }
+  #winter-maps-heading,#regional-heading { scroll-margin-top:110px; }
   #forecast-horizon-heading, #winter-variability-heading, #mjo-enso-heading { scroll-margin-top: 100px; }
   .outlook-maps { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; margin-top: 24px; }
   figure { margin: 0; min-width: 0; }

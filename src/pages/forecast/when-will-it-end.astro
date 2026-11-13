@@ -6,6 +6,7 @@ import { getData } from '../../lib/data';
 import { seasonLabel, formatDate, urls } from '../../lib/enso';
 const { snapshot, stale } = await getData(env);
 const forecast = snapshot.forecast.data;
+const firstNeutralLead = forecast.rows.find(row => row.neutral > row.nino && row.neutral > row.nina);
 const weekly = snapshot.weekly.data.at(-1)!;
 const questions = [
   { question: 'Does one cooler week confirm that El Niño has peaked?', answer: 'No. Weekly variability and later revisions can change the picture. Compare subsequent observations in the same dataset, and distinguish the warmest individual week from the peak three-month seasonal index.' },
@@ -15,8 +16,10 @@ const questions = [
 ---
 <Layout title="When will El Niño peak and end?" active="forecast" description="Separate the ocean-temperature peak, the official return to neutral and regional impacts. Read current NOAA probabilities with their dates and spring forecast uncertainty.">
   <div class="page-shell subpage lifecycle-page">
-    <div class="page-intro"><div><span class="eyebrow">ENSO LIFECYCLE · EDITORIAL REVIEW NOVEMBER 12, 2026</span><h1>When will El Niño<br /><span>peak and end?</span></h1><p>Separate the ocean peak, the official phase transition and regional impacts. Read the current outlook alongside the evidence needed to judge a change.</p></div></div>
+    <div class="page-intro"><div><span class="eyebrow">ENSO LIFECYCLE · EDITORIAL REVIEW NOVEMBER 13, 2026</span><h1>When will El Niño<br /><span>peak and end?</span></h1><p>Separate the ocean peak, the official phase transition and regional impacts. Read the current outlook alongside the evidence needed to judge a change.</p></div></div>
     <DataNotice stale={stale} />
+    <p class="body-copy lifecycle-current-answer">{firstNeutralLead ? `In CPC issue ${forecast.issue}, neutral first leads the published categories in ${seasonLabel(firstNeutralLead)}: ${firstNeutralLead.neutral}% neutral, ${firstNeutralLead.nino}% El Niño and ${firstNeutralLead.nina}% La Niña. This is a seasonal window, not an exact end date.` : `CPC issue ${forecast.issue} does not show a season in which neutral is the sole leading category. The published horizon cannot establish an exact end date.`}</p>
+    <nav aria-label="Lifecycle topics" class="lifecycle-topics"><a href="#current-outlook-heading">Current seasonal table</a> · <a href="#monitoring-change-heading">Evidence of weakening</a> · <a href="#spring-barrier-heading">Spring uncertainty</a> · <a href="#double-dip-heading">Multi-winter events</a></nav>
     <section class="lifecycle-section">
       <h2>Start with the official assessment.</h2>
       <p class="body-copy">CPC’s discussion issued {formatDate(snapshot.discussion.data.issued)} states: <strong>{snapshot.discussion.data.synopsis}</strong></p>
@@ -28,7 +31,7 @@ const questions = [
       <article><h3>The official phase</h3><p>CPC evaluates the ocean and atmosphere together. A weekly crossing of a seasonal threshold does not by itself confirm that an event has ended.</p></article>
       <article><h3>Regional impacts</h3><p>Local precipitation, temperature and water-supply effects have their own timing. The Pacific index does not set a universal end date for these impacts.</p></article>
     </div></section>
-    <section class="lifecycle-section"><h2>What does the current outlook cover?</h2>
+    <section class="lifecycle-section"><h2 id="current-outlook-heading">What does the current outlook cover?</h2>
       <p class="body-copy">CPC issue {forecast.issue}, RONI-based state probabilities. Each row is a three-month season. A probability for El Niño is not a probability of a strong event or of local severe weather.</p>
       <div class="probability-table-wrap"><table class="data-table"><caption>NOAA CPC · issue {forecast.issue}</caption><thead><tr><th scope="col">Target season</th><th scope="col">El Niño</th><th scope="col">Neutral</th><th scope="col">La Niña</th></tr></thead><tbody>{forecast.rows.map(row => <tr><th scope="row">{seasonLabel(row)}</th><td>{row.nino}%</td><td>{row.neutral}%</td><td>{row.nina}%</td></tr>)}</tbody></table></div>
       <p class="body-copy">A reported 100% does not remove real-world uncertainty. A change from 99% to 100% is one percentage point, not evidence of a significant forecast change. <a href="/forecast/">Compare the same season across official issues.</a></p>
@@ -76,6 +79,9 @@ const questions = [
 </Layout>
 
 <style>
+  .lifecycle-topics { line-height:2; margin:24px 0; }
+  .lifecycle-topics a { color:var(--green); }
+  #current-outlook-heading { scroll-margin-top:110px; }
   #monitoring-change-heading, #spring-barrier-heading, #double-dip-heading { scroll-margin-top: 100px; }
   .evidence-table table { min-width: 720px; }
   .evidence-table th, .evidence-table td { text-align: left; }

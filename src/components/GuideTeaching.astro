@@ -1,0 +1,54 @@
+---
+import { teaching } from '../content/teaching';
+interface Props { slug: string }
+const { slug } = Astro.props;
+const t = teaching[slug];
+---
+{t && <figure class="teaching-figure" aria-label={t.title}>
+  <h3>{t.title}</h3>
+  {(t.kind || t.columns) && <p class="scroll-hint">Swipe or scroll horizontally to see the full diagram or table →</p>}
+  {t.kind === 'regions' && <div class="diagram-scroll" tabindex="0" role="region" aria-label="Niño region diagram, scroll horizontally on small screens"><svg viewBox="0 0 760 310" role="img" aria-label="Overlapping Niño boxes across the equatorial Pacific, with Niño 1+2 south of the equator near South America">
+    <rect x="35" y="60" width="665" height="185" fill="#102b3b"/>
+    <path d="M35 150H700" stroke="#cbd5e1" stroke-dasharray="6 5"/>
+    <g fill="#e2e8f0" font-size="15"><text x="35" y="35">West → east across tropical Pacific</text><text x="35" y="275">160°E</text><text x="138" y="275">180°</text><text x="242" y="275">160°W</text><text x="352" y="275">140°W</text><text x="463" y="275">120°W</text><text x="700" y="275">80°W</text><text x="40" y="143">Equator</text><text x="594" y="300">South America →</text></g>
+    <!-- x maps 160E..280E (80W); y maps latitude +10..-10. -->
+    <g fill="none" stroke-width="3"><rect x="35" y="105" width="277" height="90" stroke="#60a5fa"/><rect x="201" y="105" width="277" height="90" stroke="#34d399" stroke-dasharray="9 4"/><rect x="312" y="105" width="332" height="90" stroke="#fbbf24"/><rect x="644" y="150" width="55" height="90" stroke="#fb7185"/></g>
+    <g font-size="16" font-weight="700"><text x="55" y="88" fill="#60a5fa">Niño 4</text><text x="235" y="220" fill="#34d399">Niño 3.4</text><text x="455" y="88" fill="#fbbf24">Niño 3</text><text x="633" y="135" fill="#fb7185">1+2</text></g>
+  </svg></div>}
+  {t.kind === 'kelvin' && <div class="diagram-scroll" tabindex="0" role="region" aria-label="Kelvin-wave conceptual section"><svg viewBox="0 0 760 340" role="img" aria-label="A thermocline depression moves from the west toward the east in two successive conceptual sections">
+    <g font-size="16" fill="#e2e8f0"><text x="50" y="25">Western Pacific</text><text x="555" y="25">Eastern Pacific</text><text x="15" y="72">t₁</text><text x="15" y="218">t₂</text><text x="275" y="166">Propagation east →</text><text x="50" y="325">Depth increases ↓ · warmer water above, colder below</text></g>
+    <g fill="#102b3b"><rect x="50" y="45" width="660" height="100"/><rect x="50" y="185" width="660" height="100"/></g>
+    <g stroke="#cbd5e1" stroke-dasharray="6 5"><path d="M50 85H710"/><path d="M50 225H710"/></g>
+    <g fill="none" stroke="#fbbf24" stroke-width="4"><path d="M50 85H120Q155 85 180 112Q215 140 250 112Q275 85 310 85H710"/><path d="M50 225H420Q455 225 480 252Q515 280 550 252Q575 225 610 225H710"/></g>
+  </svg></div>}
+  {t.kind === 'plume' && <div class="diagram-scroll" tabindex="0" role="region" aria-label="Model plume teaching diagram"><svg viewBox="0 0 760 360" role="img" aria-label="Three invented model-mean SST anomaly trajectories diverge with lead time; the dashed collection mean does not represent individual ensemble members">
+    <g fill="#e2e8f0" font-size="16"><text x="20" y="25">Conventional Niño 3.4 SST anomaly (°C)</text><text x="20" y="75">+2</text><text x="20" y="165">+1</text><text x="30" y="255">0</text><text x="15" y="300">−0.5</text><text x="80" y="332">DJF</text><text x="267" y="332">JFM</text><text x="450" y="332">FMA</text><text x="640" y="332">MAM → target season</text></g>
+    <path d="M65 45V300H710" stroke="#cbd5e1" fill="none"/><path d="M65 210H710" stroke="#cbd5e1" stroke-dasharray="3 5"/><text x="78" y="202" fill="#cbd5e1" font-size="14">+0.5°C reference</text>
+    <g fill="none" stroke-width="2"><path d="M85 165L280 120L470 90L660 70" stroke="#60a5fa"/><path d="M85 165L280 155L470 175L660 190" stroke="#34d399"/><path d="M85 165L280 185L470 240L660 285" stroke="#fb7185"/></g>
+    <path d="M85 165L280 153.33L470 168.33L660 181.67" stroke="#fbbf24" stroke-width="4" stroke-dasharray="10 5" fill="none"/>
+    <g fill="#e2e8f0" font-size="14"><text x="678" y="73">A</text><text x="678" y="194">B</text><text x="678" y="289">C</text></g>
+  </svg></div>}
+  {t.kind === 'snow' && <div class="diagram-scroll" tabindex="0" role="region" aria-label="Mountain snow-level diagram"><svg viewBox="0 0 760 320" role="img" aria-label="Rain at lower elevations and snow on higher Sierra slopes above a moving storm snow level">
+    <path d="M50 275L260 210L430 65L700 275Z" fill="#304252" stroke="#cbd5e1"/>
+    <path d="M337 145L430 65L533 145Z" fill="#e2e8f0"/>
+    <path d="M45 145H710" stroke="#60a5fa" stroke-dasharray="8 5"/>
+    <g fill="#e2e8f0" font-size="18"><text x="45" y="35">Higher elevation ↑</text><text x="475" y="90">Snow storage</text><text x="48" y="132">Storm snow level ↕</text><text x="85" y="235">Rain / runoff</text><text x="45" y="308">Foothills → Sierra crest → opposite slope</text></g>
+  </svg></div>}
+  {t.steps && <ol class="teaching-flow">{t.steps.map(step=><li>{step}</li>)}</ol>}
+  {t.columns && <div class="teaching-table" role="region" aria-label={t.title} tabindex="0"><table><thead><tr>{t.columns.map(column=><th scope="col">{column}</th>)}</tr></thead><tbody>{t.rows?.map(row=><tr>{row.map((cell,i)=>i===0 ? <th scope="row">{cell}</th> : <td>{cell}</td>)}</tr>)}</tbody></table></div>}
+  <figcaption>{t.caption}</figcaption>
+</figure>}
+<style>
+.teaching-figure { margin:28px 0; padding:24px; border:1px solid var(--line-strong); border-radius:12px; background:var(--card); min-width:0; }
+h3 { font-size:20px; line-height:1.5; margin:0 0 20px; }
+.scroll-hint { display:none; font-size:13px; line-height:1.6; color:var(--muted); }
+.diagram-scroll,.teaching-table { overflow-x:auto; max-width:100%; }
+svg { display:block; width:100%; min-width:580px; height:auto; }
+table { width:100%; min-width:600px; border-collapse:collapse; }
+th,td { padding:14px; border-bottom:1px solid var(--line-strong); text-align:left; vertical-align:top; font-size:14px; line-height:1.7; }
+thead th { color:var(--green); }
+.teaching-flow { list-style:decimal; padding-left:28px; }
+.teaching-flow li { padding:12px; margin:10px 0; border-left:2px solid var(--green); background:var(--bg); font-size:15px; line-height:1.7; }
+figcaption { margin-top:18px; font-size:14px; color:var(--muted); line-height:1.8; }
+@media(max-width:650px) { .teaching-figure { padding:16px; } .scroll-hint { display:block; margin:0 0 16px; } }
+</style>

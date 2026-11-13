@@ -1,0 +1,29 @@
+ENSOLens dated source extract — not an official NOAA archive
+Issue: CPC ENSO Diagnostics Discussion, November 12, 2026
+Checked: November 13, 2026. Target periods retain their original years.
+Original rolling sources (may advance to a later issue):
+https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_advisory/ensodisc.shtml
+https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/strengths/
+https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/probabilities/
+
+Short discussion extract: "El Niño Advisory"
+ENSOLens transcription/summary: continued strengthening before weakening in early 2027;
+approximately 60% chance of three-month RONI >= +2.5°C in OND 2026 and NDJ 2026–27.
+This is a forecast, not an observed record or a local-impact probability.
+
+November 2026 strength product — unconditional probabilities, percent
+Three-month RONI; 1991–2020 base period.
+Target,weak (0.5 to <1.0),moderate (1.0 to <1.5),strong (1.5 to <2.0),very strong (>=2.0),all El Niño
+DJF 2026–27,0,2,19,79,100
+JFM 2027,3,18,44,35,100
+Published 0% is approximate, not absolute impossibility.
+
+November 2026 phase product — percent
+Target,La Niña,neutral,El Niño
+AMJ 2027,1,61,38
+MJJ 2027,13,75,12
+JJA 2027,33,61,6
+
+Selection preserves only the statements and values used by ENSOLens, not the full
+source documents. NOAA/CPC remain the issuing institutions; this text was prepared
+by ENSOLens. The website's live chart can advance independently of this reference.

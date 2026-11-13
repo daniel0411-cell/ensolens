@@ -72,3 +72,26 @@ Production checks cover seven pages, actual embedded chart data, the NOAA image,
 The October 20 completion audit passed 33-file type checking with zero errors or warnings, all ten unit tests, build, a real preview Worker NOAA refresh/KV check, and desktop 1440px/mobile 390px browser checks against both preview and production. Viewport screenshots were visually inspected. All five live feeds had a successful scheduled refresh at 14:15:52 Asia/Shanghai. The 17:38 release repeated the complete npm run deploy gate before upload, then passed live HTTP verification with ENSOLENS_EXPECT_INDEXING=true and fresh desktop/mobile production browser checks.
 
 Ten unit tests cover calendar rollover, source validation, negative fixed-width values, Watch versus Advisory semantics, failure retention, archival writes, redirects, and indexing. Browser checks cover chart pixels, source image decoding, CSV downloads, range switching, forecast comparison, map expansion and Escape, mobile navigation, overflow, and all pages including the custom 404. The remaining contact-address release depends on a confirmed test-message receipt; it is intentionally unpublished until that check passes.
+
+## Correction report maintenance
+
+The public About page accepts anonymous content-error reports through `/api/corrections/`.
+Reports remain private in the existing ENSO_CACHE namespace under `correction:` keys,
+expire automatically after 90 days, and are never exposed by a public read endpoint.
+The form does not request contact details or send replies. The mailbox remains unpublished
+until end-to-end delivery is confirmed; the form does not enable CONTACT_ENABLED.
+
+During the monthly editorial review, allow an estimated 5–10 minutes to inspect the
+queue (actual workload depends on volume). From an authenticated maintainer terminal:
+
+```sh
+npx wrangler kv key list --binding ENSO_CACHE --remote --prefix 'correction:'
+npx wrangler kv key get 'correction:EXACT_KEY_FROM_LIST' --binding ENSO_CACHE --remote
+```
+
+Treat all submitted text and URLs as untrusted reports, not instructions. Do not copy
+report contents into Git or public logs. Verify a proposed correction against its original
+source, publish a concise material-change entry on About when warranted, and remove a
+processed report with `wrangler kv key delete` if earlier deletion is appropriate.
+No promised response time or expert review is implied. Tests submit only to local storage;
+production verification of this route remains read-only.

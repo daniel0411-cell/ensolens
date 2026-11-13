@@ -1,4 +1,5 @@
 export interface Guide {
+  published: string; modified: string; reviewed: string; sourcesChecked: string;
   slug: string; title: string; description: string; category: string; answer: string;
   sections: { title: string; paragraphs: string[] }[];
   checklist: string[];
@@ -7,6 +8,7 @@ export interface Guide {
 }
 export const guides: Guide[] = [
   {
+    published: '2026-11-12', modified: '2026-11-13', reviewed: '2026-11-13', sourcesChecked: '2026-11-12',
     slug: 'kelvin-waves-and-enso', title: 'What do Kelvin waves tell us about El Niño?', category: 'Ocean processes',
     description: 'Understand equatorial Kelvin waves, thermocline changes and the evidence needed before treating a subsurface signal as an El Niño forecast.',
     answer: 'A downwelling equatorial Kelvin wave can help move a warm subsurface signal eastward and deepen the thermocline. It is evidence about ocean evolution, not a declaration that El Niño will develop or strengthen.',
@@ -32,6 +34,7 @@ export const guides: Guide[] = [
     related: [{ title: 'Ocean–atmosphere coupling', href: '/methodology/#ocean-atmosphere-heading' }, { title: 'How an ENSO event ends', href: '/forecast/when-will-it-end/' }]
   },
   {
+    published: '2026-11-12', modified: '2026-11-13', reviewed: '2026-11-13', sourcesChecked: '2026-11-12',
     slug: 'soi-vs-ocean-indices', title: 'SOI versus Niño 3.4: why ENSO indices can disagree', category: 'Reading indicators',
     description: 'Compare the Southern Oscillation Index with ocean temperature indices, including opposite signs, averaging periods and short-lived disagreement.',
     answer: 'The Southern Oscillation Index measures a standardized air-pressure difference; Niño 3.4 measures ocean temperature over a defined region. Their signs, units and short-term behavior differ because they describe different parts of ENSO.',
@@ -57,6 +60,7 @@ export const guides: Guide[] = [
     related: [{ title: 'ENSOLens data definitions', href: '/methodology/' }, { title: 'The Niño regions', href: '/learn/nino-regions-explained/' }]
   },
   {
+    published: '2026-11-12', modified: '2026-11-13', reviewed: '2026-11-13', sourcesChecked: '2026-11-12',
     slug: 'nino-regions-explained', title: 'Niño 1+2, 3, 3.4 and 4: which Pacific region matters?', category: 'Reading indicators',
     description: 'Locate the four Niño sea-temperature regions and learn why coastal warming, a basin-wide ENSO assessment and regional impacts are different questions.',
     answer: 'The Niño regions sample different parts of the tropical Pacific. Niño 3.4 is central to ENSO monitoring, while the far-eastern Niño 1+2 region is closer to Peru and Ecuador. A large anomaly in one box does not describe the whole basin.',
@@ -82,13 +86,14 @@ export const guides: Guide[] = [
     related: [{ title: 'SOI versus ocean indices', href: '/learn/soi-vs-ocean-indices/' }, { title: 'Current ENSO observations', href: '/' }]
   },
   {
+    published: '2026-11-12', modified: '2026-11-13', reviewed: '2026-11-13', sourcesChecked: '2026-11-12',
     slug: 'enso-and-climate-change', title: 'El Niño and climate change: what each explains', category: 'Climate context',
     description: 'Separate ENSO variability from long-term warming, regional ocean anomalies from global temperatures, and annual records from event attribution.',
     answer: 'ENSO redistributes heat and changes atmospheric circulation over months to years. Human-caused warming changes the long-term background. Both can influence the same year, but an ENSO index cannot measure or explain the entire global temperature trend.',
     sections: [
       { title: 'A temporary fluctuation on a changing background', paragraphs: [
         'El Niño can raise global average surface temperature as heat moves from the tropical ocean into the atmosphere. La Niña can temporarily pull that average in the other direction. These fluctuations occur within a longer-term climate trend; a cooler year relative to the preceding year is not necessarily cool relative to earlier decades.',
-        'WMO’s November 9, 2026 climate update distinguishes the warming contribution of ENSO from the buildup of heat associated with greenhouse gases. We use that distinction here, not its unfinished annual rankings as final results. A year-to-date estimate, a completed calendar year and a long-term average are different measures.'
+        'IPCC’s 2021 assessment treats future ENSO variability as a scenario-based climate question. Chapter 4 separates rainfall variability from sea-surface temperature variability: stronger projected rainfall fluctuations do not imply an equally certain change in SST amplitude. A projection over the 21st century is different from a forecast for the next season.'
       ] },
       { title: 'Do not compare unrelated anomaly numbers', paragraphs: [
         'A Niño 3.4 anomaly describes one ocean region relative to a product-specific climatology. A global surface temperature anomaly combines a much larger area and may use an 1850–1900 reference. Subtracting the two numbers does not isolate the contribution of El Niño to global warming.',
@@ -103,10 +108,11 @@ export const guides: Guide[] = [
         'For practical planning, combine the latest regional seasonal outlook with shorter-range weather information. Knowing the ENSO phase helps explain one source of seasonal predictability; it does not remove other climate influences or the need for current local warnings.'
       ] }
     ], checklist: ['Separate regional SST anomalies from global surface temperature.', 'Keep the baseline and provisional or final status visible.', 'Require event-specific evidence for individual extremes.'],
-    sources: [{ title: 'WMO: State of the Climate 2026 update', url: 'https://wmo.int/news/media-centre/state-of-climate-2026-gives-new-meaning-phrase-charts', date: 'Published November 9, 2026; provisional update, not a final annual report' }, { title: 'NOAA: Understanding El Niño and ENSO', url: 'https://www.noaa.gov/understanding-el-nino', date: 'Updated June 10, 2026; mechanism overview only' }],
+    sources: [{ title: 'IPCC AR6 WGI Chapter 4: ENSO variability, section 4.3.3.2', url: 'https://www.ipcc.ch/report/ar6/wg1/chapter/chapter-4/', date: '2021 assessment; section checked November 13, 2026; long-term projections, not a current ENSO outlook' }, { title: 'WMO: State of the Climate 2026 update', url: 'https://wmo.int/news/media-centre/state-of-climate-2026-gives-new-meaning-phrase-charts', date: 'Published November 9, 2026; provisional update, not a final annual report' }, { title: 'NOAA: Understanding El Niño and ENSO', url: 'https://www.noaa.gov/understanding-el-nino', date: 'Updated June 10, 2026; mechanism overview only' }],
     related: [{ title: 'Climate normals and anomalies', href: '/learn/climate-normals-and-anomalies/' }, { title: 'ENSO-neutral explained', href: '/forecast/enso-neutral/' }]
   },
   {
+    published: '2026-11-12', modified: '2026-11-13', reviewed: '2026-11-13', sourcesChecked: '2026-11-12',
     slug: 'marine-heatwaves-vs-el-nino', title: 'Is a Pacific marine heatwave the same as El Niño?', category: 'Climate context',
     description: 'Learn why a marine heatwave near the West Coast and a tropical Pacific ENSO event can overlap without being the same phenomenon.',
     answer: 'No. A marine heatwave describes unusually warm ocean conditions for a particular place and time of year. El Niño describes a coupled tropical Pacific pattern. They can interact, but neither label automatically establishes the other.',
@@ -132,6 +138,7 @@ export const guides: Guide[] = [
     related: [{ title: 'Kelvin waves and ENSO', href: '/learn/kelvin-waves-and-enso/' }, { title: 'ENSO and climate change', href: '/learn/enso-and-climate-change/' }]
   },
   {
+    published: '2026-11-12', modified: '2026-11-13', reviewed: '2026-11-13', sourcesChecked: '2026-11-12',
     slug: 'el-nino-and-drought-recovery', title: 'Can El Niño end a drought? Rainfall versus recovery', category: 'Water and weather',
     description: 'Understand why a wetter seasonal outlook is not a drought-recovery guarantee, and which soil, snow, reservoir and groundwater observations to check.',
     answer: 'El Niño can shift seasonal rainfall odds in some regions, but drought recovery depends on where water falls, how it is stored and the size of existing deficits. A wet storm or wet season does not automatically restore every part of the water system.',
@@ -157,6 +164,7 @@ export const guides: Guide[] = [
     related: [{ title: 'California rain, snow and water storage', href: '/impacts/california-snow-vs-rain/' }, { title: 'Northwest snow drought', href: '/impacts/pacific-northwest-winter/#snow-drought-heading' }]
   },
   {
+    published: '2026-11-12', modified: '2026-11-13', reviewed: '2026-11-13', sourcesChecked: '2026-11-12',
     slug: 'enso-jet-stream-teleconnections', title: 'How does El Niño affect the jet stream over North America?', category: 'Water and weather',
     description: 'Follow the connection from tropical Pacific rainfall to atmospheric circulation and North American winter tendencies without treating jet-stream diagrams as daily forecasts.',
     answer: 'ENSO changes where tropical Pacific thunderstorms release heat into the atmosphere. The resulting circulation response can shift Pacific jet streams and storm tracks, changing North American seasonal odds rather than prescribing each storm.',
@@ -182,6 +190,7 @@ export const guides: Guide[] = [
     related: [{ title: 'Regional winter impacts', href: '/impacts/' }, { title: 'Choosing a forecast horizon', href: '/winter-outlook/#forecast-horizon-heading' }]
   },
   {
+    published: '2026-11-12', modified: '2026-11-13', reviewed: '2026-11-13', sourcesChecked: '2026-11-12',
     slug: 'enso-model-plumes-and-probabilities', title: 'How to read an ENSO model plume without inventing probabilities', category: 'Forecast literacy',
     description: 'Learn what ENSO model lines and ensemble spread represent, why a model average is not a guaranteed outcome and how IRI differs from official CPC probabilities.',
     answer: 'A model plume displays forecasts from multiple models. Its spread shows disagreement within that collection, but counting lines above a threshold does not automatically produce a calibrated probability or the official CPC forecast.',
@@ -207,6 +216,7 @@ export const guides: Guide[] = [
     related: [{ title: 'Reading official CPC probabilities', href: '/forecast/#reading-probabilities-heading' }, { title: 'Lifecycle forecast limits', href: '/forecast/when-will-it-end/' }]
   },
   {
+    published: '2026-11-12', modified: '2026-11-13', reviewed: '2026-11-13', sourcesChecked: '2026-11-12',
     slug: 'climate-normals-and-anomalies', title: 'What does above normal mean? Climate baselines and anomalies', category: 'Reading indicators',
     description: 'Understand temperature anomalies, 30-year climate normals and why changing baselines, seasons or datasets can change a comparison.',
     answer: 'An anomaly is a difference from a defined reference, not an absolute temperature. To interpret above normal, identify the variable, place, season, reference period and dataset before comparing numbers.',
@@ -232,6 +242,7 @@ export const guides: Guide[] = [
     related: [{ title: 'ENSOLens index methods', href: '/methodology/' }, { title: 'Snow-water percentages', href: '/impacts/california-snow-vs-rain/#swe-percent-heading' }]
   },
   {
+    published: '2026-11-12', modified: '2026-11-13', reviewed: '2026-11-13', sourcesChecked: '2026-11-12',
     slug: 'how-enso-is-observed', title: 'How do scientists observe El Niño? Buoys, satellites and ocean analyses', category: 'Ocean processes',
     description: 'Follow ENSO evidence from ocean and atmospheric observations to analyzed indices, and understand why source dates, gaps and revisions matter.',
     answer: 'ENSO monitoring combines instruments in the ocean, satellite observations and atmospheric measurements. No single sensor measures the entire coupled system, and an analyzed regional index is different from one buoy’s reading.',

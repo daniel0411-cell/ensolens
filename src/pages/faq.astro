@@ -50,31 +50,40 @@ const faqs = [
     category: 'fundamentals',
     categoryLabel: 'Fundamentals',
     question: 'How long do El Niño and La Niña episodes typically persist?',
-    answer: 'El Niño episodes typically develop during boreal spring or summer (April to July), reach peak intensity during late autumn or winter (November to January), and decay by the following spring, lasting on average between 9 and 12 months. In contrast, La Niña episodes frequently exhibit longer persistence, often spanning two or even three consecutive winters. These multi-year events (termed "double-dip" or "triple-dip" La Niñas, such as 1998–2001 and 2020–2023) can prolong regional drought cycles in the American Southwest and East Africa.'
+    answer: 'El Niño and La Niña episodes typically last about 9–12 months, but some persist for years. Events often reach their largest amplitude near the end of the calendar year; development and decay do not follow a fixed April–July or next-spring schedule. La Niña can recur over consecutive winters, sometimes with neutral intervals between them. Duration alone does not establish a drought outcome in any region: season, location and the affected water store need separate evidence.'
   },
   {
     id: 'local-weather-guarantee',
     category: 'weather',
     categoryLabel: 'Weather & Hurricanes',
     question: 'Does a strong El Niño or La Niña guarantee extreme weather in my specific city?',
-    answer: 'No. ENSO shifts regional atmospheric probabilities; it does not dictate day-to-day weather outcomes. Think of ENSO as loading the climate dice: a strong El Niño increases the statistical likelihood of an active southern storm track across California and the southern United States, and favors milder conditions in the northern tier. However, short-term atmospheric patterns—such as the Arctic Oscillation (AO), North Atlantic Oscillation (NAO), and Madden-Julian Oscillation (MJO)—can temporarily disrupt or override seasonal ENSO tendencies in any given month.'
+    answer: 'No. ENSO shifts seasonal regional odds rather than dictating daily weather. In Northern Hemisphere winter, El Niño often favors a more active southern U.S. storm track and milder northern-tier conditions; the relationship varies across regions and events. A warmer seasonal average can still contain a cold outbreak. Atmospheric variability, including the MJO and blocking patterns, can affect individual weeks. For a city, use the actual regional seasonal outlook, then local forecasts and warnings for storm timing, snow levels and safety.'
   },
   {
     id: 'hurricane-impact',
     category: 'weather',
     categoryLabel: 'Weather & Hurricanes',
     question: 'How does ENSO influence Atlantic and Pacific hurricane seasons?',
-    answer: 'ENSO has an opposing, seesaw effect on tropical cyclone activity across the Pacific and Atlantic basins. During El Niño, vigorous deep convection in the central Pacific generates strong upper-level westerly winds that tear across the Caribbean and tropical Atlantic, creating high vertical wind shear that suppresses Atlantic hurricane formation and intensification. Simultaneously, El Niño lowers wind shear in the eastern and central Pacific, fueling more numerous and intense Pacific cyclones. Conversely, La Niña reduces Atlantic vertical wind shear and fosters a more unstable tropical atmosphere, historically creating hyperactive Atlantic hurricane seasons.'
+    answer: 'El Niño tends to increase vertical wind shear over parts of the tropical Atlantic, making hurricane development less favorable, while often favoring activity in the central and eastern North Pacific. La Niña tends to favor the opposite Atlantic environment. These are seasonal tendencies, not guaranteed storm counts or a rule that La Niña produces a hyperactive season. Atlantic sea temperatures, moisture and other circulation patterns also matter. ENSO cannot determine an individual storm’s track, intensity or landfall; even a quieter season can produce a destructive landfall.'
   },
   {
     id: 'data-refresh-cadence',
     category: 'data',
     categoryLabel: 'Indices & Methods',
     question: 'Where does ENSOLens source its observations and how often are they refreshed?',
-    answer: 'ENSOLens ingests official datasets directly from the NOAA National Weather Service Climate Prediction Center (CPC). Our automated backend system checks and validates official sources on a 6-hour cycle: \n• Weekly Niño 3.4 SST anomaly: updated weekly from NOAA satellite and in-situ buoy blends.\n• Monthly Seasonal RONI series: updated monthly following NOAA ERSSTv6 processing.\n• Official ENSO Diagnostics Discussion & Probabilities: updated on the second Thursday of each month.\nEvery ingested record is validated before updating our live Cloudflare KV data store.'
+    answer: 'ENSOLens checks NOAA CPC sources every six hours. That is a retrieval schedule, not six-hourly new observations. The dashboard labels the weekly conventional Niño 3.4 anomaly separately from the three-month RONI series, the diagnostic discussion and seasonal phase probabilities. Each source retains its observation or issue date and check time. Monthly discussion releases normally follow CPC’s published second-Thursday schedule. Validation failures preserve the last accepted values and show a delayed-source notice; the status endpoint reports the affected feed. A successful check does not mean the source published new values.'
   }
 ];
 
+const answerSources: Record<string, {href:string; label:string; note:string}[]> = {
+  'event-duration': [{href:'https://oceanservice.noaa.gov/facts/ninonina.html',label:'NOAA: ENSO duration',note:'Updated September 23, 2026; checked November 13.'},{href:'/forecast/when-will-it-end/#double-dip-heading',label:'Multi-winter episodes and neutral intervals',note:'With dated NOAA mechanism source.'}],
+  'local-weather-guarantee': [{href:'https://www.weather.gov/mhx/ensowhat',label:'NWS: typical ENSO winter patterns',note:'Undated background; checked November 12, 2026.'},{href:'/winter-outlook/',label:'Dated U.S. seasonal outlook and forecast horizons',note:'Regional probabilities and local forecast routing.'}],
+  'hurricane-impact': [{href:'https://www.climate.gov/news-features/blogs/enso/impacts-el-nino-and-la-nina-hurricane-season',label:'NOAA: ENSO and hurricane-season mechanisms',note:'May 30, 2014; archived background, checked November 13, 2026. Its 2014 outlook is not current guidance.'},{href:'https://www.nhc.noaa.gov/',label:'NHC current advisories',note:'For individual storms.'}],
+  'data-refresh-cadence': [{href:'/methodology/',label:'Sources, products and validation',note:'ENSOLens implementation and source definitions.'},{href:'/api/status/',label:'Live source-check status',note:'Check and retrieval timestamps for each feed.'}],
+  'nino-34-threshold': [{href:'https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/strengths/',label:'CPC strength definitions',note:'Three-month RONI categories; checked November 13, 2026.'}],
+  'oni-vs-roni': [{href:'/methodology/#indices',label:'ONI, RONI and weekly anomaly methods',note:'Product-specific CPC references and baselines.'}],
+  'super-el-nino': [{href:'/forecast/#strength-heading',label:'Dated strength probabilities and thresholds',note:'November 2026 CPC reference.'}]
+};
 const faqSchema = {
   mainEntity: {
     '@type': 'FAQPage',
@@ -140,6 +149,7 @@ const faqSchema = {
               <p>{faq.answer}</p>
               {['enso-basics', 'el-nino-vs-la-nina'].includes(faq.id) && <p>Mechanism reviewed November 12, 2026. Read our <a href="/methodology/#ocean-atmosphere-heading">ocean–atmosphere coupling guide</a>, with <a href="https://www.weather.gov/fwd/basics">NWS source explanation</a>.</p>}
               {faq.id === 'alerts-explained' && <p>Source: <a href="https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_advisory/enso-alert-readme.shtml" target="_blank" rel="noreferrer">CPC ENSO Alert System definitions</a>, checked November 12, 2026.</p>}
+              {answerSources[faq.id]?.map(source => <p class="answer-source"><a href={source.href}>{source.label}</a> — {source.note}</p>)}
               <div class="faq-footer">
                 <a class="faq-anchor-link" href={`#${faq.id}`} title="Direct link to this question">Direct link #</a>
               </div>

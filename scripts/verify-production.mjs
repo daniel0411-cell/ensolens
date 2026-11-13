@@ -48,6 +48,10 @@ for (const path of paths) {
     assert.equal(article['@type'], 'Article');
     assert.equal(article.headline, $('h1').text());
     assert.equal(article.datePublished, '2026-11-12');
+    assert.equal(article.dateModified, '2026-11-13');
+    assert.equal($('.teaching-figure').length, 1);
+    assert.equal($('.section-evidence').length, 4);
+    for(const a of $('.section-evidence a').toArray()) assert.equal($($(a).attr('href')).length,1);
     assert.equal(article.url, host + path);
     assert.deepEqual(article.citation, $('.sources a').toArray().map(el => $(el).attr('href')));
     for (const el of $('main a[href^="/"]').toArray()) assert.ok(paths.includes($(el).attr('href').split('#')[0]), path + ' unknown internal link');
@@ -77,10 +81,12 @@ for (const path of paths) {
     assert.equal($('#reading-probabilities-heading').length, 1);
     assert.match($('section[aria-labelledby="reading-probabilities-heading"]').text(), /teaching example, not a current CPC forecast/);
     assert.equal($('#wmo-record-heading').text(), 'Will this El Niño be the strongest on record?');
-    assert.match($('section[aria-labelledby="wmo-record-heading"]').text(), /November 9, 2026.+not confirmation/s);
+    assert.match($('section[aria-labelledby="wmo-record-heading"]').text(), /November 9, 2026.+not an observed seasonal record/s);
     assert.equal($('section[aria-labelledby="wmo-record-heading"] a[href="https://wmo.int/news/media-centre/state-of-climate-2026-gives-new-meaning-phrase-charts"]').length, 1);
     assert.equal($('#super-el-nino-heading').text(), 'What is a super El Niño?');
     assert.equal($('h1').text(), 'El Niño & La Niña forecast.');
+    assert.ok(html.indexOf('id="probability-heading"') < html.indexOf('id="november-update-heading"'));
+    assert.equal($('a[href="/references/cpc-november-2026.txt"]').length,2);
     const current = JSON.parse($('#forecast-data').text()).current;
     const target = current.rows.find(row => row.season === 'DJF') ?? current.rows[0];
     assert.ok($('.page-intro p').text().includes(`${target.nino}% El Niño, ${target.neutral}% neutral and ${target.nina}% La Niña`));
@@ -105,8 +111,15 @@ for (const path of paths) {
     assert.match($('#alerts-explained').text(), /not a waiting requirement/);
     assert.equal($('#alerts-explained a[href$="enso-alert-readme.shtml"]').length, 1);
   }
+  if (path === '/about/') {
+    assert.equal($('form[action="/api/corrections/"]').length,1);
+    assert.equal($('#correction-log-heading').length,1);
+    assert.match($('main').text(), /AI assistance/);
+  }
   if (path === '/historical/') {
     const analog = JSON.parse($('#analog-data').text());
+    assert.ok(analog.current.every(p=>p.date.startsWith(analog.currentYear)));
+    assert.ok($('main').text().includes(analog.current.at(-1).date));
     for (const b of analog.benchmarks) {
       assert.ok($('.analog-summary-table').text().includes(b.peakDate));
       assert.equal(b.extreme.anomaly, b.peakAnomaly);
@@ -194,7 +207,7 @@ for (const entry of sitemapXml('url').toArray()) {
 }
 for (const path of ['/', '/forecast/', '/forecast/when-will-it-end/', '/faq/', '/historical/', '/winter-outlook/', '/impacts/', '/impacts/california-snow-vs-rain/', '/impacts/pacific-northwest-winter/', '/forecast/enso-neutral/', '/methodology/']) {
   const entry = sitemapXml('url').filter((_, element) => sitemapXml(element).find('loc').text() === host + path);
-  const expected = path === '/forecast/' ? '2026-11-13' : '2026-11-12';
+  const expected = ['/forecast/','/faq/','/historical/','/winter-outlook/','/forecast/when-will-it-end/','/impacts/california-snow-vs-rain/','/impacts/pacific-northwest-winter/'].includes(path) ? '2026-11-13' : '2026-11-12';
   assert.equal(entry.find('lastmod').text(), expected);
 }
 const missing = await request('/missing-page-check/');
@@ -208,3 +221,11 @@ for (const url of ['https://www.ensolens.com/forecast/?view=compare', 'http://en
   assert.equal(response.headers.get('location'), host + '/forecast/?view=compare');
 }
 console.log('PASS production health, robots, sitemap, 404 and canonical redirects', JSON.stringify(health.dates));
+
+const preserved = await fetch(host + '/references/cpc-november-2026.txt');
+assert.equal(preserved.status,200);
+assert.match(await preserved.text(), /DJF 2026–27,0,2,19,79,100/);
+const correctionGet = await fetch(host + '/api/corrections/');
+assert.equal(correctionGet.status,405);
+assert.match(correctionGet.headers.get('x-robots-tag'),/noindex/);
+console.log('PASS dated source record and private correction endpoint (read-only)');

@@ -17,6 +17,6 @@ export function secureResponse(response: Response, indexable: boolean) {
   headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
   headers.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
   headers.set('X-Robots-Tag', indexable && response.status < 400 ? 'index, follow' : 'noindex, follow');
-  if (headers.get('Content-Type')?.includes('text/html')) headers.set('Cache-Control', 'public, max-age=0, s-maxage=300');
+  if (headers.get('Content-Type')?.includes('text/html') && !headers.get('Cache-Control')?.includes('no-store')) headers.set('Cache-Control', 'public, max-age=0, s-maxage=300');
   return new Response(response.body, { status: response.status, statusText: response.statusText, headers });
 }

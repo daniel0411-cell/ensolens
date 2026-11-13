@@ -4,7 +4,7 @@ An independent English-language ENSO dashboard built with Astro, Chart.js, and C
 
 ## Status and recovery
 
-Latest release (November 13, 2026): code `77bb60f`, Cloudflare version `9bfe7996-3c93-4a75-9fba-025a1e7fc1f8`, deployment `1f9403f7-01b6-4d2e-abcd-7d9038ef4c36`, activated at 11:52:33 Asia/Shanghai with 100% traffic. Updated the forecast page to the verified November CPC strength reference and November 12 discussion, explaining phase/intensity probabilities, the distinct record threshold and seasonal transition uncertainty. Full deploy gate (16 tests), 25-page production verification and fresh live desktop/mobile browser suites passed; screenshots inspected. The November 12 ten-guide learning library remains available. See PROGRESS.md and CONTENT-SOURCES-2026-11-13.md for sources, verification and independent-review limits. Search inclusion and traffic effects remain unmeasured.
+Latest release (November 13, 2026): code `f44ad9d` (content implementation `d9a10c2`), Cloudflare version `eb12fa55-f3ca-4aaa-9ba7-b3a359836052`, deployment `272b5f7a-5f95-4448-b080-21c2c5b49ec0`, activated at 14:10:29 Asia/Shanghai with 100% traffic. Repaired content-audit findings: FAQ scope/evidence, ten guide teaching assets and per-guide metadata, forecast task order, reproducible dated source selection, historical stale-source/year behavior, editorial disclosure and a private onsite correction form. Full deploy gate (21 tests), all 25 production pages and fresh live desktop/mobile browser suites passed; teaching, forecast, form and regional screenshots inspected. November CPC values and the separately dated October winter maps remain distinct. See PROGRESS.md and CONTENT-SOURCES-2026-11-13.md for evidence and independent-review limits. Search inclusion and traffic effects remain unmeasured.
 
 Previous release (November 8, 2026): code `6e04b78`, Cloudflare version `1d51b14f-b47e-4063-a864-992a45ff9e51`, deployment `05734f0b-0e82-4c93-aa1c-a5c1993f2531`, activated at 14:36:33 Asia/Shanghai with 100% traffic. Clarified homepage/forecast search titles, H1s and dated summaries; added verified editorial sitemap dates. The complete deploy gate, 13 tests, 11-page production/RSS/asset checks and live desktop/mobile suites passed. The earlier dated winter maps and October strength reference remain available. Actual search inclusion and traffic gains remain unverified. See PROGRESS.md and CONTENT-SOURCES-2026-11-08.md for release and source records.
 
@@ -12,7 +12,7 @@ Read PROGRESS.md and AGENTS.md before continuing work. Git checkpoints preserve 
 
 - The official-data release was deployed on October 20, 2026 (Asia/Shanghai).
 - First verified official-data version: e3d2fbba-b818-4ef1-a9cb-9a772b6f4dd5.
-- Current production version: 961bd7ff-da70-4a73-927b-11218dded27b; deployment 2d3067de-4d3f-4243-a08f-f6815562a821, activated October 20 at 17:38:15 Asia/Shanghai, serving 100% of traffic.
+- Historical October 20 release version: 961bd7ff-da70-4a73-927b-11218dded27b; deployment 2d3067de-4d3f-4243-a08f-f6815562a821, activated October 20 at 17:38:15 Asia/Shanghai, serving 100% of traffic.
 - Production-only indexing is enabled and verified. This permits crawling; actual search-engine inclusion has not been confirmed.
 - contact@ensolens.com has a Cloudflare routing rule to an existing verified destination. Inbox receipt is unconfirmed; the public email link remains disabled.
 - The original demo release was 5757c27b-b2f4-4169-bda9-da8f28b76ab9.
@@ -41,7 +41,7 @@ ENSOLENS_EXPECT_INDEXING=true node scripts/verify-production.mjs
 
 Deploy runs type checks, unit tests, build, a real isolated Worker scheduled refresh against NOAA, KV persistence checks, and Chrome tests at 1440px and 390px before upload. Chrome must be installed. Browser tests start and stop their own preview; set ENSOLENS_TEST_URL to check an existing preview or production instead. Screenshots are saved under .playwright/.
 
-Production checks cover seven pages, actual embedded chart data, the NOAA image, source health, canonical URLs, metadata, indexing, sitemap, redirects, and the not-found page. A successful build alone is not a release verification.
+Production checks cover all 25 sitemap pages, actual embedded chart data, the NOAA image, source health, canonical URLs, metadata, indexing, sitemap, redirects, and the not-found page. A successful build alone is not a release verification.
 
 ## Data and failure behavior
 

@@ -2,6 +2,12 @@
 
 Updated: 2026-11-13 (Asia/Shanghai)
 
+## Existing-content quality audit (November 13)
+
+- Audit only, at Git baseline `445ba04` / application code `77bb60f`. Reviewed source for all 25 sitemap pages and shared guide content; fetched live page inventories (all HTTP 200). Background browser checks covered FAQ, forecast and Kelvin-wave guidance; primary-source checks included CPC November discussion/strengths, NOAA hurricane mechanisms, ENSO duration, marine heatwaves and Kelvin waves, plus the November 9 WMO release. Recorded source dates, page-level judgments, limits and prioritized remediation in CONTENT-AUDIT-2026-11-13.md.
+- Main findings: overstrong legacy FAQ hurricane wording, uneven claim-level citations and seasonal scope, ten new guides needing task-specific teaching diagrams/examples, forecast tool displaced below accumulated editorial sections, rolling links that cannot reproduce dated references, and historical-page omission of the shared stale-data notice. The last item is a source-code failure-path finding, not an observed production outage. Current November strength numbers and WMO attribution were supported by checked originals; no claim of exhaustive scientific certification or search-ranking causation.
+- Recommended repairs before further article-count expansion, with phased one-time effort and recurring review estimates respecting the existing maintenance budget. No new independent reviewer participated. No application edits, application tests or deployment for this documentation milestone; prior verified production release remains unchanged. Documentation whitespace, inventory and scope checks recorded before committing.
+
 ## November CPC strength refresh and interpretation (November 13)
 
 - Confirmed GitHub prior release matches local HEAD and production feed is healthy, with November12 discussion and November phase outlook. Verified original CPC discussion, strength and phase tables in background browser following search; source/date/threshold notes in CONTENT-SOURCES-2026-11-13.md.

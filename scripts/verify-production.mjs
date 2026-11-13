@@ -77,8 +77,20 @@ for (const path of paths) {
       assert.match(asset.headers.get('content-type'), /image\/jpeg/);
     }
   }
+  if (path === '/impacts/pacific-northwest-winter/') {
+    assert.equal($('picture source[type="image/webp"]').length,1);
+    for (const width of [700,1400]) {
+      const asset = await request('/images/guides/northwest-snow-usfs-'+width+'.webp');
+      assert.equal(asset.status,200);
+      assert.match(asset.headers.get('content-type'),/image\/webp/);
+      const size = (await asset.arrayBuffer()).byteLength;
+      assert.ok(size > 1000 && size < 532048);
+    }
+  }
   if (path === '/forecast/') {
     assert.equal($('#reading-probabilities-heading').length, 1);
+    assert.equal($('#revision-summary-heading').text(), 'What changed in this issue?');
+    assert.match($('.revision-summary').text(), /identical seasonal targets, across all three ENSO phases/);
     assert.match($('section[aria-labelledby="reading-probabilities-heading"]').text(), /teaching example, not a current CPC forecast/);
     assert.equal($('#wmo-record-heading').text(), 'Will this El Niño be the strongest on record?');
     assert.match($('section[aria-labelledby="wmo-record-heading"]').text(), /November 9, 2026.+not an observed seasonal record/s);

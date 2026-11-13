@@ -1,7 +1,7 @@
-import { Chart, registerables } from 'chart.js';
+import { Chart, LineController, BarController, LineElement, PointElement, BarElement, LinearScale, CategoryScale, Tooltip, Filler } from 'chart.js';
 import type { Forecast, WeeklyPoint, SeasonalPoint } from '../lib/enso';
 
-Chart.register(...registerables);
+Chart.register(LineController, BarController, LineElement, PointElement, BarElement, LinearScale, CategoryScale, Tooltip, Filler);
 Chart.defaults.font.family = '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif';
 Chart.defaults.font.size = 11;
 Chart.defaults.color = '#94a3b8';

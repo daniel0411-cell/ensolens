@@ -3,10 +3,17 @@ import { teaching } from '../content/teaching';
 interface Props { slug: string }
 const { slug } = Astro.props;
 const t = teaching[slug];
+const readingKeys: Record<string, string[]> = {
+  regions: ['West to east: Niño 4 → Niño 3.4 → Niño 3 → Niño 1+2. The boxes overlap.', 'Niño 1+2 lies south of the equator near Peru and Ecuador. The labeled coordinates below give each box’s limits.'],
+  kelvin: ['At t₁, the deeper thermocline disturbance is in the western Pacific.', 'At t₂, the disturbance is farther east. The shape propagates; this does not track one parcel of water.', 'The dashed line is the reference thermocline. Depth, distance and time are not to scale.'],
+  plume: ['The invented A, B and C model means start together in DJF and diverge toward MAM.', 'The dashed curve averages those model means. It does not show individual ensemble members or a calibrated probability.', 'The +0.5°C line is a conventional SST teaching reference, not a RONI classification rule.'],
+  snow: ['Lower foothills: more precipitation may fall as rain and contribute to runoff.', 'Above the storm snow level: precipitation can build snow storage near the Sierra crest.', 'The snow level moves during a storm. This conceptual section supplies no elevation or current forecast.']
+};
 ---
 {t && <figure class="teaching-figure" aria-label={t.title}>
   <h3>{t.title}</h3>
-  {(t.kind || t.columns) && <p class="scroll-hint">Swipe or scroll horizontally to see the full diagram or table →</p>}
+  {t.kind && <div class="mobile-reading"><p><strong>Read the diagram</strong></p><ol>{readingKeys[t.kind]?.map(text => <li>{text}</li>)}</ol></div>}
+  {t.kind && <p class="scroll-hint">Optional detail: swipe the diagram horizontally to inspect its labels →</p>}
   {t.kind === 'regions' && <div class="diagram-scroll" tabindex="0" role="region" aria-label="Niño region diagram, scroll horizontally on small screens"><svg viewBox="0 0 760 310" role="img" aria-label="Overlapping Niño boxes across the equatorial Pacific, with Niño 1+2 south of the equator near South America">
     <rect x="35" y="60" width="665" height="185" fill="#102b3b"/>
     <path d="M35 150H700" stroke="#cbd5e1" stroke-dasharray="6 5"/>
@@ -35,12 +42,13 @@ const t = teaching[slug];
     <g fill="#e2e8f0" font-size="18"><text x="45" y="35">Higher elevation ↑</text><text x="475" y="90">Snow storage</text><text x="48" y="132">Storm snow level ↕</text><text x="85" y="235">Rain / runoff</text><text x="45" y="308">Foothills → Sierra crest → opposite slope</text></g>
   </svg></div>}
   {t.steps && <ol class="teaching-flow">{t.steps.map(step=><li>{step}</li>)}</ol>}
-  {t.columns && <div class="teaching-table" role="region" aria-label={t.title} tabindex="0"><table><thead><tr>{t.columns.map(column=><th scope="col">{column}</th>)}</tr></thead><tbody>{t.rows?.map(row=><tr>{row.map((cell,i)=>i===0 ? <th scope="row">{cell}</th> : <td>{cell}</td>)}</tr>)}</tbody></table></div>}
+  {t.columns && <div class="teaching-table" role="region" aria-label={t.title} tabindex="0"><table role="table"><thead role="rowgroup"><tr role="row">{t.columns.map(column=><th role="columnheader" scope="col">{column}</th>)}</tr></thead><tbody role="rowgroup">{t.rows?.map(row=><tr role="row">{row.map((cell,i)=>i===0 ? <th role="rowheader" scope="row">{cell}</th> : <td role="cell"><span class="cell-label" aria-hidden="true">{t.columns![i]}</span>{cell}</td>)}</tr>)}</tbody></table></div>}
   <figcaption>{t.caption}</figcaption>
 </figure>}
 <style>
 .teaching-figure { margin:28px 0; padding:24px; border:1px solid var(--line-strong); border-radius:12px; background:var(--card); min-width:0; }
 h3 { font-size:20px; line-height:1.5; margin:0 0 20px; }
+.mobile-reading,.cell-label { display:none; }
 .scroll-hint { display:none; font-size:13px; line-height:1.6; color:var(--muted); }
 .diagram-scroll,.teaching-table { overflow-x:auto; max-width:100%; }
 svg { display:block; width:100%; min-width:580px; height:auto; }
@@ -50,5 +58,20 @@ thead th { color:var(--green); }
 .teaching-flow { list-style:decimal; padding-left:28px; }
 .teaching-flow li { padding:12px; margin:10px 0; border-left:2px solid var(--green); background:var(--bg); font-size:15px; line-height:1.7; }
 figcaption { margin-top:18px; font-size:14px; color:var(--muted); line-height:1.8; }
-@media(max-width:650px) { .teaching-figure { padding:16px; } .scroll-hint { display:block; margin:0 0 16px; } }
+@media(max-width:650px) {
+  .teaching-figure { padding:16px; }
+  .scroll-hint { display:block; margin:0 0 16px; }
+  .mobile-reading { display:block; font-size:15px; line-height:1.8; margin-bottom:20px; }
+  .mobile-reading ol { padding-left:22px; }
+  .mobile-reading li { margin:10px 0; }
+  .teaching-table { overflow:visible; }
+  table { display:block; min-width:0; }
+  thead { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip-path:inset(50%); }
+  tbody,tr,th,td { display:block; }
+  tr { padding:12px; margin:12px 0; border:1px solid var(--line-strong); border-radius:8px; }
+  th,td { padding:8px 0; overflow-wrap:anywhere; }
+  tbody th { color:var(--green); font-size:16px; }
+  td:last-child { border-bottom:0; }
+  .cell-label { display:block; font-weight:700; color:var(--muted); margin-bottom:3px; }
+}
 </style>

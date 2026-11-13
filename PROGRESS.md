@@ -2,6 +2,14 @@
 
 Updated: 2026-11-13 (Asia/Shanghai)
 
+## Mobile teaching, forecast revisions and resource efficiency (November 13, implementation checkpoint)
+
+- Added an automatic three-phase revision summary on `/forecast/`: only consecutive issue pairs and identical season/year/key targets qualify. Distinguishes missing previous issues, no overlap and unchanged probabilities; ranks absolute phase–target shifts with explicit top-three/tie wording. Missing targets are excluded, not zero-filled. Source feed and dated strength values are unchanged.
+- Teaching comparisons become labeled cards below 650px while retaining table/header/cell roles. Four complex SVGs retain keyboard scrolling and add readable mobile interpretation steps so the main lesson does not depend on swiping. No new editorial publishing workload.
+- Registered only the Chart.js controllers, elements, scales and plugins actually used. Built chart module: 209,047 → 176,397 bytes raw; gzip 71,051 → 61,049 bytes (14.1% smaller). No dependency upgrades. Northwest photograph retains attributed JPEG fallback and explicit dimensions; responsive WebP assets: 61,936 bytes at 700px and 267,314 at 1400px versus original 532,048 (88.4% / 49.8% smaller). These are asset measurements, not field Core Web Vitals or ranking gains.
+- Attempted existing ENSOLens Bing tab and signed-in Chrome GSC navigation; browser connection timed out before any search statistics could be read. No GSC/Bing totals, query priorities or traffic conclusions are claimed; no private session/configuration saved.
+- Independent read-only reviewer found no release-blocking issues and passed eight related tests plus an issue-year rollover assertion; did not run browser/screen-reader checks. Initial self-check passed types, 23 unit tests and build. Desktop suite and real local NOAA refresh passed. Mobile suite exposed an outdated test assumption that responsive-image `naturalWidth` must exceed 500; adjusted to density-corrected dimensions and preserved aspect-ratio/currentSrc checks. Final release gate and post-release verification pending.
+
 ## Content-audit remediation (November 13, released)
 
 - Implemented the audit repairs across FAQ evidence/wording, forecast task order and compact dated commentary, per-guide editorial metadata and section-source associations, original teaching material for all ten guides, snow-level/snow-drought comparisons, learning paths, a live lifecycle summary, historical stale-source disclosure and observation-year rollover. Preserved the verified November CPC values in a public attributed source selection; replaced the unreproducible October citation. Kept the scientific hurricane page with a basin/task comparison and direct NOAA mechanism evidence; no cross-project links added.

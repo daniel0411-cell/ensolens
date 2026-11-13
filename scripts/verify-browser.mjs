@@ -120,6 +120,9 @@ try {
     assert.ok(await page.locator('#probability-heading').evaluate(el=>!!(el.compareDocumentPosition(document.querySelector('#november-update-heading')) & Node.DOCUMENT_POSITION_FOLLOWING)));
     for(const a of await page.locator('.forecast-contents a').all()) assert.equal(await page.locator(await a.getAttribute('href')).count(),1);
     const forecastData = JSON.parse(await page.locator('#forecast-data').textContent());
+    assert.equal(await page.getByRole('complementary', {name:'What changed in this issue?'}).count(),1);
+    assert.match(await page.locator('.revision-summary').innerText(), /identical seasonal targets, across all three ENSO phases/);
+    await page.locator('.revision-summary').screenshot({path:fileURLToPath(new URL('forecast-revisions-'+width+'.png',output))});
     assert.match(await page.locator('#strength-table caption').innerText(), /November 2026.*dated reference/);
     assert.equal(await page.locator('#strength-table tbody tr').count(), 2);
     assert.equal(await page.locator('#november-update-heading').count(), 1);
@@ -167,16 +170,27 @@ try {
       assert.equal(response.status(), 200, path);
       assert.doesNotMatch(await page.content(), /hurricanetracker\.cc|hurricanehub|Hurricane Tracker|same independent builder|same publisher as/i, path);
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), true, path + ' overflow at ' + width);
+      if (path === '/impacts/pacific-northwest-winter/') {
+        const image = page.locator('main picture img');
+        await image.evaluate(el=>el.decode());
+        assert.match(await image.evaluate(el=>el.currentSrc), new RegExp(width === 390 ? 'northwest-snow-usfs-700\\.webp' : 'northwest-snow-usfs-1400\\.webp'));
+      }
       if (path.startsWith('/learn/')) {
         assert.equal(await page.locator('h1').count(), 1);
         if (path !== '/learn/') {
           assert.equal(await page.locator('.guide-section').count(), 4);
           assert.equal(await page.locator('.teaching-figure').count(),1);
           if(width===390) for(const region of await page.locator('.teaching-figure .diagram-scroll, .teaching-figure .teaching-table').all()) {
-            await region.focus();
-            await page.keyboard.press('ArrowRight');
-            await page.waitForFunction(el=>el.scrollLeft>0,await region.elementHandle());
-            await region.evaluate(el=>{el.scrollLeft=0;});
+            if (await region.evaluate(el=>el.scrollWidth>el.clientWidth+1)) {
+              assert.ok((await region.getAttribute('class')).includes('diagram-scroll'), 'Mobile teaching tables must fit without horizontal scrolling');
+              assert.equal(await page.locator('.mobile-reading').isVisible(),true);
+              await region.focus();
+              await page.keyboard.press('ArrowRight');
+              await page.waitForFunction(el=>el.scrollLeft>0,await region.elementHandle());
+              await region.evaluate(el=>{el.scrollLeft=0;});
+            } else {
+              for (const cell of await region.locator('td').all()) assert.equal(await cell.locator('.cell-label').isVisible(),true);
+            }
           }
           for(const a of await page.locator('.section-evidence a').all()) assert.equal(await page.locator(await a.getAttribute('href')).count(),1);
           await page.locator('.teaching-figure').screenshot({path:fileURLToPath(new URL(path.slice(1).replaceAll('/','-')+'teaching-'+width+'.png',output))});
@@ -206,7 +220,7 @@ try {
         assert.equal(await page.locator('h1').count(), 1);
         for (const img of await page.locator('main img').all()) {
           await img.evaluate(el => el.decode());
-          assert.equal(await img.evaluate(el => el.complete && el.naturalWidth > 500 && Number(el.getAttribute('width')) === el.naturalWidth && Number(el.getAttribute('height')) === el.naturalHeight), true, 'Guide image must decode and reserve its actual aspect ratio');
+          assert.equal(await img.evaluate(el => el.complete && el.naturalWidth > 100 && Math.abs(Number(el.getAttribute('width')) / Number(el.getAttribute('height')) - el.naturalWidth / el.naturalHeight) < 0.005), true, 'Guide image must decode and reserve its actual aspect ratio');
         }
         const table = page.locator('.probability-table-wrap');
         if (await table.count()) {

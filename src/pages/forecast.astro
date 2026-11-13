@@ -1,4 +1,5 @@
 ---
+import { forecastChanges, phaseNames } from '../lib/forecast-changes';
 import Layout from '../layouts/Layout.astro';
 import ForecastChart from '../components/ForecastChart.astro';
 import DataNotice from '../components/DataNotice.astro';
@@ -22,6 +23,7 @@ const { snapshot, stale } = await getData(env);
 const forecast = snapshot.forecast.data;
 const target = forecast.rows.find(row => row.season === 'DJF') ?? forecast.rows[0];
 const previous = snapshot.previous;
+const revisions = forecastChanges(forecast, previous);
 const priorTarget = previous?.rows.find(row => row.key === target.key);
 const delta = priorTarget ? target.nino - priorTarget.nino : null;
 
@@ -87,6 +89,22 @@ const comparisonRows = forecast.rows.map(row => {
       <p class="body-copy">
         A genuine forecast change occurs only when probability estimates shift for the <strong>exact same target season</strong> across monthly releases. Comparing a winter target with a summer target compares different periods, not a revision to the same forecast.
       </p>
+      <aside class="revision-summary content-notice" aria-labelledby="revision-summary-heading">
+        <div>
+          <h3 id="revision-summary-heading">What changed in this issue?</h3>
+          {!revisions.available ? <p>A verified consecutive issue pair is unavailable. No revision is inferred.</p>
+            : revisions.matched === 0 ? <p>Issues {previous!.issue} and {forecast.issue} have no matching seasonal targets. No revision can be calculated.</p>
+            : <>
+              <p>Comparing {previous!.issue} → {forecast.issue}: {revisions.matched} identical seasonal targets, across all three ENSO phases.</p>
+              {revisions.changes.length === 0 ? <p><strong>All three phase probabilities are unchanged for every matching target.</strong></p>
+                : <><p>Largest absolute shifts (up to three phase–target pairs; equal-sized shifts may occur):</p>
+                  <ul>{revisions.changes.slice(0,3).map(change => <li><strong>{seasonLabel(change.row)} · {phaseNames[change.phase]}</strong>: {change.before}% → {change.after}% ({change.delta > 0 ? '+' : ''}{change.delta} percentage points).</li>)}</ul>
+                </>}
+              {revisions.unmatched > 0 && <p>{revisions.unmatched} current target(s) have no previous match and are excluded, rather than treated as zero.</p>}
+            </>}
+          <p>Calculated from the validated CPC phase tables, not a separate forecast or a change in local weather odds.</p>
+        </div>
+      </aside>
       <div class="probability-table-wrap">
         <table class="data-table">
           <caption>NOAA CPC · {previous ? `Comparing issues ${previous.issue} and ${forecast.issue} for identical target seasons` : `Issue ${forecast.issue}; previous issue unavailable`}</caption>
@@ -291,6 +309,10 @@ const comparisonRows = forecast.rows.map(row => {
   <script>import { initCharts } from '../scripts/charts'; initCharts();</script>
 </Layout>
 <style>
+  .revision-summary h3 { font-size:20px; line-height:1.5; margin:0 0 12px; }
+  .revision-summary p,.revision-summary li,.revision-summary strong { font-size:15px; line-height:1.8; }
+  .revision-summary ul { padding-left:22px; margin:12px 0; }
+  .revision-summary li { margin:8px 0; }
   .forecast-contents { display:flex; flex-wrap:wrap; gap:14px; margin:20px 0; font-size:14px; }
   .forecast-contents a { color:var(--green); text-decoration:underline; }
   .forecast-summary { padding:20px; margin:24px 0; }

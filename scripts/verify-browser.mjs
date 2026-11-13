@@ -174,7 +174,7 @@ try {
           assert.equal(await page.locator('.teaching-figure').count(),1);
           if(width===390) for(const region of await page.locator('.teaching-figure .diagram-scroll, .teaching-figure .teaching-table').all()) {
             await region.focus();
-            await page.keyboard.press('End');
+            await page.keyboard.press('ArrowRight');
             await page.waitForFunction(el=>el.scrollLeft>0,await region.elementHandle());
             await region.evaluate(el=>{el.scrollLeft=0;});
           }

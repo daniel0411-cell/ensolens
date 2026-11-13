@@ -1,6 +1,12 @@
 # ENSOLens Delivery Status
 
-Updated: 2026-11-12 (Asia/Shanghai)
+Updated: 2026-11-13 (Asia/Shanghai)
+
+## November CPC strength refresh and interpretation (November 13)
+
+- Confirmed GitHub prior release matches local HEAD and production feed is healthy, with November12 discussion and November phase outlook. Verified original CPC discussion, strength and phase tables in background browser following search; source/date/threshold notes in CONTENT-SOURCES-2026-11-13.md.
+- Updated existing forecast strength reference from October to November: DJF 0/2/19/79, JFM 3/18/44/35 (weak/moderate/strong/very strong), each totaling 100% El Niño. Added dated November assessment explaining phase versus intensity, ≥2.5°C record threshold versus ≥2.0°C category, AMJ neutral61/El Niño38/La Niña1 and transition uncertainty. Updated WMO section's CPC cross-reference and forecast sitemap lastmod only. Saved October winter maps retained as a separate product; no feed/parser/release configuration changed.
+- Independent read-only review found and corrected a mobile source-note flex-layout inheritance. Scientific numbers and distinctions checked against research notes; reviewer did not reopen primary sources or run tests/browser checks. Types passed across60 files (zero errors/warnings, two existing icon hints), all16 tests and build passed. Real local Worker NOAA refresh/KV persistence, RSS and all 25 routes/interactions passed at 1440px and 390px. New update and strength screenshots inspected at both widths; anchor clearance and source-note layout passed. Git push, deployment and production verification pending.
 
 ## Ten-guide ENSO learning library (November 12)
 

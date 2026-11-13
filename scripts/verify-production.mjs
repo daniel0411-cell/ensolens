@@ -84,8 +84,12 @@ for (const path of paths) {
     const current = JSON.parse($('#forecast-data').text()).current;
     const target = current.rows.find(row => row.season === 'DJF') ?? current.rows[0];
     assert.ok($('.page-intro p').text().includes(`${target.nino}% El Niño, ${target.neutral}% neutral and ${target.nina}% La Niña`));
-    assert.match($('#strength-table caption').text(), /October 2026.*dated reference/);
+    assert.match($('#strength-table caption').text(), /November 2026.*dated reference/);
     assert.equal($('#strength-table tbody tr').length, 2);
+    assert.equal($('#november-update-heading').length, 1);
+    assert.match($('section[aria-labelledby="november-update-heading"]').text(), /61%.+38%.+1%/);
+    assert.deepEqual($('#strength-table tbody tr').toArray().map(el => $(el).find('td').toArray().map(td => $(td).text())), [['0%', '2%', '19%', '79%', '100%'], ['3%', '18%', '44%', '35%', '100%']]);
+
   }
   if (path === '/faq/') {
     assert.equal($('a[href="/methodology/#ocean-atmosphere-heading"]').length, 2);
@@ -190,7 +194,7 @@ for (const entry of sitemapXml('url').toArray()) {
 }
 for (const path of ['/', '/forecast/', '/forecast/when-will-it-end/', '/faq/', '/historical/', '/winter-outlook/', '/impacts/', '/impacts/california-snow-vs-rain/', '/impacts/pacific-northwest-winter/', '/forecast/enso-neutral/', '/methodology/']) {
   const entry = sitemapXml('url').filter((_, element) => sitemapXml(element).find('loc').text() === host + path);
-  const expected = '2026-11-12';
+  const expected = path === '/forecast/' ? '2026-11-13' : '2026-11-12';
   assert.equal(entry.find('lastmod').text(), expected);
 }
 const missing = await request('/missing-page-check/');

@@ -117,8 +117,16 @@ try {
     const noticeBounds = await nextRelease.boundingBox();
     assert.ok(noticeBounds && noticeBounds.x >= 0 && noticeBounds.x + noticeBounds.width <= width + 1);
     const forecastData = JSON.parse(await page.locator('#forecast-data').textContent());
-    assert.match(await page.locator('#strength-table caption').innerText(), /October 2026.*dated reference/);
+    assert.match(await page.locator('#strength-table caption').innerText(), /November 2026.*dated reference/);
     assert.equal(await page.locator('#strength-table tbody tr').count(), 2);
+    assert.equal(await page.locator('#november-update-heading').count(), 1);
+    assert.deepEqual(await page.locator('#strength-table tbody td').allTextContents(), ['0%', '2%', '19%', '79%', '100%', '3%', '18%', '44%', '35%', '100%']);
+    await page.locator('#november-update-heading').evaluate(el => el.scrollIntoView());
+    assert.ok((await page.locator('#november-update-heading').boundingBox()).y >= 90);
+    await page.screenshot({ path: fileURLToPath(new URL('november-update-' + width + '.png', output)), fullPage: false });
+    await page.locator('section[aria-labelledby="strength-heading"]').screenshot({ path: fileURLToPath(new URL('november-strength-' + width + '.png', output)) });
+    await page.evaluate(() => window.scrollTo(0, 0));
+
     if (width === 390) {
       const strengthRegion = page.getByRole('region', { name: 'Dated ENSO strength probabilities', exact: true });
       assert.equal(await strengthRegion.evaluate(element => element.scrollWidth > element.clientWidth), true);

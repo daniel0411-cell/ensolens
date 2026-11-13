@@ -22,7 +22,7 @@ Freeze the issue's observations and check date in any archival article. Do not r
 
 ## Monthly review
 
-The winter page preserves the October 15, 2026 DJF 2026–27 maps and interpretation; the forecast strength explainer preserves the October 2026 CPC strength issue. Both were checked November 8, 2026 and are explicitly manual dated references, separate from the live phase-probability feed. At monthly review, check both products separately and update their dates, targets, text and archived assets together. Do not relabel a rolling map as the saved issue. Allow about 20–30 minutes for this review within the monthly budget.
+The winter page preserves the October 15, 2026 DJF 2026–27 maps and interpretation; the forecast strength explainer preserves the November 2026 CPC strength issue, checked November 13, 2026. The winter maps were checked November 8, 2026. Both are explicitly manual dated references, separate from the live phase-probability feed. At monthly review, check both products separately and update their dates, targets, text and archived assets together. Do not relabel a rolling map as the saved issue. Allow about 20–30 minutes for this review within the monthly budget.
 
 Review the latest CPC discussion and probabilities separately. The live lifecycle table follows the dashboard's validated CPC feed. Qualify the spring predictability barrier, distinguish peak/phase/impacts, and do not extend forecasts beyond their target horizon. If adding IRI, store it as a separate dated product with verified methodology and matching targets, not as a continuation of the CPC series.
 

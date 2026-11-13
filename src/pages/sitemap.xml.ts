@@ -17,7 +17,7 @@ const modified: Record<string, string> = {
   '/impacts/': '2026-11-12',
   '/impacts/pacific-northwest-winter/': '2026-11-12',
   '/forecast/enso-neutral/': '2026-11-12',
-  '/forecast/': '2026-11-12',
+  '/forecast/': '2026-11-13',
   '/faq/': '2026-11-12',
   '/historical/': '2026-11-12',
   '/forecast/when-will-it-end/': '2026-11-12',

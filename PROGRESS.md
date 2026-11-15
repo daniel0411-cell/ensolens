@@ -1,6 +1,13 @@
 # ENSOLens Delivery Status
 
-Updated: 2026-11-13 (Asia/Shanghai)
+Updated: 2026-11-15 (Asia/Shanghai)
+
+## Search performance and indexing audit (November 15, no application release)
+
+- Successfully read signed-in GSC and Bing in background Chrome. GSC visible performance coverage October 19–November 12: 169 impressions, four clicks, 2.4% CTR, position 16.9. Homepage/forecast dominate page impressions; visible query themes are current status, CPC probabilities and strength. November 6–12 daily rows total 72 impressions/one click versus 33/two in October 30–November 5; samples cannot establish a CTR failure or release causation.
+- Google sitemap last read November 15, success, 25 pages discovered. Aggregate indexing report dated November 9 shows 11 indexed/four excluded; exclusions are three alternate-host/protocol homepage variants and one API URL, not four missing articles. Fresh URL inspections confirm Kelvin-wave and model-plume guides already indexed; Kelvin-wave crawl November 15 successful with matching canonical. No current 11/25 coverage ratio inferred. Desktop/mobile field CWV have insufficient data.
+- Bing October 16–November 14 search totals zero, sitemap list has no records, Site Explorer indexed-URL view no data. URL inspection: home discovered October 22 but not crawled; forecast and Kelvin-wave guide not discovered. Discovery/crawl gap is observed; fetch/WAF/log root cause remains unverified. No sitemap submission, indexing request or scan performed.
+- Full evidence, query/page/device tables, limitations and prioritized 4–6.5-hour proposed plan in SEARCH-AUDIT-2026-11-15.md. Prioritize Bing discovery/fetch investigation and 25-route index matrix, then scoped existing-page search-entry work; monitor the new library before article-count expansion. No independent review, application edits/tests or deployment for this documentation milestone. Production remains November 13 code `0e1749b` and version `ae5912a8-1216-4298-b822-8eb7907f5fbd`.
 
 ## Mobile teaching, forecast revisions and resource efficiency (November 13, released)
 

@@ -2,6 +2,12 @@
 
 Updated: 2026-11-15 (Asia/Shanghai)
 
+## Search discovery signal release (November 16)
+
+- Added a standards-compatible `<link rel="sitemap" href="/sitemap.xml">` to every rendered page so crawlers and tooling can discover the same sitemap already declared in `robots.txt`. Added production regression coverage for the declaration across all 25 routes. No content, feed, indexing policy or source interpretation changed.
+- Full `npm run deploy` gate passed: 67-file type check (zero errors/warnings, two existing icon hints), 24 tests, build, real local Worker refresh/KV persistence, RSS, desktop 1440px/mobile 390px browser suites and retained-data failure-path checks. Deployed Cloudflare version `7c4ec06a-3622-42ae-9684-75a3d9efdfe2` on November 16, 2026; custom domains and six-hour schedule retained.
+- `ENSOLENS_EXPECT_INDEXING=true node scripts/verify-production.mjs` passed all 25 routes, sitemap/robots/canonical/indexing headers, RSS, source health, redirects, dated source record and read-only correction endpoint. Initial sandbox DNS failure was retried with approved network access; no search-console submissions or indexing requests were made.
+
 ## Search performance and indexing audit (November 15, no application release)
 
 - Successfully read signed-in GSC and Bing in background Chrome. GSC visible performance coverage October 19–November 12: 169 impressions, four clicks, 2.4% CTR, position 16.9. Homepage/forecast dominate page impressions; visible query themes are current status, CPC probabilities and strength. November 6–12 daily rows total 72 impressions/one click versus 33/two in October 30–November 5; samples cannot establish a CTR failure or release causation.

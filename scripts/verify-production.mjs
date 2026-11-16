@@ -27,6 +27,7 @@ for (const path of paths) {
     for (const href of ['/impacts/', '/impacts/pacific-northwest-winter/', '/forecast/enso-neutral/']) assert.ok($(`main a[href="${href}"]`).length, href + ' must be discoverable from homepage');
   }
   assert.equal($('link[rel=canonical]').attr('href'), host + path);
+  assert.equal($('link[rel=sitemap]').attr('href'), '/sitemap.xml');
   assert.match($('meta[name=robots]').attr('content'), indexable ? /^index, follow$/ : /noindex/);
   assert.ok($('meta[name=description]').attr('content')?.length > 20);
   assert.equal(JSON.parse($('script[type="application/ld+json"]').first().text())['@type'], 'WebSite');

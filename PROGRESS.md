@@ -2,6 +2,12 @@
 
 Updated: 2026-11-15 (Asia/Shanghai)
 
+## GSC 24-hour opportunity audit (November 17, no application release)
+
+- Read the signed-in GSC 24-hour Web report for November 16–17: 134 impressions, two clicks, 1.5% CTR and average position 9.4. Desktop supplied 105 impressions/two clicks; mobile 28/zero. These are too few observations for a stable CTR or mobile conclusion.
+- The strongest targeted opportunity is `/impacts/`: 46 impressions, position 8.7, zero clicks. Homepage and forecast each had 17 impressions; the neutral guide had 17. Two learning guides earned the only two clicks at positions 6.2 and 5.0, so they should be preserved while more data accumulates. Visible query themes include `enso status` (6 impressions, position 7.2) and `enso neutral meaning` (3, position 9.7). A one-impression query `make them clickable` was not treated as editorial demand.
+- Proposed sequence is a scoped `/impacts/` title/description/answer-first test, a concise neutral-definition opening clarification, then observation for 14–28 days before any homepage/forecast snippet test. No implementation, tests, deployment, query-page mapping or independent review in this audit. Full evidence and costed plan in SEARCH-AUDIT-2026-11-17-24H.md.
+
 ## Search discovery signal release (November 16)
 
 - Added a standards-compatible `<link rel="sitemap" href="/sitemap.xml">` to every rendered page so crawlers and tooling can discover the same sitemap already declared in `robots.txt`. Added production regression coverage for the declaration across all 25 routes. No content, feed, indexing policy or source interpretation changed.

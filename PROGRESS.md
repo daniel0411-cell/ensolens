@@ -1,6 +1,13 @@
 # ENSOLens Delivery Status
 
-Updated: 2026-11-15 (Asia/Shanghai)
+Updated: 2026-11-17 (Asia/Shanghai)
+
+## Search-entry CTR test release (November 17)
+
+- Based on the November 16–17 GSC snapshot, updated only the two highest-confidence search-entry opportunities: `/impacts/` now leads with broad U.S. winter tendencies and its California, Pacific Northwest and dated CPC routes; `/forecast/enso-neutral/` now explicitly separates ENSO-neutral from near-normal weather and equal chances. Existing click-producing learning guides, homepage and forecast page were left unchanged for measurement.
+- Updated both meaningful content dates in the sitemap to November 17 and synchronized the production verification assertion. This is an editorial snippet/answer-first test, not evidence of a ranking or CTR gain.
+- `npm run deploy` passed: 67-file type check (zero errors/warnings, two existing icon hints), 24 unit tests, build, real Worker refresh/KV, RSS, desktop 1440px/mobile 390px browser suites and retained-data failure-path checks. Deployed Cloudflare version `129bf4ba-7c32-4f0f-9448-90956619e121` on November 17, 2026; custom domains and six-hour schedule retained.
+- `ENSOLENS_EXPECT_INDEXING=true node scripts/verify-production.mjs` passed all 25 routes, sitemap/robots/canonical/indexing headers, RSS, source health, redirects, dated source record and read-only correction endpoint after a transient local DNS failure. No Search Console indexing request was made. Recheck page/query CTR after 14–28 days; do not infer success from the current 24-hour sample.
 
 ## GSC 24-hour opportunity audit (November 17, no application release)
 

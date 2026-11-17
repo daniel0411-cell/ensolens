@@ -1,17 +1,18 @@
 # High-value content update audit — November 17, 2026
 
-## Highest-value opportunity: refresh the dated winter outlook
+## Highest-value opportunity: prepare the dated winter outlook for the next issue
 
-The live `/winter-outlook/` page still presents the CPC issue issued October 15, 2026 and saved October 2026 GIFs for DJF 2026–27. The official CPC seasonal outlook index observed November 17 lists a current 0.5-month NDJ 2026–27 outlook, a 1.5-month DJF 2026–27 outlook, a 2.5-month JFM 2027 outlook and later targets. It also lists a current color-map entry for November 2026 and NDJ 2026–27. This is a concrete freshness gap for a page already linked from the impacts hub.
+The live `/winter-outlook/` page presents the CPC issue issued October 15, 2026 and saved October 2026 GIFs for DJF 2026–27. The CPC index observed November 17 exposes rolling target labels, but those labels do not establish a new issue date for the saved DJF maps. The official 2026 release schedule identifies November 19, 2026 as the next DJF 2026–27 long-lead release. Until that issue is published and its maps, legend and discussion agree, the October product should remain dated and intact.
 
 Official sources observed November 17, 2026 (Asia/Shanghai):
 
 - Seasonal outlook index: https://www.cpc.ncep.noaa.gov/products/predictions/long_range/
-- Current prognostic discussion: https://www.cpc.ncep.noaa.gov/products/predictions/long_range/fxus05.html
+- Current prognostic discussion: https://www.cpc.ncep.noaa.gov/products/predictions/long_range/fxus05.html (header observed as October 15, 2026)
+- 2026 release schedule: https://www.cpc.ncep.noaa.gov/products/predictions/schedule.php (next DJF release observed as November 19, 2026)
 
-The discussion page currently displays an October 15, 2026 issue header while the seasonal index exposes November map targets. Therefore the next implementation must verify the exact current map issue, valid period, legend and discussion before changing the page. Do not call the November map “the November discussion” until the source pages agree.
+The discussion page currently displays an October 15, 2026 issue header while the seasonal index exposes rolling November target labels. Therefore the next implementation must verify the exact current map issue, valid period, legend and discussion before changing the page. Do not call a November map “the November discussion” until the source pages agree.
 
-### Proposed implementation (priority P0, about 60–100 minutes)
+### Proposed implementation after the scheduled release (priority P0, about 60–100 minutes)
 
 1. Retrieve and preserve the current CPC temperature and precipitation map assets for the exact DJF target, with source filenames and issue date.
 2. Update the page eyebrow, title/description, map alt text, regional notes, figure note and source callout together. Keep the current map as a dated archive only if the page structure makes the comparison clear; otherwise do not leave two competing “current” maps.

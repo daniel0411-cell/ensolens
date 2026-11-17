@@ -2,6 +2,12 @@
 
 Updated: 2026-11-17 (Asia/Shanghai)
 
+## Winter outlook date and release-schedule clarification (November 17)
+
+- Corrected the earlier audit inference that rolling November target labels represented a newly issued November winter map. The CPC prognostic discussion still showed the October 15, 2026 issue header when checked November 17; the official 2026 schedule lists November 19, 2026 for the next DJF 2026–27 long-lead release.
+- Kept the verified October 15 DJF maps and interpretation intact. Added the scheduled release date and archival-product boundary to `/winter-outlook/`, with source links and a November 17 schedule-check date. Updated its sitemap lastmod and production assertion to match this meaningful editorial clarification.
+- No new NOAA map asset was published and no November issue was inferred. The next content review should compare the November 19 maps and discussion for the same DJF target before replacing or archiving assets. No independent reviewer participated in this correction.
+
 ## Content update direction audit (November 17)
 
 - Verified the official CPC seasonal outlook index on November 17. It lists current November 2026 targets for NDJ 2026–27, DJF 2026–27 and JFM 2027, while `/winter-outlook/` still serves the deliberately dated October 15 DJF maps. This is the highest-value freshness opportunity, subject to confirming the exact map issue, legend and matching discussion before editing.

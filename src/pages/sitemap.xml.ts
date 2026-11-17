@@ -22,7 +22,7 @@ const modified: Record<string, string> = {
   '/historical/': '2026-11-13',
   '/forecast/when-will-it-end/': '2026-11-13',
   '/impacts/california-snow-vs-rain/': '2026-11-13',
-  '/winter-outlook/': '2026-11-13',
+  '/winter-outlook/': '2026-11-17',
   '/methodology/': '2026-11-12',
   '/hurricane-connection/': '2026-11-13',
   '/about/': '2026-11-13',

@@ -7,6 +7,7 @@ Updated: 2026-11-17 (Asia/Shanghai)
 - Corrected the earlier audit inference that rolling November target labels represented a newly issued November winter map. The CPC prognostic discussion still showed the October 15, 2026 issue header when checked November 17; the official 2026 schedule lists November 19, 2026 for the next DJF 2026–27 long-lead release.
 - Kept the verified October 15 DJF maps and interpretation intact. Added the scheduled release date and archival-product boundary to `/winter-outlook/`, with source links and a November 17 schedule-check date. Updated its sitemap lastmod and production assertion to match this meaningful editorial clarification.
 - No new NOAA map asset was published and no November issue was inferred. The next content review should compare the November 19 maps and discussion for the same DJF target before replacing or archiving assets. No independent reviewer participated in this correction.
+- Release gate passed types (67 files, zero errors; two pre-existing deprecation hints), 24 unit tests, build, real Worker refresh/KV checks, RSS, and 1440px/390px browser suites. Cloudflare deployment completed November 17 with version `acf8a8bd-3314-4bf2-971a-0d76cf71bf88`; both custom domains and the six-hour schedule remained active. Post-release verification passed all 25 routes, sitemap/robots/canonical/indexing headers, RSS, source health, redirects and the read-only correction endpoint.
 
 ## Content update direction audit (November 17)
 

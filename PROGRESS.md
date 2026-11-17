@@ -2,6 +2,11 @@
 
 Updated: 2026-11-17 (Asia/Shanghai)
 
+## Content update direction audit (November 17)
+
+- Verified the official CPC seasonal outlook index on November 17. It lists current November 2026 targets for NDJ 2026–27, DJF 2026–27 and JFM 2027, while `/winter-outlook/` still serves the deliberately dated October 15 DJF maps. This is the highest-value freshness opportunity, subject to confirming the exact map issue, legend and matching discussion before editing.
+- Recommended sequence and scope are recorded in CONTENT-UPDATE-AUDIT-2026-11-17.md: refresh the dated winter product first, then strengthen existing `/impacts/` links and consider one compact answer block; do not add a generic article batch or relabel archival assets. No application changes, tests or deployment were performed.
+
 ## Bing sitemap submission and discovery checks (November 17)
 
 - Submitted `https://ensolens.com/sitemap.xml` in the signed-in ENSOLens Bing property. Verified the visible row: last submit November 17, `Submitted`, status `Processing`; one known sitemap, zero errors/warnings, zero URLs discovered and no last-crawl date at observation. Submission is confirmed; parsing, crawling and indexing remain pending.

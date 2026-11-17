@@ -2,6 +2,13 @@
 
 Updated: 2026-11-17 (Asia/Shanghai)
 
+## Bing sitemap submission and discovery checks (November 17)
+
+- Submitted `https://ensolens.com/sitemap.xml` in the signed-in ENSOLens Bing property. Verified the visible row: last submit November 17, `Submitted`, status `Processing`; one known sitemap, zero errors/warnings, zero URLs discovered and no last-crawl date at observation. Submission is confirmed; parsing, crawling and indexing remain pending.
+- Robots/sitemap/forecast HTTP checks passed. Simulated Bingbot requests to home, forecast and Kelvin-wave guide returned 200 and index/follow; these do not establish real Bingbot access or rule out IP-based WAF blocking. No crawler logs, WAF changes or fresh URL inspection results. Chrome was in concurrent use, so further native UI navigation stopped.
+- Documented content readiness and manual follow-up in SEARCH-DISCOVERY-2026-11-17.md: Bing review November 24–December 1; Google snippet observation December 1–15; verify new CPC seasonal products before changing the separately dated October winter assets. No article batch or unsupported current forecast was published.
+- Documentation/search-console milestone only: no application changes, application tests, independent review or website deployment. Production remains version `129bf4ba-7c32-4f0f-9448-90956619e121` from the earlier November 17 release.
+
 ## Search-entry CTR test release (November 17)
 
 - Based on the November 16–17 GSC snapshot, updated only the two highest-confidence search-entry opportunities: `/impacts/` now leads with broad U.S. winter tendencies and its California, Pacific Northwest and dated CPC routes; `/forecast/enso-neutral/` now explicitly separates ENSO-neutral from near-normal weather and equal chances. Existing click-producing learning guides, homepage and forecast page were left unchanged for measurement.

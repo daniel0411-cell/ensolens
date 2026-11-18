@@ -1,6 +1,13 @@
 # ENSOLens Delivery Status
 
-Updated: 2026-11-17 (Asia/Shanghai)
+Updated: 2026-11-18 (Asia/Shanghai)
+
+## Fifteen-page content release and next-content audit (November 18)
+
+- Pushed yesterday's 15-page editorial update as `402794f` to GitHub master. Full `npm run deploy` passed types (67 files, zero errors/warnings, two existing hints), all 24 unit tests, build, real Worker refresh/KV, RSS, 1440px/390px browser checks and retained-data failure path. Inspected the mobile Kelvin-wave guide screenshot including its new decision card.
+- Released Cloudflare version `3f534c93-9998-4a12-bef0-16d30a603e4b`, deployment `00bcb962-b28f-4580-8610-37a34182c777`, November 18 at 16:10:48 Asia/Shanghai, 100% traffic; confirmed from actual Wrangler output and deployment list. Both custom domains and the six-hour schedule remain configured.
+- Production verification passed all 25 routes, ten new guide decision cards, article dates, sitemap, indexing/canonical/redirects, RSS, source health and the read-only correction endpoint. Corrected an outdated verification-only November 12 eyebrow assertion for the impacts/neutral pages to their actual November 17 editorial dates. No application change or redeploy was needed for that script correction. Source dates: discussion November 12, weekly November 11, RONI October 31, forecast November; next discussion December 10.
+- Rechecked CPC primary sources in the background browser: long-lead discussion still headed October 15; the schedule explicitly lists November 19 for DJF 2026–DJF 2027 (forecast month December). Recorded four prioritized follow-ups and their evidence/maintenance limits in CONTENT-OPPORTUNITIES-2026-11-18.md. No fresh GSC/Bing data or traffic gain is claimed. No independent reviewer participated in this editorial release.
 
 ## Fifteen-page decision-reading content refresh (November 17, not deployed)
 

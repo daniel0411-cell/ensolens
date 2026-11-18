@@ -4,6 +4,8 @@ An independent English-language ENSO dashboard built with Astro, Chart.js, and C
 
 ## Status and recovery
 
+November 18 release: the 15-page practical-reading content refresh (`402794f`) is deployed as Cloudflare version `3f534c93-9998-4a12-bef0-16d30a603e4b`. Full release gate and all 25 production-route checks passed. See PROGRESS.md for deployment IDs and validation limits, and CONTENT-OPPORTUNITIES-2026-11-18.md for the next priorities. Older entries below describe their original checkpoints.
+
 November 17 follow-up: the canonical sitemap was submitted in Bing Webmaster Tools and visibly accepted as `Processing`; actual parsing/crawling/indexing is pending. Public HTTP and simulated Bingbot checks passed, but real crawler/WAF logs were not inspected. See SEARCH-DISCOVERY-2026-11-17.md. The latest website release is the November 17 search-entry update, Cloudflare version `129bf4ba-7c32-4f0f-9448-90956619e121`; this sitemap follow-up did not redeploy the website. Historical checkpoints below retain their original observation dates.
 
 Search audit (November 15, 2026): signed-in GSC/Bing access succeeded. GSC visible performance through November 12 has 169 impressions/four clicks; two sampled new guides are already indexed despite the older aggregate report. Bing shows zero search visibility and sampled discovery/crawl gaps. See SEARCH-AUDIT-2026-11-15.md for evidence and the proposed plan. A November 16 release added an explicit sitemap link to rendered pages and passed production verification; no URLs or sitemaps were submitted from the console, and field Core Web Vitals still has insufficient data.

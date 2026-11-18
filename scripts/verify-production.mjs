@@ -50,6 +50,8 @@ for (const path of paths) {
     assert.equal(article.headline, $('h1').text());
     assert.equal(article.datePublished, '2026-11-12');
     assert.equal(article.dateModified, '2026-11-17');
+    assert.equal($('.decision-card h2').length, 1);
+    assert.ok($('.decision-card p').text().length > 100);
     assert.equal($('.teaching-figure').length, 1);
     assert.equal($('.section-evidence').length, 4);
     for(const a of $('.section-evidence a').toArray()) assert.equal($($(a).attr('href')).length,1);
@@ -67,7 +69,7 @@ for (const path of paths) {
   }
   if (path === '/impacts/' || path === '/impacts/pacific-northwest-winter/' || path === '/forecast/enso-neutral/') {
     assert.equal($('h1').length, 1);
-    assert.match($('.eyebrow').first().text(), /NOVEMBER 12, 2026/);
+    assert.match($('.eyebrow').first().text(), path === '/impacts/pacific-northwest-winter/' ? /NOVEMBER 12, 2026/ : /NOVEMBER 17, 2026/);
     for (const element of $('main a[href^="/"]').toArray()) {
       const target = $(element).attr('href').split('#')[0];
       assert.ok(paths.includes(target) || target.startsWith('/images/'), path + ' has an unknown internal destination: ' + target);

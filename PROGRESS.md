@@ -2,6 +2,12 @@
 
 Updated: 2026-11-18 (Asia/Shanghai)
 
+## Requested redeployment (November 18)
+
+- Redeployed source commit `4710109` at the owner's request without further application changes. Cloudflare version `d3350595-6c0f-4dcc-9a90-95f7096c2f99`, deployment `4ed1a5c0-d95e-4306-abf6-07bfc5b2d1a8`, created November 18 at 17:07:12 Asia/Shanghai, serves 100% traffic. Both custom domains and the six-hour schedule remain configured; IDs and traffic were confirmed from Wrangler output.
+- Full `npm run deploy` gate passed: type checks (67 files, zero errors/warnings, two existing deprecation hints), all 24 unit tests, build, real Worker refresh/KV persistence, RSS, desktop/mobile browser checks and retained-data failure checks. Postdeployment verification with indexing expected passed all 25 production routes, guide decision cards/dates, canonical/indexing, sitemap/robots, RSS, redirects/404, source health and the read-only correction endpoint.
+- This repeats the same 15-page content release; meaningful editorial dates remain November 17. No additional independent review participated. The following documentation checkpoint does not require another website deployment.
+
 ## Fifteen-page content release and next-content audit (November 18)
 
 - Pushed yesterday's 15-page editorial update as `402794f` to GitHub master. Full `npm run deploy` passed types (67 files, zero errors/warnings, two existing hints), all 24 unit tests, build, real Worker refresh/KV, RSS, 1440px/390px browser checks and retained-data failure path. Inspected the mobile Kelvin-wave guide screenshot including its new decision card.

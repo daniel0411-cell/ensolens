@@ -2,6 +2,13 @@
 
 Updated: 2026-11-17 (Asia/Shanghai)
 
+## Fifteen-page decision-reading content refresh (November 17, not deployed)
+
+- Updated ten existing learning guides with task-specific decision-reading cards that keep dates, baselines, regions, indicators, forecast windows and local-decision limits visible. Updated `/learn/` with a guide-to-dashboard reading workflow.
+- Strengthened `/forecast/`, `/forecast/enso-neutral/`, `/impacts/` and `/methodology/` with concise reading checklists and source-routing guidance. Advanced the meaningful sitemap dates for all 15 edited routes to November 17, 2026.
+- Local validation passed `git diff --check`, `npm run check` (zero errors/warnings; two pre-existing `CircleHelp` deprecation hints), `npm test` (24/24), `npm run build`, and `npm run test:browser` (real Worker refresh, RSS, desktop/mobile checks and retained-data failure path).
+- This checkpoint is local only by request: no production verification, GitHub push or Cloudflare deployment was performed. No independent reviewer participated; the changes reuse existing sources and do not add a current forecast or new external asset.
+
 ## Winter outlook date and release-schedule clarification (November 17)
 
 - Corrected the earlier audit inference that rolling November target labels represented a newly issued November winter map. The CPC prognostic discussion still showed the October 15, 2026 issue header when checked November 17; the official 2026 schedule lists November 19, 2026 for the next DJF 2026–27 long-lead release.

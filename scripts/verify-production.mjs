@@ -49,7 +49,7 @@ for (const path of paths) {
     assert.equal(article['@type'], 'Article');
     assert.equal(article.headline, $('h1').text());
     assert.equal(article.datePublished, '2026-11-12');
-    assert.equal(article.dateModified, '2026-11-13');
+    assert.equal(article.dateModified, '2026-11-17');
     assert.equal($('.teaching-figure').length, 1);
     assert.equal($('.section-evidence').length, 4);
     for(const a of $('.section-evidence a').toArray()) assert.equal($($(a).attr('href')).length,1);
@@ -220,7 +220,7 @@ for (const entry of sitemapXml('url').toArray()) {
 }
 for (const path of ['/', '/forecast/', '/forecast/when-will-it-end/', '/faq/', '/historical/', '/winter-outlook/', '/impacts/', '/impacts/california-snow-vs-rain/', '/impacts/pacific-northwest-winter/', '/forecast/enso-neutral/', '/methodology/']) {
   const entry = sitemapXml('url').filter((_, element) => sitemapXml(element).find('loc').text() === host + path);
-  const expected = ['/impacts/','/forecast/enso-neutral/','/winter-outlook/'].includes(path) ? '2026-11-17' : ['/forecast/','/faq/','/historical/','/forecast/when-will-it-end/','/impacts/california-snow-vs-rain/','/impacts/pacific-northwest-winter/'].includes(path) ? '2026-11-13' : '2026-11-12';
+  const expected = ['/impacts/','/forecast/enso-neutral/','/winter-outlook/','/forecast/','/methodology/'].includes(path) ? '2026-11-17' : ['/faq/','/historical/','/forecast/when-will-it-end/','/impacts/california-snow-vs-rain/','/impacts/pacific-northwest-winter/'].includes(path) ? '2026-11-13' : '2026-11-12';
   assert.equal(entry.find('lastmod').text(), expected);
 }
 const missing = await request('/missing-page-check/');

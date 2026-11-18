@@ -2,6 +2,11 @@
 
 Updated: 2026-11-18 (Asia/Shanghai)
 
+## Follow-up content opportunity research (November 18, no application release)
+
+- Checked existing guide/FAQ/winter coverage to avoid repeating ONI/RONI, alerts, MJO, forecast-horizon and SWE definitions. Verified CPC RONI/ONI tables and USDA NRCS report-format samples in the background browser; expanded CONTENT-OPPORTUNITIES-2026-11-18.md with a same-ASO seasonal comparison, index/revision worked case and reproducible snowpack-percentage exercise, source dates, implementation costs and maintenance limits.
+- Fresh seasonal discussion check still showed October 15; November 19 publication remains unconfirmed. No fresh GSC/Bing session, application edits, application tests, deployment or independent review in this documentation-only checkpoint.
+
 ## Requested redeployment (November 18)
 
 - Redeployed source commit `4710109` at the owner's request without further application changes. Cloudflare version `d3350595-6c0f-4dcc-9a90-95f7096c2f99`, deployment `4ed1a5c0-d95e-4306-abf6-07bfc5b2d1a8`, created November 18 at 17:07:12 Asia/Shanghai, serves 100% traffic. Both custom domains and the six-hour schedule remain configured; IDs and traffic were confirmed from Wrangler output.

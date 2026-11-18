@@ -220,7 +220,9 @@ for (const entry of sitemapXml('url').toArray()) {
   const modified = sitemapXml(entry).find('lastmod').text();
   if (modified) {
     assert.match(modified, /^\d{4}-\d{2}-\d{2}$/);
-    assert.ok(Date.parse(modified) <= Date.now(), 'Sitemap dates must not be in the future');
+    // Editorial dates are recorded in the project's Asia/Shanghai calendar.
+    const editorialToday = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Shanghai', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
+    assert.ok(modified <= editorialToday, 'Sitemap dates must not be in the future (Asia/Shanghai)');
   }
 }
 for (const path of ['/', '/forecast/', '/forecast/when-will-it-end/', '/faq/', '/historical/', '/winter-outlook/', '/impacts/', '/impacts/california-snow-vs-rain/', '/impacts/pacific-northwest-winter/', '/forecast/enso-neutral/', '/methodology/']) {

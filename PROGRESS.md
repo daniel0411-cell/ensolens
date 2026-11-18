@@ -2,11 +2,13 @@
 
 Updated: 2026-11-19 (Asia/Shanghai)
 
-## Worked examples implementation (November 19, release pending)
+## Worked examples release (November 19)
 
 - Added fixed ASO RONI comparisons for four selected years to historical, a same-season ONI/RONI and revision example to methodology, and a reproducible USDA report-format SWE denominator exercise to California. Preserved dated extracts in public/references/worked-examples-2026-11-19.txt. Only these three pages' meaningful sitemap dates advanced.
 - CPC seasonal discussion still displayed October 15 at the November 19 early-morning check; existing October winter maps retained. No current snow conditions, observed vintage revision, all-time ranking or traffic gain inferred.
-- Independent content interpretation review found no actionable issues; it checked numbers and interpretation against the verified source record, without repeating browser source research. Added targeted browser anchor/screenshots and production assertions. Full release gate and deployment pending.
+- Independent content interpretation review found no actionable issues; it checked numbers and interpretation against the verified source record, without repeating browser source research. Added targeted browser anchor/screenshots and production assertions. Full release gate passed: 67-file type check (zero errors/warnings, two existing hints), 24 unit tests, build, real local Worker NOAA refresh/KV/RSS, 1440px/390px browser suite and retained-data failure path. Inspected desktop historical and all three new mobile example screenshots.
+- Implementation commit 7ab1b1a pushed to GitHub master. Cloudflare version f7018f1e-3fe1-442f-9415-1b4f0b295a73, deployment 249bce8c-28dd-419b-8642-f99772b16074, created November 19 at 02:36:48 Asia/Shanghai, serves 100% traffic. IDs confirmed from Wrangler output; custom domains and six-hour schedule retained.
+- Production verification passed all 25 routes, three new sections, source record, source health, RSS, canonical/indexing, sitemap/robots, redirects/404 and read-only correction endpoint. The initial date assertion treated Shanghai's November 19 as future UTC; corrected the verification-only calendar comparison to Asia/Shanghai and reran successfully. This postrelease script/documentation checkpoint does not change the deployed application or require redeployment.
 
 ## Follow-up content opportunity research (November 18, no application release)
 

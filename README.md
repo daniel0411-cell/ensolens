@@ -4,6 +4,8 @@ An independent English-language ENSO dashboard built with Astro, Chart.js, and C
 
 ## Status and recovery
 
+November 19 release: three sourced worked examples now extend historical ASO comparisons, ONI/RONI methodology and California SWE reading. Application commit 7ab1b1a is deployed as Cloudflare version f7018f1e-3fe1-442f-9415-1b4f0b295a73, with 100% traffic at 02:36 Asia/Shanghai. Full release gate and all 25 production-route checks passed; independent interpretation review found no actionable issues. Official winter discussion still showed October 15, so the dated winter maps remain intact. Source extracts: public/references/worked-examples-2026-11-19.txt. See PROGRESS.md for release IDs and verification limits.
+
 November 18 release: the 15-page practical-reading content refresh (`402794f`) was redeployed from source `4710109` as Cloudflare version `d3350595-6c0f-4dcc-9a90-95f7096c2f99` at 17:07 Asia/Shanghai. Full release gate and all 25 production-route checks passed. See PROGRESS.md for deployment IDs and validation limits, and CONTENT-OPPORTUNITIES-2026-11-18.md for the next priorities. Older entries below describe their original checkpoints.
 
 November 17 follow-up: the canonical sitemap was submitted in Bing Webmaster Tools and visibly accepted as `Processing`; actual parsing/crawling/indexing is pending. Public HTTP and simulated Bingbot checks passed, but real crawler/WAF logs were not inspected. See SEARCH-DISCOVERY-2026-11-17.md. The latest website release is the November 17 search-entry update, Cloudflare version `129bf4ba-7c32-4f0f-9448-90956619e121`; this sitemap follow-up did not redeploy the website. Historical checkpoints below retain their original observation dates.

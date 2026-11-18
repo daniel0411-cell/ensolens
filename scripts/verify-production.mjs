@@ -132,6 +132,7 @@ for (const path of paths) {
     assert.match($('main').text(), /AI assistance/);
   }
   if (path === '/historical/') {
+    assert.equal($('#same-season-heading').length, 1);
     const analog = JSON.parse($('#analog-data').text());
     assert.ok(analog.current.every(p=>p.date.startsWith(analog.currentYear)));
     assert.ok($('main').text().includes(analog.current.at(-1).date));
@@ -145,6 +146,7 @@ for (const path of paths) {
     assert.equal($('a[href$="wksst9120.for"]').length, 1);
   }
   if (path === '/methodology/') {
+    assert.equal($('#index-worked-example-heading').length, 1);
     assert.equal($('#ocean-atmosphere-heading').length, 1);
     assert.equal($('a[href="https://www.weather.gov/fwd/basics"]').length, 1);
     assert.equal($('a[href="https://www.noaa.gov/understanding-el-nino"]').length, 1);
@@ -167,6 +169,7 @@ for (const path of paths) {
     }
   }
   if (path === '/impacts/california-snow-vs-rain/') {
+    assert.equal($('#swe-worked-example-heading').length, 1);
     assert.equal($('#swe-percent-heading').length, 1);
     assert.equal($('#atmospheric-river-heading').length, 1);
     assert.equal($('a[href="https://www.noaa.gov/stories/what-are-atmospheric-rivers"]').length, 1);
@@ -222,7 +225,7 @@ for (const entry of sitemapXml('url').toArray()) {
 }
 for (const path of ['/', '/forecast/', '/forecast/when-will-it-end/', '/faq/', '/historical/', '/winter-outlook/', '/impacts/', '/impacts/california-snow-vs-rain/', '/impacts/pacific-northwest-winter/', '/forecast/enso-neutral/', '/methodology/']) {
   const entry = sitemapXml('url').filter((_, element) => sitemapXml(element).find('loc').text() === host + path);
-  const expected = ['/impacts/','/forecast/enso-neutral/','/winter-outlook/','/forecast/','/methodology/'].includes(path) ? '2026-11-17' : ['/faq/','/historical/','/forecast/when-will-it-end/','/impacts/california-snow-vs-rain/','/impacts/pacific-northwest-winter/'].includes(path) ? '2026-11-13' : '2026-11-12';
+  const expected = ['/historical/','/methodology/','/impacts/california-snow-vs-rain/'].includes(path) ? '2026-11-19' : ['/impacts/','/forecast/enso-neutral/','/winter-outlook/','/forecast/','/methodology/'].includes(path) ? '2026-11-17' : ['/faq/','/historical/','/forecast/when-will-it-end/','/impacts/california-snow-vs-rain/','/impacts/pacific-northwest-winter/'].includes(path) ? '2026-11-13' : '2026-11-12';
   assert.equal(entry.find('lastmod').text(), expected);
 }
 const missing = await request('/missing-page-check/');
@@ -240,6 +243,9 @@ console.log('PASS production health, robots, sitemap, 404 and canonical redirect
 const preserved = await fetch(host + '/references/cpc-november-2026.txt');
 assert.equal(preserved.status,200);
 assert.match(await preserved.text(), /DJF 2026–27,0,2,19,79,100/);
+const worked = await request('/references/worked-examples-2026-11-19.txt');
+assert.equal(worked.status, 200);
+assert.match(await worked.text(), /2026 \| \+2.0/);
 const correctionGet = await fetch(host + '/api/corrections/');
 assert.equal(correctionGet.status,405);
 assert.match(correctionGet.headers.get('x-robots-tag'),/noindex/);

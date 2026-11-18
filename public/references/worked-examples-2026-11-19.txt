@@ -1,0 +1,37 @@
+ENSOLens worked examples — source record
+Checked November 19, 2026 (Asia/Shanghai). Fixed educational snapshot.
+Selected values, not a complete official publication or live feed.
+
+CPC RONI: https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+ASO = August–October. ERSSTv6; reference 1991–2020.
+Year | ASO RONI (C)
+1997 | +2.1
+2015 | +1.8
+2023 | +1.0
+2026 | +2.0 (recent; subject to revision)
+Three-month Niño 3.4 anomaly minus the 20N–20S tropical mean anomaly,
+with variance adjusted to the original Niño 3.4 index.
+Source note: recent RONI values can change for up to two months due to filtering.
+Updates by the fifth of the month; no exact issue date inferred from retrieval.
+These selected seasons are not full-event peaks or an all-time ranking.
+
+CPC ONI: https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso/oni/v6/
+ASO 2023 ONI +1.5 C; same-window RONI +1.0 C.
+ONI uses centered 30-year reference periods updated every five years.
+The 0.5 C difference is between indices, not temporal cooling.
+Only one vintage checked: no actual revision between vintages is claimed.
+The ONI heading names ERSSTv6 while a filter note still names ERSSTv5;
+this source inconsistency is not resolved or used to infer a revision here.
+
+USDA NRCS: https://wcc.sc.egov.usda.gov/reports/format_html.html
+Format #4: SNOTEL Snowpack Update Report; NORTHERN GREAT BASIN.
+CEDAR PASS | elevation 7100 ft | SWE 7.3 in | today's median 12.9 in |
+median peak 19.3 in | median peak date Apr 02 | 57% | 38%.
+7.3/12.9*100 = 56.59%; 7.3/19.3*100 = 37.82% (whole-percent rounding).
+This is a report-format SAMPLE, without an observation date/reference-year range.
+It is not a November 2026 observation or a current regional condition report.
+Station calculations do not establish a basin aggregation method.
+
+CPC winter: https://www.cpc.ncep.noaa.gov/products/predictions/long_range/fxus05.html
+Header observed: 830 AM EDT Thu Oct 15 2026.
+November issue not confirmed at check; existing dated October assets retained.

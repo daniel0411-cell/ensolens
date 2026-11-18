@@ -48,6 +48,24 @@ const payload = JSON.stringify({ current: view.current, currentYear, benchmarks 
       <p class="figure-note">Weeks are numbered from January 1 in seven-day bins, including week 53 where present; month labels are approximate. Dates identify the center of each observation week. Similar curves do not predict the same regional weather.</p>
     </section>
 
+    <section class="method-section" aria-labelledby="same-season-heading">
+      <span class="eyebrow">FIXED SEASONAL SNAPSHOT · CHECKED NOVEMBER 19, 2026</span>
+      <h2 id="same-season-heading">How does ASO 2026 compare with earlier El Niño years?</h2>
+      <p class="body-copy">Compare August–October (ASO) in each year using CPC's ERSSTv6 Relative Oceanic Niño Index (RONI), with the same 1991–2020 reference. This fixed seasonal example is separate from the live weekly chart above.</p>
+      <div class="table-container" role="region" aria-label="August–October RONI comparison" tabindex="0"><table class="data-table seasonal-example">
+        <caption>Selected ASO RONI values, as checked November 19, 2026</caption>
+        <thead><tr><th scope="col">Year</th><th scope="col">ASO RONI</th><th scope="col">Reading</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">1997</th><td>+2.1°C</td><td>Selected historical season</td></tr>
+          <tr><th scope="row">2015</th><td>+1.8°C</td><td>Selected historical season</td></tr>
+          <tr><th scope="row">2023</th><td>+1.0°C</td><td>Selected historical season</td></tr>
+          <tr><th scope="row">2026</th><td>+2.0°C</td><td>Recent value; subject to revision</td></tr>
+        </tbody>
+      </table></div>
+      <p class="body-copy">In this snapshot, ASO 2026 is 0.1°C below ASO 1997 and 0.2°C above ASO 2015. These are rounded source values in a selected four-year sample. They do not establish an all-time ranking, a full-event peak or the eventual strength of the 2026–27 episode. Similar seasonal ocean indices also do not imply identical winter rainfall or snow.</p>
+      <p class="figure-note">Source: <a href="https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/">CPC RONI table</a>; <a href="/references/worked-examples-2026-11-19.txt">preserved dated values and method</a>. Recent RONI values may revise for up to two months. See the <a href="/methodology/#index-worked-example-heading">same-season ONI/RONI worked example</a> before comparing a conventional index with this relative index.</p>
+    </section>
+
     <section class="analog-profiles-section" aria-labelledby="profiles-heading">
       <div class="section-header-compact"><span class="eyebrow">DATED OBSERVATIONS</span><h2 id="profiles-heading">What each benchmark actually shows</h2><p>These are the largest warm departures or coldest departure within the calendar year shown. They are weekly observations, not seasonal ONI or RONI strength classifications.</p></div>
       <div class="analog-cards-grid">
@@ -96,6 +114,9 @@ const payload = JSON.stringify({ current: view.current, currentYear, benchmarks 
 </Layout>
 
 <style>
+  #same-season-heading { scroll-margin-top: 100px; }
+  .seasonal-example { text-align: left; }
+  .seasonal-example caption { padding: 14px; }
   .historical-limits p { margin-top: 16px; line-height: 1.8; color: var(--muted); }
   .figure-note { display: block; }
   .analog-summary-table { min-width: 780px; }

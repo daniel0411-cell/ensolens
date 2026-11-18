@@ -1,6 +1,12 @@
 # ENSOLens Delivery Status
 
-Updated: 2026-11-18 (Asia/Shanghai)
+Updated: 2026-11-19 (Asia/Shanghai)
+
+## Worked examples implementation (November 19, release pending)
+
+- Added fixed ASO RONI comparisons for four selected years to historical, a same-season ONI/RONI and revision example to methodology, and a reproducible USDA report-format SWE denominator exercise to California. Preserved dated extracts in public/references/worked-examples-2026-11-19.txt. Only these three pages' meaningful sitemap dates advanced.
+- CPC seasonal discussion still displayed October 15 at the November 19 early-morning check; existing October winter maps retained. No current snow conditions, observed vintage revision, all-time ranking or traffic gain inferred.
+- Independent content interpretation review found no actionable issues; it checked numbers and interpretation against the verified source record, without repeating browser source research. Added targeted browser anchor/screenshots and production assertions. Full release gate and deployment pending.
 
 ## Follow-up content opportunity research (November 18, no application release)
 

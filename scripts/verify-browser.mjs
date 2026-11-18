@@ -202,9 +202,10 @@ try {
         await page.screenshot({ path: fileURLToPath(new URL(path.slice(1).replaceAll('/', '-') + width + '.png', output)), fullPage: true });
       }
       const editorialSections = {
-        '/methodology/': ['ocean-atmosphere-heading'],
+        '/historical/': ['same-season-heading'],
+        '/methodology/': ['ocean-atmosphere-heading', 'index-worked-example-heading'],
         '/winter-outlook/': ['forecast-horizon-heading', 'winter-variability-heading', 'mjo-enso-heading'],
-        '/impacts/california-snow-vs-rain/': ['swe-percent-heading', 'atmospheric-river-heading'],
+        '/impacts/california-snow-vs-rain/': ['swe-percent-heading', 'atmospheric-river-heading', 'swe-worked-example-heading'],
         '/impacts/pacific-northwest-winter/': ['snow-drought-heading'],
       };
       for (const id of editorialSections[path] ?? []) {

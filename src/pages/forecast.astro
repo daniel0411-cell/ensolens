@@ -1,4 +1,5 @@
 ---
+import ExplainerVisual from '../components/ExplainerVisual.astro';
 import { forecastChanges, phaseNames } from '../lib/forecast-changes';
 import Layout from '../layouts/Layout.astro';
 import ForecastChart from '../components/ForecastChart.astro';
@@ -175,6 +176,7 @@ const comparisonRows = forecast.rows.map(row => {
       <p class="body-copy">CPC’s RONI outlook gives a range of possible seasonal index values. Its central 50% band means a 50% forecast chance that RONI falls between the displayed bounds. That differs from a 50% chance of El Niño, which is a probability assigned to an ENSO phase.</p>
       <h3>A dated example: December 2026–February 2027</h3>
       <p class="body-copy">In the November 2026 issue, the DJF 2026–27 median (50th percentile) is <strong>+2.28°C</strong>. A median splits the forecast distribution in half; it is not a guaranteed outcome and does not necessarily equal the arithmetic mean. The same forecast has three nested central ranges:</p>
+      <ExplainerVisual kind="ranges" />
       <div class="explanation-grid roni-ranges">
         <div><h3>Central 50%</h3><p><strong>+2.00 to +2.56°C</strong></p><p>25th to 75th percentiles: 75 − 25 = 50% of the forecast distribution.</p></div>
         <div><h3>Central 70%</h3><p><strong>+1.85 to +2.71°C</strong></p><p>15th to 85th percentiles: a wider range contains more forecast probability.</p></div>

@@ -164,6 +164,12 @@ try {
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), true, 'Forecast overflow at ' + width);
     await page.screenshot({ path: fileURLToPath(new URL('forecast-' + width + '.png', output)), fullPage: true });
     await page.locator('section[aria-labelledby="wmo-record-heading"]').screenshot({ path: fileURLToPath(new URL('wmo-update-' + width + '.png', output)) });
+    const rangeVisual = page.locator('#range-visual');
+    assert.equal(await rangeVisual.locator('.range-band').count(), 3);
+    const markerPositions = await rangeVisual.locator('.median-marker').evaluateAll(elements => elements.map(el => el.getBoundingClientRect().x));
+    assert.ok(markerPositions.every(x => Math.abs(x - markerPositions[0]) < 1), 'All interval medians share a numeric coordinate');
+    await rangeVisual.evaluate(element => element.scrollIntoView());
+    await page.screenshot({ path: fileURLToPath(new URL('range-visual-' + width + '.png', output)) });
     const ranges = page.locator('section[aria-labelledby="roni-range-heading"]');
     assert.equal(await ranges.locator('.roni-ranges > div').count(), 3);
     assert.match(await ranges.innerText(), /DJF 2026–27 median.*50th percentile/s);
@@ -207,14 +213,19 @@ try {
       }
       const editorialSections = {
         '/learn/enso-model-plumes-and-probabilities/': ['section-2'],
-        '/historical/': ['same-season-heading', 'enso-frequency-heading', 'event-years-heading'],
+        '/historical/': ['season-visual', 'same-season-heading', 'enso-frequency-heading', 'event-years-heading'],
         '/methodology/': ['ocean-atmosphere-heading', 'index-worked-example-heading'],
         '/winter-outlook/': ['november-changes-heading', 'forecast-horizon-heading', 'winter-variability-heading', 'mjo-enso-heading'],
         '/impacts/': ['current-winter-heading'],
         '/learn/el-nino-and-drought-recovery/': ['section-4', 'section-5'],
-        '/impacts/california-snow-vs-rain/': ['california-outlook-heading', 'swe-percent-heading', 'atmospheric-river-heading', 'swe-worked-example-heading'],
+        '/impacts/california-snow-vs-rain/': ['snow-water-visual', 'california-outlook-heading', 'swe-percent-heading', 'atmospheric-river-heading', 'swe-worked-example-heading'],
         '/impacts/pacific-northwest-winter/': ['northwest-outlook-heading', 'snow-drought-heading'],
       };
+      if (path === '/impacts/california-snow-vs-rain/') {
+        const waterWidths = await page.locator('#snow-water-visual .swe-water').evaluateAll(elements => elements.map(el => el.getBoundingClientRect().width));
+        assert.equal(waterWidths.length, 2);
+        assert.ok(Math.abs(waterWidths[0] - waterWidths[1]) < 1, 'Same SWE must have equal lengths on the shared scale');
+      }
       for (const id of editorialSections[path] ?? []) {
         const heading = page.locator('#' + id);
         assert.equal(await heading.count(), 1);

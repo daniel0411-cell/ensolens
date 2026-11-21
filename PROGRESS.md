@@ -2,6 +2,12 @@
 
 Updated: 2026-11-21 (Asia/Shanghai)
 
+## Explanatory visuals (November 21, implementation checkpoint)
+
+- Added three original responsive HTML/CSS figure groups in ExplainerVisual.astro: fixed November DJF RONI central intervals and median; five overlapping seasonal windows plus selected 1998 values; qualitative equal-depth snow density plus the USDA 57%/38% denominator example. Integrated into forecast, historical and California. Replaced the redundant historical table with text-accessible value cards. No new data source, client chart dependency or image download; same-day substantive sitemap dates already November 21 remain accurate.
+- Figures reuse preserved browser-verified source records (roni-ranges-november-2026.txt, enso-recurrence-2026-11-21.txt and worked-examples-2026-11-19.txt). No new external source check claimed. Labels retain issue/target/baseline and sample-versus-observation distinctions. Interval rows and SWE bars use shared numeric scales; overlapping seasons are not shown as five qualifying episodes.
+- Independent code/interpretation review matched geometry and claims to saved extracts; found axis text spacing could misalign numeric ticks. Replaced flex spacing with exact numeric tick coordinates. Review did not include new external research or rendered layout inspection. Local focused Chrome checks passed 1440/390/320px with no page overflow; inspected all three mobile figures, narrow range and desktop seasonal diagram. Build and git diff --check passed. Full release gate and production verification pending at this checkpoint.
+
 ## Recurrence and historical-year reading release (November 21)
 
 - Rechecked GSC: settled November 12–18 still 525 impressions/five clicks. Expanded query list shows sparse recurrence and event-year searches; these are coverage clues, not measured demand or a same-day release effect. Bing default three-month report remains zero impressions/clicks. Evidence and maintenance estimate are in SEARCH-FOLLOWUP-2026-11-21.md.

@@ -1,0 +1,152 @@
+---
+interface Props { kind: 'ranges' | 'seasons' | 'snow' }
+const { kind } = Astro.props;
+const ranges = [
+  { label: 'Central 90%', low: 1.59, high: 2.97, percentile: '5th–95th percentiles', tone: 'wide' },
+  { label: 'Central 70%', low: 1.85, high: 2.71, percentile: '15th–85th percentiles', tone: 'middle' },
+  { label: 'Central 50%', low: 2.00, high: 2.56, percentile: '25th–75th percentiles', tone: 'inner' },
+];
+const position = (value: number) => (value - 1.5) / 1.5 * 100;
+const seasons = [
+  { label: 'DJF', months: 'December–February', start: 0 },
+  { label: 'JFM', months: 'January–March', start: 1 },
+  { label: 'FMA', months: 'February–April', start: 2 },
+  { label: 'MAM', months: 'March–May', start: 3 },
+  { label: 'AMJ', months: 'April–June', start: 4 },
+];
+---
+
+{kind === 'ranges' && <figure class="explainer-visual" id="range-visual" aria-labelledby="range-visual-title">
+  <div class="visual-label">ENSOLENS DATA GRAPHIC · FIXED NOVEMBER 2026 ISSUE</div>
+  <h3 id="range-visual-title">One seasonal forecast, three nested ranges</h3>
+  <p>DJF 2026–27 · three-month RONI · 1991–2020 baseline</p>
+  <div class="median-key"><span aria-hidden="true">│</span> Median: +2.28°C · marker in every row</div>
+  <div class="range-chart">
+    {ranges.map(range => <div class="range-row">
+      <div class="range-label"><strong>{range.label}</strong><span>+{range.low.toFixed(2)} to +{range.high.toFixed(2)}°C</span></div>
+      <div class="range-track" aria-hidden="true">
+        <span class={`range-band ${range.tone}`} style={`left:${position(range.low)}%;width:${position(range.high) - position(range.low)}%`}></span>
+        <span class="median-marker" style={`left:${position(2.28)}%`}></span>
+      </div>
+      <div class="percentile-label">{range.percentile}</div>
+    </div>)}
+    <div class="range-axis" aria-hidden="true">{[1.5, 2.0, 2.5, 3.0].map(value => <span style={`left:${position(value)}%`}><i></i><b>+{value.toFixed(1)}°C</b></span>)}</div>
+  </div>
+  <figcaption>ENSOLens graphic of the <a href="/references/roni-ranges-november-2026.txt">preserved CPC November values</a>, checked November 21, 2026. All rows share one scale and overlap; their percentages must not be added. The central 90% leaves 5% in each tail. The plotted axis is a viewing window, not a physical limit. These are seasonal index ranges, not local weather probabilities.</figcaption>
+</figure>}
+
+{kind === 'seasons' && <figure class="explainer-visual" id="season-visual" aria-labelledby="season-visual-title">
+  <div class="visual-label">ENSOLENS READING DIAGRAM · OVERLAPPING WINDOWS</div>
+  <h3 id="season-visual-title">Five seasonal windows span seven months</h3>
+  <p>Each row covers three months. The next row shifts forward by only one month.</p>
+  <div class="season-grid" aria-hidden="true">
+    <div></div>{['Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'].map(month => <div class="month">{month}</div>)}
+    {seasons.map((season, index) => <><strong class="season-name" style={`grid-row:${index + 2}`}>{season.label}</strong><div class="season-window" style={`grid-row:${index + 2};grid-column:${season.start + 2} / span 3`}>{season.label}</div></>)}
+  </div>
+  <ul class="season-text">{seasons.map(season => <li><strong>{season.label}</strong>: {season.months}</li>)}</ul>
+  <div class="transition-cards" aria-label="Selected seasonal RONI values from the 1998 row">
+    <div><span>DJF 1998</span><strong>+2.1°C</strong><small>Warm seasonal value</small></div>
+    <div><span>AMJ 1998</span><strong>+0.1°C</strong><small>Between ±0.5°C</small></div>
+    <div><span>JJA 1998</span><strong>−1.0°C</strong><small>Cold seasonal value</small></div>
+  </div>
+  <figcaption>The window diagram shows calendar overlap only; it does not mark five qualifying warm or cold seasons. The three cards separately reproduce selected <a href="/references/enso-recurrence-2026-11-21.txt">CPC ERSSTv6 RONI values in the 1998 row</a> (1991–2020 baseline), checked November 21, 2026. A single value does not define an episode; historical persistence criteria differ from operational Advisory criteria.</figcaption>
+</figure>}
+
+{kind === 'snow' && <figure class="explainer-visual" id="snow-water-visual" aria-labelledby="snow-water-visual-title">
+  <div class="visual-label">ENSOLENS TEACHING DIAGRAM · NOT CURRENT CONDITIONS</div>
+  <h3 id="snow-water-visual-title">Snow depth and stored water answer different questions</h3>
+  <div class="snow-pair">
+    {['Less dense snow', 'Denser snow'].map((label, index) => <div class="snow-case">
+      <strong>{label}</strong>
+      <div class:list={['snow-column', { dense: index === 1 }]} aria-hidden="true"></div>
+      <span>Same snow depth</span>
+      <div class="water-label">{index === 0 ? 'Less' : 'More'} water after melting</div>
+    </div>)}
+  </div>
+  <p class="small-note">Qualitative illustration, not a measured density or melt ratio. SWE expresses the depth of liquid water stored in the snow.</p>
+  <h4>One SWE value, two reference amounts</h4>
+  <p>USDA's undated Cedar Pass report-format sample: <strong>7.3 inches of SWE</strong>.</p>
+  <div class="swe-bars">
+    <div class="swe-row">
+      <div class="range-label"><strong>Same-day median</strong><span>12.9 in</span></div>
+      <div class="swe-scale" aria-hidden="true"><div class="swe-reference" style={`width:${12.9 / 19.3 * 100}%`}></div><div class="swe-water" style={`width:${7.3 / 19.3 * 100}%`}></div></div>
+      <p>7.3 ÷ 12.9 × 100 ≈ <strong>57%</strong></p>
+    </div>
+    <div class="swe-row">
+      <div class="range-label"><strong>Median seasonal peak</strong><span>19.3 in</span></div>
+      <div class="swe-scale" aria-hidden="true"><div class="swe-reference" style="width:100%"></div><div class="swe-water" style={`width:${7.3 / 19.3 * 100}%`}></div></div>
+      <p>7.3 ÷ 19.3 × 100 ≈ <strong>38%</strong></p>
+    </div>
+    <div class="bar-key"><span><i class="water-key"></i>Sample SWE: 7.3 in</span><span><i class="reference-key"></i>Reference amount</span></div>
+    <p class="small-note">Both bars use the same 0–19.3 inch scale. The blue length stays fixed; the reference changes.</p>
+  </div>
+  <figcaption>Original ENSOLens diagram with calculations from <a href="/references/worked-examples-2026-11-19.txt">USDA NRCS Format #4, checked November 19, 2026</a>. The source sample supplies no observation date or reference-year range. These percentages describe stored water relative to different references, not snow depth, future snowfall or guaranteed runoff.</figcaption>
+</figure>}
+
+<style>
+  .explainer-visual { margin:28px 0; padding:28px; background:var(--card); border:1px solid var(--line-strong); border-radius:12px; min-width:0; scroll-margin-top:100px; }
+  .visual-label { color:var(--green); font-size:12px; font-weight:700; letter-spacing:.05em; line-height:1.7; }
+  h3 { font-size:24px; line-height:1.35; margin:12px 0; }
+  h4 { font-size:20px; margin:28px 0 12px; }
+  p,figcaption { color:var(--muted); line-height:1.8; font-size:15px; }
+  p { margin:10px 0; }
+  figcaption { margin-top:22px; padding-top:16px; border-top:1px solid var(--line-strong); font-size:13px; }
+  figcaption a { color:var(--green); text-decoration:underline; text-underline-offset:3px; }
+  .median-key { margin:20px 0; color:var(--ink); font-size:14px; }
+  .median-key span { font-weight:900; }
+  .range-chart,.swe-bars { max-width:850px; }
+  .range-row { margin:20px 0; }
+  .range-label { display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; font-size:15px; line-height:1.6; color:var(--ink); }
+  .range-label span { color:var(--muted); }
+  .range-track { position:relative; height:32px; margin-top:10px; border-left:1px solid var(--muted); border-right:1px solid var(--muted); background:var(--bg); }
+  .range-band { position:absolute; top:6px; height:20px; border-radius:3px; }
+  .wide { background:#475569; border:1px solid #94a3b8; }
+  .middle { background:#0f766e; border:1px solid #5eead4; }
+  .inner { background:#34d399; border:1px solid #d1fae5; }
+  .median-marker { position:absolute; top:0; height:32px; border-left:3px solid #f8fafc; }
+  .percentile-label { color:var(--muted); font-size:13px; margin-top:6px; }
+  .range-axis { position:relative; height:32px; color:var(--muted); font-size:12px; margin-top:8px; }
+  .range-axis span { position:absolute; top:0; }
+  .range-axis i { display:block; height:5px; border-left:1px solid var(--muted); }
+  .range-axis b { display:block; font-weight:400; transform:translateX(-50%); white-space:nowrap; }
+  .range-axis span:first-child b { transform:none; }
+  .range-axis span:last-child b { transform:translateX(-100%); }
+  .season-grid { display:grid; grid-template-columns:46px repeat(7,minmax(0,1fr)); grid-template-rows:28px repeat(5,34px); gap:8px 4px; margin:24px 0; max-width:850px; }
+  .month { text-align:center; color:var(--muted); font-size:13px; }
+  .season-name { align-self:center; font-size:13px; }
+  .season-window { background:#134e4a; border:1px solid #5eead4; color:#f0fdfa; border-radius:4px; display:grid; place-items:center; font-size:14px; font-weight:700; }
+  .season-text { display:flex; flex-wrap:wrap; gap:8px 24px; padding-left:20px; font-size:13px; line-height:1.8; color:var(--muted); }
+  .transition-cards { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; margin:24px 0; }
+  .transition-cards div { padding:16px; border:1px solid var(--line-strong); border-radius:6px; }
+  .transition-cards span,.transition-cards strong,.transition-cards small { display:block; line-height:1.7; }
+  .transition-cards span,.transition-cards small { color:var(--muted); font-size:13px; }
+  .transition-cards strong { font-size:24px; }
+  .snow-pair { display:grid; grid-template-columns:1fr 1fr; gap:20px; max-width:700px; margin:24px 0; }
+  .snow-case { font-size:15px; line-height:1.7; }
+  .snow-column { height:100px; border:2px solid #cbd5e1; margin:14px 0; background-color:#1e3a4b; background-image:radial-gradient(#e2e8f0 2px,transparent 3px); background-size:24px 24px; }
+  .snow-column.dense { background-size:12px 12px; }
+  .snow-case span { color:var(--muted); }
+  .water-label { color:#7dd3fc; margin-top:8px; }
+  .small-note { font-size:13px; }
+  .swe-row { margin:22px 0; }
+  .swe-scale { height:30px; position:relative; margin-top:10px; }
+  .swe-reference { position:absolute; height:30px; border:1px solid #94a3b8; background:#334155; }
+  .swe-water { position:absolute; top:5px; height:20px; background:#7dd3fc; }
+  .bar-key { display:flex; flex-wrap:wrap; gap:12px 24px; color:var(--muted); font-size:13px; }
+  .bar-key span { display:flex; align-items:center; gap:8px; }
+  .bar-key i { display:inline-block; width:16px; height:12px; }
+  .water-key { background:#7dd3fc; }
+  .reference-key { background:#334155; border:1px solid #94a3b8; }
+  @media(max-width:650px) {
+    .explainer-visual { padding:18px; }
+    h3 { font-size:22px; }
+    .transition-cards { grid-template-columns:1fr; gap:8px; }
+    .transition-cards div { display:flex; flex-wrap:wrap; align-items:center; gap:4px 16px; padding:12px; }
+    .transition-cards strong { font-size:20px; }
+    .transition-cards small { flex-basis:100%; }
+    .snow-pair { gap:14px; }
+    .snow-case { font-size:14px; }
+    .season-grid { grid-template-columns:35px repeat(7,minmax(0,1fr)); gap:8px 2px; }
+    .month { font-size:11px; }
+  }
+</style>

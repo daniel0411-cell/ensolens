@@ -94,7 +94,9 @@ for (const path of paths) {
     assert.equal($('#roni-range-heading').length, 1);
     assert.equal($('.roni-ranges > div').length, 3);
     assert.deepEqual($('.roni-ranges strong').toArray().map(el => $(el).text()), ['+2.00 to +2.56°C', '+1.85 to +2.71°C', '+1.59 to +2.97°C']);
-    assert.equal($('a[href="/references/roni-ranges-november-2026.txt"]').length, 1);
+    assert.equal($('a[href="/references/roni-ranges-november-2026.txt"]').length, 2);
+    assert.equal($('#range-visual').length, 1);
+    assert.equal($('#range-visual .range-band').length, 3);
     assert.equal($('#reading-probabilities-heading').length, 1);
     assert.equal($('#revision-summary-heading').text(), 'What changed in this issue?');
     assert.match($('.revision-summary').text(), /identical seasonal targets, across all three ENSO phases/);
@@ -115,6 +117,12 @@ for (const path of paths) {
     assert.match($('section[aria-labelledby="november-update-heading"]').text(), /61%.+38%.+1%/);
     assert.deepEqual($('#strength-table tbody tr').toArray().map(el => $(el).find('td').toArray().map(td => $(td).text())), [['0%', '2%', '19%', '79%', '100%'], ['3%', '18%', '44%', '35%', '100%']]);
 
+  }
+  if (path === '/impacts/california-snow-vs-rain/') {
+    assert.equal($('#snow-water-visual').length, 1);
+    assert.equal($('#snow-water-visual .swe-water').length, 2);
+    assert.match($('#snow-water-visual').text(), /57%/);
+    assert.match($('#snow-water-visual').text(), /38%/);
   }
   if (path === '/faq/') {
     assert.match($('#enso-frequency').text(), /two to seven years/);
@@ -141,6 +149,8 @@ for (const path of paths) {
     assert.equal($('#same-season-heading').length, 1);
     assert.equal($('#enso-frequency-heading').length, 1);
     assert.equal($('#event-years-heading').length, 1);
+    assert.equal($('#season-visual .season-window').length, 5);
+    assert.equal($('#season-visual .transition-cards > div').length, 3);
     assert.match($('main').text(), /five consecutive overlapping three-month seasons/);
     assert.match($('main').text(), /−1.0°C/);
     const analog = JSON.parse($('#analog-data').text());

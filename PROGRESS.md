@@ -2,6 +2,11 @@
 
 Updated: 2026-11-21 (Asia/Shanghai)
 
+## RONI forecast-range update (November 21, implementation checkpoint)
+
+- Added a preserved November CPC DJF 2026–27 percentile example to forecast: median and central 50/70/90% intervals, tails and limits. Expanded the model-plume guide to distinguish collection extremes from official intervals and conventional SST from RONI. Saved the browser-verified source extract in public/references/roni-ranges-november-2026.txt; only these two pages' sitemap dates changed. No new live feed, title experiment or runtime change.
+- Independent interpretation review checked numbers and citation mapping against the saved extract, without repeating primary-source browser research. Corrected its median/mean wording finding. Type check passed (67 files, zero errors/warnings, two existing hints). Full release gate and production verification pending at this checkpoint.
+
 ## November winter outlook release (November 21)
 
 - Updated five existing pages: winter outlook, impacts index, California snow/rain, Northwest winter and drought recovery. Archived and visually verified November 19 DJF maps, dates/legends and 3300×2550 dimensions; preserved October assets. Source URLs, scope and hashes are in public/references/winter-update-2026-11-21.txt.

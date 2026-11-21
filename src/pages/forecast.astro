@@ -59,7 +59,7 @@ const comparisonRows = forecast.rows.map(row => {
       </div>
     </div>
 
-    <nav class="forecast-contents" aria-label="Forecast tasks"><a href="#probability-heading">Current probabilities</a><a href="#comparison-heading">Changes since last issue</a><a href="#strength-heading">Strength</a><a href="#reading-probabilities-heading">How to read the odds</a><a href="#wmo-record-heading">Record claims</a></nav>
+    <nav class="forecast-contents" aria-label="Forecast tasks"><a href="#probability-heading">Current probabilities</a><a href="#comparison-heading">Changes since last issue</a><a href="#strength-heading">Strength</a><a href="#roni-range-heading">Forecast ranges</a><a href="#reading-probabilities-heading">How to read the odds</a><a href="#wmo-record-heading">Record claims</a></nav>
     <!-- Active Winter Highlight -->
     <div class="forecast-summary">
       <div>
@@ -168,6 +168,22 @@ const comparisonRows = forecast.rows.map(row => {
     </section>
 
 
+
+    <section class="lifecycle-section" aria-labelledby="roni-range-heading">
+      <span class="eyebrow">NOVEMBER 2026 RONI OUTLOOK · CHECKED NOVEMBER 21</span>
+      <h2 id="roni-range-heading">What does the 50% forecast range mean?</h2>
+      <p class="body-copy">CPC’s RONI outlook gives a range of possible seasonal index values. Its central 50% band means a 50% forecast chance that RONI falls between the displayed bounds. That differs from a 50% chance of El Niño, which is a probability assigned to an ENSO phase.</p>
+      <h3>A dated example: December 2026–February 2027</h3>
+      <p class="body-copy">In the November 2026 issue, the DJF 2026–27 median (50th percentile) is <strong>+2.28°C</strong>. A median splits the forecast distribution in half; it is not a guaranteed outcome and does not necessarily equal the arithmetic mean. The same forecast has three nested central ranges:</p>
+      <div class="explanation-grid roni-ranges">
+        <div><h3>Central 50%</h3><p><strong>+2.00 to +2.56°C</strong></p><p>25th to 75th percentiles: 75 − 25 = 50% of the forecast distribution.</p></div>
+        <div><h3>Central 70%</h3><p><strong>+1.85 to +2.71°C</strong></p><p>15th to 85th percentiles: a wider range contains more forecast probability.</p></div>
+        <div><h3>Central 90%</h3><p><strong>+1.59 to +2.97°C</strong></p><p>5th to 95th percentiles: 10% remains outside, with 5% in each tail.</p></div>
+      </div>
+      <p class="body-copy">The 90% bounds are not physical minimum and maximum values. These ranges describe one three-month RONI value, not daily fluctuations, absolute ocean temperature or the event’s eventual peak. They use this product’s 1991–2020 base period and cannot be read as a local rainfall or snowfall range.</p>
+      <p class="body-copy">Use CPC’s separate <a href="#strength-heading">strength-category probabilities</a> for category odds; do not reconstruct them from rounded percentile endpoints. A <a href="/learn/enso-model-plumes-and-probabilities/">model plume’s outermost lines</a> are also different from an official central probability interval.</p>
+      <p class="figure-note">Manually preserved November 2026 example, separate from the live phase chart. <a href="/references/roni-ranges-november-2026.txt">Read the percentile extract and calculation</a>. <a href="https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/outlook/" target="_blank" rel="noreferrer">CPC RONI outlook and interval definitions <ArrowUpRight size={13} /></a>.</p>
+    </section>
 
     <section class="lifecycle-section" aria-labelledby="reading-probabilities-heading">
       <span class="eyebrow">READING THE ENSO FORECAST</span>
@@ -326,7 +342,9 @@ const comparisonRows = forecast.rows.map(row => {
   .forecast-big { font-size:48px; }
   .record-context summary { cursor:pointer; color:var(--green); line-height:1.6; }
   .record-context .figure-note { display:block; }
-  #november-update-heading, #strength-heading, #super-el-nino-heading, #wmo-record-heading, #reading-probabilities-heading, #comparison-heading { scroll-margin-top: 100px; }
+  #roni-range-heading, #november-update-heading, #strength-heading, #super-el-nino-heading, #wmo-record-heading, #reading-probabilities-heading, #comparison-heading { scroll-margin-top: 100px; }
+  .roni-ranges strong { font-variant-numeric: tabular-nums; }
+  section[aria-labelledby="roni-range-heading"] .figure-note { display: block; }
   #strength-table { min-width: 720px; }
   #strength-table th, #strength-table td { white-space: nowrap; }
   section[aria-labelledby="november-update-heading"] .figure-note,

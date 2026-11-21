@@ -206,7 +206,7 @@ export const guides: Guide[] = [
     related: [{ title: 'Regional winter impacts', href: '/impacts/' }, { title: 'Choosing a forecast horizon', href: '/winter-outlook/#forecast-horizon-heading' }]
   },
   {
-    published: '2026-11-12', modified: '2026-11-17', reviewed: '2026-11-17', sourcesChecked: '2026-11-12',
+    published: '2026-11-12', modified: '2026-11-21', reviewed: '2026-11-21', sourcesChecked: '2026-11-12',
     slug: 'enso-model-plumes-and-probabilities', title: 'How to read an ENSO model plume without inventing probabilities', category: 'Forecast literacy',
     description: 'Learn what ENSO model lines and ensemble spread represent, why a model average is not a guaranteed outcome and how IRI differs from official CPC probabilities.',
     answer: 'A model plume displays forecasts from multiple models. Its spread shows disagreement within that collection, but counting lines above a threshold does not automatically produce a calibrated probability or the official CPC forecast.',
@@ -218,7 +218,8 @@ export const guides: Guide[] = [
       ] },
       { title: 'Spread is useful, but not the full uncertainty', paragraphs: [
         'A wide plume shows that the displayed models disagree. A narrow plume shows more agreement within that set. Models can share observations, assumptions or biases, however, so close agreement does not guarantee accuracy. Forecast uncertainty also depends on lead time, season and the quality of the starting observations.',
-        'The mean line summarizes the collection. It can sit between different possible evolutions and may never resemble the eventual observed path. Check whether each thin line is a model mean or an individual ensemble member before interpreting the number of lines as independent evidence.'
+        'The mean line summarizes the collection. It can sit between different possible evolutions and may never resemble the eventual observed path. Check whether each thin line is a model mean or an individual ensemble member before interpreting the number of lines as independent evidence.',
+        'The outermost plume lines show the extremes of the displayed model collection, not a defined 90% probability interval. CPC’s separate official RONI outlook publishes central 50%, 70% and 90% ranges from percentiles. Its central 50% interval runs from the 25th to the 75th percentile; its 50th percentile is the median. Neither label means a 50% chance of El Niño. Keep the index and baseline in view: the CPC product uses seasonal RONI and a 1991–2020 base period, so do not overlay its values on a conventional SST-anomaly plume as though they were the same variable.'
       ] },
       { title: 'IRI model probabilities and CPC odds are separate products', paragraphs: [
         'IRI explains that its objective plume-based probabilities use model forecasts through a statistical calculation. The official CPC probability forecast also uses human forecaster judgment and a wider assessment of observational and predictive evidence. Their publication timing and available starting information can differ.',
@@ -229,8 +230,8 @@ export const guides: Guide[] = [
         'For a useful reading, summarize the favored evolution, the spread, the target season and the source. Then link to the named probability product for numerical odds. Keep event strength separate from local impact severity: even a confident tropical Pacific forecast does not determine a specific city’s winter precipitation.'
       ] }
     ], checklist: ['Identify variable, target season, issue and initialization dates.', 'Check whether lines are model means or ensemble members.', 'Keep IRI model products and official CPC probabilities separate.'],
-    sources: [{ title: 'IRI: ENSO Quick Look and figure-method explanations', url: 'https://iri.columbia.edu/our-expertise/climate/forecasts/enso/current/', date: 'Displayed issue October 19, 2026; methods used, no numerical forecast copied' }],
-    related: [{ title: 'Reading official CPC probabilities', href: '/forecast/#reading-probabilities-heading' }, { title: 'Lifecycle forecast limits', href: '/forecast/when-will-it-end/' }]
+    sources: [{ title: 'IRI: ENSO Quick Look and figure-method explanations', url: 'https://iri.columbia.edu/our-expertise/climate/forecasts/enso/current/', date: 'Displayed issue October 19, 2026; methods used, no numerical forecast copied' }, { title: 'CPC: official RONI outlook and percentile-range definitions', url: 'https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/outlook/', date: 'November 2026 issue; interval definitions checked November 21, 2026' }],
+    related: [{ title: 'Worked example: median and central forecast ranges', href: '/forecast/#roni-range-heading' }, { title: 'Reading official CPC probabilities', href: '/forecast/#reading-probabilities-heading' }, { title: 'Lifecycle forecast limits', href: '/forecast/when-will-it-end/' }]
   },
   {
     published: '2026-11-12', modified: '2026-11-17', reviewed: '2026-11-17', sourcesChecked: '2026-11-12',

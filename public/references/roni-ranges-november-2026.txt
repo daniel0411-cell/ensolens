@@ -1,0 +1,26 @@
+ENSOLens dated source extract — not an official NOAA archive
+Source: Official NOAA Relative Oceanic Niño Index (RONI) Outlook
+https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/outlook/
+Issue displayed: November 2026. Checked in browser: November 21, 2026.
+Target: DJF 2026–27 (December 2026–February 2027).
+Index: seasonal RONI; source states 1991–2020 climatological base period.
+Rolling URL may advance independently of this preserved example.
+
+Source table row, transcribed from the displayed November issue:
+Season,5th,15th,25th,50th,75th,85th,95th percentile (degrees C)
+DJF,1.59,1.85,2.00,2.28,2.56,2.71,2.97
+
+Source definition: darkest band is 50% chance between bounds; middle band
+70%; lightest band 90%. Table values correspond to displayed percentiles.
+ENSOLens calculations/explanation:
+Median = 50th percentile = +2.28 C; this identifies a median, not a calculation
+of the arithmetic mean. The two statistics can coincide numerically.
+Central 50% = 25th–75th = +2.00 to +2.56 C (75 - 25 = 50).
+Central 70% = 15th–85th = +1.85 to +2.71 C.
+Central 90% = 5th–95th = +1.59 to +2.97 C.
+10% lies outside the central 90%, 5% in each tail; bounds are not physical limits.
+These are seasonal index intervals, not phase probabilities, daily ranges,
+eventual peak bounds, or regional weather forecasts. Do not derive official
+strength-category odds from rounded percentile endpoints. Model-plume extremes
+are the extremes of the displayed collection, not a defined probability interval.
+No new IRI issue or model probabilities were copied in this update.

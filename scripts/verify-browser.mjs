@@ -164,6 +164,10 @@ try {
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), true, 'Forecast overflow at ' + width);
     await page.screenshot({ path: fileURLToPath(new URL('forecast-' + width + '.png', output)), fullPage: true });
     await page.locator('section[aria-labelledby="wmo-record-heading"]').screenshot({ path: fileURLToPath(new URL('wmo-update-' + width + '.png', output)) });
+    const ranges = page.locator('section[aria-labelledby="roni-range-heading"]');
+    assert.equal(await ranges.locator('.roni-ranges > div').count(), 3);
+    assert.match(await ranges.innerText(), /DJF 2026–27 median.*50th percentile/s);
+    await ranges.screenshot({ path: fileURLToPath(new URL('roni-ranges-' + width + '.png', output)) });
     await page.locator('section[aria-labelledby="reading-probabilities-heading"]').screenshot({ path: fileURLToPath(new URL('probability-reading-' + width + '.png', output)) });
     for (const path of ['/learn/', '/learn/kelvin-waves-and-enso/', '/learn/soi-vs-ocean-indices/', '/learn/nino-regions-explained/', '/learn/enso-and-climate-change/', '/learn/marine-heatwaves-vs-el-nino/', '/learn/el-nino-and-drought-recovery/', '/learn/enso-jet-stream-teleconnections/', '/learn/enso-model-plumes-and-probabilities/', '/learn/climate-normals-and-anomalies/', '/learn/how-enso-is-observed/', '/forecast/when-will-it-end/', '/forecast/enso-neutral/', '/impacts/', '/impacts/california-snow-vs-rain/', '/impacts/pacific-northwest-winter/', '/historical/', '/faq/', '/winter-outlook/', '/hurricane-connection/', '/methodology/', '/about/', '/privacy/']) {
       const response = await page.goto(base + path, { waitUntil: 'networkidle' });
@@ -202,6 +206,7 @@ try {
         await page.screenshot({ path: fileURLToPath(new URL(path.slice(1).replaceAll('/', '-') + width + '.png', output)), fullPage: true });
       }
       const editorialSections = {
+        '/learn/enso-model-plumes-and-probabilities/': ['section-2'],
         '/historical/': ['same-season-heading'],
         '/methodology/': ['ocean-atmosphere-heading', 'index-worked-example-heading'],
         '/winter-outlook/': ['november-changes-heading', 'forecast-horizon-heading', 'winter-variability-heading', 'mjo-enso-heading'],

@@ -49,7 +49,7 @@ for (const path of paths) {
     assert.equal(article['@type'], 'Article');
     assert.equal(article.headline, $('h1').text());
     assert.equal(article.datePublished, '2026-11-12');
-    assert.equal(article.dateModified, path === '/learn/el-nino-and-drought-recovery/' ? '2026-11-21' : '2026-11-17');
+    assert.equal(article.dateModified, ['/learn/el-nino-and-drought-recovery/', '/learn/enso-model-plumes-and-probabilities/'].includes(path) ? '2026-11-21' : '2026-11-17');
     assert.equal($('.decision-card h2').length, 1);
     assert.ok($('.decision-card p').text().length > 100);
     assert.equal($('.teaching-figure').length, 1);
@@ -91,6 +91,10 @@ for (const path of paths) {
     }
   }
   if (path === '/forecast/') {
+    assert.equal($('#roni-range-heading').length, 1);
+    assert.equal($('.roni-ranges > div').length, 3);
+    assert.deepEqual($('.roni-ranges strong').toArray().map(el => $(el).text()), ['+2.00 to +2.56°C', '+1.85 to +2.71°C', '+1.59 to +2.97°C']);
+    assert.equal($('a[href="/references/roni-ranges-november-2026.txt"]').length, 1);
     assert.equal($('#reading-probabilities-heading').length, 1);
     assert.equal($('#revision-summary-heading').text(), 'What changed in this issue?');
     assert.match($('.revision-summary').text(), /identical seasonal targets, across all three ENSO phases/);
@@ -233,7 +237,7 @@ for (const entry of sitemapXml('url').toArray()) {
 }
 for (const path of ['/', '/forecast/', '/forecast/when-will-it-end/', '/faq/', '/historical/', '/winter-outlook/', '/impacts/', '/impacts/california-snow-vs-rain/', '/impacts/pacific-northwest-winter/', '/forecast/enso-neutral/', '/methodology/']) {
   const entry = sitemapXml('url').filter((_, element) => sitemapXml(element).find('loc').text() === host + path);
-  const expected = ['/winter-outlook/','/impacts/','/impacts/california-snow-vs-rain/','/impacts/pacific-northwest-winter/'].includes(path) ? '2026-11-21' : ['/historical/','/methodology/','/impacts/california-snow-vs-rain/'].includes(path) ? '2026-11-19' : ['/impacts/','/forecast/enso-neutral/','/winter-outlook/','/forecast/','/methodology/'].includes(path) ? '2026-11-17' : ['/faq/','/historical/','/forecast/when-will-it-end/','/impacts/california-snow-vs-rain/','/impacts/pacific-northwest-winter/'].includes(path) ? '2026-11-13' : '2026-11-12';
+  const expected = ['/forecast/','/winter-outlook/','/impacts/','/impacts/california-snow-vs-rain/','/impacts/pacific-northwest-winter/'].includes(path) ? '2026-11-21' : ['/historical/','/methodology/','/impacts/california-snow-vs-rain/'].includes(path) ? '2026-11-19' : ['/impacts/','/forecast/enso-neutral/','/winter-outlook/','/forecast/','/methodology/'].includes(path) ? '2026-11-17' : ['/faq/','/historical/','/forecast/when-will-it-end/','/impacts/california-snow-vs-rain/','/impacts/pacific-northwest-winter/'].includes(path) ? '2026-11-13' : '2026-11-12';
   assert.equal(entry.find('lastmod').text(), expected);
 }
 const missing = await request('/missing-page-check/');
@@ -248,6 +252,9 @@ for (const url of ['https://www.ensolens.com/forecast/?view=compare', 'http://en
 }
 console.log('PASS production health, robots, sitemap, 404 and canonical redirects', JSON.stringify(health.dates));
 
+const rangeRecord = await request('/references/roni-ranges-november-2026.txt');
+assert.equal(rangeRecord.status, 200);
+assert.match(await rangeRecord.text(), /DJF,1.59,1.85,2.00,2.28,2.56,2.71,2.97/);
 const preserved = await fetch(host + '/references/cpc-november-2026.txt');
 assert.equal(preserved.status,200);
 assert.match(await preserved.text(), /DJF 2026–27,0,2,19,79,100/);

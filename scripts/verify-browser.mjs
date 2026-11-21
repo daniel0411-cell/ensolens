@@ -178,7 +178,7 @@ try {
       if (path.startsWith('/learn/')) {
         assert.equal(await page.locator('h1').count(), 1);
         if (path !== '/learn/') {
-          assert.equal(await page.locator('.guide-section').count(), 4);
+          assert.equal(await page.locator('.guide-section').count(), path === '/learn/el-nino-and-drought-recovery/' ? 6 : 4);
           assert.equal(await page.locator('.teaching-figure').count(),1);
           if(width===390) for(const region of await page.locator('.teaching-figure .diagram-scroll, .teaching-figure .teaching-table').all()) {
             if (await region.evaluate(el=>el.scrollWidth>el.clientWidth+1)) {
@@ -204,9 +204,11 @@ try {
       const editorialSections = {
         '/historical/': ['same-season-heading'],
         '/methodology/': ['ocean-atmosphere-heading', 'index-worked-example-heading'],
-        '/winter-outlook/': ['forecast-horizon-heading', 'winter-variability-heading', 'mjo-enso-heading'],
-        '/impacts/california-snow-vs-rain/': ['swe-percent-heading', 'atmospheric-river-heading', 'swe-worked-example-heading'],
-        '/impacts/pacific-northwest-winter/': ['snow-drought-heading'],
+        '/winter-outlook/': ['november-changes-heading', 'forecast-horizon-heading', 'winter-variability-heading', 'mjo-enso-heading'],
+        '/impacts/': ['current-winter-heading'],
+        '/learn/el-nino-and-drought-recovery/': ['section-4', 'section-5'],
+        '/impacts/california-snow-vs-rain/': ['california-outlook-heading', 'swe-percent-heading', 'atmospheric-river-heading', 'swe-worked-example-heading'],
+        '/impacts/pacific-northwest-winter/': ['northwest-outlook-heading', 'snow-drought-heading'],
       };
       for (const id of editorialSections[path] ?? []) {
         const heading = page.locator('#' + id);

@@ -144,7 +144,7 @@ export const guides: Guide[] = [
     related: [{ title: 'Kelvin waves and ENSO', href: '/learn/kelvin-waves-and-enso/' }, { title: 'ENSO and climate change', href: '/learn/enso-and-climate-change/' }]
   },
   {
-    published: '2026-11-12', modified: '2026-11-17', reviewed: '2026-11-17', sourcesChecked: '2026-11-12',
+    published: '2026-11-12', modified: '2026-11-21', reviewed: '2026-11-21', sourcesChecked: '2026-11-12',
     slug: 'el-nino-and-drought-recovery', title: 'Can El Niño end a drought? Rainfall versus recovery', category: 'Water and weather',
     description: 'Understand why a wetter seasonal outlook is not a drought-recovery guarantee, and which soil, snow, reservoir and groundwater observations to check.',
     answer: 'El Niño can shift seasonal rainfall odds in some regions, but drought recovery depends on where water falls, how it is stored and the size of existing deficits. A wet storm or wet season does not automatically restore every part of the water system.',
@@ -162,13 +162,21 @@ export const guides: Guide[] = [
         'Flooding describes water causing harm at a particular place and time. Drought describes a shortage relative to the needs and conditions being assessed. Intense runoff can produce a dangerous flood while longer-term groundwater or reservoir deficits persist. The two labels are not mutually exclusive.',
         'In snow-fed basins, rain and snow also have different timing. A warm storm may deliver immediate runoff instead of building the mountain snow reservoir needed for spring and summer. This is why rainfall totals, snow-water equivalent and seasonal water-supply forecasts should be read separately.'
       ] },
+      { title: 'What an Illinois soil-recharge study can teach us', paragraphs: [
+        'A November 19, 2026 NIDIS article summarizes research using three Illinois Climate Network stations, May–October rainfall events from 2008–2023 and soil-water recharge in the upper three feet. Its useful lesson is that rainfall totals alone do not describe recharge: rainfall intensity and the moisture already in the soil affect how much water enters and remains in the soil.',
+        'This is a bounded example reported by NIDIS, not our independent analysis of the journal paper. It is not a nationwide recharge percentage, an aquifer-recovery model or a prediction for a Southeastern winter. Apply the question it raises—where did the water go?—then check local root-zone moisture and other depleted stores rather than transferring the study’s results unchanged.'
+      ] },
+      { title: 'Apply that distinction to the Southeast winter outlook', paragraphs: [
+        'NIDIS’s November 19, 2026 Southeast briefing describes a wetter winter tilt and the opportunity for drought relief. The matching November 19 CPC outlook favors above-normal precipitation across much of the Southeast for December 2026–February 2027. These dated forecasts describe seasonal odds, not observed recovery or a numerical probability of flooding.',
+        'Start with the basin’s existing shortage, then compare subsequent soil moisture, streamflow, reservoir storage and groundwater observations against the appropriate dated references. Rain can improve one indicator while another remains low. Use current National Weather Service warnings for flood safety; neither a wet seasonal category nor a drought label replaces those warnings.'
+      ] },
       { title: 'Build a recovery check around the actual shortage', paragraphs: [
         'For a garden or crop, examine root-zone moisture and local agricultural advice. For a reservoir system, check storage, inflows and the operator’s supply assessment. For a private well, consult local groundwater observations and qualified local advice. Choose indicators for the resource, rather than using the ENSO phase as a recovery score.',
         'Record the comparison period and location for each indicator. A basin total, statewide percentage and individual station may tell different stories without contradicting one another. Continue to follow flood warnings during wet periods and water-use guidance while supply deficits remain; ENSO is context, not the operational instruction.'
       ] }
     ], checklist: ['Identify the depleted store: soil, snow, reservoir or aquifer.', 'Compare observed recovery with the same basin and baseline.', 'Keep flood hazards separate from long-term supply recovery.'],
-    sources: [{ title: 'USGS: Drought and groundwater levels', url: 'https://www.usgs.gov/water-science-school/science/drought-and-groundwater-levels', date: 'Page dated September 17, 2026' }, { title: 'NWS: Typical ENSO winter circulation', url: 'https://www.weather.gov/mhx/ensowhat', date: 'No publication date displayed; seasonal tendencies only' }],
-    related: [{ title: 'California rain, snow and water storage', href: '/impacts/california-snow-vs-rain/' }, { title: 'Northwest snow drought', href: '/impacts/pacific-northwest-winter/#snow-drought-heading' }]
+    sources: [{ title: 'USGS: Drought and groundwater levels', url: 'https://www.usgs.gov/water-science-school/science/drought-and-groundwater-levels', date: 'Page dated September 17, 2026' }, { title: 'NWS: Typical ENSO winter circulation', url: 'https://www.weather.gov/mhx/ensowhat', date: 'No publication date displayed; seasonal tendencies only' }, { title: 'NIDIS: Why heavy rain does not always end drought', url: 'https://www.drought.gov/news/why-heavy-rain-doesnt-always-end-drought-2026-11-19', date: 'Published November 19, 2026; checked November 21; scoped summary of Illinois research, underlying paper not independently reviewed' }, { title: 'NIDIS: Wetter winter odds across the Southeast', url: 'https://www.drought.gov/news/strong-el-nino-tilts-odds-toward-wetter-winter-across-southeast-2026-11-19', date: 'Published November 19, 2026; checked November 21; reports November 17 webinar' }, { title: 'CPC: Seasonal outlook discussion', url: 'https://www.cpc.ncep.noaa.gov/products/predictions/long_range/fxus05.html', date: 'Issued November 19, 2026; checked November 21; DJF 2026–27, 1991–2020 reference; rolling source' }],
+    related: [{ title: 'November winter outlook and its limits', href: '/winter-outlook/' }, { title: 'California rain, snow and water storage', href: '/impacts/california-snow-vs-rain/' }, { title: 'Northwest snow drought', href: '/impacts/pacific-northwest-winter/#snow-drought-heading' }]
   },
   {
     published: '2026-11-12', modified: '2026-11-17', reviewed: '2026-11-17', sourcesChecked: '2026-11-12',

@@ -21,7 +21,7 @@ export const sectionEvidence: Record<string, number[][]> = {
  'nino-regions-explained':[[0],[1],[0],[0,1]],
  'enso-and-climate-change':[[0,2],[1,2],[0,2],[0,1]],
  'marine-heatwaves-vs-el-nino':[[0,1],[0],[0],[0]],
- 'el-nino-and-drought-recovery':[[1],[0],[0,1],[0]],
+ 'el-nino-and-drought-recovery':[[1],[0],[0,1],[2],[3,4],[0]],
  'enso-jet-stream-teleconnections':[[1],[0],[0],[0]],
  'enso-model-plumes-and-probabilities':[[0],[0],[0],[0]],
  'climate-normals-and-anomalies':[[0],[0,1],[0,1],[0,1]],

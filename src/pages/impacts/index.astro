@@ -4,12 +4,13 @@ import { ArrowUpRight, CloudRain, Snowflake, Thermometer } from '@lucide/astro';
 ---
 <Layout title="El Niño & La Niña U.S. Winter Impacts: Regional Guides" active="winter" description="Understand broad El Niño and La Niña U.S. winter tendencies, then compare California rain and snow, Pacific Northwest snowpack and the dated CPC winter outlook.">
   <div class="page-shell subpage lifecycle-page">
-    <div class="page-intro"><div><span class="eyebrow">REGIONAL ENSO GUIDES · REVIEWED NOVEMBER 17, 2026</span><h1>El Niño &amp; La Niña<br /><span>U.S. winter impacts.</span></h1><p>ENSO shifts broad seasonal odds, not a local forecast. Start with a regional tendency, then check the season, elevation and official forecast that matter to your decision.</p></div></div>
+    <div class="page-intro"><div><span class="eyebrow">REGIONAL ENSO GUIDES · REVIEWED NOVEMBER 21, 2026</span><h1>El Niño &amp; La Niña<br /><span>U.S. winter impacts.</span></h1><p>ENSO shifts broad seasonal odds, not a local forecast. Start with a regional tendency, then check the season, elevation and official forecast that matter to your decision.</p></div></div>
     <section class="regional-section" aria-labelledby="guides-heading"><h2 id="guides-heading">Choose your region or question</h2><div class="regional-grid">
       <article><CloudRain size={24} /><h3>California rain or Sierra snow?</h3><p>A wetter outlook cannot determine the snow line. Separate storm precipitation, resort snowfall and water stored in the snowpack.</p><a href="/impacts/california-snow-vs-rain/">California rain and snow <ArrowUpRight size={13} /></a></article>
       <article><Snowflake size={24} /><h3>Pacific Northwest winters</h3><p>How El Niño and La Niña can shift winter conditions in Washington, Oregon and Idaho, and why mountain snow differs from city snow.</p><a href="/impacts/pacific-northwest-winter/">Northwest winter and snowpack <ArrowUpRight size={13} /></a></article>
-      <article><Thermometer size={24} /><h3>U.S. winter 2026–27</h3><p>The saved October 15, 2026 CPC maps for December–February, with category probabilities and regional interpretation.</p><a href="/winter-outlook/">Dated U.S. winter outlook <ArrowUpRight size={13} /></a></article>
+      <article><Thermometer size={24} /><h3>U.S. winter 2026–27</h3><p>The saved November 19, 2026 CPC maps for December–February, with category probabilities and regional interpretation.</p><a href="/winter-outlook/">Dated U.S. winter outlook <ArrowUpRight size={13} /></a></article>
     </div></section>
+    <section class="lifecycle-section" aria-labelledby="current-winter-heading"><h2 id="current-winter-heading">Winter 2026–27: use the November issue</h2><p class="body-copy">The November 19 CPC outlook for December–February increases wetter odds for California, the Desert Southwest and the East Coast compared with October. Across the Northwest, southwestern Oregon favors wetter conditions while Washington and northern Oregon have equal chances for precipitation. These are dated seasonal categories, separate from the historical phase tendencies below.</p><p class="body-copy">See <a href="/winter-outlook/#november-changes-heading">what changed in the November outlook</a> and <a href="/learn/el-nino-and-drought-recovery/">why wetter odds do not guarantee drought recovery</a>. Seasonal probabilities cannot determine storm timing, local snowfall or flood warnings.</p></section>
     <section class="lifecycle-section"><h2>How do U.S. winter tendencies compare?</h2><p class="body-copy">These are broad late-fall and winter relationships described by the National Weather Service, not a forecast for a particular winter. The relationship varies by region and event; La Niña is not an exact mirror of El Niño.</p>
       <div class="probability-table-wrap" role="region" aria-label="Broad U.S. ENSO winter tendencies" tabindex="0"><table class="data-table"><caption>Historical tendencies · no local numerical probabilities assigned</caption><thead><tr><th scope="col">Region</th><th scope="col">El Niño tendency</th><th scope="col">La Niña tendency</th><th scope="col">What still needs a forecast?</th></tr></thead><tbody>
         <tr><th scope="row">Pacific Northwest</th><td>Warmer; often drier</td><td>Cooler; can be wetter</td><td>Snow levels, storm totals and runoff</td></tr>
@@ -26,6 +27,7 @@ import { ArrowUpRight, CloudRain, Snowflake, Thermometer } from '@lucide/astro';
 </Layout>
 <style>
   .regional-grid a, .explanation-grid a { display: inline-block; margin-top: 14px; color: var(--green); font-size: 13px; }
+  #current-winter-heading { scroll-margin-top: 110px; }
   table { min-width: 740px; }
   th, td { white-space: normal; min-width: 150px; }
 </style>

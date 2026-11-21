@@ -43,17 +43,17 @@ for (const path of paths) {
   if (path === '/learn/') assert.equal($('.library-grid article').length, 10);
   if (path.startsWith('/learn/') && path !== '/learn/') {
     assert.equal($('h1').length, 1);
-    assert.equal($('.guide-section').length, 4);
+    assert.equal($('.guide-section').length, path === '/learn/el-nino-and-drought-recovery/' ? 6 : 4);
     assert.equal($('.checklist li').length, 3);
     const article = JSON.parse($('script[type="application/ld+json"]').last().text());
     assert.equal(article['@type'], 'Article');
     assert.equal(article.headline, $('h1').text());
     assert.equal(article.datePublished, '2026-11-12');
-    assert.equal(article.dateModified, '2026-11-17');
+    assert.equal(article.dateModified, path === '/learn/el-nino-and-drought-recovery/' ? '2026-11-21' : '2026-11-17');
     assert.equal($('.decision-card h2').length, 1);
     assert.ok($('.decision-card p').text().length > 100);
     assert.equal($('.teaching-figure').length, 1);
-    assert.equal($('.section-evidence').length, 4);
+    assert.equal($('.section-evidence').length, path === '/learn/el-nino-and-drought-recovery/' ? 6 : 4);
     for(const a of $('.section-evidence a').toArray()) assert.equal($($(a).attr('href')).length,1);
     assert.equal(article.url, host + path);
     assert.deepEqual(article.citation, $('.sources a').toArray().map(el => $(el).attr('href')));
@@ -69,7 +69,7 @@ for (const path of paths) {
   }
   if (path === '/impacts/' || path === '/impacts/pacific-northwest-winter/' || path === '/forecast/enso-neutral/') {
     assert.equal($('h1').length, 1);
-    assert.match($('.eyebrow').first().text(), path === '/impacts/pacific-northwest-winter/' ? /NOVEMBER 12, 2026/ : /NOVEMBER 17, 2026/);
+    assert.match($('.eyebrow').first().text(), path === '/forecast/enso-neutral/' ? /NOVEMBER 17, 2026/ : /NOVEMBER 21, 2026/);
     for (const element of $('main a[href^="/"]').toArray()) {
       const target = $(element).attr('href').split('#')[0];
       assert.ok(paths.includes(target) || target.startsWith('/images/'), path + ' has an unknown internal destination: ' + target);
@@ -151,7 +151,12 @@ for (const path of paths) {
     assert.equal($('a[href="https://www.weather.gov/fwd/basics"]').length, 1);
     assert.equal($('a[href="https://www.noaa.gov/understanding-el-nino"]').length, 1);
   }
+  if (path === '/impacts/') assert.equal($('#current-winter-heading').length, 1);
+  if (path === '/impacts/pacific-northwest-winter/') assert.equal($('#northwest-outlook-heading').length, 1);
   if (path === '/winter-outlook/') {
+    assert.equal($('#november-changes-heading').length, 1);
+    assert.match($('.eyebrow').first().text(), /CPC ISSUE NOVEMBER 19, 2026/);
+    assert.equal($('.outlook-maps img[src^="/images/outlooks/2026-11/"]').length, 2);
     assert.equal($('#forecast-horizon-heading').length, 1);
     assert.equal($('#winter-variability-heading').length, 1);
     assert.equal($('#mjo-enso-heading').length, 1);
@@ -169,6 +174,7 @@ for (const path of paths) {
     }
   }
   if (path === '/impacts/california-snow-vs-rain/') {
+    assert.equal($('#california-outlook-heading').length, 1);
     assert.equal($('#swe-worked-example-heading').length, 1);
     assert.equal($('#swe-percent-heading').length, 1);
     assert.equal($('#atmospheric-river-heading').length, 1);
@@ -227,7 +233,7 @@ for (const entry of sitemapXml('url').toArray()) {
 }
 for (const path of ['/', '/forecast/', '/forecast/when-will-it-end/', '/faq/', '/historical/', '/winter-outlook/', '/impacts/', '/impacts/california-snow-vs-rain/', '/impacts/pacific-northwest-winter/', '/forecast/enso-neutral/', '/methodology/']) {
   const entry = sitemapXml('url').filter((_, element) => sitemapXml(element).find('loc').text() === host + path);
-  const expected = ['/historical/','/methodology/','/impacts/california-snow-vs-rain/'].includes(path) ? '2026-11-19' : ['/impacts/','/forecast/enso-neutral/','/winter-outlook/','/forecast/','/methodology/'].includes(path) ? '2026-11-17' : ['/faq/','/historical/','/forecast/when-will-it-end/','/impacts/california-snow-vs-rain/','/impacts/pacific-northwest-winter/'].includes(path) ? '2026-11-13' : '2026-11-12';
+  const expected = ['/winter-outlook/','/impacts/','/impacts/california-snow-vs-rain/','/impacts/pacific-northwest-winter/'].includes(path) ? '2026-11-21' : ['/historical/','/methodology/','/impacts/california-snow-vs-rain/'].includes(path) ? '2026-11-19' : ['/impacts/','/forecast/enso-neutral/','/winter-outlook/','/forecast/','/methodology/'].includes(path) ? '2026-11-17' : ['/faq/','/historical/','/forecast/when-will-it-end/','/impacts/california-snow-vs-rain/','/impacts/pacific-northwest-winter/'].includes(path) ? '2026-11-13' : '2026-11-12';
   assert.equal(entry.find('lastmod').text(), expected);
 }
 const missing = await request('/missing-page-check/');
@@ -245,6 +251,10 @@ console.log('PASS production health, robots, sitemap, 404 and canonical redirect
 const preserved = await fetch(host + '/references/cpc-november-2026.txt');
 assert.equal(preserved.status,200);
 assert.match(await preserved.text(), /DJF 2026–27,0,2,19,79,100/);
+const winterRecord = await request('/references/winter-update-2026-11-21.txt');
+assert.equal(winterRecord.status, 200);
+assert.match(await winterRecord.text(), /Next scheduled seasonal issue: December 17, 2026/);
+
 const worked = await request('/references/worked-examples-2026-11-19.txt');
 assert.equal(worked.status, 200);
 assert.match(await worked.text(), /2026 \| \+2.0/);

@@ -1,0 +1,48 @@
+ENSOLens November winter update — verified source record
+Checked and saved: November 21, 2026 (Asia/Shanghai)
+This record summarizes verified source content; it is not an official bulletin.
+
+NOAA CPC seasonal discussion
+https://www.cpc.ncep.noaa.gov/products/predictions/long_range/fxus05.html
+Issue header: 830 AM EST Thu Nov 19 2026; forecaster Brad Pugh.
+Target: December 2026–February 2027 (DJF); reference 1991–2020.
+Next scheduled seasonal issue: December 17, 2026.
+Same-target comparison: discussion explicitly increases above-normal precipitation
+probabilities over California, the Desert Southwest and the East Coast versus
+October 15. No exact percentage-point change is reconstructed here.
+Temperature: above-normal favored across northern two-thirds CONUS; near-normal
+favored in parts of Southeast; equal chances in parts of Southwest.
+Precipitation: above-normal favored in southwestern Oregon, California, Southwest,
+central/southern Great Plains and much of the Southeast/Mid-Atlantic/Northeast.
+Washington and northern Oregon show equal chances. Below-normal favored in
+northern Rockies and parts of Great Lakes. A wet category is neither a rainfall
+amount nor a local flood or snowfall probability.
+
+Original map URLs (rolling; saved copies preserve printed issue and valid dates):
+https://www.cpc.ncep.noaa.gov/products/predictions/long_range/lead01/off01_temp.gif
+https://www.cpc.ncep.noaa.gov/products/predictions/long_range/lead01/off01_prcp.gif
+Selector: https://www.cpc.ncep.noaa.gov/products/predictions/long_range/seasonal.php?lead=1
+Both GIFs visually checked: issued November 19, 2026; valid DJF 2026–27;
+original legends retained; each 3300 x 2550 pixels.
+Saved temperature: /images/outlooks/2026-11/djf-temperature.gif
+SHA-256 c510c57f229fbb72d13a78a9885f1b4bfee9b7c160626ab67f2ce3b6564779fe
+Saved precipitation: /images/outlooks/2026-11/djf-precipitation.gif
+SHA-256 12cecd1a801646e34b49a895cea358d7072651b5202d59fb65b53cf18ea9e5ff
+October assets remain in /images/outlooks/2026-10/ unchanged.
+
+NOAA/NIDIS Southeast briefing
+https://www.drought.gov/news/strong-el-nino-tilts-odds-toward-wetter-winter-across-southeast-2026-11-19
+Published November 19, 2026; reports November 17 webinar.
+Use: wetter winter tilt and possible drought relief; distinguish actual water-store
+recovery and flood safety from seasonal precipitation probabilities.
+Do not reuse article ENSO strength/record numbers as independent observations.
+
+NOAA/NIDIS soil-recharge research summary
+https://www.drought.gov/news/why-heavy-rain-doesnt-always-end-drought-2026-11-19
+Published November 19, 2026; summary by Illinois State Climatologist Trent Ford.
+Scope: three Illinois Climate Network stations; May–October rainfall events,
+2008–2023; soil water recharge in upper three feet. Rain intensity and antecedent
+soil moisture affect recharge; totals alone are insufficient.
+Underlying Water Resources Research paper not directly reviewed. Attribute the
+qualitative case to NIDIS. Do not transfer recharge percentages to the nation,
+aquifers or Southeast winter conditions. No observed recovery is declared.

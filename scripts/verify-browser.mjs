@@ -207,7 +207,7 @@ try {
       }
       const editorialSections = {
         '/learn/enso-model-plumes-and-probabilities/': ['section-2'],
-        '/historical/': ['same-season-heading'],
+        '/historical/': ['same-season-heading', 'enso-frequency-heading', 'event-years-heading'],
         '/methodology/': ['ocean-atmosphere-heading', 'index-worked-example-heading'],
         '/winter-outlook/': ['november-changes-heading', 'forecast-horizon-heading', 'winter-variability-heading', 'mjo-enso-heading'],
         '/impacts/': ['current-winter-heading'],
@@ -257,10 +257,10 @@ try {
         assert.equal(await page.locator('#faq-empty').isVisible(), false);
         await page.locator('#super-el-nino summary').click();
         assert.equal(await page.locator('#super-el-nino .faq-answer').isVisible(), true);
-        assert.equal(await page.locator('.faq-num').last().textContent(), '10');
+        assert.equal(await page.locator('.faq-num').last().textContent(), '11');
         await page.screenshot({ path: fileURLToPath(new URL('faq-strength-' + width + '.png', output)), fullPage: true });
         await page.locator('#faq-search').fill('');
-        assert.equal(await page.locator('.faq-item:visible').count(), 10);
+        assert.equal(await page.locator('.faq-item:visible').count(), 11);
         await page.locator('#faq-search').fill('no-matching-question-12345');
         assert.equal(await page.locator('.faq-item:visible').count(), 0);
         assert.equal(await page.locator('#faq-empty').isVisible(), true);
@@ -268,7 +268,7 @@ try {
         await page.locator('#alerts-explained summary').click();
         assert.equal(await page.locator('#alerts-explained .faq-answer').isVisible(), true);
         await page.locator('#alerts-explained').screenshot({ path: fileURLToPath(new URL('faq-alerts-' + width + '.png', output)) });
-        for (const id of ['enso-basics', 'el-nino-vs-la-nina']) {
+        for (const id of ['enso-basics', 'el-nino-vs-la-nina', 'enso-frequency']) {
           await page.locator('#' + id + ' summary').click();
           assert.equal(await page.locator('#' + id + ' .faq-answer').isVisible(), true);
           await page.locator('#' + id).screenshot({ path: fileURLToPath(new URL('faq-' + id + '-' + width + '.png', output)) });

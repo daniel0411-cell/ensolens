@@ -1,0 +1,28 @@
+ENSO recurrence and historical-year reading — verified November 21, 2026
+
+1. NOAA National Ocean Service, What are El Nino and La Nina?
+https://oceanservice.noaa.gov/facts/ninonina.html
+Page last updated September 23, 2026. Read directly in the background browser.
+Pertinent source text: Episodes typically last nine to 12 months but can sometimes
+last for years. Events occur every two to seven years on average, but do not occur
+on a regular schedule.
+Scope: a broad ENSO recurrence description, not a phase-specific return-period
+estimate, probability of an event in any one year, or forecast of the next event.
+
+2. NOAA CPC, Relative Oceanic Nino Index historical episodes (1950–Present)
+https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+Rolling table, directly read November 21, 2026. Heading: ERSSTv6.
+RONI: three-month running mean, 1991–2020 baseline, Nino 3.4 minus tropical-mean
+anomaly (20N–20S), with variance adjustment. Historical coloring uses a +/-0.5 C
+threshold for at least five consecutive overlapping seasons. Other indices confirm
+the coupled ocean–atmosphere phenomenon. Recent values can revise for up to two
+months after posting. This record is a selected extract, not the full episode list.
+
+Year DJF JFM FMA MAM AMJ MJJ JJA JAS ASO SON OND NDJ
+1998 2.1 1.8 1.2 0.8 0.1 -0.5 -1.0 -1.1 -1.2 -1.3 -1.5 -1.6
+
+Published example selects DJF +2.1 C, AMJ +0.1 C and JJA -1.0 C in the 1998 row.
+These show a seasonal transition, not three separate episode diagnoses.
+Adjacent three-month seasons overlap by two months. Historical episode criteria
+are distinct from operational alert criteria. ONI and RONI must remain identified
+separately; this example does not rank all events or predict future recurrence.

@@ -66,6 +66,27 @@ const payload = JSON.stringify({ current: view.current, currentYear, benchmarks 
       <p class="figure-note">Source: <a href="https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/">CPC RONI table</a>; <a href="/references/worked-examples-2026-11-19.txt">preserved dated values and method</a>. Recent RONI values may revise for up to two months. See the <a href="/methodology/#index-worked-example-heading">same-season ONI/RONI worked example</a> before comparing a conventional index with this relative index.</p>
     </section>
 
+    <section class="method-section" aria-labelledby="enso-frequency-heading">
+      <span class="eyebrow">RECURRENCE AND EVENT YEARS · CHECKED NOVEMBER 21, 2026</span>
+      <h2 id="enso-frequency-heading">How often do El Niño and La Niña happen?</h2>
+      <p class="body-copy">NOAA describes El Niño and La Niña events as occurring every two to seven years on average, without a regular schedule. That broad recurrence interval differs from an episode's duration, typically nine to twelve months but sometimes years. It cannot tell you the date of the next El Niño or imply that the two phases alternate every year. For the next few seasons, use the <a href="/forecast/">dated CPC phase probabilities</a>.</p>
+      <p class="figure-note">Source: <a href="https://oceanservice.noaa.gov/facts/ninonina.html">NOAA National Ocean Service: What are El Niño and La Niña?</a>, updated September 23, 2026; checked November 21. <a href="/forecast/when-will-it-end/#double-dip-heading">Why some episodes span multiple winters</a>.</p>
+      <h3 id="event-years-heading">How to read an El Niño or La Niña years list</h3>
+      <p class="body-copy">A calendar year, a winter pair such as 1997–98, and a continuous run of seasonal values describe different time windows. A year can contain both warm and cold seasons. The weekly curves above are selected calendar-year comparisons; they are not a complete list of historical episodes.</p>
+      <div class="table-container" role="region" aria-label="1998 RONI transition example" tabindex="0"><table class="data-table seasonal-example">
+        <caption>Three selected seasons in CPC's 1998 RONI row</caption>
+        <thead><tr><th scope="col">Season label</th><th scope="col">Three-month RONI</th><th scope="col">Reading</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">DJF 1998</th><td>+2.1°C</td><td>Warm seasonal value</td></tr>
+          <tr><th scope="row">AMJ 1998</th><td>+0.1°C</td><td>Between the ±0.5°C thresholds</td></tr>
+          <tr><th scope="row">JJA 1998</th><td>−1.0°C</td><td>Cold seasonal value</td></tr>
+        </tbody>
+      </table></div>
+      <p class="body-copy">These selected values illustrate the transition within the table's 1998 row; each value alone does not define an episode. CPC colors historical episodes when the ±0.5°C threshold is met for at least five consecutive overlapping three-month seasons. Adjacent seasons share two months, so five seasons are not five independent observations or five individual months. This retrospective convention is separate from the <a href="/faq/#alerts-explained">operational Advisory criteria</a>.</p>
+      <p class="body-copy">For the full El Niño and La Niña history since 1950, use the <a href="https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/">official CPC seasonal RONI table</a> and follow the consecutive colored seasons across year boundaries. Identify the index and baseline before comparing another list: ONI and RONI can give different values and episode boundaries. A historical list is context, not a countdown to the next event.</p>
+      <p class="figure-note">Example: CPC ERSSTv6 RONI, 1991–2020 base period; checked November 21, 2026. DJF = December–February, AMJ = April–June, JJA = June–August. <a href="/references/enso-recurrence-2026-11-21.txt">Preserved source extracts and selected values</a>. See <a href="/methodology/#indices">ONI/RONI methods</a> before mixing products.</p>
+    </section>
+
     <section class="analog-profiles-section" aria-labelledby="profiles-heading">
       <div class="section-header-compact"><span class="eyebrow">DATED OBSERVATIONS</span><h2 id="profiles-heading">What each benchmark actually shows</h2><p>These are the largest warm departures or coldest departure within the calendar year shown. They are weekly observations, not seasonal ONI or RONI strength classifications.</p></div>
       <div class="analog-cards-grid">
@@ -114,7 +135,7 @@ const payload = JSON.stringify({ current: view.current, currentYear, benchmarks 
 </Layout>
 
 <style>
-  #same-season-heading { scroll-margin-top: 100px; }
+  #same-season-heading, #enso-frequency-heading, #event-years-heading { scroll-margin-top: 100px; }
   .seasonal-example { text-align: left; }
   .seasonal-example caption { padding: 14px; }
   .historical-limits p { margin-top: 16px; line-height: 1.8; color: var(--muted); }

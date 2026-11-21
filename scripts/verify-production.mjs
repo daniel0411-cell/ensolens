@@ -117,6 +117,8 @@ for (const path of paths) {
 
   }
   if (path === '/faq/') {
+    assert.match($('#enso-frequency').text(), /two to seven years/);
+    assert.equal($('#enso-frequency a[href="/historical/#enso-frequency-heading"]').length, 1);
     assert.equal($('a[href="/methodology/#ocean-atmosphere-heading"]').length, 2);
     const faq = JSON.parse($('script[type="application/ld+json"]').first().text()).mainEntity;
     assert.equal(faq['@type'], 'FAQPage');
@@ -137,6 +139,10 @@ for (const path of paths) {
   }
   if (path === '/historical/') {
     assert.equal($('#same-season-heading').length, 1);
+    assert.equal($('#enso-frequency-heading').length, 1);
+    assert.equal($('#event-years-heading').length, 1);
+    assert.match($('main').text(), /five consecutive overlapping three-month seasons/);
+    assert.match($('main').text(), /−1.0°C/);
     const analog = JSON.parse($('#analog-data').text());
     assert.ok(analog.current.every(p=>p.date.startsWith(analog.currentYear)));
     assert.ok($('main').text().includes(analog.current.at(-1).date));
@@ -237,7 +243,7 @@ for (const entry of sitemapXml('url').toArray()) {
 }
 for (const path of ['/', '/forecast/', '/forecast/when-will-it-end/', '/faq/', '/historical/', '/winter-outlook/', '/impacts/', '/impacts/california-snow-vs-rain/', '/impacts/pacific-northwest-winter/', '/forecast/enso-neutral/', '/methodology/']) {
   const entry = sitemapXml('url').filter((_, element) => sitemapXml(element).find('loc').text() === host + path);
-  const expected = ['/forecast/','/winter-outlook/','/impacts/','/impacts/california-snow-vs-rain/','/impacts/pacific-northwest-winter/'].includes(path) ? '2026-11-21' : ['/historical/','/methodology/','/impacts/california-snow-vs-rain/'].includes(path) ? '2026-11-19' : ['/impacts/','/forecast/enso-neutral/','/winter-outlook/','/forecast/','/methodology/'].includes(path) ? '2026-11-17' : ['/faq/','/historical/','/forecast/when-will-it-end/','/impacts/california-snow-vs-rain/','/impacts/pacific-northwest-winter/'].includes(path) ? '2026-11-13' : '2026-11-12';
+  const expected = ['/faq/','/historical/','/forecast/','/winter-outlook/','/impacts/','/impacts/california-snow-vs-rain/','/impacts/pacific-northwest-winter/'].includes(path) ? '2026-11-21' : ['/historical/','/methodology/','/impacts/california-snow-vs-rain/'].includes(path) ? '2026-11-19' : ['/impacts/','/forecast/enso-neutral/','/winter-outlook/','/forecast/','/methodology/'].includes(path) ? '2026-11-17' : ['/faq/','/historical/','/forecast/when-will-it-end/','/impacts/california-snow-vs-rain/','/impacts/pacific-northwest-winter/'].includes(path) ? '2026-11-13' : '2026-11-12';
   assert.equal(entry.find('lastmod').text(), expected);
 }
 const missing = await request('/missing-page-check/');

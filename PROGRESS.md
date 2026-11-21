@@ -2,6 +2,12 @@
 
 Updated: 2026-11-21 (Asia/Shanghai)
 
+## Recurrence and historical-year reading (November 21, implementation checkpoint)
+
+- Rechecked GSC: settled November 12–18 still 525 impressions/five clicks. Expanded query list shows sparse recurrence and event-year searches; these are coverage clues, not measured demand or a same-day release effect. Bing default three-month report remains zero impressions/clicks. Evidence and maintenance estimate are in SEARCH-FOLLOWUP-2026-11-21.md.
+- Added recurrence, historical episode-list reading and a preserved 1998 RONI transition example to historical, plus one matching FAQ answer. Browser-verified NOAA source extracts are in public/references/enso-recurrence-2026-11-21.txt. Only these two sitemap dates advanced; runtime, live forecasts and November 17 snippet experiments remain unchanged.
+- Independent interpretation review found no actionable issues against the saved source record; the reviewer did not repeat browser research or layout checks. git diff --check passed. Full release gate is running; this checkpoint does not establish deployment or production verification.
+
 ## RONI forecast-range release (November 21)
 
 - Added a preserved November CPC DJF 2026–27 percentile example to forecast: median and central 50/70/90% intervals, tails and limits. Expanded the model-plume guide to distinguish collection extremes from official intervals and conventional SST from RONI. Saved the browser-verified source extract in public/references/roni-ranges-november-2026.txt; only these two pages' sitemap dates changed. No new live feed, title experiment or runtime change.

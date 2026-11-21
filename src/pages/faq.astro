@@ -46,6 +46,13 @@ const faqs = [
     answer: '“Super El Niño” is a shorthand for an unusually intense event, not a separate category in CPC\'s strength-probability product. That product uses weak, moderate, strong and very strong categories based on three-month RONI, with very strong starting at +2.0°C. A weekly Niño 3.4 anomaly above +3°C cannot be substituted for seasonal RONI or establish a historical record on its own. Check the index, averaging period and baseline behind any strength claim. Stronger ENSO does not guarantee more severe weather at a particular location.'
   },
   {
+    id: 'enso-frequency',
+    category: 'fundamentals',
+    categoryLabel: 'Fundamentals',
+    question: 'How often do El Niño and La Niña occur?',
+    answer: 'NOAA describes El Niño and La Niña events as occurring every two to seven years on average, without a regular schedule. This recurrence interval differs from an episode’s duration, typically nine to twelve months but sometimes years. It does not mean the phases alternate annually or that an event is due after a fixed countdown. A calendar year can contain both warm and cold seasons, so a years list needs a named index and seasonal episode definition. Use dated CPC probabilities for the coming seasons rather than extrapolating a calendar cycle.'
+  },
+  {
     id: 'event-duration',
     category: 'fundamentals',
     categoryLabel: 'Fundamentals',
@@ -76,6 +83,7 @@ const faqs = [
 ];
 
 const answerSources: Record<string, {href:string; label:string; note:string}[]> = {
+  'enso-frequency': [{href:'https://oceanservice.noaa.gov/facts/ninonina.html',label:'NOAA: ENSO recurrence and duration',note:'Updated September 23, 2026; checked November 21, 2026.'},{href:'/historical/#enso-frequency-heading',label:'Recurrence and reading event-year lists',note:'Includes a dated 1998 seasonal RONI transition example.'}],
   'event-duration': [{href:'https://oceanservice.noaa.gov/facts/ninonina.html',label:'NOAA: ENSO duration',note:'Updated September 23, 2026; checked November 13.'},{href:'/forecast/when-will-it-end/#double-dip-heading',label:'Multi-winter episodes and neutral intervals',note:'With dated NOAA mechanism source.'}],
   'local-weather-guarantee': [{href:'https://www.weather.gov/mhx/ensowhat',label:'NWS: typical ENSO winter patterns',note:'Undated background; checked November 12, 2026.'},{href:'/winter-outlook/',label:'Dated U.S. seasonal outlook and forecast horizons',note:'Regional probabilities and local forecast routing.'}],
   'hurricane-impact': [{href:'https://www.climate.gov/news-features/blogs/enso/impacts-el-nino-and-la-nina-hurricane-season',label:'NOAA: ENSO and hurricane-season mechanisms',note:'May 30, 2014; archived background, checked November 13, 2026. Its 2014 outlook is not current guidance.'},{href:'https://www.nhc.noaa.gov/',label:'NHC current advisories',note:'For individual storms.'}],

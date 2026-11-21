@@ -2,11 +2,13 @@
 
 Updated: 2026-11-21 (Asia/Shanghai)
 
-## Recurrence and historical-year reading (November 21, implementation checkpoint)
+## Recurrence and historical-year reading release (November 21)
 
 - Rechecked GSC: settled November 12–18 still 525 impressions/five clicks. Expanded query list shows sparse recurrence and event-year searches; these are coverage clues, not measured demand or a same-day release effect. Bing default three-month report remains zero impressions/clicks. Evidence and maintenance estimate are in SEARCH-FOLLOWUP-2026-11-21.md.
 - Added recurrence, historical episode-list reading and a preserved 1998 RONI transition example to historical, plus one matching FAQ answer. Browser-verified NOAA source extracts are in public/references/enso-recurrence-2026-11-21.txt. Only these two sitemap dates advanced; runtime, live forecasts and November 17 snippet experiments remain unchanged.
-- Independent interpretation review found no actionable issues against the saved source record; the reviewer did not repeat browser research or layout checks. git diff --check passed. Full release gate is running; this checkpoint does not establish deployment or production verification.
+- Independent interpretation review found no actionable issues against the saved source record; the reviewer did not repeat browser research or layout checks. Full release gate passed: types (67 files, zero errors/warnings, two existing hints), 24 tests, build, real Worker NOAA refresh/KV/RSS, desktop/mobile browser suites and retained-data failure path. Inspected desktop event-year table and mobile table/FAQ screenshots. Live 1440px/390px focused checks verified the recurrence heading clears the header and FAQ hash opens the new answer; inspected the live mobile screenshot.
+- Application commit 5529d3a pushed to GitHub master. Cloudflare version e7891cbf-e622-4fa3-9110-c6adcbd7b657, deployment 2a381add-23b2-474a-8d8c-eaf40e51b32c, created November 21 at 14:27:05 Asia/Shanghai, serves 100% traffic. IDs and traffic confirmed from Wrangler output; domains and six-hour schedule retained.
+- Postdeployment verification with indexing expected passed all 25 routes, new historical/FAQ content, visible/schema consistency, sitemap dates, RSS, source health, canonical/indexing, redirects/404 and read-only correction endpoint. No search gain inferred. This documentation checkpoint does not redeploy the application.
 
 ## RONI forecast-range release (November 21)
 

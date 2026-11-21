@@ -1,6 +1,13 @@
 # ENSOLens Delivery Status
 
-Updated: 2026-11-19 (Asia/Shanghai)
+Updated: 2026-11-21 (Asia/Shanghai)
+
+## Search and current-source audit (November 21, no application release)
+
+- Read signed-in ENSOLens GSC/Bing reports in Chrome. GSC settled November 12–18: 525 impressions/five clicks versus 55/one in November 5–11; 28-day report October 22–November 18: 664/nine. Provisional 24-hour November 20–21: 102/one. Visibility increased from a small base; no specific release causality or stable CTR gain claimed.
+- Bing sitemap now Success with 25 discovered URLs and no errors/warnings. Homepage inspection shows indexed; forecast and impacts show discovered November 17 but not yet crawled. Zero search impressions/clicks persist in the selected seven-day report. No indexing requests or configuration changes were made.
+- Verified CPC seasonal discussion issued November 19 for DJF 2026–27, two November 19 NIDIS articles, and the production winter page still preserving October 15. Prioritized matching November maps/text, regional routing and a scoped drought-recharge example in SEARCH-CONTENT-AUDIT-2026-11-21.md. New map images and the underlying journal study still require direct verification before reuse.
+- Documentation/research only: no application edits, application tests, independent review or deployment. Production release remains the November 19 version recorded below.
 
 ## Worked examples release (November 19)
 

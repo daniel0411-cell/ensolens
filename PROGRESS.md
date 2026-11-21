@@ -2,10 +2,12 @@
 
 Updated: 2026-11-21 (Asia/Shanghai)
 
-## RONI forecast-range update (November 21, implementation checkpoint)
+## RONI forecast-range release (November 21)
 
 - Added a preserved November CPC DJF 2026–27 percentile example to forecast: median and central 50/70/90% intervals, tails and limits. Expanded the model-plume guide to distinguish collection extremes from official intervals and conventional SST from RONI. Saved the browser-verified source extract in public/references/roni-ranges-november-2026.txt; only these two pages' sitemap dates changed. No new live feed, title experiment or runtime change.
-- Independent interpretation review checked numbers and citation mapping against the saved extract, without repeating primary-source browser research. Corrected its median/mean wording finding. Type check passed (67 files, zero errors/warnings, two existing hints). Full release gate and production verification pending at this checkpoint.
+- Independent interpretation review checked numbers and citation mapping against the saved extract, without repeating primary-source browser research. Corrected its median/mean wording finding. Full release gate passed: types (67 files, zero errors/warnings, two existing hints), 24 unit tests, build, real Worker NOAA refresh/KV/RSS, 1440px/390px browser suites and retained-data failure path. Inspected desktop/mobile range sections and mobile plume content. An element screenshot included fixed-header capture artifacts; fresh live viewport screenshots verified both new anchors clear the header at about 100px. The supplemental screenshot command initially selected an unavailable bundled Chromium; reran successfully using the project’s installed Chrome channel without installing dependencies.
+- Application commit de1d016 pushed to GitHub master. Cloudflare version 9018a4d9-3613-4c48-8f63-134b2a14da27, deployment 5fdd29a7-4091-4d04-8a25-70114de347ac, created November 21 at 14:08:36 Asia/Shanghai, serves 100% traffic. IDs and traffic confirmed from Wrangler output. Custom domains and six-hour schedule retained.
+- Postdeployment verification with indexing expected passed all 25 routes, interval numbers, source record, guide dates/citations, RSS, sitemap/robots, canonical redirects/404, source health and read-only correction endpoint. No new search-console measurements or search gain claimed. This documentation checkpoint does not redeploy the application.
 
 ## November winter outlook release (November 21)
 

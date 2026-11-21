@@ -2,11 +2,13 @@
 
 Updated: 2026-11-21 (Asia/Shanghai)
 
-## November winter outlook implementation (November 21, release pending)
+## November winter outlook release (November 21)
 
 - Updated five existing pages: winter outlook, impacts index, California snow/rain, Northwest winter and drought recovery. Archived and visually verified November 19 DJF maps, dates/legends and 3300×2550 dimensions; preserved October assets. Source URLs, scope and hashes are in public/references/winter-update-2026-11-21.txt.
 - Explained same-target precipitation revisions and Northwest subregional differences; added attributed, bounded NIDIS Illinois soil-recharge and Southeast winter examples. Preserved November 17 search title/description tests on impacts and neutral. Advanced only five meaningful sitemap dates.
-- Independent interpretation review checked the final content against the saved research audit and source record. A section-source mapping issue was corrected; final review found no remaining actionable findings. The reviewer did not repeat browser source research. Release checks/deployment remain pending at this checkpoint.
+- Independent interpretation review checked the final content against the saved research audit and source record. A section-source mapping issue was corrected; final review found no remaining actionable findings. The reviewer did not repeat browser source research. Full release gate passed: 67-file type check (zero errors/warnings, two pre-existing hints), 24 unit tests, build, real local Worker NOAA refresh/KV/RSS, 1440px/390px browser suites and retained-data failure path. Inspected the new winter, California, Northwest and drought mobile sections plus desktop drought content.
+- Implementation commit 75fd710 pushed to GitHub master. Cloudflare version b0074335-e765-4764-9b9c-a08b5c3b2a8c, deployment 45a7750c-7bfc-4a9d-8213-d805aae3e8c3, created November 21 at 11:13:18 Asia/Shanghai, serves 100% traffic. IDs confirmed from actual Wrangler output; both custom domains and six-hour schedule retained.
+- Postdeployment verification with indexing expected passed all 25 routes, new sections, archived maps/source record, guide metadata/citations, RSS, canonical/indexing, sitemap/robots, redirects/404, source health and read-only correction endpoint. The first sandboxed deploy attempt stopped before upload because local port binding was prohibited; the authorized full gate reran successfully with required access. Search inclusion and traffic effects remain unmeasured. This following documentation checkpoint does not redeploy the application.
 
 ## Search and current-source audit (November 21, no application release)
 

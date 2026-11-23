@@ -2,10 +2,13 @@
 
 Updated: 2026-11-23 (Asia/Shanghai)
 
-## Twelve reading improvements (November 23, local checkpoint)
+## Twelve reading improvements release (November 23)
 
 - Implemented12 explanatory additions across8 existing pages: winter tercile arithmetic, joint probabilities and lead labels; IRI portal migration and phase-versus-strength methods; mean/median exercise; overlapping Niño boxes; Kelvin time–longitude reading; D0 and weekly cutoff; station aggregation and early-season SWE deficits. Source observations and dates preserved in public/references/reading-examples-2026-11-23.txt; scope and maintenance estimate in CONTENT-UPDATE-2026-11-23.md. No new live feed, title experiment or current snow/wave claim. Only eight substantive sitemap dates changed.
-- Independent interpretation review found no actionable arithmetic, scientific or source-mapping defects against the saved extracts and code diff. Reviewer did not repeat external browser research or rendered-layout checks. Types,24 tests and build passed. Release/browser and production verification remain pending at this local checkpoint.
+- Independent interpretation review found no actionable arithmetic, scientific or source-mapping defects against the saved extracts and code diff. Reviewer did not repeat external browser research or rendered-layout checks. Full release gate passed: types (68 files, zero errors/warnings, two existing hints), 24 tests, build, real Worker NOAA refresh/KV/RSS, 1440px/390px Chrome suites and retained-data failure path. Inspected desktop probability/IRI and mobile probability/IRI/California/Northwest sections.
+
+- Application commit d08f1af pushed to GitHub master. Cloudflare version 3ac2c221-981e-4f40-ace5-ef536333d703, deployment 192dfe9f-41ba-43c4-80d8-15425ba6ab64, created November 23 at 22:34:03 Asia/Shanghai, serves 100% traffic. IDs/traffic verified from actual Wrangler output; custom domains and six-hour schedule retained.
+- Postdeployment verification with indexing expected passed all 25 routes, guide section counts/metadata/citations, new reading anchors/source record, sitemap, RSS, source health, redirects/404 and read-only correction endpoint. The initial HTTP run briefly received the old six-section drought page; a later canonical request returned eight sections and the complete unmodified verifier reran successfully. Focused live 1440px/390px Chrome checks passed all eight pages and 12 content anchors, with no overflow; inspected live mobile IRI portal guidance. No current GSC/Bing measurements or traffic gain claimed. This following documentation checkpoint does not redeploy the application.
 
 ## Explanatory visuals release (November 21)
 
@@ -159,7 +162,7 @@ Updated: 2026-11-23 (Asia/Shanghai)
 
 - Code `77bb60f` pushed to `origin/master`; remote SHA verified. Full `npm run deploy` gate passed types, all16 tests, build, real NOAA refresh/KV persistence, RSS and both browser widths before upload.
 - Released version `9bfe7996-3c93-4a75-9fba-025a1e7fc1f8`, deployment `1f9403f7-01b6-4d2e-abcd-7d9038ef4c36`, activated November13 at 11:52:33 Asia/Shanghai with100% traffic, confirmed by actual Wrangler output. Both custom domains, six-hour schedule, indexing enabled and contact disabled retained.
-- Post-release production verification passed all25 routes, November editorial/table assertions, source links, sitemap dates, metadata/indexing permission, RSS, assets, source health and redirects. Source dates: discussion November12, next December10, weekly November4, RONI October31 and forecast November. Fresh live 1440px/390px browser suites passed; new update/strength screenshots inspected at both widths, including mobile anchor clearance and horizontal table interaction. Actual search inclusion and traffic effects unmeasured.
+- Post-release production verification passed all 25 routes, November editorial/table assertions, source links, sitemap dates, metadata/indexing permission, RSS, assets, source health and redirects. Source dates: discussion November12, next December10, weekly November4, RONI October31 and forecast November. Fresh live 1440px/390px browser suites passed; new update/strength screenshots inspected at both widths, including mobile anchor clearance and horizontal table interaction. Actual search inclusion and traffic effects unmeasured.
 
 ## Ten-guide ENSO learning library (November 12)
 

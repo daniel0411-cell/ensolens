@@ -188,7 +188,7 @@ try {
       if (path.startsWith('/learn/')) {
         assert.equal(await page.locator('h1').count(), 1);
         if (path !== '/learn/') {
-          assert.equal(await page.locator('.guide-section').count(), path === '/learn/el-nino-and-drought-recovery/' ? 6 : 4);
+          assert.equal(await page.locator('.guide-section').count(), ({ '/learn/el-nino-and-drought-recovery/': 8, '/learn/enso-model-plumes-and-probabilities/': 6, '/learn/kelvin-waves-and-enso/': 5, '/learn/nino-regions-explained/': 5, '/learn/climate-normals-and-anomalies/': 5 }[path] ?? 4));
           assert.equal(await page.locator('.teaching-figure').count(),1);
           if(width===390) for(const region of await page.locator('.teaching-figure .diagram-scroll, .teaching-figure .teaching-table').all()) {
             if (await region.evaluate(el=>el.scrollWidth>el.clientWidth+1)) {
@@ -212,14 +212,17 @@ try {
         await page.screenshot({ path: fileURLToPath(new URL(path.slice(1).replaceAll('/', '-') + width + '.png', output)), fullPage: true });
       }
       const editorialSections = {
-        '/learn/enso-model-plumes-and-probabilities/': ['section-2'],
+        '/learn/enso-model-plumes-and-probabilities/': ['section-2', 'section-5', 'section-6'],
         '/historical/': ['season-visual', 'same-season-heading', 'enso-frequency-heading', 'event-years-heading'],
         '/methodology/': ['ocean-atmosphere-heading', 'index-worked-example-heading'],
-        '/winter-outlook/': ['november-changes-heading', 'forecast-horizon-heading', 'winter-variability-heading', 'mjo-enso-heading'],
+        '/winter-outlook/': ['probability-examples-heading', 'seasonal-lead-example', 'november-changes-heading', 'forecast-horizon-heading', 'winter-variability-heading', 'mjo-enso-heading'],
         '/impacts/': ['current-winter-heading'],
-        '/learn/el-nino-and-drought-recovery/': ['section-4', 'section-5'],
-        '/impacts/california-snow-vs-rain/': ['snow-water-visual', 'california-outlook-heading', 'swe-percent-heading', 'atmospheric-river-heading', 'swe-worked-example-heading'],
-        '/impacts/pacific-northwest-winter/': ['northwest-outlook-heading', 'snow-drought-heading'],
+        '/learn/el-nino-and-drought-recovery/': ['section-4', 'section-5', 'section-7', 'section-8'],
+        '/learn/kelvin-waves-and-enso/': ['section-5'],
+        '/learn/nino-regions-explained/': ['section-5'],
+        '/learn/climate-normals-and-anomalies/': ['section-5'],
+        '/impacts/california-snow-vs-rain/': ['station-basin-heading', 'snow-water-visual', 'california-outlook-heading', 'swe-percent-heading', 'atmospheric-river-heading', 'swe-worked-example-heading'],
+        '/impacts/pacific-northwest-winter/': ['early-swe-heading', 'northwest-outlook-heading', 'snow-drought-heading'],
       };
       if (path === '/impacts/california-snow-vs-rain/') {
         const waterWidths = await page.locator('#snow-water-visual .swe-water').evaluateAll(elements => elements.map(el => el.getBoundingClientRect().width));

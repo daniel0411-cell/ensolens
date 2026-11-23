@@ -1,0 +1,72 @@
+ENSOLens source-reading examples — checked November 23, 2026
+
+Scope: explanatory additions to eight existing pages, not a new live feed.
+This record preserves facts observed through the background in-app browser.
+All invented arithmetic examples in the articles are ENSOLens teaching exercises,
+not NOAA, USDA or IRI forecasts or current station observations.
+
+1. CPC seasonal index
+https://www.cpc.ncep.noaa.gov/products/predictions/long_range/
+November index displayed 0.5 Month Outlook for Dec-Jan-Feb 2026–27;
+1.5 Month for Jan-Feb-Mar 2027; 2.5 Month for Feb-Mar-Apr 2027.
+These are lead labels for three-month targets, not forecast durations.
+CPC official forecast legend (undated; inspected visually):
+https://www.cpc.ncep.noaa.gov/products/predictions/multi_season/13_seasonal_outlooks/color/shortlegend.gif
+Above 40–50%, near 33.3%, below 26.7–16.7%; at the lower boundary,
+approximately 40/33.3/26.7. Higher bins do not keep the middle at 33.3%.
+This regional tercile legend does not define ENSO phase probabilities.
+Own math: marginal warm/wet probabilities of 50% each allow intersection
+0–50%; 25% requires independence. Not current CPC regional odds.
+
+2. CCSR/IRI portal migration and different chart methods
+https://iri.columbia.edu/our-expertise/climate/forecasts/enso/current/
+Displayed October 2026 Quick Look, published October 19, 2026; announced new site.
+https://forecast.ccsr.columbia.edu/forecasts/enso/forecast
+Displayed November 2026, 26 models (15 dynamical, 11 statistical).
+Exact publication day not established. Do not label scheduled day as actual issue.
+https://forecast.ccsr.columbia.edu/forecasts/enso/methodology
+Undated; checked November 23, 2026.
+Nine overlapping three-month seasons; first begins in issue month. Conventional
+Niño 3.4 plume plus separate limited-model RONI plume. Available models equally
+weighted for each season. Phase probabilities: normal distribution centered on
+multi-model mean; width uses historical correlation skill and observed seasonal
+variability (sigma_obs * sqrt(1-r^2)); rounded whole-percent totals adjusted to100.
+Strength consensus: percentage of available models in nine Niño 3.4 ranges;
+explicitly "not a calibrated probability", not adjusted for past skill.
+Very strong El Niño threshold 2.0°C in this conventional Niño 3.4 strength chart.
+Do not substitute this for CPC RONI strength criteria or official phase odds.
+Own example 15/20=75% is model agreement only; no current forecast copied.
+
+3. U.S. Drought Monitor
+https://droughtmonitor.unl.edu/About/WhatistheUSDM.aspx
+Undated explanation. D1–D4 are drought; D0 abnormally dry can precede or follow
+drought. Convergence of evidence includes precipitation, streamflow, reservoirs,
+soil, vegetation, demand and local expertise. Snapshot, not a forecast.
+Thursday release uses previous Tuesday morning cutoff; Wednesday precipitation
+is incorporated in the following assessment, not that Thursday's final map.
+https://droughtmonitor.unl.edu/
+Displayed release November 19, 2026; valid November 17, 2026. Example used solely
+for date interpretation, with no current regional recovery claim.
+
+4. Kelvin-wave mechanism
+https://oceanservice.noaa.gov/facts/kelvin-waves.html
+Displayed updated October 15, 2026; rechecked November 23.
+Equatorial wave propagation west to east; roughly 2–3 months across Pacific.
+Thermocline and sea-height information complement surface observations.
+Own time–longitude exercise: 170W then150W then130W; no dated measured feature,
+no new wave identification, no inferred wave speed or forecast strengthening.
+
+5. Previously verified definitions reused, not claimed newly checked
+https://psl.noaa.gov/enso/data.html
+See existing guide source check: Niño boxes overlap. In particular Niño3 and
+Niño3.4 intersect 150W–120W within5N–5S. Their equal average is not a basin index.
+https://www.ncei.noaa.gov/products/land-based-station/us-climate-normals
+Existing normal definitions. Own invented five-value series0,1,2,3,14 has mean4,
+median2. Two units=100%median or50%mean; not an official climatology.
+https://www.drought.gov/topics/snow-drought
+https://wcc.sc.egov.usda.gov/reports/format_html.html
+See November19 and November12 source records for SWE references.
+Own two-station example1/2=50%,15/10=150%; unweighted percentage mean100%,
+ratio of summed station amounts16/12≈133%. Neither is an official basin method.
+Own early-season example1/2vs10/20: same50%, shortfall1vs10 inches SWE.
+No current snowpack data or new agency aggregation rule inferred.

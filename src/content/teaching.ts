@@ -16,14 +16,14 @@ export const teaching: Record<string, Teaching> = {
 // Sources are numbered in each guide’s own source list. These links support the
 // section’s principal scientific claims; examples are separately identified.
 export const sectionEvidence: Record<string, number[][]> = {
- 'kelvin-waves-and-enso':[[0],[0],[0],[0]],
+ 'kelvin-waves-and-enso':[[0],[0],[0],[0],[0]],
  'soi-vs-ocean-indices':[[0,1],[0,1],[0],[0,1]],
- 'nino-regions-explained':[[0],[1],[0],[0,1]],
+ 'nino-regions-explained':[[0],[1],[0],[0,1],[0]],
  'enso-and-climate-change':[[0,2],[1,2],[0,2],[0,1]],
  'marine-heatwaves-vs-el-nino':[[0,1],[0],[0],[0]],
- 'el-nino-and-drought-recovery':[[1],[0],[0,1],[2],[3,4],[0]],
+ 'el-nino-and-drought-recovery':[[1],[0],[0,1],[2],[3,4],[0],[5],[5,6]],
  'enso-jet-stream-teleconnections':[[1],[0],[0],[0]],
- 'enso-model-plumes-and-probabilities':[[0],[0,1],[0],[0]],
- 'climate-normals-and-anomalies':[[0],[0,1],[0,1],[0,1]],
+ 'enso-model-plumes-and-probabilities':[[3],[3,1],[3,1],[3],[0,2,3],[3,1]],
+ 'climate-normals-and-anomalies':[[0],[0,1],[0,1],[0,1],[0]],
  'how-enso-is-observed':[[0],[1],[0],[1]]
 };

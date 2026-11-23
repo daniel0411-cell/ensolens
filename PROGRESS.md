@@ -1,6 +1,11 @@
 # ENSOLens Delivery Status
 
-Updated: 2026-11-21 (Asia/Shanghai)
+Updated: 2026-11-23 (Asia/Shanghai)
+
+## Twelve reading improvements (November 23, local checkpoint)
+
+- Implemented12 explanatory additions across8 existing pages: winter tercile arithmetic, joint probabilities and lead labels; IRI portal migration and phase-versus-strength methods; mean/median exercise; overlapping Niño boxes; Kelvin time–longitude reading; D0 and weekly cutoff; station aggregation and early-season SWE deficits. Source observations and dates preserved in public/references/reading-examples-2026-11-23.txt; scope and maintenance estimate in CONTENT-UPDATE-2026-11-23.md. No new live feed, title experiment or current snow/wave claim. Only eight substantive sitemap dates changed.
+- Independent interpretation review found no actionable arithmetic, scientific or source-mapping defects against the saved extracts and code diff. Reviewer did not repeat external browser research or rendered-layout checks. Types,24 tests and build passed. Release/browser and production verification remain pending at this local checkpoint.
 
 ## Explanatory visuals release (November 21)
 

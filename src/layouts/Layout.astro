@@ -56,11 +56,22 @@ const links = [
     <script>
       const toggle = document.querySelector<HTMLButtonElement>('.mobile-menu');
       const menu = document.querySelector<HTMLElement>('#mobile-navigation');
+      const setExpanded = (expanded: boolean) => {
+        toggle?.setAttribute('aria-expanded', String(expanded));
+        toggle?.setAttribute('aria-label', expanded ? 'Close navigation' : 'Open navigation');
+        if (menu) menu.hidden = !expanded;
+      };
       toggle?.addEventListener('click', () => {
-        const expanded = toggle.getAttribute('aria-expanded') === 'true';
-        toggle.setAttribute('aria-expanded', String(!expanded));
-        toggle.setAttribute('aria-label', expanded ? 'Open navigation' : 'Close navigation');
-        if (menu) menu.hidden = expanded;
+        setExpanded(toggle.getAttribute('aria-expanded') !== 'true');
+      });
+      document.addEventListener('keydown', event => {
+        if (event.key === 'Escape' && toggle?.getAttribute('aria-expanded') === 'true') {
+          setExpanded(false);
+          toggle.focus();
+        }
+      });
+      window.matchMedia('(min-width: 801px)').addEventListener('change', event => {
+        if (event.matches) setExpanded(false);
       });
     </script>
   </body>

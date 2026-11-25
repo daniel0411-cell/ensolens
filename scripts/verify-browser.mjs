@@ -4,6 +4,7 @@ import { chromium } from 'playwright';
 import { spawn, execFile } from 'node:child_process';
 import { createServer } from 'node:net';
 import { fileURLToPath } from 'node:url';
+import { verifySharedUI } from './verify-shared-ui.mjs';
 
 let base = process.env.ENSOLENS_TEST_URL;
 let server;
@@ -47,6 +48,7 @@ try {
   assert.deepEqual(rssCheck, { errors: 0, items: 5, buildDates: 0 });
   await rssPage.close();
   console.log('PASS RSS: real XML parsing, response headers and item count');
+  await verifySharedUI(browser, base, output);
   for (const width of [1440, 390]) {
     const context = await browser.newContext({ viewport: { width, height: 1000 }, deviceScaleFactor: 1, acceptDownloads: true, reducedMotion: 'reduce' });
     const page = await context.newPage();

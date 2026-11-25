@@ -2,6 +2,16 @@
 
 Updated: 2026-11-25 (Asia/Shanghai)
 
+## Shared component accessibility and mobile refinements (November 25)
+
+- Based on current remote master `742154b`, preserving all newer published guides and source records. Work performed in an isolated checkout; the older local checkout and its pending social-share changes remain untouched.
+- Added a visible focus ring to the forecast comparison switch, enlarged mobile control hit areas, and increased key source/date/baseline/footer text sizes while retaining the existing visual identity.
+- Removed nested map-dialog padding and its redundant expand control, increased usable image area, and added a link to the same versioned figure at original size. Native dialog Escape and focus restoration remain.
+- Added a server-rendered trend table, with separate weekly center-week and seasonal period-end labels and exact source values. It follows 6M/12M filters, remains accessible without JavaScript, and does not introduce a new feed or interpolate unlike series.
+- Methodology anchors now clear the sticky header. Mobile navigation marks the current page and closes with Escape, returning focus; tablet widths use the mobile navigation when needed.
+- Added behavioral checks at 320/390/768/1440px for map enlargement, touch targets, focus, navigation, anchor clearance and every trend-table value/range, plus a no-JavaScript check. Existing 24 tests, build and the full preview browser suite passed, including source refresh/KV and failure retention. Independent code review found no actionable issues; rendered verification was performed by the implementation task, not the reviewer.
+- Release gate and deployment pending. No historic prototype output or unrelated social-share work is part of this release.
+
 ## November forecast comparison release (November 25)
 
 - Updated two existing pages with a dated GFDL experimental SPEAR example: peak versus phase transition, November 16 publication versus November 1 initialization and October 31, 2027 horizon, member versus model counts, ensemble mean and relative-warmth interpretation. Compared the named November 12 CPC discussion without replacing live CPC probabilities. Verified primary sources in the background browser; record in public/references/forecast-reading-2026-11-25.txt and scope/maintenance in CONTENT-UPDATE-2026-11-25.md. Only two substantive sitemap dates advance.

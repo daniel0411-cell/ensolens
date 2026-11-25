@@ -66,6 +66,13 @@ export function initCharts() {
       const months = Number(button.dataset.range);
       line.data = makeData(months);
       line.update();
+      const cutoff = new Date(latest);
+      cutoff.setUTCMonth(cutoff.getUTCMonth() - months);
+      document.querySelectorAll<HTMLTableRowElement>('[data-trend-date]').forEach(row => {
+        row.hidden = stamp(row.dataset.trendDate!) < +cutoff;
+      });
+      const tableRange = document.querySelector('#trend-table-range');
+      if (tableRange) tableRange.textContent = months + ' months';
       document.querySelectorAll('[data-range]').forEach(other => { other.classList.toggle('selected', other === button); other.setAttribute('aria-pressed', String(other === button)); });
       document.querySelector('#trend-live')!.textContent = 'Showing ' + months + ' months of official observations.';
     }));

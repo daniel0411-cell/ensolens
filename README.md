@@ -1,5 +1,7 @@
 # ENSOLens
 
+November 25 shared-UI release: keyboard-visible forecast comparison, an enlarged mobile map, readable source/date text and mobile controls, a server-rendered trend table following 6M/12M, methodology anchor clearance and current-page/Escape mobile navigation. Application commit `2f1dd31` is deployed as Cloudflare version `de03ccc6-dc0a-416e-bb38-73f760dc5945` with 100% traffic (16:20 Asia/Shanghai). Full release gate, 24 unit tests, four-viewport UI checks and all 25 production-route checks passed. Built from current remote master in isolation to preserve newer content and unrelated pending local changes; see PROGRESS.md for deployment ID and verification limits.
+
 November 25 release: two existing guides now explain the dated GFDL SPEAR/CPC peak-timing comparison and distinguish 30 ensemble members from independent models. Application commit 239351b is deployed as Cloudflare version 75be7b86-743b-4c9e-b2a6-43f0614ed29b (100% traffic, 14:25 Asia/Shanghai). Independent interpretation review, full release gate and all 25 production-route checks passed; desktop/mobile sections verified. Source record: public/references/forecast-reading-2026-11-25.txt. See PROGRESS.md for deployment ID and review limits.
 
 An independent English-language ENSO dashboard built with Astro, Chart.js, and Cloudflare Workers. Production: https://ensolens.com/

@@ -2,10 +2,13 @@
 
 Updated: 2026-11-25 (Asia/Shanghai)
 
-## November forecast comparison (November 25, implementation checkpoint)
+## November forecast comparison release (November 25)
 
 - Updated two existing pages with a dated GFDL experimental SPEAR example: peak versus phase transition, November 16 publication versus November 1 initialization and October 31, 2027 horizon, member versus model counts, ensemble mean and relative-warmth interpretation. Compared the named November 12 CPC discussion without replacing live CPC probabilities. Verified primary sources in the background browser; record in public/references/forecast-reading-2026-11-25.txt and scope/maintenance in CONTENT-UPDATE-2026-11-25.md. Only two substantive sitemap dates advance.
-- Independent interpretation/code review checked changes against the preserved source extract. Corrected the new section’s source mapping to cite both GFDL and IRI for their different counts. Reviewer did not repeat browser research or rendered-layout checks. Type check passed (68 files, zero errors/warnings, two existing hints). Release and production verification pending; no new deployment or traffic result claimed at this checkpoint.
+- Independent interpretation/code review checked changes against the preserved source extract. Corrected the new section’s source mapping to cite both GFDL and IRI for their different counts. Reviewer did not repeat browser research or rendered-layout checks. Type check passed (68 files, zero errors/warnings, two existing hints). Full release gate passed: type check, 24 tests, build, real local Worker NOAA refresh/KV/RSS, 1440px/390px Chrome suites and retained-data failure path. Inspected both new sections on desktop and mobile before upload.
+
+- Application commit 239351b pushed to GitHub master. Cloudflare version 75be7b86-743b-4c9e-b2a6-43f0614ed29b, deployment 1b7a1007-a7b5-4e73-bf66-8b86778c5249, created November 25 at 14:25:53 Asia/Shanghai, serves 100% traffic. IDs and traffic verified from Wrangler output; both custom domains and six-hour schedule retained.
+- Postdeployment verification with indexing expected passed all 25 routes, new source record, guide section/source/schema dates, two sitemap dates, RSS, health, redirects/404 and read-only correction endpoint. Focused live Chrome checks passed both new anchors at 1440px/390px with header clearance, source links and no page overflow; inspected live mobile lifecycle screenshot. No new GSC/Bing measurements or search gain claimed. Following documentation checkpoint does not redeploy the application.
 
 ## Twelve reading improvements release (November 23)
 

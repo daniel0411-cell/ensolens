@@ -188,7 +188,7 @@ try {
       if (path.startsWith('/learn/')) {
         assert.equal(await page.locator('h1').count(), 1);
         if (path !== '/learn/') {
-          assert.equal(await page.locator('.guide-section').count(), ({ '/learn/el-nino-and-drought-recovery/': 8, '/learn/enso-model-plumes-and-probabilities/': 6, '/learn/kelvin-waves-and-enso/': 5, '/learn/nino-regions-explained/': 5, '/learn/climate-normals-and-anomalies/': 5 }[path] ?? 4));
+          assert.equal(await page.locator('.guide-section').count(), ({ '/learn/el-nino-and-drought-recovery/': 8, '/learn/enso-model-plumes-and-probabilities/': 7, '/learn/kelvin-waves-and-enso/': 5, '/learn/nino-regions-explained/': 5, '/learn/climate-normals-and-anomalies/': 5 }[path] ?? 4));
           assert.equal(await page.locator('.teaching-figure').count(),1);
           if(width===390) for(const region of await page.locator('.teaching-figure .diagram-scroll, .teaching-figure .teaching-table').all()) {
             if (await region.evaluate(el=>el.scrollWidth>el.clientWidth+1)) {
@@ -212,7 +212,8 @@ try {
         await page.screenshot({ path: fileURLToPath(new URL(path.slice(1).replaceAll('/', '-') + width + '.png', output)), fullPage: true });
       }
       const editorialSections = {
-        '/learn/enso-model-plumes-and-probabilities/': ['section-2', 'section-5', 'section-6'],
+        '/forecast/when-will-it-end/': ['model-timing-heading'],
+        '/learn/enso-model-plumes-and-probabilities/': ['section-2', 'section-5', 'section-6', 'section-7'],
         '/historical/': ['season-visual', 'same-season-heading', 'enso-frequency-heading', 'event-years-heading'],
         '/methodology/': ['ocean-atmosphere-heading', 'index-worked-example-heading'],
         '/winter-outlook/': ['probability-examples-heading', 'seasonal-lead-example', 'november-changes-heading', 'forecast-horizon-heading', 'winter-variability-heading', 'mjo-enso-heading'],

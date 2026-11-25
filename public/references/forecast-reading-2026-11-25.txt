@@ -1,0 +1,17 @@
+ENSOLens dated forecast-reading source record
+Checked November 25, 2026 via background in-app browser. Source statements below are scoped summaries, not a reproduced forecast feed.
+
+1. NOAA GFDL, Nathaniel Johnson, November 2026 El Niño Predictions
+https://www.gfdl.noaa.gov/prediction/november-2026-el-nino-predictions/
+Published November 16, 2026. Experimental SPEAR prediction system.
+Article describes event at or quickly approaching peak; El Niño through winter, transition to neutral in late spring or summer. This is GFDL's experimental trajectory, not CPC consensus or an observed peak confirmation.
+Figure explanation: purple predictions began November 1, 2026 and extend through October 31, 2027. Green predictions are previous month. Positive y-axis values describe east-central tropical Pacific warmth relative to tropical average temperature. No numerical graph values, exact index acronym, or baseline inferred here.
+Thirty individual runs start from slightly different initial conditions; thick line averages all realizations. Spread increases during spring/summer. Runs are members of one prediction system, not thirty independent models. Outer lines are not labeled a calibrated interval in this source.
+
+2. NOAA CPC ENSO Diagnostic Discussion
+https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_advisory/ensodisc.shtml
+Displayed issue November 12, 2026, El Niño Advisory. Rolling URL.
+Official discussion says continued strengthening before weakening in early 2027, synthesizing multiple models from North America and abroad. Next discussion scheduled December 10, 2026.
+This issue and November 16 GFDL article differ in peak wording. Do not infer that a newer experimental publication supersedes CPC, that differences are caused by a particular mechanism, or that an observed peak is settled. Current lifecycle probabilities remain the validated CPC runtime feed.
+
+Editorial interpretations: publication, initialization and target horizon are different dates; forecast peak, phase transition and regional impacts are different clocks. Model members and model means are different units; combining counts does not establish probabilities. Those are reader explanations, not new numerical forecasts.

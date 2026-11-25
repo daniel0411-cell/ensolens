@@ -1,6 +1,11 @@
 # ENSOLens Delivery Status
 
-Updated: 2026-11-23 (Asia/Shanghai)
+Updated: 2026-11-25 (Asia/Shanghai)
+
+## November forecast comparison (November 25, implementation checkpoint)
+
+- Updated two existing pages with a dated GFDL experimental SPEAR example: peak versus phase transition, November 16 publication versus November 1 initialization and October 31, 2027 horizon, member versus model counts, ensemble mean and relative-warmth interpretation. Compared the named November 12 CPC discussion without replacing live CPC probabilities. Verified primary sources in the background browser; record in public/references/forecast-reading-2026-11-25.txt and scope/maintenance in CONTENT-UPDATE-2026-11-25.md. Only two substantive sitemap dates advance.
+- Independent interpretation/code review checked changes against the preserved source extract. Corrected the new section’s source mapping to cite both GFDL and IRI for their different counts. Reviewer did not repeat browser research or rendered-layout checks. Type check passed (68 files, zero errors/warnings, two existing hints). Release and production verification pending; no new deployment or traffic result claimed at this checkpoint.
 
 ## Twelve reading improvements release (November 23)
 

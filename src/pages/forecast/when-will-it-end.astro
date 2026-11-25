@@ -16,10 +16,10 @@ const questions = [
 ---
 <Layout title="When will El Niño peak and end?" active="forecast" description="Separate the ocean-temperature peak, the official return to neutral and regional impacts. Read current NOAA probabilities with their dates and spring forecast uncertainty.">
   <div class="page-shell subpage lifecycle-page">
-    <div class="page-intro"><div><span class="eyebrow">ENSO LIFECYCLE · EDITORIAL REVIEW NOVEMBER 13, 2026</span><h1>When will El Niño<br /><span>peak and end?</span></h1><p>Separate the ocean peak, the official phase transition and regional impacts. Read the current outlook alongside the evidence needed to judge a change.</p></div></div>
+    <div class="page-intro"><div><span class="eyebrow">ENSO LIFECYCLE · EDITORIAL REVIEW NOVEMBER 25, 2026</span><h1>When will El Niño<br /><span>peak and end?</span></h1><p>Separate the ocean peak, the official phase transition and regional impacts. Read the current outlook alongside the evidence needed to judge a change.</p></div></div>
     <DataNotice stale={stale} />
     <p class="body-copy lifecycle-current-answer">{firstNeutralLead ? `In CPC issue ${forecast.issue}, neutral first leads the published categories in ${seasonLabel(firstNeutralLead)}: ${firstNeutralLead.neutral}% neutral, ${firstNeutralLead.nino}% El Niño and ${firstNeutralLead.nina}% La Niña. This is a seasonal window, not an exact end date.` : `CPC issue ${forecast.issue} does not show a season in which neutral is the sole leading category. The published horizon cannot establish an exact end date.`}</p>
-    <nav aria-label="Lifecycle topics" class="lifecycle-topics"><a href="#current-outlook-heading">Current seasonal table</a> · <a href="#monitoring-change-heading">Evidence of weakening</a> · <a href="#spring-barrier-heading">Spring uncertainty</a> · <a href="#double-dip-heading">Multi-winter events</a></nav>
+    <nav aria-label="Lifecycle topics" class="lifecycle-topics"><a href="#current-outlook-heading">Current seasonal table</a> · <a href="#model-timing-heading">Comparing November forecasts</a> · <a href="#monitoring-change-heading">Evidence of weakening</a> · <a href="#spring-barrier-heading">Spring uncertainty</a> · <a href="#double-dip-heading">Multi-winter events</a></nav>
     <section class="lifecycle-section">
       <h2>Start with the official assessment.</h2>
       <p class="body-copy">CPC’s discussion issued {formatDate(snapshot.discussion.data.issued)} states: <strong>{snapshot.discussion.data.synopsis}</strong></p>
@@ -35,6 +35,15 @@ const questions = [
       <p class="body-copy">CPC issue {forecast.issue}, RONI-based state probabilities. Each row is a three-month season. A probability for El Niño is not a probability of a strong event or of local severe weather.</p>
       <div class="probability-table-wrap"><table class="data-table"><caption>NOAA CPC · issue {forecast.issue}</caption><thead><tr><th scope="col">Target season</th><th scope="col">El Niño</th><th scope="col">Neutral</th><th scope="col">La Niña</th></tr></thead><tbody>{forecast.rows.map(row => <tr><th scope="row">{seasonLabel(row)}</th><td>{row.nino}%</td><td>{row.neutral}%</td><td>{row.nina}%</td></tr>)}</tbody></table></div>
       <p class="body-copy">A reported 100% does not remove real-world uncertainty. A change from 99% to 100% is one percentage point, not evidence of a significant forecast change. <a href="/forecast/">Compare the same season across official issues.</a></p>
+    </section>
+    <section class="lifecycle-section" aria-labelledby="model-timing-heading">
+      <h2 id="model-timing-heading">Why do November forecasts describe the peak differently?</h2>
+      <p class="body-copy">In its November 16, 2026 experimental SPEAR forecast, NOAA GFDL described El Niño as at or quickly approaching its peak, with El Niño conditions persisting through winter and a transition to neutral in late spring or summer. CPC’s November 12 discussion instead described further strengthening before weakening in early 2027. These are dated statements from different forecast products, not two consecutive revisions of one outlook.</p>
+      <p class="body-copy">SPEAR is one prediction system. CPC’s operational assessment synthesizes multiple models and other evidence. GFDL describes its plotted quantity as east-central tropical Pacific warmth relative to the tropical average; do not treat it as the weekly conventional Niño 3.4 anomaly shown above. Different methods, starting information and averaging periods need to be checked before comparing peak timing. A later publication date alone does not make an experimental forecast a replacement for CPC guidance.</p>
+      <h3>Keep three dates with the forecast</h3>
+      <p class="body-copy">The GFDL article was published November 16; the runs began November 1; their target horizon extends through October 31, 2027. Publication, initialization and target dates answer different questions. That long horizon does not give an exact neutral-transition day or establish the following winter’s ENSO phase. GFDL says its spread increases during spring and summer.</p>
+      <p class="body-copy">Use this comparison to understand forecast uncertainty. The live CPC table above remains the source for this page’s phase probabilities. A temperature peak can precede the return to neutral by months; a model’s expected decline does not establish that an observed peak has already occurred. <a href="/learn/enso-model-plumes-and-probabilities/#section-7">Read what SPEAR’s 30 runs represent</a>.</p>
+      <p class="body-copy source-note">Dated comparison, checked November 25, 2026: <a href="https://www.gfdl.noaa.gov/prediction/november-2026-el-nino-predictions/" target="_blank" rel="noreferrer">NOAA GFDL, November 16, 2026 experimental prediction</a> and <a href="https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_advisory/ensodisc.shtml" target="_blank" rel="noreferrer">CPC discussion, November 12, 2026 issue</a>. CPC’s discussion URL rolls forward; these summaries preserve the named issues.</p>
     </section>
     <section class="explanation-grid"><div><h2>Why a winter peak is common</h2><p>ENSO events often reach their greatest amplitude around the end of the calendar year because of the seasonal cycle of ocean-atmosphere coupling. November–January is a monitoring window, not a guaranteed peak for every event.</p></div><div><h2>How an event can weaken</h2><p>Changes in winds, currents, upwelling and thermocline depth redistribute ocean heat. Oceanic waves transmit these adjustments. Surface warming alone cannot prove that a subsurface cooling wave has arrived or set a countdown to decay.</p></div></section>
     <section class="lifecycle-section" aria-labelledby="monitoring-change-heading">
@@ -82,7 +91,7 @@ const questions = [
   .lifecycle-topics { line-height:2; margin:24px 0; }
   .lifecycle-topics a { color:var(--green); }
   #current-outlook-heading { scroll-margin-top:110px; }
-  #monitoring-change-heading, #spring-barrier-heading, #double-dip-heading { scroll-margin-top: 100px; }
+  #model-timing-heading, #monitoring-change-heading, #spring-barrier-heading, #double-dip-heading { scroll-margin-top: 100px; }
   .evidence-table table { min-width: 720px; }
   .evidence-table th, .evidence-table td { text-align: left; }
   .evidence-table th:first-child { width: 22%; }

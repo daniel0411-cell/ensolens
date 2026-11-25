@@ -43,20 +43,25 @@ for (const path of paths) {
   if (path === '/learn/') assert.equal($('.library-grid article').length, 10);
   const newAnchors = { '/winter-outlook/': ['probability-examples-heading','seasonal-lead-example'], '/impacts/california-snow-vs-rain/': ['station-basin-heading'], '/impacts/pacific-northwest-winter/': ['early-swe-heading'] };
   for (const id of newAnchors[path] ?? []) assert.equal($('#' + id).length, 1);
+  if (path === '/learn/enso-model-plumes-and-probabilities/' || path === '/forecast/when-will-it-end/') {
+    assert.equal($('main a[href="https://www.gfdl.noaa.gov/prediction/november-2026-el-nino-predictions/"]').length, 1);
+    assert.match($('main').text(), /October 31, 2027/);
+    assert.match($('main').text(), /November 16/);
+  }
   if (path === '/learn/enso-model-plumes-and-probabilities/') { assert.ok($('main').text().includes('not a calibrated probability')); assert.equal($('.sources a[href="https://forecast.ccsr.columbia.edu/forecasts/enso/methodology"]').length, 1); }
   if (path.startsWith('/learn/') && path !== '/learn/') {
     assert.equal($('h1').length, 1);
-    assert.equal($('.guide-section').length, ({ '/learn/el-nino-and-drought-recovery/': 8, '/learn/enso-model-plumes-and-probabilities/': 6, '/learn/kelvin-waves-and-enso/': 5, '/learn/nino-regions-explained/': 5, '/learn/climate-normals-and-anomalies/': 5 }[path] ?? 4));
+    assert.equal($('.guide-section').length, ({ '/learn/el-nino-and-drought-recovery/': 8, '/learn/enso-model-plumes-and-probabilities/': 7, '/learn/kelvin-waves-and-enso/': 5, '/learn/nino-regions-explained/': 5, '/learn/climate-normals-and-anomalies/': 5 }[path] ?? 4));
     assert.equal($('.checklist li').length, 3);
     const article = JSON.parse($('script[type="application/ld+json"]').last().text());
     assert.equal(article['@type'], 'Article');
     assert.equal(article.headline, $('h1').text());
     assert.equal(article.datePublished, '2026-11-12');
-    assert.equal(article.dateModified, ['/learn/kelvin-waves-and-enso/', '/learn/nino-regions-explained/', '/learn/climate-normals-and-anomalies/', '/learn/el-nino-and-drought-recovery/', '/learn/enso-model-plumes-and-probabilities/'].includes(path) ? '2026-11-23' : '2026-11-17');
+    assert.equal(article.dateModified, path === '/learn/enso-model-plumes-and-probabilities/' ? '2026-11-25' : ['/learn/kelvin-waves-and-enso/', '/learn/nino-regions-explained/', '/learn/climate-normals-and-anomalies/', '/learn/el-nino-and-drought-recovery/', '/learn/enso-model-plumes-and-probabilities/'].includes(path) ? '2026-11-23' : '2026-11-17');
     assert.equal($('.decision-card h2').length, 1);
     assert.ok($('.decision-card p').text().length > 100);
     assert.equal($('.teaching-figure').length, 1);
-    assert.equal($('.section-evidence').length, ({ '/learn/el-nino-and-drought-recovery/': 8, '/learn/enso-model-plumes-and-probabilities/': 6, '/learn/kelvin-waves-and-enso/': 5, '/learn/nino-regions-explained/': 5, '/learn/climate-normals-and-anomalies/': 5 }[path] ?? 4));
+    assert.equal($('.section-evidence').length, ({ '/learn/el-nino-and-drought-recovery/': 8, '/learn/enso-model-plumes-and-probabilities/': 7, '/learn/kelvin-waves-and-enso/': 5, '/learn/nino-regions-explained/': 5, '/learn/climate-normals-and-anomalies/': 5 }[path] ?? 4));
     for(const a of $('.section-evidence a').toArray()) assert.equal($($(a).attr('href')).length,1);
     assert.equal(article.url, host + path);
     assert.deepEqual(article.citation, $('.sources a').toArray().map(el => $(el).attr('href')));
@@ -64,7 +69,7 @@ for (const path of paths) {
   }
   assert.doesNotMatch($('main').text(), /illustrative|synthetic|example phase/i);
   if (path === '/forecast/when-will-it-end/') {
-    for (const id of ['monitoring-change-heading', 'spring-barrier-heading', 'double-dip-heading']) assert.equal($('#' + id).length, 1);
+    for (const id of ['model-timing-heading', 'monitoring-change-heading', 'spring-barrier-heading', 'double-dip-heading']) assert.equal($('#' + id).length, 1);
     assert.equal($('.evidence-table tbody tr').length, 4);
     assert.equal($('.source-note a[href^="https://www.climate.gov/news-features/blogs/enso/"]').length, 2);
     assert.match($('main').text(), /historical examples, not analog forecasts/);
@@ -254,9 +259,9 @@ for (const entry of sitemapXml('url').toArray()) {
     assert.ok(modified <= editorialToday, 'Sitemap dates must not be in the future (Asia/Shanghai)');
   }
 }
-for (const path of ['/', '/forecast/', '/forecast/when-will-it-end/', '/faq/', '/historical/', '/winter-outlook/', '/impacts/', '/impacts/california-snow-vs-rain/', '/impacts/pacific-northwest-winter/', '/forecast/enso-neutral/', '/methodology/']) {
+for (const path of ['/learn/enso-model-plumes-and-probabilities/', '/', '/forecast/', '/forecast/when-will-it-end/', '/faq/', '/historical/', '/winter-outlook/', '/impacts/', '/impacts/california-snow-vs-rain/', '/impacts/pacific-northwest-winter/', '/forecast/enso-neutral/', '/methodology/']) {
   const entry = sitemapXml('url').filter((_, element) => sitemapXml(element).find('loc').text() === host + path);
-  const expected = ['/winter-outlook/', '/impacts/california-snow-vs-rain/', '/impacts/pacific-northwest-winter/', '/learn/kelvin-waves-and-enso/', '/learn/nino-regions-explained/', '/learn/climate-normals-and-anomalies/', '/learn/el-nino-and-drought-recovery/', '/learn/enso-model-plumes-and-probabilities/'].includes(path) ? '2026-11-23' : ['/faq/','/historical/','/forecast/','/winter-outlook/','/impacts/','/impacts/california-snow-vs-rain/','/impacts/pacific-northwest-winter/'].includes(path) ? '2026-11-21' : ['/historical/','/methodology/','/impacts/california-snow-vs-rain/'].includes(path) ? '2026-11-19' : ['/impacts/','/forecast/enso-neutral/','/winter-outlook/','/forecast/','/methodology/'].includes(path) ? '2026-11-17' : ['/faq/','/historical/','/forecast/when-will-it-end/','/impacts/california-snow-vs-rain/','/impacts/pacific-northwest-winter/'].includes(path) ? '2026-11-13' : '2026-11-12';
+  const expected = ['/forecast/when-will-it-end/', '/learn/enso-model-plumes-and-probabilities/'].includes(path) ? '2026-11-25' : ['/winter-outlook/', '/impacts/california-snow-vs-rain/', '/impacts/pacific-northwest-winter/', '/learn/kelvin-waves-and-enso/', '/learn/nino-regions-explained/', '/learn/climate-normals-and-anomalies/', '/learn/el-nino-and-drought-recovery/', '/learn/enso-model-plumes-and-probabilities/'].includes(path) ? '2026-11-23' : ['/faq/','/historical/','/forecast/','/winter-outlook/','/impacts/','/impacts/california-snow-vs-rain/','/impacts/pacific-northwest-winter/'].includes(path) ? '2026-11-21' : ['/historical/','/methodology/','/impacts/california-snow-vs-rain/'].includes(path) ? '2026-11-19' : ['/impacts/','/forecast/enso-neutral/','/winter-outlook/','/forecast/','/methodology/'].includes(path) ? '2026-11-17' : ['/faq/','/historical/','/forecast/when-will-it-end/','/impacts/california-snow-vs-rain/','/impacts/pacific-northwest-winter/'].includes(path) ? '2026-11-13' : '2026-11-12';
   assert.equal(entry.find('lastmod').text(), expected);
 }
 const missing = await request('/missing-page-check/');
@@ -292,3 +297,8 @@ const correctionGet = await fetch(host + '/api/corrections/');
 assert.equal(correctionGet.status,405);
 assert.match(correctionGet.headers.get('x-robots-tag'),/noindex/);
 console.log('PASS dated source record and private correction endpoint (read-only)');
+
+const forecastReadingRecord = await request('/references/forecast-reading-2026-11-25.txt');
+assert.equal(forecastReadingRecord.status, 200);
+assert.match(await forecastReadingRecord.text(), /Thirty individual runs/);
+console.log('PASS dated November 25 forecast-reading source record');

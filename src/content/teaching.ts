@@ -23,7 +23,7 @@ export const sectionEvidence: Record<string, number[][]> = {
  'marine-heatwaves-vs-el-nino':[[0,1],[0],[0],[0]],
  'el-nino-and-drought-recovery':[[1],[0],[0,1],[2],[3,4],[0],[5],[5,6]],
  'enso-jet-stream-teleconnections':[[1],[0],[0],[0]],
- 'enso-model-plumes-and-probabilities':[[3],[3,1],[3,1],[3],[0,2,3],[3,1]],
+ 'enso-model-plumes-and-probabilities':[[3],[3,1],[3,1],[3],[0,2,3],[3,1],[4,2]],
  'climate-normals-and-anomalies':[[0],[0,1],[0,1],[0,1],[0]],
  'how-enso-is-observed':[[0],[1],[0],[1]]
 };

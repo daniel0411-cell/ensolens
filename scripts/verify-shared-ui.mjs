@@ -7,6 +7,10 @@ export async function verifySharedUI(browser, base, output) {
     const page = await context.newPage();
     try {
       await page.goto(base + '/', { waitUntil: 'networkidle' });
+      assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1), `${width}px: homepage has no page overflow`);
+      assert.equal(await page.locator('.next-steps a').count(), 3);
+      assert.ok(await page.locator('.next-steps').evaluate(el => el.getBoundingClientRect().top < document.querySelector('.overview-grid').getBoundingClientRect().top));
+      assert.equal(await page.locator('.desktop-nav a[href="/learn/"]').count(), 1);
       const payload = JSON.parse(await page.locator('#trend-data').textContent());
       await page.getByText('View trend data', { exact: true }).click();
       for (const months of [12, 6, 12]) {
@@ -65,6 +69,19 @@ export async function verifySharedUI(browser, base, output) {
       await page.keyboard.press('Space');
       assert.equal(await page.locator('#compare-forecast').isChecked(), true);
       await page.locator('.compare-toggle').screenshot({ path: fileURLToPath(new URL('shared-focus-' + width + '.png', output)) });
+      assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1), `${width}px: forecast has no page overflow`);
+      await page.goto(base + '/impacts/california-snow-vs-rain/', { waitUntil: 'networkidle' });
+      assert.equal(await page.locator('header [aria-current="page"]').count(), 0, 'Regional child is not the directory URL');
+      const prose = await page.locator('.body-copy').first().evaluate(el => ({ size: parseFloat(getComputedStyle(el).fontSize), width: el.getBoundingClientRect().width }));
+      assert.ok(prose.size >= 16);
+      assert.ok(prose.width <= 900, 'Long prose retains a reading measure');
+      assert.ok(await page.locator('.body-copy a').first().evaluate(el => getComputedStyle(el).textDecorationLine.includes('underline')));
+      await page.screenshot({ path: fileURLToPath(new URL('reading-' + width + '.png', output)), fullPage: true });
+      await page.goto(base + '/faq/', { waitUntil: 'networkidle' });
+      if (width <= 900) assert.equal(await page.locator('.faq-category-tag').first().isVisible(), false);
+      await page.locator('.faq-question').first().click();
+      assert.equal(await page.locator('.faq-item').first().getAttribute('open'), '');
+      await page.screenshot({ path: fileURLToPath(new URL('faq-' + width + '.png', output)) });
       console.log(`PASS shared UI ${width}px: data table/ranges, enlarged map, touch targets, navigation, anchor and keyboard focus`);
     } finally { await context.close(); }
   }

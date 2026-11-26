@@ -1,6 +1,14 @@
 # ENSOLens Delivery Status
 
-Updated: 2026-11-25 (Asia/Shanghai)
+Updated: 2026-11-26 (Asia/Shanghai)
+
+## Focused reading and navigation refinements (November 26)
+
+- Implemented the five highest-impact findings from the November 26 Impeccable review: visible underlined prose links, three task paths directly after the homepage status, Learn/regional directory navigation, 16px/75ch continuous prose and clearer subsection spacing, mobile FAQ title space, and wrapping source/provenance rows at narrow widths.
+- Navigation keeps section highlighting but only the exact current URL receives aria-current="page". FAQ remains in the footer; the regional directory retains the dated U.S. winter outlook. Existing content, scientific values/source periods, fonts, palette, data feeds and sitemap dates are unchanged.
+- Type check, 24 unit tests and build passed. Local browser suite passed at 320/390/768/1440px, including trend tables/ranges, comparison focus, enlarged map/Escape, FAQ expansion, body link styling/measure, overflow, RSS, 25 routes, NOAA refresh/KV and failed-source retention. Existing full desktop/mobile functionality checks also passed. Additional navigation-boundary checks at 801/820/1024px had no overflow.
+- Visually inspected local desktop homepage, mobile forecast anchor, desktop/tablet California prose and mobile FAQ screenshots. Independent code review found no concrete issues; that reviewer did not perform rendered verification. Browser viewport emulation is not physical-device or screen-reader certification, and no field performance or search gain is claimed.
+- Scope deferred: full in-page historical weekly data table, further small-label typography, real-device/screen-reader and field-performance work. Release and live verification recorded below after publication.
 
 ## Shared component accessibility and mobile refinements (November 25)
 

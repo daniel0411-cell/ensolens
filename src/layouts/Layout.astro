@@ -12,8 +12,8 @@ const links = [
   ['overview', '/', 'Overview'],
   ['forecast', '/forecast/', 'Forecast'],
   ['historical', '/historical/', 'Historical'],
-  ['faq', '/faq/', 'FAQ'],
-  ['winter', '/winter-outlook/', 'U.S. winter'],
+  ['learn', '/learn/', 'Learn'],
+  ['winter', '/impacts/', 'Regional impacts'],
   ['methodology', '/methodology/', 'Sources & methods']
 ];
 ---
@@ -45,11 +45,11 @@ const links = [
     <header class="site-header">
       <div class="header-inner">
         <a class="brand" href="/" aria-label="ENSOLens home"><span class="brand-mark"><Globe2 size={25} stroke-width={1.6} /></span><span>ENSO<span class="brand-light">Lens</span><span class="brand-dot">.</span></span></a>
-        <nav class="desktop-nav" aria-label="Main navigation">{links.map(([key, href, label]) => <a href={href} class:list={{ active: active === key }} aria-current={active === key ? 'page' : undefined}>{label}</a>)}</nav>
+        <nav class="desktop-nav" aria-label="Main navigation">{links.map(([key, href, label]) => <a href={href} class:list={{ active: active === key }} aria-current={Astro.url.pathname === href ? 'page' : undefined}>{label}</a>)}</nav>
         <a class="source-link" href="https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_advisory/ensodisc.shtml" target="_blank" rel="noreferrer">NOAA / CPC <ArrowUpRight size={14} /></a>
         <button class="mobile-menu icon-button" aria-label="Open navigation" aria-expanded="false" aria-controls="mobile-navigation"><Menu size={22} /></button>
       </div>
-      <nav id="mobile-navigation" class="mobile-navigation" aria-label="Mobile navigation" hidden>{links.map(([key, href, label]) => <a href={href} aria-current={active === key ? 'page' : undefined}>{label}<ArrowRight size={15} /></a>)}</nav>
+      <nav id="mobile-navigation" class="mobile-navigation" aria-label="Mobile navigation" hidden>{links.map(([key, href, label]) => <a href={href} class:list={{ active: active === key }} aria-current={Astro.url.pathname === href ? 'page' : undefined}>{label}<ArrowRight size={15} /></a>)}</nav>
     </header>
     <main><slot /></main>
     <footer class="site-footer"><div class="footer-inner"><div><a class="brand footer-brand" href="/"><Globe2 size={20} /><span>ENSO<span class="brand-light">Lens</span><span class="brand-dot">.</span></span></a><p>Climate context. A little clearer.</p></div><div class="footer-note">Independent project. Not affiliated with NOAA.<br />Seasonal tendencies are not local weather forecasts.</div><div class="footer-links"><a href="/learn/">ENSO learning library</a><a href="/historical/">Historical analogs</a><a href="/faq/">FAQ</a><a href="/methodology/">Sources & methods <ArrowUpRight size={13} /></a><a href="/rss.xml">RSS feed</a><a href="/about/">About & contact</a><a href="/privacy/">Privacy</a><span>© 2026 ENSOLens</span></div></div></footer>

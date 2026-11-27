@@ -15,6 +15,7 @@ const benchmarks = historicalData.benchmarks.map(b => ({
   ...b,
   extreme: b.weeks.reduce((a, p) => Math.abs(p.anomaly) > Math.abs(a.anomaly) ? p : a),
 }));
+const weeklyTables = [{ id: 'current', year: currentYear, weeks: view.current, current: true }, ...benchmarks.map(b => ({ id: b.id, year: b.id, weeks: b.weeks, current: false }))];
 const signed = (value: number) => (value > 0 ? '+' : '') + value.toFixed(1) + '°C';
 const payload = JSON.stringify({ current: view.current, currentYear, benchmarks }).replace(/</g, '\\u003c');
 ---
@@ -47,6 +48,25 @@ const payload = JSON.stringify({ current: view.current, currentYear, benchmarks 
       <script id="analog-data" type="application/json" set:html={payload} />
       <div class="chart-footer"><span>NOAA CPC WEEKLY DATA · 1991–2020 BASELINE</span><a href="/methodology/#indices">Niño 3.4 method <ArrowUpRight size={13} /></a></div>
       <p class="figure-note">Weeks are numbered from January 1 in seven-day bins, including week 53 where present; month labels are approximate. Dates identify the center of each observation week. Similar curves do not predict the same regional weather.</p>
+    </section>
+
+    <section class="method-section weekly-lookup" aria-labelledby="weekly-lookup-heading">
+      <span class="eyebrow">EXACT DATES AND VALUES</span>
+      <h2 id="weekly-lookup-heading">Look up the weekly observations behind the chart</h2>
+      <p class="body-copy">Open a year to read every plotted observation, newest first. Dates are week centers, not publication dates. SST is sea-surface temperature; the anomaly is its departure from the 1991–2020 reference for that week in the Niño 3.4 region. Neither column is seasonal ONI or RONI.</p>
+      {weeklyTables.map(series => (
+        <details class="weekly-year" id={`weekly-${series.id}`}>
+          <summary>{series.year}{series.current ? ' · current curve' : ' · stored benchmark'} <span>{series.weeks.length} observations · {series.weeks[0]?.date ?? 'unavailable'} to {series.weeks.at(-1)?.date ?? 'unavailable'}</span></summary>
+          <div class="table-container" role="region" aria-label={`${series.year} weekly Niño 3.4 observations`} tabindex="0">
+            <table class="data-table weekly-values" data-weekly-year={series.year}>
+              <caption>{series.year} weekly Niño 3.4 · °C · 1991–2020 baseline</caption>
+              <thead><tr><th scope="col">Week centered</th><th scope="col">SST (°C)</th><th scope="col">Anomaly (°C)</th></tr></thead>
+              <tbody>{[...series.weeks].reverse().map(point => <tr><th scope="row"><time datetime={point.date}>{point.date}</time></th><td>{point.sst.toFixed(1)}</td><td>{signed(point.anomaly)}</td></tr>)}</tbody>
+            </table>
+          </div>
+        </details>
+      ))}
+      <p class="figure-note">These tables use the same values as the chart and CSV download. The current curve follows the validated feed; the four stored benchmarks retain the November 12, 2026 source check described below. This is a selected five-year view, not the full weekly archive or a complete event catalogue. Use the <a href="#comparison-heading">source and coverage summary</a> for the official full file, and the <a href="#same-season-heading">separate ASO table</a> for a like-season RONI comparison. Tables work without JavaScript.</p>
     </section>
 
     <section class="method-section" aria-labelledby="same-season-heading">
@@ -128,10 +148,19 @@ const payload = JSON.stringify({ current: view.current, currentYear, benchmarks 
 </Layout>
 
 <style>
-  #same-season-heading, #enso-frequency-heading, #event-years-heading { scroll-margin-top: 100px; }
+  #weekly-lookup-heading, #comparison-heading, #same-season-heading, #enso-frequency-heading, #event-years-heading { scroll-margin-top: 100px; }
   .seasonal-example { text-align: left; }
   .seasonal-example caption { padding: 14px; }
   .historical-limits p { margin-top: 16px; line-height: 1.8; color: var(--muted); }
   .figure-note { display: block; }
+  .weekly-year { border-bottom: 1px solid var(--line-strong); padding: 16px 0; }
+  .weekly-year summary { cursor: pointer; color: var(--ink); font-weight: 600; line-height: 1.6; }
+  .weekly-year summary span { display: block; color: var(--muted); font-size: 14px; font-weight: 400; }
+  .weekly-year summary:focus-visible { outline: 2px solid var(--green); outline-offset: 5px; }
+  .weekly-year .table-container { margin-top: 14px; max-height: 420px; overflow: auto; }
+  .weekly-values { min-width: 0; width: 100%; text-align: left; font-variant-numeric: tabular-nums; }
+  .weekly-values thead th { position: sticky; top: 0; z-index: 1; background: var(--card); }
+  .weekly-values caption { padding: 12px; text-align: left; }
+  .weekly-values th, .weekly-values td { padding: 12px 10px; }
   .analog-summary-table { min-width: 780px; }
 </style>

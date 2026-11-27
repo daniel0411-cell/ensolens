@@ -5,6 +5,7 @@ import { chromium } from 'playwright';
 import { spawn, execFile } from 'node:child_process';
 import { createServer } from 'node:net';
 import { fileURLToPath } from 'node:url';
+import { verifyReadingUpdates } from './verify-reading-updates.mjs';
 import { verifySharedUI } from './verify-shared-ui.mjs';
 
 let base = process.env.ENSOLENS_TEST_URL;
@@ -51,6 +52,7 @@ try {
   await rssPage.close();
   console.log('PASS RSS: real XML parsing, response headers and item count');
   await verifySharedUI(browser, base, output);
+  await verifyReadingUpdates(browser, base, output);
   for (const width of [1440, 390]) {
     const context = await browser.newContext({ viewport: { width, height: 1000 }, deviceScaleFactor: 1, acceptDownloads: true, reducedMotion: 'reduce' });
     const page = await context.newPage();

@@ -2,6 +2,14 @@
 
 Updated: 2026-11-27 (Asia/Shanghai)
 
+## Status answer, historical lookup and DWR reading — November 27
+
+- Owner approved the four recommended updates and deployment. Re-fetched GitHub master at `7b7a64b`; no incoming changes. Verified NOAA's raw weekly file in the background browser: latest row remains November 18 (+3.3°C Niño 3.4, versus +3.2°C November 11). This matches the site; no ingestion defect or newer November 25 observation was established.
+- Homepage now starts with CPC's dated status and labels the weekly center date, prior value/date and difference. Historical page exposes every existing chart observation in five native expandable tables (date, SST and anomaly), newest first, with coverage, separate stored/live vintages, baseline and seasonal-index limits. No new feed or event classification.
+- California guide adds an actual dated DWR report-reading example: the directory's Latest route returned a November 13 report while the archive selector said November 17. Preserved exact fields and unresolved zero-percent/reference issues in public/references/status-and-snow-reading-2026-11-27.txt; no current snow-storage or deficit claim. Existing useful original figures retained.
+- Only historical and California sitemap dates newly advance to November 27 (home already has that date); November 17 snippet experiment retained. No new GSC/Bing report read. Ongoing work remains in the existing weekly/monthly review budget; this dated exercise is not a new manual feed.
+- Independent interpretation/code review found one annual-rollover false failure in the new scroll check, corrected. It reviewed the saved source record and diff, without repeating source research or browser QA. Local types (82 files, zero errors/warnings, two existing hints), 26 tests, registered image assets and build passed. First browser run passed actual NOAA refresh/KV, all image viewports and shared UI, then exposed an asynchronous scroll-check timing issue; corrected and focused checks passed all three widths and no-JS. Visual review added sticky weekly table headings and prevented regional-name splitting at 320px. Complete final release gate and deployment pending at this checkpoint.
+
 ## Whole-site explanatory images — November 27
 
 - Owner authorized implementation and deployment. From clean `c60b896`, expanded representative-image coverage from ten to nineteen major content pages; all ten learning guides now have useful original figures. Neutral uses an accurate three-phase comparison. Learning/regional directory cards have destination-specific thumbnails and visible third-party attribution where required.

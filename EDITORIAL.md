@@ -26,6 +26,8 @@ The winter page preserves the November 19, 2026 DJF 2026–27 maps and interpret
 
 Review the latest CPC discussion and probabilities separately. The live lifecycle table follows the dashboard's validated CPC feed. Qualify the spring predictability barrier, distinguish peak/phase/impacts, and do not extend forecasts beyond their target horizon. If adding IRI, store it as a separate dated product with verified methodology and matching targets, not as a continuation of the CPC series.
 
+The California guide’s DWR DLYSWEQ table is a frozen report-reading example (report headed November 13, 2026; checked November 27), not a daily conditions feed. Preserve report date, retrieval date, station coverage and unresolved reference fields together. A directory’s “Latest” label or archive selector is not proof of a new report. If replacing this example, verify the actual report header and reference definitions and update the saved extract and visible example together; no daily manual refresh is required.
+
 California guidance remains evergreen unless a dated regional source supports a current claim. Snowfall, heating demand and hurricane attribution require their own evidence. No prewritten claim that ENSO must have suppressed a hurricane season.
 
 ## Cross-page synchronization checklist

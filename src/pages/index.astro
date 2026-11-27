@@ -20,7 +20,7 @@ const target = snapshot.forecast.data.rows.find(row => row.season === 'DJF') ?? 
 ---
 <Layout image={oceanPageImage(snapshot.map.data)} title="Current ENSO Status: El Niño & La Niña Tracker" active="overview" description="Check current ENSO status, dated Niño 3.4 temperatures and NOAA CPC El Niño and La Niña probabilities. Explore forecasts and U.S. winter context.">
   <div class="page-shell">
-    <div class="page-intro"><div><div class="eyebrow intro-eyebrow"><span class="live-dot"></span> EL NIÑO · NEUTRAL · LA NIÑA</div><h1>Current <span>ENSO status.</span></h1><p>ENSO—the El Niño–Southern Oscillation—is a coupled ocean–atmosphere pattern in the tropical Pacific, with El Niño, neutral and La Niña phases. NOAA CPC reports {discussion.phase} in its {formatDate(discussion.issued)} discussion. The latest weekly Niño 3.4 anomaly is {signed(weekly.anomaly)}°C for {formatDate(weekly.date)}. Next scheduled discussion: {formatDate(discussion.next)}.</p></div><div class="snapshot-stamp"><CalendarDays size={15} /><div><strong>{formatDate(discussion.issued)}</strong><span>CPC discussion issued</span></div></div></div>
+    <div class="page-intro"><div><div class="eyebrow intro-eyebrow"><span class="live-dot"></span> EL NIÑO · NEUTRAL · LA NIÑA</div><h1>Current <span>ENSO status.</span></h1><p>NOAA CPC reports {discussion.phase} in its {formatDate(discussion.issued)} discussion. The latest validated weekly Niño 3.4 anomaly is {signed(weekly.anomaly)}°C for the week centered {formatDate(weekly.date)}. Next scheduled discussion: {formatDate(discussion.next)}. ENSO—the El Niño–Southern Oscillation—is the coupled ocean–atmosphere pattern behind El Niño, neutral and La Niña conditions.</p></div><div class="snapshot-stamp"><CalendarDays size={15} /><div><strong>{formatDate(discussion.issued)}</strong><span>CPC discussion issued</span></div></div></div>
     <DataNotice stale={stale} />
     <section class="status-band" aria-label="Official ENSO snapshot">
       <div class="phase-stat">
@@ -35,7 +35,7 @@ const target = snapshot.forecast.data.rows.find(row => row.season === 'DJF') ?? 
           </div>
         </div>
       </div>
-      <div class="numeric-stat"><div class="stat-label">WEEKLY NIÑO 3.4</div><div class="stat-value">{signed(weekly.anomaly)}<span>°C</span></div><p><span class="change-pill">{signed(weekly.anomaly - priorWeek.anomaly)}°C</span> · {formatDate(weekly.date)}</p></div>
+      <div class="numeric-stat"><div class="stat-label">WEEKLY NIÑO 3.4</div><div class="stat-value">{signed(weekly.anomaly)}<span>°C</span></div><p>Week centered {formatDate(weekly.date)}</p><p class="weekly-comparison"><span class="change-pill">{signed(Number((weekly.anomaly - priorWeek.anomaly).toFixed(1)))}°C</span> versus {signed(priorWeek.anomaly)}°C on {formatDate(priorWeek.date)}</p></div>
       <div class="numeric-stat"><div class="stat-label">SEASONAL RONI</div><div class="stat-value">{signed(roni.value)}<span>°C</span></div><p>{seasonLabel(roni)} · three-month index <a href="/methodology/#indices" aria-label="Learn about the seasonal RONI index"><ArrowUpRight size={13} /></a></p></div>
       <div class="outlook-stat"><div class="stat-label">{target.season} EL NIÑO PROBABILITY</div><div class="stat-value">{target.nino}<span>%</span><span class="probability-mini"><i style={{ right: 0, width: target.nino + '%' }}></i></span></div><p>{seasonLabel(target)} · issue {snapshot.forecast.data.issue}</p></div>
     </section>

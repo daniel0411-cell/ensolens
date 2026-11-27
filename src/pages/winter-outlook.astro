@@ -18,7 +18,7 @@ const maps = [
         {maps.map(map => <figure>
           <h3>{map.name}</h3>
           <a href={'/images/outlooks/2026-11/' + map.file} target="_blank" rel="noreferrer" aria-label={'Open full-size ' + map.name.toLowerCase() + ' outlook map'}>
-            <img src={'/images/outlooks/2026-11/' + map.file} alt={map.alt} width="3300" height="2550" />
+            <img src={'/images/outlooks/2026-11/' + map.file} alt={map.alt} width="3300" height="2550" decoding="async" />
           </a>
           <figcaption>{map.note} <a href={'/images/outlooks/2026-11/' + map.file} target="_blank" rel="noreferrer">Full-size map <ArrowUpRight size={13} /></a></figcaption>
         </figure>)}

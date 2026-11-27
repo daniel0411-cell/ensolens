@@ -2,6 +2,12 @@
 
 Updated: 2026-11-27 (Asia/Shanghai)
 
+## Search image optimization (November 27 — local checkpoint)
+
+- Audited live image metadata, image routes and robots before implementation; findings and deferred asset work are in IMAGE-AUDIT-2026-11-27.md. Ten existing pages now share representative body/OG/Twitter/applicable structured images. Six original PNG explanations retain editable SVGs and accessible text; reused NOAA/USFS assets retain credits and dated limitations. The homepage validated NOAA GIF has a public route with true dimensions, while API/preview/error noindex remains.
+- Added image publication rules to EDITORIAL.md and referenced them from AGENTS.md, a provenance registry, static checks and shared browser checks. No article or sitemap dates were changed. Independent code/interpretation review checked routing and diagrams against retained records; it did not repeat browser source research or visual QA. Identified issues were corrected.
+- Local type check, 26 tests, nine static assets, build, real NOAA/KV refresh and all ten image pages at 1440×1000, 390×1000 and 320×1000 CSS px passed. Inspected desktop/mobile figure screenshots. The new 320px check found and fixed an existing footer-row overflow. A later legacy browser assertion had invalid CSS syntax; corrected it and restarted the complete release gate. Deployment and live verification are pending this checkpoint.
+
 ## Focused content maintenance (November 27)
 
 - Based on GitHub master `62fe527`; existing November 26 UI is the baseline. Expanded ENSO at its first homepage explanation, added three contextual FAQ links to existing neutral, Niño-region and California sections, and shortened two repeated forecast reading/limitation blocks. Preserved titles, routes, data products, dates on archival examples, and all existing section anchors.
@@ -56,6 +62,7 @@ Updated: 2026-11-27 (Asia/Shanghai)
 - Application commit `2f1dd31` pushed to GitHub master; remote SHA verified before upload. The full release gate passed: 69-file type check (zero errors/warnings, two pre-existing hints), 24 unit tests, build, NOAA refresh/KV, RSS, four-viewport shared-UI checks, no-JavaScript values, desktop/mobile full suites and retained-data failure path.
 - Released Cloudflare version `de03ccc6-dc0a-416e-bb38-73f760dc5945`, deployment `1ae8d471-95bc-46c3-a8a2-0a6eefd0bdb6`, created November 25 at 16:20:10 Asia/Shanghai with 100% traffic, verified from Wrangler. Custom domains and six-hour refresh schedule retained. No historic prototype output or unrelated social-share work is part of this release.
 - Production verification passed all 25 routes, preserved guide/source records, RSS, source health, indexing configuration, redirects/404 and the correction endpoint (read-only). Live shared-UI checks passed 320/390/768/1440px plus no-JavaScript rendering; the full live 1440px/390px browser suites also passed. Screenshots of the map, trend table and keyboard focus were inspected; checks use Chrome viewport emulation and keyboard/mouse input, not physical-device or screen-reader certification. No indexing submission or search-performance claim.
+
 
 ## November forecast comparison release (November 25)
 

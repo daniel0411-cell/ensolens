@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="340" viewBox="0 0 760 340" font-family="Arial, sans-serif" aria-label="A thermocline depression moves from the west toward the east in two successive conceptual sections"><rect width="100%" height="100%" fill="#10201d"/>
+    <g font-size="16" fill="#e2e8f0"><text x="50" y="25">Western Pacific</text><text x="555" y="25">Eastern Pacific</text><text x="15" y="72">t₁</text><text x="15" y="218">t₂</text><text x="275" y="166">Propagation east →</text><text x="50" y="325">Depth increases ↓ · warmer water above, colder below</text></g>
+    <g fill="#102b3b"><rect x="50" y="45" width="660" height="100"/><rect x="50" y="185" width="660" height="100"/></g>
+    <g stroke="#cbd5e1" stroke-dasharray="6 5"><path d="M50 85H710"/><path d="M50 225H710"/></g>
+    <g fill="none" stroke="#fbbf24" stroke-width="4"><path d="M50 85H120Q155 85 180 112Q215 140 250 112Q275 85 310 85H710"/><path d="M50 225H420Q455 225 480 252Q515 280 550 252Q575 225 610 225H710"/></g>
+  </svg>

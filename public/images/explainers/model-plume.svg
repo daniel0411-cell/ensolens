@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="360" viewBox="0 0 760 360" font-family="Arial, sans-serif" aria-label="Three invented model-mean SST anomaly trajectories diverge with lead time; the dashed collection mean does not represent individual ensemble members"><rect width="100%" height="100%" fill="#10201d"/>
+    <g fill="#e2e8f0" font-size="16"><text x="20" y="25">Conventional Niño 3.4 SST anomaly (°C)</text><text x="20" y="75">+2</text><text x="20" y="165">+1</text><text x="30" y="255">0</text><text x="15" y="300">−0.5</text><text x="80" y="332">DJF</text><text x="267" y="332">JFM</text><text x="450" y="332">FMA</text><text x="640" y="332">MAM</text></g>
+    <path d="M65 45V300H710" stroke="#cbd5e1" fill="none"/><path d="M65 210H710" stroke="#cbd5e1" stroke-dasharray="3 5"/><text x="78" y="202" fill="#cbd5e1" font-size="14">+0.5°C reference</text>
+    <g fill="none" stroke-width="2"><path d="M85 165L280 120L470 90L660 70" stroke="#60a5fa"/><path d="M85 165L280 155L470 175L660 190" stroke="#34d399"/><path d="M85 165L280 185L470 240L660 285" stroke="#fb7185"/></g>
+    <path d="M85 165L280 153.33L470 168.33L660 181.67" stroke="#fbbf24" stroke-width="4" stroke-dasharray="10 5" fill="none"/>
+    <g fill="#e2e8f0" font-size="14"><text x="678" y="73">A</text><text x="678" y="194">B</text><text x="678" y="289">C</text></g>
+  </svg>

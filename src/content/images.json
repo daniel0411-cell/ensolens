@@ -1,0 +1,96 @@
+{
+  "assets": {
+    "nino-regions": {
+      "src": "/images/explainers/nino-regions.png",
+      "width": 760,
+      "height": 310,
+      "alt": "Overlapping Niño 4, Niño 3.4 and Niño 3 regions along the equator, with Niño 1+2 south of it near South America.",
+      "credit": "Original ENSOLens diagram; geographic limits from NOAA CPC.",
+      "source": "https://www.cpc.ncep.noaa.gov/data/indices/",
+      "rights": "ENSOLens original vector drawing; factual region coordinates from NOAA."
+    },
+    "kelvin-wave": {
+      "src": "/images/explainers/kelvin-wave.png",
+      "width": 760,
+      "height": 340,
+      "alt": "A deeper thermocline disturbance moves east between two conceptual sections; it does not track one parcel of water.",
+      "credit": "Original ENSOLens schematic; depth, distance and time are not to scale.",
+      "source": "https://oceanservice.noaa.gov/facts/kelvin-waves.html",
+      "rights": "ENSOLens original vector drawing; retained existing scientific explanation."
+    },
+    "model-plume": {
+      "src": "/images/explainers/model-plume.png",
+      "width": 760,
+      "height": 360,
+      "alt": "Three invented model-mean SST anomaly paths diverge from DJF to MAM; their dashed mean is not a probability.",
+      "credit": "Original ENSOLens teaching curves; invented values, not a current model forecast.",
+      "source": "/learn/enso-model-plumes-and-probabilities/",
+      "rights": "ENSOLens original vector drawing and hypothetical curves."
+    },
+    "sierra-snow-level": {
+      "src": "/images/explainers/sierra-snow-level.png",
+      "width": 760,
+      "height": 320,
+      "alt": "Conceptual Sierra cross-section shows rain below a moving storm snow level and snow storage above it.",
+      "credit": "Original ENSOLens conceptual elevation diagram; not a current snow-level forecast.",
+      "source": "/impacts/california-snow-vs-rain/",
+      "rights": "ENSOLens original vector drawing."
+    },
+    "roni-ranges": {
+      "src": "/images/explainers/roni-ranges.png",
+      "width": 1000,
+      "height": 500,
+      "alt": "Nested DJF 2026–27 RONI intervals share one scale: central 90%, 70% and 50%, with median +2.28°C.",
+      "credit": "Original ENSOLens graphic of the preserved November 2026 CPC forecast; not local weather odds.",
+      "source": "/references/roni-ranges-november-2026.txt",
+      "rights": "ENSOLens original rendering of NOAA CPC factual forecast values; source issue retained."
+    },
+    "season-windows": {
+      "src": "/images/explainers/season-windows.png",
+      "width": 1000,
+      "height": 500,
+      "alt": "DJF, JFM, FMA, MAM and AMJ are overlapping three-month windows spanning December through June.",
+      "credit": "Original ENSOLens calendar diagram; calendar overlap alone does not classify an ENSO episode.",
+      "source": "/historical/#event-years-heading",
+      "rights": "ENSOLens original vector drawing of calendar windows."
+    },
+    "northwest-snow": {
+      "src": "/images/guides/northwest-snow-usfs.jpg",
+      "width": 1400,
+      "height": 877,
+      "alt": "A skier descends a snow-covered mountain beside a forested slope near Yellow Pine, Idaho.",
+      "credit": "USDA Forest Service / Todd Leeds; location photo, not current snow conditions.",
+      "source": "https://www.climatehubs.usda.gov/hubs/northwest/topic/la-nina-northwest-what-can-we-expect",
+      "rights": "Existing USDA-hosted photo credited USDA Forest Service / Todd Leeds; federal employee work attribution, retained source credit. Recheck per-asset credit before reuse elsewhere."
+    },
+    "winter-circulation": {
+      "src": "/images/guides/enso-winter-circulation-noaa.jpg",
+      "width": 1600,
+      "height": 766,
+      "alt": "NOAA schematic compares typical winter jet-stream patterns in La Niña and El Niño; it does not depict neutral.",
+      "credit": "NOAA / NWS event-phase comparison, not a neutral map or current winter forecast.",
+      "source": "https://www.weather.gov/mhx/ensowhat",
+      "rights": "Existing NOAA/NWS government schematic; original attribution retained; no endorsement implied."
+    },
+    "winter-temperature": {
+      "src": "/images/outlooks/2026-11/djf-temperature.gif",
+      "width": 3300,
+      "height": 2550,
+      "alt": "CPC temperature outlook issued November 19, 2026 for December 2026 through February 2027: warmth favored across the northern two-thirds of the contiguous U.S.; near-normal favored in parts of the Southeast; equal chances in parts of the Southwest.",
+      "credit": "NOAA CPC; original issue, validity dates, legend and map retained.",
+      "source": "/references/winter-update-2026-11-21.txt",
+      "rights": "NOAA CPC government forecast map, retained unmodified with original dates/legend; no endorsement implied."
+    }
+  },
+  "pages": {
+    "/learn/nino-regions-explained/": "nino-regions",
+    "/learn/kelvin-waves-and-enso/": "kelvin-wave",
+    "/learn/enso-model-plumes-and-probabilities/": "model-plume",
+    "/impacts/california-snow-vs-rain/": "sierra-snow-level",
+    "/forecast/": "roni-ranges",
+    "/historical/": "season-windows",
+    "/impacts/pacific-northwest-winter/": "northwest-snow",
+    "/forecast/enso-neutral/": "winter-circulation",
+    "/winter-outlook/": "winter-temperature"
+  }
+}

@@ -34,3 +34,15 @@ test('private correction response is never converted into shared HTML cache', ()
   assert.equal(response.headers.get('cache-control'),'no-store');
   assert.match(response.headers.get('x-robots-tag'),/noindex/);
 });
+
+test('large image previews apply only to successful intentionally indexable responses', () => {
+  for (const type of ['text/html', 'image/gif']) {
+    const published = secureResponse(new Response('body', {headers:{'Content-Type':type}}),true);
+    assert.equal(published.headers.get('x-robots-tag'),'index, follow, max-image-preview:large');
+    const preview = secureResponse(new Response('body', {headers:{'Content-Type':type}}),false);
+    assert.equal(preview.headers.get('x-robots-tag'),'noindex, follow');
+  }
+  for (const status of [301,400,404,503]) {
+    assert.equal(secureResponse(new Response(null,{status}),true).headers.get('x-robots-tag'),'noindex, follow');
+  }
+});

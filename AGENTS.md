@@ -40,5 +40,6 @@
 - Keep compatibility_date within the installed workerd version's support. Avoid dependency upgrades unless needed for the task.
 - Use npm run preview to inspect the built Worker. Local preview must use localhost as its upstream host to avoid production HTTPS redirect loops.
 - Keep unverified contact routes unpublished. Never store private mail destinations, credentials, or browser session data in repository files.
+- Follow the image-quality and search-preview publication requirements in [EDITORIAL.md](EDITORIAL.md#image-quality-and-search-previews), including source/rights records, honest dimensions, body/metadata consistency, human relevance review and image release checks.
 - Keep changes scoped. Runtime defects require regression coverage; editorial updates do not require unrelated tests.
 - A documentation-only update can be committed and pushed without deploying the website or running the application release gate. Report which checks were actually performed; do not imply that a Git push is a deployment.

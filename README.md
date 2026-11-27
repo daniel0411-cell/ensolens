@@ -123,3 +123,7 @@ source, publish a concise material-change entry on About when warranted, and rem
 processed report with `wrangler kv key delete` if earlier deletion is appropriate.
 No promised response time or expert review is implied. Tests submit only to local storage;
 production verification of this route remains read-only.
+
+## Representative images
+
+Follow EDITORIAL.md#image-quality-and-search-previews. Static asset provenance and page mappings live in src/content/images.json; the homepage uses the validated public versioned NOAA map. `npm run test:images` is included in verify. The existing browser release gate now checks representative pages at 1440×1000, 390×1000 and 320×1000. To repeat these checks after release, run `node scripts/verify-image-production.mjs`. Google selects search previews automatically; passing checks does not establish thumbnail appearance or CTR improvement. See IMAGE-AUDIT-2026-11-27.md for findings, coverage and remaining asset gaps.

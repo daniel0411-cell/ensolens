@@ -1,3 +1,4 @@
+import { verifyPageImages } from './image-browser-checks.mjs';
 import assert from 'node:assert/strict';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
@@ -36,6 +37,7 @@ try {
     console.log('PASS real Worker scheduled refresh: NOAA validation, KV persistence and healthy status');
   }
   browser = await chromium.launch({ channel: 'chrome', headless: true });
+  await verifyPageImages(browser,base,{screenshots:true});
   const rssResponse = await fetch(base + '/rss.xml');
   assert.equal(rssResponse.status, 200);
   assert.equal(rssResponse.headers.get('content-type'), 'application/xml; charset=utf-8');
@@ -167,9 +169,8 @@ try {
     await page.screenshot({ path: fileURLToPath(new URL('forecast-' + width + '.png', output)), fullPage: true });
     await page.locator('section[aria-labelledby="wmo-record-heading"]').screenshot({ path: fileURLToPath(new URL('wmo-update-' + width + '.png', output)) });
     const rangeVisual = page.locator('#range-visual');
-    assert.equal(await rangeVisual.locator('.range-band').count(), 3);
-    const markerPositions = await rangeVisual.locator('.median-marker').evaluateAll(elements => elements.map(el => el.getBoundingClientRect().x));
-    assert.ok(markerPositions.every(x => Math.abs(x - markerPositions[0]) < 1), 'All interval medians share a numeric coordinate');
+    assert.equal(await rangeVisual.locator('img[width="1000"][height="500"]').count(), 1);
+    assert.equal(await rangeVisual.locator('.range-values li').count(), 3);
     await rangeVisual.evaluate(element => element.scrollIntoView());
     await page.screenshot({ path: fileURLToPath(new URL('range-visual-' + width + '.png', output)) });
     const ranges = page.locator('section[aria-labelledby="roni-range-heading"]');

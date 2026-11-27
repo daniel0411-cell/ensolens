@@ -1,3 +1,4 @@
+import { gifDimensions } from './gif-dimensions.ts';
 import { load } from 'cheerio/slim';
 import { Buffer } from 'node:buffer';
 
@@ -216,7 +217,7 @@ export async function refreshSnapshot(prior: Snapshot | null, fetcher: typeof fe
   const map = await refresh(prior?.map, async () => {
     requireValue(!discussion.error, 'Discussion unavailable; retain matched map');
     const bytes = await fetchOfficial(urls.map, fetcher);
-    requireValue(new TextDecoder().decode(bytes.slice(0, 6)).startsWith('GIF8'), 'Expected NOAA GIF image');
+    gifDimensions(bytes);
     const hash = await crypto.subtle.digest('SHA-256', bytes);
     const version = [...new Uint8Array(hash)].map(n => n.toString(16).padStart(2, '0')).join('').slice(0, 20);
     return { version, base64: Buffer.from(bytes).toString('base64'), issued: discussion.data.issued };

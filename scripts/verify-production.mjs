@@ -10,7 +10,7 @@ async function request(path, options = {}) {
 for (const path of paths) {
   const response = await request(path);
   assert.equal(response.status, 200, path);
-  assert.match(response.headers.get('x-robots-tag'), indexable ? /^index, follow$/ : /noindex/);
+  assert.match(response.headers.get('x-robots-tag'), indexable ? /^index, follow, max-image-preview:large$/ : /noindex/);
   const html = await response.text();
   assert.doesNotMatch(html, /hurricanetracker\.cc|hurricanehub|Hurricane Tracker|same independent builder|same publisher as/i, path + ' must not expose cross-site branding');
   const $ = load(html);
@@ -28,7 +28,7 @@ for (const path of paths) {
   }
   assert.equal($('link[rel=canonical]').attr('href'), host + path);
   assert.equal($('link[rel=sitemap]').attr('href'), '/sitemap.xml');
-  assert.match($('meta[name=robots]').attr('content'), indexable ? /^index, follow$/ : /noindex/);
+  assert.match($('meta[name=robots]').attr('content'), indexable ? /^index, follow, max-image-preview:large$/ : /noindex/);
   assert.ok($('meta[name=description]').attr('content')?.length > 20);
   assert.equal(JSON.parse($('script[type="application/ld+json"]').first().text())['@type'], 'WebSite');
   if (['/forecast/when-will-it-end/', '/impacts/california-snow-vs-rain/', '/impacts/pacific-northwest-winter/', '/forecast/enso-neutral/'].includes(path)) {
@@ -104,7 +104,7 @@ for (const path of paths) {
     assert.deepEqual($('.roni-ranges strong').toArray().map(el => $(el).text()), ['+2.00 to +2.56°C', '+1.85 to +2.71°C', '+1.59 to +2.97°C']);
     assert.equal($('a[href="/references/roni-ranges-november-2026.txt"]').length, 2);
     assert.equal($('#range-visual').length, 1);
-    assert.equal($('#range-visual .range-band').length, 3);
+    assert.equal($('#range-visual .range-values li').length, 3);
     assert.equal($('#reading-probabilities-heading').length, 1);
     assert.equal($('#revision-summary-heading').text(), 'What changed in this issue?');
     assert.match($('.revision-summary').text(), /identical seasonal targets, across all three ENSO phases/);
@@ -157,7 +157,7 @@ for (const path of paths) {
     assert.equal($('#same-season-heading').length, 1);
     assert.equal($('#enso-frequency-heading').length, 1);
     assert.equal($('#event-years-heading').length, 1);
-    assert.equal($('#season-visual .season-window').length, 5);
+    assert.equal($('#season-visual img[width="1000"][height="500"]').length, 1);
     assert.equal($('#season-visual .transition-cards > div').length, 3);
     assert.match($('main').text(), /five consecutive overlapping three-month seasons/);
     assert.match($('main').text(), /−1.0°C/);
@@ -221,7 +221,7 @@ for (const path of paths) {
     assert.ok(trend.weekly.length >= 52);
     const image = await request($('#ocean-image').attr('src'));
     assert.equal(image.status, 200);
-    assert.match(image.headers.get('x-robots-tag'), /noindex/);
+    assert.match(image.headers.get('x-robots-tag'), indexable ? /max-image-preview:large/ : /noindex/);
     assert.ok((await image.arrayBuffer()).byteLength > 1000);
   }
   console.log('PASS production', path, 'status, canonical, metadata, indexing and source data');

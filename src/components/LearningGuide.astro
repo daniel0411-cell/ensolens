@@ -1,4 +1,5 @@
 ---
+import { pageImage, imageObject } from '../lib/images';
 import Layout from '../layouts/Layout.astro';
 import { sectionEvidence } from '../content/teaching';
 import GuideTeaching from './GuideTeaching.astro';
@@ -6,7 +7,8 @@ import type { Guide } from '../content/guides';
 interface Props { guide: Guide }
 const { guide } = Astro.props;
 const url = `https://ensolens.com/learn/${guide.slug}/`;
-const schema = JSON.stringify({ '@context':'https://schema.org', '@type':'Article', headline:guide.title, description:guide.description, url, mainEntityOfPage:url, datePublished:guide.published, dateModified:guide.modified, inLanguage:'en', author:{'@type':'Organization',name:'ENSOLens',url:'https://ensolens.com/about/'}, publisher:{'@type':'Organization',name:'ENSOLens',url:'https://ensolens.com/about/'}, citation:guide.sources.map(s=>s.url) }).replace(/</g, '\\u003c');
+const image = pageImage(`/learn/${guide.slug}/`);
+const schema = JSON.stringify({ '@context':'https://schema.org', '@type':'Article', headline:guide.title, ...(image ? { image: imageObject(image) } : {}), description:guide.description, url, mainEntityOfPage:url, datePublished:guide.published, dateModified:guide.modified, inLanguage:'en', author:{'@type':'Organization',name:'ENSOLens',url:'https://ensolens.com/about/'}, publisher:{'@type':'Organization',name:'ENSOLens',url:'https://ensolens.com/about/'}, citation:guide.sources.map(s=>s.url) }).replace(/</g, '\\u003c');
 ---
 <Layout title={guide.title} description={guide.description} active="learn">
   <article class="guide page-shell">

@@ -699,6 +699,7 @@ main { min-height: 65vh; }
 
 /* Provenance Line & Footer */
 .provenance-line {
+  flex-wrap: wrap;
   border-top: 1px solid var(--line);
   display: flex;
   align-items: center;

@@ -2,11 +2,15 @@
 import { ArrowUpRight, ArrowRight, Menu, Earth as Globe2, Activity } from '@lucide/astro';
 import '../styles/global.css';
 import { env } from 'cloudflare:workers';
-import { indexingAllowed } from '../lib/http';
-interface Props { title: string; description?: string; active?: string; extraSchema?: Record<string, unknown> }
+import { indexingAllowed, robotsDirective } from '../lib/http';
+import { pageImage, imageObject, type PageImage } from '../lib/images';
+interface Props { title: string; description?: string; active?: string; extraSchema?: Record<string, unknown>; image?: PageImage }
 const { title, description = 'A clearer view of ENSO. Explore ocean conditions, seasonal probabilities, and the science behind El Niño and La Niña.', active = 'overview', extraSchema = {} } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const indexable = indexingAllowed(Astro.url.hostname, env.INDEXING_ENABLED) && (Astro.response.status ?? 200) < 400;
+const image = (Astro.response.status ?? 200) < 400 ? (Astro.props.image ?? pageImage(Astro.url.pathname)) : undefined;
+const imageUrl = image ? new URL(image.src, 'https://ensolens.com').href : undefined;
+const imageSchema = image ? JSON.stringify({ '@context': 'https://schema.org', '@type': 'WebPage', url: canonical.href, primaryImageOfPage: imageObject(image) }).replace(/</g, '\u003c') : undefined;
 const structured = JSON.stringify({ '@context': 'https://schema.org', '@type': 'WebSite', name: 'ENSOLens', url: 'https://ensolens.com/', inLanguage: 'en', description, publisher: { '@type': 'Organization', name: 'ENSOLens', url: 'https://ensolens.com/about/' }, ...extraSchema }).replace(/</g, '\\u003c');
 const links = [
   ['overview', '/', 'Overview'],
@@ -23,16 +27,18 @@ const links = [
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
-    <meta name="robots" content={indexable ? "index, follow" : "noindex, follow"} />
+    <meta name="robots" content={robotsDirective(indexable)} />
     <meta property="og:title" content={title + " · ENSOLens"} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="ENSOLens" />
-    <meta name="twitter:card" content="summary" />
+    {image && <><meta property="og:image" content={imageUrl} /><meta property="og:image:width" content={String(image.width)} /><meta property="og:image:height" content={String(image.height)} /><meta property="og:image:alt" content={image.alt} /><meta name="twitter:image" content={imageUrl} /><meta name="twitter:image:alt" content={image.alt} /></>}
+    <meta name="twitter:card" content={image ? "summary_large_image" : "summary"} />
     <meta name="twitter:title" content={title + " · ENSOLens"} />
     <meta name="twitter:description" content={description} />
     <script type="application/ld+json" set:html={structured} />
+    {imageSchema && <script type="application/ld+json" set:html={imageSchema} />}
     <meta name="theme-color" content="#090e0c" />
     <link rel="canonical" href={canonical} />
     <link rel="sitemap" type="application/xml" href="/sitemap.xml" />

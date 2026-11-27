@@ -2,11 +2,16 @@
 
 Updated: 2026-11-27 (Asia/Shanghai)
 
-## Search image optimization (November 27 — local checkpoint)
+## Search image optimization (November 27)
 
 - Audited live image metadata, image routes and robots before implementation; findings and deferred asset work are in IMAGE-AUDIT-2026-11-27.md. Ten existing pages now share representative body/OG/Twitter/applicable structured images. Six original PNG explanations retain editable SVGs and accessible text; reused NOAA/USFS assets retain credits and dated limitations. The homepage validated NOAA GIF has a public route with true dimensions, while API/preview/error noindex remains.
 - Added image publication rules to EDITORIAL.md and referenced them from AGENTS.md, a provenance registry, static checks and shared browser checks. No article or sitemap dates were changed. Independent code/interpretation review checked routing and diagrams against retained records; it did not repeat browser source research or visual QA. Identified issues were corrected.
 - Local type check, 26 tests, nine static assets, build, real NOAA/KV refresh and all ten image pages at 1440×1000, 390×1000 and 320×1000 CSS px passed. Inspected desktop/mobile figure screenshots. The new 320px check found and fixed an existing footer-row overflow. A later legacy browser assertion had invalid CSS syntax; corrected it and restarted the complete release gate. Deployment and live verification are pending this checkpoint.
+
+
+- Before upload, detected newer GitHub work through bc3decd. Paused the earlier gate, rebased onto all six newer UI/content commits and preserved their navigation, accessibility, scientific content and sitemap dates. Application commit ec101f8 was pushed to master. Repeated full release gate on the merged source passed: 77-file type check, zero errors/warnings and two pre-existing deprecation hints; 26 tests; nine static assets; build; real NOAA refresh/KV/RSS; ten-page image checks at 1440/390/320×1000; existing shared-UI checks at 320/390/768/1440px, no-JavaScript rendering, full 1440/390 suites and failed-source retention.
+- Released Cloudflare version d8e090aa-2c49-438e-8c9e-d3888e5f0626, deployment 6c9860fc-7b51-4bd9-9364-eda9718e5371, created November 27 at 11:18:58 Asia/Shanghai, serving 100% traffic. IDs/traffic read from actual Wrangler output. Both custom domains, six-hour refresh and unpublished mailbox configuration retained.
+- Production HTTP verification passed all 25 routes, health, source records, RSS, unchanged merged-baseline sitemap dates, canonical redirects, 404 and read-only correction endpoint. Separately checked robots permits public images while /api/ remains disallowed. Live image checks passed all ten mapped pages at 1440×1000, 390×1000 and 320×1000 CSS px, including successful image decoding, true dimensions/aspect ratios, body/OG/Twitter/JSON-LD agreement, image HTTP/MIME and index boundaries, and no page overflow. Inspected live desktop forecast, mobile Niño regions and 320px forecast screenshots. Diagrams scroll locally with text equivalents; viewport emulation is not physical-device certification. Saved live screenshots in .playwright/search-images-live-{forecast-1440,nino-390,forecast-320}.png. Simulated Googlebot-Image requests establish HTTP accessibility, not actual Google crawling or thumbnail selection.
 
 ## Focused content maintenance (November 27)
 

@@ -1,4 +1,5 @@
 ---
+import ContentFigure from '../components/ContentFigure.astro';
 import Layout from '../layouts/Layout.astro';
 import { urls } from '../lib/enso';
 import { ArrowUpRight, Database, ShieldCheck } from '@lucide/astro';
@@ -14,6 +15,7 @@ const sources = [
   <div class="page-shell subpage">
     <div class="page-intro"><div><span class="eyebrow">TRANSPARENT BY DESIGN</span><h1>Know what <span>you're looking at.</span></h1><p>The sources, the distinctions, and the limits behind the numbers.</p></div></div>
     <section class="method-section" id="indices"><span class="eyebrow">01 / THE INDICATORS</span><h2>Different numbers answer different questions.</h2><div class="index-grid"><article><span class="index-label">WEEKLY OBSERVATION</span><h3>Niño 3.4 anomaly</h3><p>A sea surface temperature anomaly for 5°N–5°S, 170°W–120°W. The weekly CPC series uses the 1991–2020 reference climatology. A weekly reading does not establish an official ENSO phase.</p></article><article><span class="index-label">SEASONAL RELATIVE INDEX</span><h3>RONI</h3><p>The Relative Oceanic Niño Index adjusts for tropical ocean background warming and uses a three-month window. CPC currently publishes ERSSTv6 RONI values against a 1991–2020 reference. Points appear at the end of each season; they are not weekly observations.</p></article><article><span class="index-label">HISTORICAL INDEX</span><h3>ONI</h3><p>The Oceanic Niño Index is a conventional three-month Niño 3.4 anomaly. It is not the weekly anomaly or RONI. ENSOLens charts RONI, and its probability table follows CPC's RONI-based framework.</p></article></div></section>
+    <ContentFigure name="product-windows" />
     <section class="method-section" aria-labelledby="index-worked-example-heading">
       <span class="eyebrow">WORKED EXAMPLE · CHECKED NOVEMBER 19, 2026</span>
       <h2 id="index-worked-example-heading">Why can ONI and RONI give different numbers for the same season?</h2>

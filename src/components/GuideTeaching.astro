@@ -1,4 +1,5 @@
 ---
+import ContentFigure from './ContentFigure.astro';
 import manifest from '../content/images.json';
 import { teaching } from '../content/teaching';
 interface Props { slug: string }
@@ -6,6 +7,9 @@ const { slug } = Astro.props;
 const t = teaching[slug];
 const imageKeys: Record<string, keyof typeof manifest.assets> = {regions:'nino-regions',kelvin:'kelvin-wave',plume:'model-plume',snow:'sierra-snow-level'};
 const diagram = t?.kind ? manifest.assets[imageKeys[t.kind]] : undefined;
+const extraImages: Record<string, keyof typeof manifest.assets> = {
+'soi-vs-ocean-indices':'soi-ocean', 'enso-and-climate-change':'climate-timescales', 'marine-heatwaves-vs-el-nino':'heatwave-enso', 'el-nino-and-drought-recovery':'water-stores', 'enso-jet-stream-teleconnections':'winter-pathway', 'climate-normals-and-anomalies':'baseline-ruler', 'how-enso-is-observed':'observing-system'
+};
 const readingKeys: Record<string, string[]> = {
   regions: ['West to east: Niño 4 → Niño 3.4 → Niño 3 → Niño 1+2. The boxes overlap.', 'Niño 1+2 lies south of the equator near Peru and Ecuador. The labeled coordinates below give each box’s limits.'],
   kelvin: ['At t₁, the deeper thermocline disturbance is in the western Pacific.', 'At t₂, the disturbance is farther east. The shape propagates; this does not track one parcel of water.', 'The dashed line is the reference thermocline. Depth, distance and time are not to scale.'],
@@ -13,7 +17,9 @@ const readingKeys: Record<string, string[]> = {
   snow: ['Lower foothills: more precipitation may fall as rain and contribute to runoff.', 'Above the storm snow level: precipitation can build snow storage near the Sierra crest.', 'The snow level moves during a storm. This conceptual section supplies no elevation or current forecast.']
 };
 ---
-{t && <figure class="teaching-figure" aria-label={t.title}>
+{extraImages[slug] && <ContentFigure name={extraImages[slug]} />}
+{t?.steps && extraImages[slug] && <details class="teaching-transcript"><summary>Text version of the processing / influence diagram</summary><ol>{t.steps.map(step => <li>{step}</li>)}</ol><p>{t.caption}</p></details>}
+{t && !(t.steps && extraImages[slug]) && <figure class="teaching-figure" aria-label={t.title}>
   <h3>{t.title}</h3>
   {t.kind && <div class="mobile-reading"><p><strong>Read the diagram</strong></p><ol>{readingKeys[t.kind]?.map(text => <li>{text}</li>)}</ol></div>}
   {t.kind && <p class="scroll-hint">Optional detail: swipe the diagram horizontally to inspect its labels →</p>}
@@ -23,6 +29,10 @@ const readingKeys: Record<string, string[]> = {
   <figcaption>{t.caption}</figcaption>
 </figure>}
 <style>
+.teaching-transcript { margin:20px 0; padding:16px; border:1px solid var(--line-strong); border-radius:8px; font-size:15px; line-height:1.8; color:var(--muted); }
+.teaching-transcript summary { cursor:pointer; color:var(--ink); }
+.teaching-transcript ol { padding-left:24px; }
+.teaching-transcript li { margin:12px 0; }
 .teaching-figure { margin:28px 0; padding:24px; border:1px solid var(--line-strong); border-radius:12px; background:var(--card); min-width:0; }
 h3 { font-size:20px; line-height:1.5; margin:0 0 20px; }
 .mobile-reading,.cell-label { display:none; }

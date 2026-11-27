@@ -43,7 +43,12 @@
       "alt": "Nested DJF 2026–27 RONI intervals share one scale: central 90%, 70% and 50%, with median +2.28°C.",
       "credit": "Original ENSOLens graphic of the preserved November 2026 CPC forecast; not local weather odds.",
       "source": "/references/roni-ranges-november-2026.txt",
-      "rights": "ENSOLens original rendering of NOAA CPC factual forecast values; source issue retained."
+      "rights": "ENSOLens original rendering of NOAA CPC factual forecast values; source issue retained.",
+      "mobile": {
+        "src": "/images/explainers/roni-ranges-mobile.png",
+        "width": 480,
+        "height": 740
+      }
     },
     "season-windows": {
       "src": "/images/explainers/season-windows.png",
@@ -52,7 +57,12 @@
       "alt": "DJF, JFM, FMA, MAM and AMJ are overlapping three-month windows spanning December through June.",
       "credit": "Original ENSOLens calendar diagram; calendar overlap alone does not classify an ENSO episode.",
       "source": "/historical/#event-years-heading",
-      "rights": "ENSOLens original vector drawing of calendar windows."
+      "rights": "ENSOLens original vector drawing of calendar windows.",
+      "mobile": {
+        "src": "/images/explainers/season-windows-mobile.png",
+        "width": 480,
+        "height": 670
+      }
     },
     "northwest-snow": {
       "src": "/images/guides/northwest-snow-usfs.jpg",
@@ -80,6 +90,156 @@
       "credit": "NOAA CPC; original issue, validity dates, legend and map retained.",
       "source": "/references/winter-update-2026-11-21.txt",
       "rights": "NOAA CPC government forecast map, retained unmodified with original dates/legend; no endorsement implied."
+    },
+    "soi-ocean": {
+      "src": "/images/explainers/soi-ocean.png",
+      "width": 1000,
+      "height": 430,
+      "mobile": {
+        "src": "/images/explainers/soi-ocean-mobile.png",
+        "width": 480,
+        "height": 710
+      },
+      "alt": "SOI uses standardized Tahiti–Darwin pressure contrast; Niño 3.4 uses regional sea-surface temperature. Their typical El Niño signs differ and their scales cannot be converted.",
+      "credit": "Original ENSOLens explanatory diagram; conceptual, not current conditions.",
+      "source": "https://psl.noaa.gov/data/timeseries/month/DS/SOI/",
+      "rights": "ENSOLens original artwork; editable SVG and generator retained; scientific sources credited.",
+      "caption": "Original ENSOLens quantity comparison, not current readings. SOI is a standardized pressure contrast with provider-specific units; conventional Niño 3.4 is an SST departure in °C. Typical El Niño signs are not a conversion formula. Match provider, baseline and averaging window before comparing."
+    },
+    "climate-timescales": {
+      "src": "/images/explainers/climate-timescales.png",
+      "width": 1000,
+      "height": 430,
+      "mobile": {
+        "src": "/images/explainers/climate-timescales-mobile.png",
+        "width": 480,
+        "height": 710
+      },
+      "alt": "Separate conceptual curves show a rising long-term temperature background and oscillating ENSO variability; neither curve contains observations or a forecast.",
+      "credit": "Original ENSOLens explanatory diagram; conceptual, not current conditions.",
+      "source": "https://www.ipcc.ch/report/ar6/wg1/chapter/chapter-4/",
+      "rights": "ENSOLens original artwork; editable SVG and generator retained; scientific sources credited.",
+      "caption": "Original ENSOLens conceptual curves, with no measured values, common time scale or forecast. Long-term background warming and ENSO variability answer different questions. The panels are not components to add together or an attribution of a particular storm. The IPCC assessment and its rainfall-versus-SST distinction remain in the text."
+    },
+    "heatwave-enso": {
+      "src": "/images/explainers/heatwave-enso.png",
+      "width": 1000,
+      "height": 440,
+      "mobile": {
+        "src": "/images/explainers/heatwave-enso-mobile.png",
+        "width": 480,
+        "height": 710
+      },
+      "alt": "A regional warm patch is contrasted with central and eastern equatorial Pacific warmth plus atmospheric evidence. Neither schematic shows a current marine heatwave or El Niño.",
+      "credit": "Original ENSOLens explanatory diagram; conceptual, not current conditions.",
+      "source": "https://www.integratedecosystemassessment.noaa.gov/regions/california-current/california-current-marine-heatwave-tracker-blobtracker",
+      "rights": "ENSOLens original artwork; editable SVG and generator retained; scientific sources credited.",
+      "caption": "Original ENSOLens spatial schematics, not maps of current conditions or geographic boundaries. A marine heatwave needs its own product’s location, duration and baseline criteria. El Niño assessment also needs atmospheric evidence. A regional warm patch can coexist with ENSO but does not establish the phase; the Blob-Class threshold in the table is not a universal heatwave definition."
+    },
+    "water-stores": {
+      "src": "/images/explainers/water-stores.png",
+      "width": 1000,
+      "height": 710,
+      "mobile": {
+        "src": "/images/explainers/water-stores-mobile.png",
+        "width": 480,
+        "height": 1280
+      },
+      "alt": "Soil roots, mountain snow, a reservoir and a groundwater well illustrate four separate water stores requiring their own observations to assess drought recovery.",
+      "credit": "Original ENSOLens explanatory diagram; conceptual, not current conditions.",
+      "source": "https://www.usgs.gov/water-science-school/science/drought-and-groundwater-levels",
+      "rights": "ENSOLens original artwork; editable SVG and generator retained; scientific sources credited.",
+      "caption": "Original ENSOLens diagnostic cross-sections, not measured levels or recovery times. These are separate stores, not a required sequence in which rainfall refills them. Check root-zone moisture, basin SWE, reservoir storage and local well levels with their dates; operations, recharge and withdrawals also matter."
+    },
+    "winter-pathway": {
+      "src": "/images/explainers/winter-pathway.png",
+      "width": 1000,
+      "height": 1000,
+      "mobile": {
+        "src": "/images/explainers/winter-pathway-mobile.png",
+        "width": 480,
+        "height": 1000
+      },
+      "alt": "A qualitative boreal-winter pathway links tropical rainfall and heating to large-scale circulation, jet and storm-track tendencies, then local weather affected by elevation and air mass.",
+      "credit": "Original ENSOLens explanatory diagram; conceptual, not current conditions.",
+      "source": "https://www.weather.gov/mhx/ensowhat",
+      "rights": "ENSOLens original artwork; editable SVG and generator retained; scientific sources credited.",
+      "caption": "Original ENSOLens conceptual pathway for Northern Hemisphere winter, not a map of today’s jet stream. Arrows indicate influence, not guaranteed outcomes. Other climate patterns, storm position, elevation and air mass affect the local result; use local forecasts and warnings for a particular storm."
+    },
+    "baseline-ruler": {
+      "src": "/images/explainers/baseline-ruler.png",
+      "width": 1000,
+      "height": 470,
+      "mobile": {
+        "src": "/images/explainers/baseline-ruler-mobile.png",
+        "width": 480,
+        "height": 750
+      },
+      "alt": "On a shared 26 to 29°C scale, the same invented 28°C SST is 1°C above a 27°C reference and 0.5°C above a 27.5°C reference.",
+      "credit": "Original ENSOLens explanatory diagram; conceptual, not current conditions.",
+      "source": "https://www.ncei.noaa.gov/products/land-based-station/us-climate-normals",
+      "rights": "ENSOLens original artwork; editable SVG and generator retained; scientific sources credited.",
+      "caption": "Original ENSOLens invented arithmetic, not observations or RONI. Both panels share a 26–29°C scale and the same 28°C temperature. Only the reference changes: +1.0°C versus +0.5°C. Actual comparisons must also match season, region, dataset and processing."
+    },
+    "observing-system": {
+      "src": "/images/explainers/observing-system.png",
+      "width": 1000,
+      "height": 1000,
+      "mobile": {
+        "src": "/images/explainers/observing-system-mobile.png",
+        "width": 480,
+        "height": 1000
+      },
+      "alt": "Ocean instruments feed a processed SST analysis, regional and seasonal indices. Separately observed winds, pressure and rainfall also feed the ENSO assessment.",
+      "credit": "Original ENSOLens explanatory diagram; conceptual, not current conditions.",
+      "source": "https://www.pmel.noaa.gov/elnino/faq",
+      "rights": "ENSOLens original artwork; editable SVG and generator retained; scientific sources credited.",
+      "caption": "Original ENSOLens processing schematic. Product methods differ; not every analysis uses every observing platform. Regional averaging and seasonal processing do not turn SST into atmospheric observations. Winds, pressure and convection are assessed separately alongside the ocean evidence."
+    },
+    "lifecycle-clocks": {
+      "src": "/images/explainers/lifecycle-clocks.png",
+      "width": 1000,
+      "height": 730,
+      "mobile": {
+        "src": "/images/explainers/lifecycle-clocks-mobile.png",
+        "width": 480,
+        "height": 800
+      },
+      "alt": "A conceptual ocean-temperature peak, a combined ocean–atmosphere phase assessment and separate regional water and weather evidence answer different timing questions without supplying an end date.",
+      "credit": "Original ENSOLens explanatory diagram; conceptual, not current conditions.",
+      "source": "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_advisory/ensodisc.shtml",
+      "rights": "ENSOLens original artwork; editable SVG and generator retained; scientific sources credited.",
+      "caption": "Original ENSOLens timing schematic, not a current forecast, timeline or measured curve. Peak temperature, operational phase and regional impacts need different evidence. The panels set no universal delay or ordering for impacts and no neutral-transition date. Use the dated CPC outlook below for actual target seasons."
+    },
+    "product-windows": {
+      "src": "/images/explainers/product-windows.png",
+      "width": 1000,
+      "height": 730,
+      "mobile": {
+        "src": "/images/explainers/product-windows-mobile.png",
+        "width": 480,
+        "height": 830
+      },
+      "alt": "Weekly conventional SST observations, overlapping three-month relative RONI windows and a monthly-issued three-category seasonal forecast are shown as distinct products.",
+      "credit": "Original ENSOLens explanatory diagram; conceptual, not current conditions.",
+      "source": "https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/",
+      "rights": "ENSOLens original artwork; editable SVG and generator retained; scientific sources credited.",
+      "caption": "Original ENSOLens product-reading schematic, not current values or probabilities. Weekly conventional SST, three-month relative RONI and monthly-issued seasonal probabilities have different constructions and dates. The calendar examples illustrate windows only; forecast categories are labels, not equal numerical odds. Source-specific methods and references are listed in the text."
+    },
+    "three-phases": {
+      "src": "/images/explainers/three-phases.png",
+      "width": 1000,
+      "height": 750,
+      "mobile": {
+        "src": "/images/explainers/three-phases-mobile.png",
+        "width": 480,
+        "height": 970
+      },
+      "alt": "El Niño has central and eastern equatorial Pacific warmth with an atmospheric response; La Niña has cooling with an atmospheric response; neutral is neither event and can include ocean–atmosphere mismatch.",
+      "credit": "Original ENSOLens explanatory diagram; conceptual, not current conditions.",
+      "source": "https://www.weather.gov/mhx/ensowhat",
+      "rights": "ENSOLens original artwork; editable SVG and generator retained; scientific sources credited.",
+      "caption": "Original ENSOLens conceptual phase comparison based on NWS definitions, rechecked November 27, 2026 (source has no displayed publication date). Strips show qualitative central/eastern equatorial Pacific temperature departures, not observations, thresholds or jet-stream maps. Neutral is neither event; SST is often near average, but ocean and atmosphere can be out of step. None of the phases guarantees normal local weather."
     }
   },
   "pages": {
@@ -90,7 +250,16 @@
     "/forecast/": "roni-ranges",
     "/historical/": "season-windows",
     "/impacts/pacific-northwest-winter/": "northwest-snow",
-    "/forecast/enso-neutral/": "winter-circulation",
-    "/winter-outlook/": "winter-temperature"
+    "/forecast/enso-neutral/": "three-phases",
+    "/winter-outlook/": "winter-temperature",
+    "/learn/soi-vs-ocean-indices/": "soi-ocean",
+    "/learn/enso-and-climate-change/": "climate-timescales",
+    "/learn/marine-heatwaves-vs-el-nino/": "heatwave-enso",
+    "/learn/el-nino-and-drought-recovery/": "water-stores",
+    "/learn/enso-jet-stream-teleconnections/": "winter-pathway",
+    "/learn/climate-normals-and-anomalies/": "baseline-ruler",
+    "/learn/how-enso-is-observed/": "observing-system",
+    "/forecast/when-will-it-end/": "lifecycle-clocks",
+    "/methodology/": "product-windows"
   }
 }

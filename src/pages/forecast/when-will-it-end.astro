@@ -1,4 +1,5 @@
 ---
+import ContentFigure from '../../components/ContentFigure.astro';
 import Layout from '../../layouts/Layout.astro';
 import DataNotice from '../../components/DataNotice.astro';
 import { env } from 'cloudflare:workers';
@@ -31,6 +32,7 @@ const questions = [
       <article><h3>The official phase</h3><p>CPC evaluates the ocean and atmosphere together. A weekly crossing of a seasonal threshold does not by itself confirm that an event has ended.</p></article>
       <article><h3>Regional impacts</h3><p>Local precipitation, temperature and water-supply effects have their own timing. The Pacific index does not set a universal end date for these impacts.</p></article>
     </div></section>
+    <ContentFigure name="lifecycle-clocks" />
     <section class="lifecycle-section"><h2 id="current-outlook-heading">What does the current outlook cover?</h2>
       <p class="body-copy">CPC issue {forecast.issue}, RONI-based state probabilities. Each row is a three-month season. A probability for El Niño is not a probability of a strong event or of local severe weather.</p>
       <div class="probability-table-wrap"><table class="data-table"><caption>NOAA CPC · issue {forecast.issue}</caption><thead><tr><th scope="col">Target season</th><th scope="col">El Niño</th><th scope="col">Neutral</th><th scope="col">La Niña</th></tr></thead><tbody>{forecast.rows.map(row => <tr><th scope="row">{seasonLabel(row)}</th><td>{row.nino}%</td><td>{row.neutral}%</td><td>{row.nina}%</td></tr>)}</tbody></table></div>

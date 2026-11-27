@@ -1,3 +1,11 @@
+## Whole-site explanatory images — November 27 (local checkpoint)
+
+- Owner authorized implementation and deployment. From clean `c60b896`, expanded representative-image coverage from ten to nineteen major content pages; all ten learning guides now have useful original figures. Neutral uses an accurate three-phase comparison. Learning/regional directory cards have destination-specific thumbnails and visible third-party attribution where required.
+- Added ten original diagram families and twelve mobile art directions (including existing numeric ranges/calendar). Kept four detailed earlier diagrams' accessible local scroll/text equivalent. Preserved current feeds, existing title experiment, article dates and sitemap dates; this release visualizes existing sourced facts rather than claiming new observations.
+- Independent review findings corrected and re-reviewed with no remaining blockers. Added source SVG text-bound/overlap acceptance, variant dimensions/selection checks and canonical/mobile served-byte comparisons. See IMAGE-AUDIT-2026-11-27.md and EDITORIAL.md for scientific/rights limits and long-term publication rules.
+- Preflight passed: 80 type files (0 errors/warnings, two pre-existing hints), 26 tests, static assets, build, real local NOAA refresh/KV, image browser 1440/390/320×1000, shared UI 320/390/768/1440 and no-JS, full 1440/390 interaction suite and simulated source failure. Screenshots inspected. GitHub was re-fetched before commit and had no incoming changes.
+- Application submission and required `npm run deploy` gate are next; production is still the first November 27 release until an actual upload is recorded. No search inclusion or thumbnail outcome has been measured.
+
 # ENSOLens Delivery Status
 
 Updated: 2026-11-27 (Asia/Shanghai)

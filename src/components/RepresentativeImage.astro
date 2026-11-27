@@ -1,0 +1,13 @@
+---
+import type { PageImage } from '../lib/images';
+interface Props { image: PageImage; loading?: 'eager' | 'lazy' }
+const {image, loading = 'lazy'} = Astro.props;
+---
+<picture class="representative-picture">
+  {image.mobile && <source media="(max-width: 650px)" srcset={image.mobile.src} width={image.mobile.width} height={image.mobile.height} />}
+  <img src={image.src} width={image.width} height={image.height} alt={image.alt} loading={loading} decoding="async" />
+</picture>
+<style>
+  picture { display:block; min-width:0; }
+  img { display:block; width:100%; height:auto; }
+</style>

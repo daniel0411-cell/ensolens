@@ -60,7 +60,7 @@ for (const path of paths) {
     assert.equal(article.dateModified, path === '/learn/enso-model-plumes-and-probabilities/' ? '2026-11-25' : ['/learn/kelvin-waves-and-enso/', '/learn/nino-regions-explained/', '/learn/climate-normals-and-anomalies/', '/learn/el-nino-and-drought-recovery/', '/learn/enso-model-plumes-and-probabilities/'].includes(path) ? '2026-11-23' : '2026-11-17');
     assert.equal($('.decision-card h2').length, 1);
     assert.ok($('.decision-card p').text().length > 100);
-    assert.equal($('.teaching-figure').length, 1);
+    assert.equal($('.teaching-figure, .teaching-transcript').length, 1);
     assert.equal($('.section-evidence').length, ({ '/learn/el-nino-and-drought-recovery/': 8, '/learn/enso-model-plumes-and-probabilities/': 7, '/learn/kelvin-waves-and-enso/': 5, '/learn/nino-regions-explained/': 5, '/learn/climate-normals-and-anomalies/': 5 }[path] ?? 4));
     for(const a of $('.section-evidence a').toArray()) assert.equal($($(a).attr('href')).length,1);
     assert.equal(article.url, host + path);
@@ -85,7 +85,7 @@ for (const path of paths) {
     for (const element of $('main img').toArray()) {
       const asset = await request($(element).attr('src'));
       assert.equal(asset.status, 200);
-      assert.match(asset.headers.get('content-type'), /image\/jpeg/);
+      assert.match(asset.headers.get('content-type'), /^image\/(jpeg|png|gif)/);
     }
   }
   if (path === '/impacts/pacific-northwest-winter/') {

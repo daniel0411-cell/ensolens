@@ -1,4 +1,5 @@
 ---
+import RepresentativeImage from './RepresentativeImage.astro';
 import manifest from '../content/images.json';
 interface Props { kind: 'ranges' | 'seasons' | 'snow' }
 const { kind } = Astro.props;
@@ -21,8 +22,7 @@ const seasons = [
   <h3 id="range-visual-title">One seasonal forecast, three nested ranges</h3>
   <p>DJF 2026–27 · three-month RONI · 1991–2020 baseline</p>
   <div class="median-key"><span aria-hidden="true">│</span> Median: +2.28°C · marker in every row</div>
-  <p class="diagram-hint">On a small screen, scroll the diagram horizontally. The values are also listed below.</p>
-  <div class="diagram-viewport" tabindex="0" role="region" aria-label="Explanatory diagram, scroll horizontally on small screens"><img class="representative-diagram" src={manifest.assets['roni-ranges'].src} width="1000" height="500" alt={manifest.assets['roni-ranges'].alt} loading="lazy" decoding="async" /></div>
+  <RepresentativeImage image={manifest.assets['roni-ranges']} />
   <ul class="range-values">{ranges.map(range => <li><strong>{range.label}</strong>: +{range.low.toFixed(2)} to +{range.high.toFixed(2)}°C ({range.percentile})</li>)}</ul>
   <figcaption>ENSOLens graphic of the <a href="/references/roni-ranges-november-2026.txt">preserved CPC November values</a>, checked November 21, 2026. All rows share one scale and overlap; their percentages must not be added. The central 90% leaves 5% in each tail. The plotted axis is a viewing window, not a physical limit. These are seasonal index ranges, not local weather probabilities.</figcaption>
 </figure>}
@@ -31,8 +31,7 @@ const seasons = [
   <div class="visual-label">ENSOLENS READING DIAGRAM · OVERLAPPING WINDOWS</div>
   <h3 id="season-visual-title">Five seasonal windows span seven months</h3>
   <p>Each row covers three months. The next row shifts forward by only one month.</p>
-  <p class="diagram-hint">On a small screen, scroll the diagram horizontally. The values are also listed below.</p>
-  <div class="diagram-viewport" tabindex="0" role="region" aria-label="Explanatory diagram, scroll horizontally on small screens"><img class="representative-diagram" src={manifest.assets['season-windows'].src} width="1000" height="500" alt={manifest.assets['season-windows'].alt} loading="lazy" decoding="async" /></div>
+  <RepresentativeImage image={manifest.assets['season-windows']} />
   <ul class="season-text">{seasons.map(season => <li><strong>{season.label}</strong>: {season.months}</li>)}</ul>
   <div class="transition-cards" aria-label="Selected seasonal RONI values from the 1998 row">
     <div><span>DJF 1998</span><strong>+2.1°C</strong><small>Warm seasonal value</small></div>
@@ -74,10 +73,6 @@ const seasons = [
 </figure>}
 
 <style>
-  .representative-diagram { display:block; width:100%; min-width:640px; max-width:1000px; height:auto; margin:20px 0; }
-  .diagram-viewport { overflow-x:auto; }
-  .diagram-viewport:focus-visible { outline:2px solid var(--green); outline-offset:3px; }
-  .diagram-hint { font-size:13px; }
   .range-values { padding-left:22px; line-height:1.8; }
   .explainer-visual { margin:28px 0; padding:28px; background:var(--card); border:1px solid var(--line-strong); border-radius:12px; min-width:0; scroll-margin-top:100px; }
   .visual-label { color:var(--green); font-size:12px; font-weight:700; letter-spacing:.05em; line-height:1.7; }

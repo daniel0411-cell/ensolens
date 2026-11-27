@@ -192,7 +192,7 @@ try {
         assert.equal(await page.locator('h1').count(), 1);
         if (path !== '/learn/') {
           assert.equal(await page.locator('.guide-section').count(), ({ '/learn/el-nino-and-drought-recovery/': 8, '/learn/enso-model-plumes-and-probabilities/': 7, '/learn/kelvin-waves-and-enso/': 5, '/learn/nino-regions-explained/': 5, '/learn/climate-normals-and-anomalies/': 5 }[path] ?? 4));
-          assert.equal(await page.locator('.teaching-figure').count(),1);
+          assert.equal(await page.locator('.teaching-figure, .teaching-transcript').count(),1);
           if(width===390) for(const region of await page.locator('.teaching-figure .diagram-scroll, .teaching-figure .teaching-table').all()) {
             if (await region.evaluate(el=>el.scrollWidth>el.clientWidth+1)) {
               assert.ok((await region.getAttribute('class')).includes('diagram-scroll'), 'Mobile teaching tables must fit without horizontal scrolling');
@@ -205,8 +205,13 @@ try {
               for (const cell of await region.locator('td').all()) assert.equal(await cell.locator('.cell-label').isVisible(),true);
             }
           }
+          if(await page.locator('.teaching-transcript').count()){
+            await page.locator('.teaching-transcript summary').click();
+            assert.ok(await page.locator('.teaching-transcript li').first().isVisible(),'Text equivalent opens by native disclosure');
+            await page.locator('.teaching-transcript summary').click();
+          }
           for(const a of await page.locator('.section-evidence a').all()) assert.equal(await page.locator(await a.getAttribute('href')).count(),1);
-          await page.locator('.teaching-figure').screenshot({path:fileURLToPath(new URL(path.slice(1).replaceAll('/','-')+'teaching-'+width+'.png',output))});
+          await page.locator('.teaching-figure, .teaching-transcript').screenshot({path:fileURLToPath(new URL(path.slice(1).replaceAll('/','-')+'teaching-'+width+'.png',output))});
           await page.locator('.contents a').first().click();
           const bounds = await page.locator('#section-1').boundingBox();
           assert.ok(bounds && bounds.y >= 90, 'Guide anchor must clear header');
@@ -246,7 +251,7 @@ try {
         assert.equal(await page.locator('h1').count(), 1);
         for (const img of await page.locator('main img').all()) {
           await img.evaluate(el => el.decode());
-          assert.equal(await img.evaluate(el => el.complete && el.naturalWidth > 100 && Math.abs(Number(el.getAttribute('width')) / Number(el.getAttribute('height')) - el.naturalWidth / el.naturalHeight) < 0.005), true, 'Guide image must decode and reserve its actual aspect ratio');
+          assert.equal(await img.evaluate(el => el.complete && el.naturalWidth > 100 && Math.abs(Number(([...el.parentElement.querySelectorAll('source')].find(s=>s.media&&matchMedia(s.media).matches)||el).getAttribute('width')) / Number(([...el.parentElement.querySelectorAll('source')].find(s=>s.media&&matchMedia(s.media).matches)||el).getAttribute('height')) - el.naturalWidth / el.naturalHeight) < 0.005), true, 'Guide image must decode and reserve its actual aspect ratio');
         }
         const table = page.locator('.probability-table-wrap');
         if (await table.count()) {

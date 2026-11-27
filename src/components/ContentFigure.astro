@@ -1,0 +1,18 @@
+---
+import manifest from '../content/images.json';
+import RepresentativeImage from './RepresentativeImage.astro';
+interface Props { name: keyof typeof manifest.assets }
+const {name} = Astro.props;
+const asset = manifest.assets[name];
+const caption = 'caption' in asset ? asset.caption : asset.credit;
+---
+<figure class="content-figure">
+  <RepresentativeImage image={asset} />
+  <figcaption>{caption} <a href={asset.source}>Scientific source / reference</a>.</figcaption>
+</figure>
+<style>
+  figure { max-width:1000px; margin:28px 0; padding:20px; border:1px solid var(--line-strong); border-radius:12px; background:var(--card); min-width:0; }
+  figcaption { margin-top:16px; font-size:14px; line-height:1.8; color:var(--muted); }
+  a { color:var(--green); text-decoration:underline; }
+  @media(max-width:650px) { figure { padding:12px; } }
+</style>

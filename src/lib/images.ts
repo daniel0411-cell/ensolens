@@ -1,6 +1,6 @@
 import { gifDimensions } from './gif-dimensions.ts';
 import manifest from '../content/images.json';
-export interface PageImage { src: string; width: number; height: number; alt: string }
+export interface PageImage { src: string; width: number; height: number; alt: string; mobile?: { src: string; width: number; height: number } }
 export function pageImage(path: string): PageImage | undefined {
   const key = manifest.pages[path as keyof typeof manifest.pages];
   return key ? manifest.assets[key as keyof typeof manifest.assets] : undefined;

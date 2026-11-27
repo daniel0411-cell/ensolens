@@ -12,9 +12,6 @@ import {
   ArrowRight,
   GitCompareArrows,
   CalendarDays,
-  ShieldAlert,
-  Info,
-  Compass,
   CloudRain,
   Snowflake,
   Activity
@@ -204,8 +201,7 @@ const comparisonRows = forecast.rows.map(row => {
     <section class="lifecycle-section" aria-labelledby="forecast-use-heading">
       <span class="eyebrow">A THREE-STEP READING CHECK</span>
       <h2 id="forecast-use-heading">Before you turn an ENSO probability into a plan</h2>
-      <div class="explanation-grid"><div><h3>1. Confirm the target</h3><p>Write down the issue date and the exact three-month season. Adjacent rows overlap, and a probability for DJF cannot answer a question about one storm or a later winter.</p></div><div><h3>2. Keep the alternatives</h3><p>Read El Niño, neutral and La Niña together. The leading category can still be below 50%, and a change in one category is meaningful only alongside the shifts in the other two.</p></div><div><h3>3. Route the decision</h3><p>Use the regional CPC outlook for seasonal temperature or precipitation odds, then local National Weather Service forecasts for timing, hazards, snow levels and travel decisions.</p></div></div>
-      <p class="body-copy">This sequence keeps a tropical Pacific state estimate separate from regional impact probabilities and short-range weather guidance. <a href="/winter-outlook/#forecast-horizon-heading">Choose the forecast horizon that matches your question</a>.</p>
+      <p class="body-copy">Confirm the issue date and target season, keep all three states in view, then choose the right forecast horizon. Use the <a href="#reading-probabilities-heading">probability reading guide</a> for the first two checks and the <a href="/winter-outlook/#forecast-horizon-heading">season-to-storm guide</a> for regional or local decisions.</p>
     </section>
 
     <section class="lifecycle-section" aria-labelledby="super-el-nino-heading">
@@ -240,23 +236,7 @@ const comparisonRows = forecast.rows.map(row => {
     <section class="regional-section" aria-labelledby="boundaries-heading">
       <span class="eyebrow">INTERPRETATION BOUNDARIES</span>
       <h2 id="boundaries-heading">What seasonal probabilities cannot decide</h2>
-      <div class="regional-grid">
-        <article>
-          <ShieldAlert size={20} />
-          <h3>Not a daily weather forecast</h3>
-          <p>A seasonal probability describes an overlapping three-calendar-month period across the tropical Pacific. It is not an odds rating for daily precipitation, freezing levels, or severe weather in your city.</p>
-        </article>
-        <article>
-          <Info size={20} />
-          <h3>100% is not zero uncertainty</h3>
-          <p>These are CPC's official ENSO category probabilities, not counts of models in agreement. A displayed 100% is the published estimate for that issue and target season; new observations can lead to revisions. It does not specify event strength or guarantee local weather outcomes.</p>
-        </article>
-        <article>
-          <Compass size={20} />
-          <h3>Not a uniform regional script</h3>
-          <p>Tropical heat redistributes global jet streams probabilistically. As 1997–98 versus 2015–16 showed in California, similar ocean anomalies can produce sharply different regional winter precipitation outcomes.</p>
-        </article>
-      </div>
+      <p class="body-copy">ENSO phase odds do not specify event strength, daily storm timing or local rainfall and snow totals. A published 100% is an issue-specific estimate that can be revised, not proof that an outcome has already occurred. Read the <a href="#strength-heading">separate strength probabilities</a> and use the decision links below for regional outlooks and local warnings.</p>
     </section>
 
     <!-- 3. Actionable Next Steps: Choose by your decision -->
@@ -344,7 +324,7 @@ const comparisonRows = forecast.rows.map(row => {
   .forecast-big { font-size:48px; }
   .record-context summary { cursor:pointer; color:var(--green); line-height:1.6; }
   .record-context .figure-note { display:block; }
-  #roni-range-heading, #november-update-heading, #strength-heading, #super-el-nino-heading, #wmo-record-heading, #reading-probabilities-heading, #comparison-heading { scroll-margin-top: 100px; }
+  #forecast-use-heading, #boundaries-heading, #roni-range-heading, #november-update-heading, #strength-heading, #super-el-nino-heading, #wmo-record-heading, #reading-probabilities-heading, #comparison-heading { scroll-margin-top: 100px; }
   .roni-ranges strong { font-variant-numeric: tabular-nums; }
   section[aria-labelledby="roni-range-heading"] .figure-note { display: block; }
   #strength-table { min-width: 720px; }

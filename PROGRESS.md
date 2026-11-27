@@ -1,6 +1,34 @@
 # ENSOLens Delivery Status
 
-Updated: 2026-11-26 (Asia/Shanghai)
+Updated: 2026-11-27 (Asia/Shanghai)
+
+## Focused content maintenance (November 27, implementation checkpoint)
+
+- Based on GitHub master `62fe527`; existing November 26 UI is the baseline. Expanded ENSO at its first homepage explanation, added three contextual FAQ links to existing neutral, Niño-region and California sections, and shortened two repeated forecast reading/limitation blocks. Preserved titles, routes, data products, dates on archival examples, and all existing section anchors.
+- Browser inspection also found FAQ prose links lacked the shared visible link style and question/reminder anchors could sit behind the sticky header. Reused the existing prose-link style for FAQ answers and added scoped anchor clearance.
+- Only home, FAQ and forecast substantive sitemap dates advance to November 27. The production date assertion follows those three changes. No new page or dependency.
+- EDITORIAL.md now records the monthly product-to-page dependency checklist and evidence-driven review triggers. Historical full-series table and California official-report reading path remain deferred: current pages already provide seasonal comparisons/CSV and sourced examples/official links; a future focused change should show exact values/fields without creating a new live feed.
+- Type check (zero errors/warnings, two existing hints), 24 tests, build and complete local browser suite passed, including real NOAA refresh/KV/RSS, four-width FAQ keyboard/deep-link/underline/header-clearance checks, no-JavaScript rendering and failure retention. Visually inspected home, FAQ and shortened forecast at 1440px/390px using local Chrome screenshots. Independent content/code review found no actionable issue; its scope was preserved source records, facts/links and GSC labeling, not fresh source/GSC authentication or rendered verification. November 27 live checks confirmed healthy production feeds, current CPC probability definitions and NWS Fort Worth ENSO background; the general NOAA understanding page returned HTTP 403, so that request was not counted as verified. Publication and final live results are recorded after release.
+
+## Search baseline read November 26, 2026
+
+- Source: signed-in Search Console property `sc-domain:ensolens.com`; Web (text) search; 28-day report **October 28–November 24, 2026**, no global country/device/page filter. Read November 26, before this content update. Total: 1,292 impressions, 18 clicks, displayed CTR 1.4%, average position 10.8. No new November 27 search report was read.
+
+| Page | Impressions | Clicks |
+|---|---:|---:|
+| /impacts/ | 387 | 2 |
+| /forecast/ | 292 | 7 |
+| / | 262 | 5 |
+| /forecast/enso-neutral/ | 62 | 0 |
+| /forecast/when-will-it-end/ | 31 | 1 |
+| /impacts/california-snow-vs-rain/ | 21 | 0 |
+| /historical/ | 19 | 1 |
+| /faq/ | 6 | 0 |
+
+- Visible query examples (impressions/clicks): `enso status` 56/0; `enso forecast` 24/0; `current enso status` 20/0; `enso strength probabilities` 18/0. This is a partial query list, not keyword search volume. Anonymized queries mean its visible rows cannot reconstruct all clicks.
+- With the **/impacts/ page filter only**, that same window shows 387 impressions, two clicks, displayed CTR 0.5%, average position 10.3; visible query `el nino us winter climate outlook` has eight impressions. Country breakdown of the unfiltered report shows the United States at 638 impressions/five clicks. Neither establishes an audience persona or conversion value.
+- No onsite analytics, reading depth, return visits, conversions or causal release effects were measured. The window spans multiple versions and predates the November 26 UI release. Preserve the November 17 snippet observation window; do not label zero-click small samples as failed topics or claim improvement from these updates.
+- GSC sitemap was successfully read November 24 with 25 discovered pages. The index report, last updated November 16, shows 25 indexed and five excluded URLs: three HTTP/www home variants, /api/status and /rss.xml. November 26 HTTP checks confirmed the variants redirect to the canonical HTTPS host; exclusions are not five failed article pages or live URL-inspection results. No submissions or indexing changes were made by that audit.
 
 ## Focused reading and navigation refinements (November 26)
 

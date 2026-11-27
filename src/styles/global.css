@@ -857,7 +857,7 @@ main { min-height: 65vh; }
 
 .prose-page { max-width: 950px; }
 .prose-page .method-section p { margin-top: 16px; line-height: 1.8; color: var(--muted); }
-.body-copy a, .method-section p a, .figure-note a, .content-notice a, .source-callout p a, .prose-page a {
+.body-copy a, .faq-answer p a, .method-section p a, .figure-note a, .content-notice a, .source-callout p a, .prose-page a {
   color: var(--green);
   text-decoration: underline;
   text-underline-offset: 3px;
@@ -1430,3 +1430,6 @@ dialog::backdrop { background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(4px); 
 @media (max-width: 600px) {
   .provenance-line > a, .source-callout > a { margin-left: 0; white-space: normal; }
 }
+
+/* Keep FAQ question links clear of the sticky header. */
+.faq-item { scroll-margin-top: 100px; }

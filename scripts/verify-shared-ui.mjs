@@ -82,6 +82,23 @@ export async function verifySharedUI(browser, base, output) {
       await page.locator('.faq-question').first().click();
       assert.equal(await page.locator('.faq-item').first().getAttribute('open'), '');
       await page.screenshot({ path: fileURLToPath(new URL('faq-' + width + '.png', output)) });
+      for (const [question, href, target] of [
+        ['enso-basics', '/forecast/enso-neutral/#neutral-check-heading', '#neutral-check-heading'],
+        ['nino-34-threshold', '/learn/nino-regions-explained/#section-1', '#section-1'],
+        ['local-weather-guarantee', '/impacts/california-snow-vs-rain/#california-outlook-heading', '#california-outlook-heading'],
+      ]) {
+        await page.goto(base + '/faq/#' + question, { waitUntil: 'networkidle' });
+        const link = page.locator('#' + question + ' a[href="' + href + '"]');
+        assert.equal(await link.isVisible(), true);
+        assert.ok(await link.evaluate(el => getComputedStyle(el).textDecorationLine.includes('underline')));
+        await page.waitForFunction(id => document.getElementById(id).getBoundingClientRect().top >= document.querySelector('.site-header').getBoundingClientRect().bottom, question);
+        await link.press('Enter');
+        await page.waitForURL(base + href);
+        await page.waitForLoadState('networkidle');
+        const destination = await page.locator(target).boundingBox();
+        const header = await page.locator('.site-header').boundingBox();
+        assert.ok(destination.y >= header.y + header.height, `${width}px: FAQ destination clears header`);
+      }
       console.log(`PASS shared UI ${width}px: data table/ranges, enlarged map, touch targets, navigation, anchor and keyboard focus`);
     } finally { await context.close(); }
   }

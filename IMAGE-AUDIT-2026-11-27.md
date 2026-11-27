@@ -39,7 +39,7 @@ Ten existing content pages now have body representative images with matching pre
 
 The first four exports preserve existing vector geometry; six PNGs are approximately 19–52 KB each. The two previously HTML-only diagrams retain textual values, source dates and caveats. No unrelated content expansion or stock-image acquisition. Large-preview permission is conditional on successful intentionally indexable production output; preview/API/404 restrictions remain. API URL retained for compatibility. Metadata changes and exports do not change article/sitemap dates.
 
-### Deferred asset work (text remains useful, no generic fallback)
+### Initial deferred work (first release; extension below completes the main-page gaps)
 
 | Existing page group | Gap / replacement plan |
 |---|---|
@@ -62,7 +62,7 @@ Initial image gate: 1440×1000 and 390×1000 passed. The new 320×1000 check cau
 
 GitHub had six newer commits through bc3decd when this image work was ready. Paused upload, fetched and rebased the image commit onto that baseline, preserving the November 25–27 shared UI/content releases and their sitemap dates. Image application commit is ec101f8. Re-ran the complete gate on the combined source; no force-push. The earlier 320px footer wrap is also present in the newer UI baseline. Final deployment/live verification is recorded below.
 
-## Final verification and release
+## First-release verification and release
 
 - Application ec101f8 pushed to GitHub master; full `npm run deploy` gate passed on the merged baseline: 77-file type check (zero errors/warnings, two existing hints), 26 tests, nine static image files, build, real NOAA refresh/KV/RSS, image checks at 1440×1000 / 390×1000 / 320×1000 CSS px, existing four-width shared UI/no-JavaScript checks, full desktop/mobile interactions and retained-data failure behavior.
 - Actual Cloudflare version d8e090aa-2c49-438e-8c9e-d3888e5f0626; deployment 6c9860fc-7b51-4bd9-9364-eda9718e5371; November 27, 2026 at 11:18:58 Asia/Shanghai, 100% traffic.
@@ -71,7 +71,7 @@ GitHub had six newer commits through bc3decd when this image work was ready. Pau
 - Visually inspected live desktop forecast, 390px Niño region and 320px forecast images. Complex diagrams retain local horizontal scrolling and accessible text. Screenshots: `.playwright/search-images-live-forecast-1440.png`, `.playwright/search-images-live-nino-390.png`, `.playwright/search-images-live-forecast-320.png`. These are actual production page captures, not mockups or search-result screenshots; ignored local files are available in this workspace.
 - The seven guide gaps, lifecycle/methodology opportunities and neutral illustration improvement above remain deferred. No purchases, low-resolution upscaling, article/sitemap date refresh or indexing submission was made by this image release. Relevance, scientific truth and rights require continuing human editorial review; automated passes do not guarantee search thumbnails or clicks.
 
-## Whole-site extension — November 27, second release (in progress)
+## Whole-site extension — November 27, second release
 
 The owner approved broader useful-image coverage after the first release. Started from clean `c60b896`, with no remote changes at the pre-edit check. Expanded body/OG/Twitter/Article-or-WebPage alignment from ten to nineteen major content pages: all ten learning guides, dashboard, forecast, lifecycle, neutral, historical, methodology, California, Northwest and winter outlook. This is eligible-image configuration, not observed Google thumbnail inclusion.
 
@@ -85,4 +85,15 @@ Titles/descriptions in the November 17 experiment, scientific article dates and 
 
 Independent review found two mobile text overlaps, a missing per-use photo credit, the need for a conceptual label inside the lifecycle raster, and duplicate long flow presentation. All were corrected; the reviewer rechecked the PNGs and all 28 SVG label bounds/overlaps with no remaining blockers. External primary-source rechecking and site-layout release acceptance were outside that review's scope. An automatic Chrome text-bound/overlap check now covers the twenty new canonical/mobile artwork sources; file checks include all twelve mobile assets. Page-image checks also compare served canonical/mobile bytes with reviewed local files, so a successful response with an older asset is insufficient.
 
-Pre-release local check passed: 80 type-checked files, no errors/warnings (two existing deprecated CircleHelp hints); 26 unit tests; 19 registered assets including all variant dimension/MIME/size/provenance checks; build; real NOAA scheduled refresh/KV; image pages at 1440×1000, 390×1000 and 320×1000; shared UI at 320/390/768/1440 plus no-JavaScript data table; full desktop/mobile 1440/390 interaction checks and simulated historical source-failure path. Desktop water-store, mobile neutral and 320px range screenshots inspected. Release and production verification remain pending at this checkpoint.
+Pre-release local check passed: 80 type-checked files, no errors/warnings (two existing deprecated CircleHelp hints); 26 unit tests; 19 registered assets including all variant dimension/MIME/size/provenance checks; build; real NOAA scheduled refresh/KV; image pages at 1440×1000, 390×1000 and 320×1000; shared UI at 320/390/768/1440 plus no-JavaScript data table; full desktop/mobile 1440/390 interaction checks and simulated historical source-failure path. Desktop water-store, mobile neutral and 320px range screenshots inspected. This was the pre-release checkpoint; final release and production results follow.
+
+
+### Second-release completion
+
+- Application `827b4113293dfc27c3ec19fd11d35750ae7e210f` was pushed to GitHub master and its exact remote SHA verified. Full `npm run deploy` passed: 81 type files, zero errors/warnings (two existing hints), 26 tests, 19 registered assets / 31 canonical and mobile files, build, real NOAA refresh/KV, twenty original artwork text checks, image/browser interaction suites and source-failure retention.
+- Actual Cloudflare version `f5b5de2e-3c76-46a6-a052-fbc45836f517`, deployment `40c22b53-933c-475a-9c13-cfe1c0b4e17b`, created November 27, 2026 at 16:00:33 Asia/Shanghai; 100% traffic. Existing custom domains, schedule, production indexing and unpublished contact configuration retained.
+- `ENSOLENS_EXPECT_INDEXING=true node scripts/verify-production.mjs` passed all 25 routes plus health/RSS/source records, canonical/indexing boundaries, unchanged sitemap dates, redirects/404 and read-only correction endpoint.
+- `node scripts/verify-image-production.mjs` passed nineteen representative pages and two directories at each actual viewport: **1440×1000, 390×1000 and 320×1000 CSS px**. Checks include canonical/mobile decoding and real dimensions, source selection, served bytes matching reviewed assets, body/OG/Twitter/applicable structured image agreement, HTTP/MIME accessibility, image-preview permission, indexing restrictions and no horizontal page overflow. Simulated Googlebot-Image requests are not evidence of an actual Google crawl.
+- Inspected actual live neutral desktop/mobile comparison and 320px forecast image; labels, captions and proportional layout remain readable. Local screenshots: `.playwright/whole-site-images-live-neutral-1440.png`, `.playwright/whole-site-images-live-neutral-390.png`, `.playwright/whole-site-images-live-forecast-320.png`; side-by-side production screenshot composite `.playwright/whole-site-images-live-preview.png`. These are production page captures, not Google search-result captures; viewport emulation is not physical-device certification.
+- The first release's seven guide, lifecycle/methodology and neutral illustration gaps are now completed. Six remaining sitemap routes (learning/regional directories, FAQ, hurricane context, about and privacy) intentionally have no forced page-level representative metadata; directories do have useful card thumbnails. No essential material acquisition or owner assistance is currently needed. Future asset replacements must follow EDITORIAL.md rights, relevance, truthful dimensions, caption/alt, source and release acceptance requirements.
+- Google thumbnail selection, indexing changes and CTR effects have not been measured or promised. Final documentation records this completed release and is pushed separately without another application deployment.

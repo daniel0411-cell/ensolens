@@ -1,14 +1,17 @@
-## Whole-site explanatory images — November 27 (local checkpoint)
+# ENSOLens Delivery Status
+
+Updated: 2026-11-27 (Asia/Shanghai)
+
+## Whole-site explanatory images — November 27
 
 - Owner authorized implementation and deployment. From clean `c60b896`, expanded representative-image coverage from ten to nineteen major content pages; all ten learning guides now have useful original figures. Neutral uses an accurate three-phase comparison. Learning/regional directory cards have destination-specific thumbnails and visible third-party attribution where required.
 - Added ten original diagram families and twelve mobile art directions (including existing numeric ranges/calendar). Kept four detailed earlier diagrams' accessible local scroll/text equivalent. Preserved current feeds, existing title experiment, article dates and sitemap dates; this release visualizes existing sourced facts rather than claiming new observations.
 - Independent review findings corrected and re-reviewed with no remaining blockers. Added source SVG text-bound/overlap acceptance, variant dimensions/selection checks and canonical/mobile served-byte comparisons. See IMAGE-AUDIT-2026-11-27.md and EDITORIAL.md for scientific/rights limits and long-term publication rules.
 - Preflight passed: 80 type files (0 errors/warnings, two pre-existing hints), 26 tests, static assets, build, real local NOAA refresh/KV, image browser 1440/390/320×1000, shared UI 320/390/768/1440 and no-JS, full 1440/390 interaction suite and simulated source failure. Screenshots inspected. GitHub was re-fetched before commit and had no incoming changes.
-- Application submission and required `npm run deploy` gate are next; production is still the first November 27 release until an actual upload is recorded. No search inclusion or thumbnail outcome has been measured.
+- Application `827b411` pushed to GitHub master; a transient Git HTTP connection failure was resolved by retrying with HTTP/1.1 and a bounded post buffer. Exact remote SHA was checked before upload. Complete `npm run deploy` passed on this version: 81 type files (0 errors/warnings, two existing hints), 26 tests, all registered canonical/mobile assets, build, real NOAA refresh/KV, twenty original source text checks, nineteen image pages plus two directories at 1440/390/320×1000, RSS, shared UI 320/390/768/1440, no-JS, full 1440/390 interactions and failure retention.
+- Released version `f5b5de2e-3c76-46a6-a052-fbc45836f517`, deployment `40c22b53-933c-475a-9c13-cfe1c0b4e17b`, created November 27 at 16:00:33 Asia/Shanghai, 100% traffic, from actual Wrangler output. Both custom domains, six-hour schedule, indexing enabled and contact unpublished retained.
+- Postrelease HTTP verification passed all 25 routes plus health, RSS, source records, indexing, unchanged sitemap dates, redirects, 404 and read-only correction endpoint. Production image browser acceptance also passed all nineteen representative pages and two directories at 1440×1000, 390×1000 and 320×1000 CSS px, including decoded images, actual mobile source selection, served-byte agreement, metadata alignment, indexing boundaries and no page overflow. Inspected actual live desktop/mobile neutral and 320px forecast screenshots; saved .playwright/whole-site-images-live-preview.png and .playwright/whole-site-images-live-forecast-320.png. These are browser viewport checks, not physical-device certification. No actual Google crawl, search inclusion, thumbnail or CTR outcome has been measured.
 
-# ENSOLens Delivery Status
-
-Updated: 2026-11-27 (Asia/Shanghai)
 
 ## Search image optimization (November 27)
 
